@@ -48,17 +48,26 @@ public class CrearUsuario implements Serializable {
     private String email;
     private int idRol;
     private Persona p;
-    private Rol r;
+    private Rol rol;
     private Area area; 
 
     @PostConstruct
     public void init() {
         p = new Persona();
-        r= new Rol();
         area = new Area();
-
+        rol = new Rol();
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+    
+    
+    
     public Area getArea() {
         return area;
     }
@@ -164,23 +173,16 @@ public class CrearUsuario implements Serializable {
         this.rfl = rfl;
     }
 
-    public Rol getR() {
-        return r;
-    }
-
-    public void setR(Rol r) {
-        this.r = r;
-    }
-
     public String crearUsuario() {
         p = new Persona(null, documento, nombre, apellido, password, telefono, direccion, email);
         //Area area = afl.find(1);
-        Rol rol = rfl.find(1);
+        //Rol rol = rfl.find(1);
         p.setAreasIdArea(afl.find(area.getIdArea()));
         System.out.println(area);
-        List<Rol> roles = new ArrayList();
-        roles.add(rol);
-        p.setRoles(roles);
+        //List<Rol> roles = new ArrayList();
+        //roles.add(rol);
+        rol = rfl.find(rol);
+        p.setRoles(rol);
         pfl.create(p);
         return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
         
