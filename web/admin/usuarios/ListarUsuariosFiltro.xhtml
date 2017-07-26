@@ -8,7 +8,7 @@
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <ui:define name="titulo">listar usuarios</ui:define>
+    <ui:define name="titulo">listar usuarios con filtro</ui:define>
 
     <ui:define name="contenido">
 
@@ -51,7 +51,7 @@
                             </thead>
 
                             <tbody>
-
+                                
                                 <c:forEach items="#{listarUsuarios.persona}" var="u">
                                     <tr>
                                         <td><h:outputText value="#{u.idPersona}"></h:outputText></td>
