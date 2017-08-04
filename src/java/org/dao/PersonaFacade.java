@@ -64,7 +64,7 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
             while (it.hasNext()) {
                 String key = it.next();
                 sql += key + " =: " + key + (it.hasNext() ? " AND " : "");
-
+                   
             }
 
             Persona = q.getResultList();
