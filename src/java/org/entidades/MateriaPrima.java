@@ -43,6 +43,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "MateriaPrima.findByDimensionAlto", query = "SELECT m FROM MateriaPrima m WHERE m.dimensionAlto = :dimensionAlto")})
 public class MateriaPrima implements Serializable {
 
+    @Column(name = "estado")
+    private Integer estado;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -195,6 +198,14 @@ public class MateriaPrima implements Serializable {
     @Override
     public String toString() {
         return "org.entidades.MateriaPrima[ idMateria=" + idMateria + " ]";
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
     
 }

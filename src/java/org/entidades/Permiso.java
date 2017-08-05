@@ -40,6 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Permiso.findByNombrePermiso", query = "SELECT p FROM Permiso p WHERE p.nombrePermiso = :nombrePermiso")})
 public class Permiso implements Serializable {
 
+    @Column(name = "estado")
+    private Integer estado;
+
     @Lob
     @Size(max = 65535)
     @Column(name = "url")
@@ -163,6 +166,14 @@ public class Permiso implements Serializable {
 
     public void setPermisoPadre(Permiso permisoPadre) {
         this.permisoPadre = permisoPadre;
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
     
 }
