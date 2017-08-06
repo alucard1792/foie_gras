@@ -47,7 +47,7 @@ public class EliminarPedido implements Serializable{
 
     public String eliminarPedido() {
         pedidoFacadeLocal.remove(pedidoSeleccionado);
-        return "/admin/Pedidos/listarPedidos.xhtml?faces-redirect=true";
+        return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
     }
 
 }

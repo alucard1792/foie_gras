@@ -28,7 +28,8 @@ public class CrearMateriaPrima implements Serializable {
             tipoMateriaPrima;
     private int calibre,
             dimensionLargo,
-            dimensionAlto;
+            dimensionAlto,
+            estado;
 
     public CrearMateriaPrima() {
 
@@ -36,7 +37,7 @@ public class CrearMateriaPrima implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        materiaPrima = new MateriaPrima();
     }
 
     public MateriaPrima getMateriaPrima() {
@@ -87,11 +88,20 @@ public class CrearMateriaPrima implements Serializable {
         this.dimensionAlto = dimensionAlto;
     }
 
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
     public String crear() {
         try {
-            materiaPrima = new MateriaPrima(null, referencia, tipoMateriaPrima, calibre, dimensionLargo, dimensionAlto);
+            System.out.println("entro");
+            materiaPrima = new MateriaPrima(null, referencia, tipoMateriaPrima, calibre, dimensionLargo, dimensionAlto, estado);
             materiaPrimaFacadeLocal.create(materiaPrima);
-            return "/admin/materiaPrima/ListarMateriaPrima.xhtml?faces-redirect=true";
+            return "/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true";
 
         } catch (Exception e) {
             return "";
@@ -101,12 +111,12 @@ public class CrearMateriaPrima implements Serializable {
     }
 
     public String cancelar() {
-        return "/admin/materiaPrima/ListarMateriaPrima.xhtml?faces-redirect=true";
+        return "/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true";
 
     }
 
     public String prueba() {
-        return "/admin/materiaPrima/ListarMateriaPrima.xhtml?faces-redirect=true";
+        return "/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true";
 
     }
 

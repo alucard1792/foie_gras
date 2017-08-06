@@ -91,13 +91,14 @@ public class MateriaPrima implements Serializable {
         this.idMateria = idMateria;
     }
 
-    public MateriaPrima(Integer idMateria, String referencia, String tipoMateriaPrima, int calibre, int dimensionLargo, int dimensionAlto) {
+    public MateriaPrima(Integer idMateria, String referencia, String tipoMateriaPrima, int calibre, int dimensionLargo, int dimensionAlto, int estado) {
         this.idMateria = idMateria;
         this.referencia = referencia;
         this.tipoMateriaPrima = tipoMateriaPrima;
         this.calibre = calibre;
         this.dimensionLargo = dimensionLargo;
         this.dimensionAlto = dimensionAlto;
+        this.estado = estado;
     }
 
     public Integer getIdMateria() {

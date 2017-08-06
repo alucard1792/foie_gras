@@ -46,6 +46,7 @@ public class CrearUsuario implements Serializable {
     private int telefono;
     private String direccion;
     private String email;
+    private int estado;
     private int idRol;
     private Persona p;
     private Rol r;
@@ -148,6 +149,14 @@ public class CrearUsuario implements Serializable {
         this.email = email;
     }
 
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
     public PersonaFacadeLocal getPfl() {
         return pfl;
     }
@@ -173,8 +182,8 @@ public class CrearUsuario implements Serializable {
     }
 
     public String crearUsuario() {
-        p = new Persona(null, documento, nombre, apellido, password, telefono, direccion, email);
-        //Area area = afl.find(1);
+        p = new Persona(null, documento, nombre, apellido, password, telefono, direccion, email, estado);
+        Area area = afl.find(1);
         Rol rol = rfl.find(1);
         p.setAreasIdArea(afl.find(area.getIdArea()));
         System.out.println(area);

@@ -79,12 +79,12 @@ public class CrearPedido implements Serializable {
         pedido.setMateriasPrimaIdMateria(materiaPrima);
         pedido.setPersonasIdPersona(p);
         pedidoFacadeLocal.create(pedido);
-        return "/admin/Pedidos/listarPedidos.xhtml?faces-redirect=true";
+        return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
         
     }
     
     public String cancelar() {
-        return "/admin/Pedidos/listarPedidos.xhtml?faces-redirect=true";
+        return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
 
     }
 

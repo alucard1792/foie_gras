@@ -110,7 +110,7 @@ public class Persona implements Serializable {
         this.idPersona = idPersona;
     }
 
-    public Persona(Integer idPersona, int documento, String nombre, String apellido, String password, int telefono, String direccion, String email) {
+    public Persona(Integer idPersona, int documento, String nombre, String apellido, String password, int telefono, String direccion, String email, int estado) {
         this.idPersona = idPersona;
         this.documento = documento;
         this.nombre = nombre;
@@ -119,6 +119,7 @@ public class Persona implements Serializable {
         this.telefono = telefono;
         this.direccion = direccion;
         this.email = email;
+        this.estado = estado;
     }
 
     public Integer getIdPersona() {

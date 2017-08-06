@@ -109,7 +109,7 @@ public class ListarUsuarios implements Serializable {
     public void preparacionEliminar(Persona p) {
         iniciarConversacion();
         personaSeleccionado = p;
-        System.out.printf("se elimini: %s", personaSeleccionado.getNombre());
+        System.out.printf("se eliminar: %s", personaSeleccionado.getNombre());
 
     }
 

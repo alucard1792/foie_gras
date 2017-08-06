@@ -20,7 +20,7 @@
                         <div class="panel-options">
                             <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                                 <c:choose>
-                                    <c:when test="#{p.idPermiso eq 10}">
+                                    <c:when test="#{p.idPermiso eq 16}">
                                         <span><h:link outcome="/#{p.url}" value="ingresar proveedor">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                                     </c:when>
                                 </c:choose>
@@ -57,10 +57,10 @@
                                             <h:form>
                                                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="permiso">
                                                     <c:choose>
-                                                        <c:when test="#{permiso.idPermiso eq 11}">
+                                                        <c:when test="#{permiso.idPermiso eq 19}">
                                                             <h:commandButton action="#{listarProvedores.prepararEditar(p)}" value="Editar"></h:commandButton>
                                                         </c:when>
-                                                        <c:when test="#{permiso.idPermiso eq 12}">
+                                                        <c:when test="#{permiso.idPermiso eq 18}">
                                                             <h:commandButton class="btnModal1"  value="elminar">
                                                                 <f:ajax event="click" listener="#{eliminarProveedor.prepararEliminar(p)}" render=":content-modal-eliminar"></f:ajax>
                                                             </h:commandButton>
