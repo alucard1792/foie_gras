@@ -6,6 +6,7 @@
 package org.dao;
 
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Local;
 import org.entidades.Persona;
 
@@ -31,5 +32,7 @@ public interface PersonaFacadeLocal {
     int count();
 
     Persona iniciarSesion(int documento, String password);
+    
+    List<Persona> filtroMultiCriterio (Map<String, Object>usuariosFiltro);
     
 }

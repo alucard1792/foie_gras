@@ -21,7 +21,7 @@
                         <div class="panel-options">
                             <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                                 <c:choose>
-                                    <c:when test="#{p.idPermiso eq 6}">
+                                    <c:when test="#{p.idPermiso eq 9}">
                                         <span><h:link outcome="/#{p.url}" value="ingresar materia prima">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                                     </c:when>
                                 </c:choose>
@@ -38,8 +38,9 @@
                                     <th>Referencia</th>
                                     <th>Tipo materia prima</th>
                                     <th>Calibre</th>
-                                    <th>largo del material</th>
-                                    <th>alto del material</th>
+                                    <th>Largo del material</th>
+                                    <th>Alto del material</th>
+                                    <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -54,14 +55,15 @@
                                         <td><h:outputText value="#{m.calibre}"></h:outputText></td>
                                         <td><h:outputText value="#{m.dimensionLargo}"> cm</h:outputText></td>
                                         <td><h:outputText value="#{m.dimensionAlto}"> cm</h:outputText></td>
+                                        <td><h:outputText value="#{m.estado}"></h:outputText></td>
                                         <td>
                                             <h:form>
                                                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="permiso">
                                                     <c:choose>
-                                                        <c:when test="#{permiso.idPermiso eq 7}">
+                                                        <c:when test="#{permiso.idPermiso eq 19}">
                                                             <h:commandButton action="#{listarMateriaPrima.prepararEditar(m)}" value="Editar"></h:commandButton>
                                                         </c:when>
-                                                        <c:when test="#{permiso.idPermiso eq 8}">
+                                                        <c:when test="#{permiso.idPermiso eq 18}">
                                                             <h:commandButton class="btnModal1"  value="elminar">
                                                                 <f:ajax event="click" listener="#{eliminarMateriaPrima.prepararEliminar(m)}" render=":content-modal-eliminar"></f:ajax>
                                                             </h:commandButton>

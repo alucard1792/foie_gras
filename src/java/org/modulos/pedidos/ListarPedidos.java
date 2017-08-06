@@ -73,14 +73,14 @@ public class ListarPedidos implements Serializable {
 
     public String cancelar() {
         terminarConversacion();
-        return "/admin/Pedidos/listarPedidos.xhtml?faces-redirect=true";
+        return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
 
     }
 
     public String preparacionEditar(Pedido p) {
         iniciarConversacion();
         pedidoSeleccionado = p;
-        return "/admin/Pedidos/editarPedido.xhtml?faces-redirect=true";
+        return "/admin/pedidos/editarPedido.xhtml?faces-redirect=true";
         
     }
 
@@ -99,7 +99,7 @@ public class ListarPedidos implements Serializable {
 
     public String eliminarPedido() {
         pedidoFacadeLocal.remove(pedidoSeleccionado);
-        return "/admin/Pedidos/listarPedidos.xhtml?faces-redirect=true";
+        return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
         
     }
 

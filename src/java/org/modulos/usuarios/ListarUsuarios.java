@@ -6,7 +6,9 @@
 package org.modulos.usuarios;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
@@ -44,6 +46,9 @@ public class ListarUsuarios implements Serializable {
 
     @PostConstruct
     public void init() {
+        Map<String, Object> miFiltro = new HashMap<>();
+        miFiltro.put("documento", 1);
+        miFiltro.put("nombre", "david");
         persona = pfl.findAll();
         rol = rfl.findAll();
         
@@ -104,7 +109,7 @@ public class ListarUsuarios implements Serializable {
     public void preparacionEliminar(Persona p) {
         iniciarConversacion();
         personaSeleccionado = p;
-        System.out.printf("se elimini: %s", personaSeleccionado.getNombre());
+        System.out.printf("se eliminar: %s", personaSeleccionado.getNombre());
 
     }
 

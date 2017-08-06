@@ -57,14 +57,14 @@ public class EliminarUsuario implements Serializable {
     public String eliminarUsuario() {
         boolean isAdmin=false;
         for (Rol rol : personaSeleccionado.getRoles()) {
-            if ("administrador".equals(rol.getNombreRol())) {
+            if ("administrador".equals(rol.getNombreRol()) || "root".equals(rol.getNombreRol())) {
                 isAdmin=true;
             }
         }
 
         System.out.println("entro");
         if (isAdmin) {
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "no se pueden borrar administradores", "");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "no se pueden borrar usuarios administradores o root", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
             return "";
 

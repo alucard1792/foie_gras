@@ -9,7 +9,7 @@
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <ui:define name="titulo">Ingresar materia prima</ui:define>
+    <ui:define name="titulo">Crear proveedor</ui:define>
 
     <ui:define name="contenido">
 
@@ -20,66 +20,69 @@
 
                 <div class="content-box-large">
                     <div class="panel-heading">
-                        <div class="panel-title"><h2>Ingresar materia prima</h2></div>
+                        <div class="panel-title"><h2>Ingresar nuevo proveedor</h2></div>
+
+
                     </div>
                     <div class="panel-body">
 
                         <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
 
                             <div class="form-group">
-                                <label for="referencia" class="col-sm-2 control-label">Referencia</label>
+                                <label for="nitProveedor" class="col-sm-2 control-label">Nit proveedor</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="referencia" a:placeholder="ingrese la referencia" value="#{crearMateriaPrima.referencia}" required="true"/>
+                                    <h:inputText class="form-control" id="nitProveedor" a:placeholder="ingrese el nit proveedor" value="#{crearProveedor.nitProveedor}" required="true"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="tipoMateriaPrima" class="col-sm-2 control-label">Tipo materia prima</label>
+                                <label for="nombreEmpresa" class="col-sm-2 control-label">Nombre empresa</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="tipoMateriaPrima" a:placeholder="ingrese el tipo de materia prima" value="#{crearMateriaPrima.tipoMateriaPrima}" required="true"/>
+                                    <h:inputText class="form-control" id="nombreEmpresa" a:placeholder="ingrese el nombre de la empresa" value="#{crearProveedor.nombreEmpresa}" required="true"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="calibre" class="col-sm-2 control-label">Calibre</label>
+                                <label for="direccion" class="col-sm-2 control-label">Direccion</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="calibre" a:placeholder="ingrese el calibre" value="#{crearMateriaPrima.calibre}" required="true"/>
+                                    <h:inputText class="form-control" id="direccion" a:placeholder="ingrese la direccion de la empresa" value="#{crearProveedor.direccion}" required="true"/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="telefono" class="col-sm-2 control-label">Telefono</label>
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="telefono" a:placeholder="ingrese el telefono de la empresa" value="#{crearProveedor.telefono}" required="true"/>
                                 </div>
                             </div>
 
 
                             <div class="form-group">
-                                <label for="dimensionLargo" class="col-sm-2 control-label">Dimension largo</label>
+                                <label for="representanteLegal" class="col-sm-2 control-label">Representante legal</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="dimensionLargo" a:placeholder="ingrese el largo de la lamina" value="#{crearMateriaPrima.dimensionLargo}" required="true"/>
+                                    <h:inputText class="form-control" id="representanteLegal" a:placeholder="ingrese el representante legal" value="#{crearProveedor.representanteLegal}" required="true"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="dimensionAlto" class="col-sm-2 control-label">Dimension alto</label>
-                                <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="dimensionAlto" a:placeholder="ingrese el alto de la lamina" value="#{crearMateriaPrima.dimensionAlto}" required="true"/>
-                                </div>
-                            </div>
 
-                            <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{crearMateriaPrima.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
+                                    <h:commandButton action="#{crearProveedor.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <h:commandButton action="#{crearMateriaPrima.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
+                                    <h:commandButton action="#{crearProveedor.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
                                 </div>
-                            </div>
 
+
+                            </div>
+                            
                         </h:form>
 
                     </div>
                 </div>
             </div>
         </div>
-
-
 
     </ui:define>
 

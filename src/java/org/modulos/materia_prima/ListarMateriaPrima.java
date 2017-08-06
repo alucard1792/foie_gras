@@ -71,14 +71,14 @@ public class ListarMateriaPrima implements Serializable {
 
     public String cancelar() {
         terminarConversacion();
-        return "/admin/materiaPrima/ListarMateriaPrima.xhtml?faces-redirect=true";
+        return "/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true";
 
     }
     
     public String prepararEditar(MateriaPrima mp){
         iniciarConversacion();
         materiaPrimaSeleccionada = mp;
-        return "/admin/materiaPrima/EditarMateriaPrima.xhtml?faces-redirect=true";
+        return "/admin/materiaPrima/editarMateriaPrima.xhtml?faces-redirect=true";
         
     }
 

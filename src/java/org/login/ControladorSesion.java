@@ -80,6 +80,14 @@ public class ControladorSesion implements Serializable {
         this.password = password;
     }
 
+    public Persona getP() {
+        return p;
+    }
+
+    public void setP(Persona p) {
+        this.p = p;
+    }
+
     public String iniciarSesion() {
         FacesContext fc = FacesContext.getCurrentInstance();
         if ((documento != 0) && password != null && !password.equals("")) {
