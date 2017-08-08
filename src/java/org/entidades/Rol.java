@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Rol implements Serializable {
 
     @Column(name = "estado")
-    private Integer estado;
+    private int estado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -64,6 +64,13 @@ public class Rol implements Serializable {
     public Rol(Integer idRol, String nombreRol) {
         this.idRol = idRol;
         this.nombreRol = nombreRol;
+    }
+    
+    public Rol(Integer idRol, String nombreRol, int estado) {
+        this.idRol = idRol;
+        this.nombreRol = nombreRol;
+        this.estado = estado;
+        
     }
 
     public Integer getIdRol() {
@@ -125,11 +132,11 @@ public class Rol implements Serializable {
         return "org.entidades.Rol[ idRol=" + idRol + " ]";
     }
 
-    public Integer getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     
