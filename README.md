@@ -4,6 +4,7 @@ Proyecto formativo del sena.
 Por favor, mantener actualizado este archivo y anexar los cambios, correcciones y nuevas funcionalidades a continuacion:
 
  1. arreglos:
+
 	- corregido los nombre de los modulos y controladores (camelCase).
 	
 	- corregido el redireccionamiento al index del sistema cuando se hace clic en el nombre del rol.
@@ -11,6 +12,7 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 	- varios fix a la hora de redireccionar (redireccionamiento en los controladores).
   
 2) nuevo:
+
 	- permiso padre ahora es el nombre del modulo, antes era la url de listar de los modulos.
 	
 	- ahora aparece el nombre del usuario en vez del documento cuando se valida.
@@ -19,10 +21,19 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 	
 	- se implementa el modulo rol con su crud.
 
+	- se implementa el filtro de busqueda en todos los modulos.
+
+	- se agregaron las imagenes del filtro de busqueda
+
+
 3) experimental:
+
 	-a la hora de hacer reportes en excel, ya no aparece la columna opciones y sus respectivos botones*
   
-4)To do:
+	- se implementa la version 0.2 de los reportes en pdf, png, json, xml, txt, sql, cvs, word y excel y sus respectivas librerias
+
+4)ToDo:
+
 	- vincular la tabla detalles_pedidos al modulo pedidos.
 	
 	- implementar los campos restantes en el modulo proyectos (converters).

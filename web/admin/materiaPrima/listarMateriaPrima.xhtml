@@ -15,6 +15,16 @@
         <div class="row">
             <div class="col-md-12">
 
+                <button id="pdf">Exportar a pdf</button>
+                <button id="png">Exportar a png</button>
+                <button id="json">Exportar a json</button>
+                <button id="xml">Exportar a xml</button>
+                <button id="txt">Exportar a txt</button>
+                <button id="sql">Exportar a sql</button>
+                <button id="csv">Exportar a cvs</button>
+                <button id="word">Exportar a word</button>
+                <button id="excel">Exportar a excel</button>
+
                 <div class="content-box-large">
                     <div class="panel-heading">
                         <div class="panel-title"><h1>Materia prima registrada</h1>  </div>
@@ -106,8 +116,8 @@
         </div>
     </ui:define>
 
-    <ui:define name="ultimosScripts">
-        <script>
+<ui:define name="ultimosScripts">
+        <script >
             /* function openModal() {
              #("myModal").modal("show");
              
@@ -124,6 +134,109 @@
                     $("#myModal").modal("show");
                 });
             });
+
+            $(document).ready(function () {
+                $('.table').DataTable();
+            });
+
+            /*$("button").click(function () {
+             $(".table").table2excel({
+             // exclude CSS class
+             exclude: ".noExl",
+             name: "Worksheet Name",
+             filename: "SomeFile" //do not include extension
+             });
+             });*/
+
+            // $(document).ready(function (e){ preguntar al profe porque falla los reportes con linea
+
+            $("#pdf").click(function (e) {
+                $(".table").tableExport({
+                    type: 'pdf',
+                    escape: 'false',
+                    pdfFontSize: '8',
+                    ignoreColumn: []
+
+                });
+
+
+            });
+
+            $("#png").click(function (e) {
+                $(".table").tableExport({
+                    type: 'png',
+                    escape: 'false'
+
+                });
+
+
+            });
+
+            $("#json").click(function (e) {
+                $(".table").tableExport({
+                    type: 'json',
+                    escape: 'false'
+
+                });
+
+
+            });
+
+            $("#xml").click(function (e) {
+                $(".table").tableExport({
+                    type: 'xml',
+                    escape: 'false'
+
+                });
+
+            });
+
+            $("#txt").click(function (e) {
+                $(".table").tableExport({
+                    type: 'txt',
+                    escape: 'false'
+
+                });
+
+            });
+
+            $("#sql").click(function (e) {
+                $(".table").tableExport({
+                    type: 'sql',
+                    escape: 'false'
+
+                });
+
+            });
+
+            $("#csv").click(function (e) {
+                $(".table").tableExport({
+                    type: 'csv',
+                    escape: 'false'
+
+                });
+
+            });
+
+            $("#word").click(function (e) {
+                $(".table").tableExport({
+                    type: 'doc',
+                    escape: 'false'
+
+                });
+
+            });
+
+            $("#excel").click(function (e) {
+                $(".table").tableExport({
+                    type: 'excel',
+                    escape: 'false'
+
+                });
+
+            });
+
+            //});
 
         </script>
     </ui:define>
