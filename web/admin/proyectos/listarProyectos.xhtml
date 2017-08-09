@@ -11,106 +11,111 @@
     <ui:define name="titulo">listar proyectos</ui:define>
 
     <ui:define name="contenido">
+        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="z">
+            <c:choose>
+                <c:when test="#{z.idPermiso eq 31}" rendered="">
 
-        <div class="row">
-            <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
 
-                <button id="pdf">Exportar a pdf</button>
-                <button id="png">Exportar a png</button>
-                <button id="json">Exportar a json</button>
-                <button id="xml">Exportar a xml</button>
-                <button id="txt">Exportar a txt</button>
-                <button id="sql">Exportar a sql</button>
-                <button id="csv">Exportar a cvs</button>
-                <button id="word">Exportar a word</button>
-                <button id="excel">Exportar a excel</button>
+                            <button id="pdf">Exportar a pdf</button>
+                            <button id="png">Exportar a png</button>
+                            <button id="json">Exportar a json</button>
+                            <button id="xml">Exportar a xml</button>
+                            <button id="txt">Exportar a txt</button>
+                            <button id="sql">Exportar a sql</button>
+                            <button id="csv">Exportar a cvs</button>
+                            <button id="word">Exportar a word</button>
+                            <button id="excel">Exportar a excel</button>
 
-                <div class="content-box-large">
-                    <div class="panel-heading">
-                        <div class="panel-title"><h2>proyectos registrados del sistema</h2></div>
-                        <div class="panel-options">
-                            <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                                <c:choose>
-                                    <c:when test="#{p.idPermiso eq 30}">
-                                        <span><h:link outcome="/#{p.url}" value="ingresar proyecto">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                                    </c:when>
-                                </c:choose>
-                            </c:forEach>
-                        </div>
-                    </div>
+                            <div class="content-box-large">
+                                <div class="panel-heading">
+                                    <div class="panel-title"><h2>proyectos registrados del sistema</h2></div>
+                                    <div class="panel-options">
+                                        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                                            <c:choose>
+                                                <c:when test="#{p.idPermiso eq 30}">
+                                                    <span><h:link outcome="/#{p.url}" value="ingresar proyecto">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </div>
+                                </div>
 
-                    <div class="panel-body" >
-                        <h:messages showSummary="true" showDetail="true"></h:messages>
+                                <div class="panel-body" >
+                                    <h:messages showSummary="true" showDetail="true"></h:messages>
 
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>nombre proyecto</th>
-                                    <th>estado</th>
-                                    <th>fecha de inicio</th>
-                                    <th>tiempo estimado</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>nombre proyecto</th>
+                                                <th>estado</th>
+                                                <th>fecha de inicio</th>
+                                                <th>tiempo estimado</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
 
-                            <tbody>
-                                <c:forEach items="#{listarProyectos.proyecto}" var="p">
-                                    <tr>
-                                        <td><h:outputText value="#{p.idProyecto}"></h:outputText></td>
-                                        <td><h:outputText value="#{p.nombreProyecto}"></h:outputText></td>
-                                        <td><h:outputText value="#{p.estadosIdEstado.descripcionEstado}"></h:outputText></td>
-                                        <td><h:outputText value="#{p.fechaInicio}"></h:outputText></td>
-                                        <td><h:outputText value="#{p.tiempoEstimado}"></h:outputText> dia(s)</td>
-                                        <td>
-                                            <h:form>
-                                                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="permiso">
-                                                    <c:choose>
-                                                        <c:when test="#{permiso.idPermiso eq 33}">
-                                                            <h:commandButton action="#{listarProyectos.preparacionEditar(p)}" value="Editar"></h:commandButton>
-                                                        </c:when>
-                                                        <c:when test="#{permiso.idPermiso eq 32}">
-                                                            <h:commandButton class="btnModal1"  value="elminar">
-                                                                <f:ajax event="click" listener="#{eliminarProyecto.prepararEliminar(p)}" render=":content-modal-eliminar" ></f:ajax>
-                                                            </h:commandButton>
-                                                        </c:when>
-                                                    </c:choose>
-                                                </c:forEach>
+                                        <tbody>
+                                            <c:forEach items="#{listarProyectos.proyecto}" var="p">
+                                                <tr>
+                                                    <td><h:outputText value="#{p.idProyecto}"></h:outputText></td>
+                                                    <td><h:outputText value="#{p.nombreProyecto}"></h:outputText></td>
+                                                    <td><h:outputText value="#{p.estadosIdEstado.descripcionEstado}"></h:outputText></td>
+                                                    <td><h:outputText value="#{p.fechaInicio}"></h:outputText></td>
+                                                    <td><h:outputText value="#{p.tiempoEstimado}"></h:outputText> dia(s)</td>
+                                                    <td>
+                                                        <h:form>
+                                                            <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="permiso">
+                                                                <c:choose>
+                                                                    <c:when test="#{permiso.idPermiso eq 33}">
+                                                                        <h:commandButton action="#{listarProyectos.preparacionEditar(p)}" value="Editar"></h:commandButton>
+                                                                    </c:when>
+                                                                    <c:when test="#{permiso.idPermiso eq 32}">
+                                                                        <h:commandButton class="btnModal1"  value="elminar">
+                                                                            <f:ajax event="click" listener="#{eliminarProyecto.prepararEliminar(p)}" render=":content-modal-eliminar" ></f:ajax>
+                                                                        </h:commandButton>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                        </h:form>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+
+                                    <div id="myModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <h:form id="form-eliminar-usuario" prependId="false">
+                                                <h:panelGroup id="content-modal-eliminar" layout="block" class="modal-content">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">eliminar</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Desea el eliminar el proyecto: ${eliminarProyecto.proyectoSeleccionado.nombreProyecto}</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <h:commandButton class="btn btn-primary" value="ELIMINAR" action="#{eliminarProyecto.eliminar()}"></h:commandButton>
+                                                    </div>
+                                                </h:panelGroup>
                                             </h:form>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                                        </div>
+                                    </div>
 
-                        <div id="myModal" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <h:form id="form-eliminar-usuario" prependId="false">
-                                    <h:panelGroup id="content-modal-eliminar" layout="block" class="modal-content">
-                                        <!-- Modal content-->
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">eliminar</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Desea el eliminar el proyecto: ${eliminarProyecto.proyectoSeleccionado.nombreProyecto}</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <h:commandButton class="btn btn-primary" value="ELIMINAR" action="#{eliminarProyecto.eliminar()}"></h:commandButton>
-                                        </div>
-                                    </h:panelGroup>
-                                </h:form>
+                                </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
-            </div>
-        </div>
-
+                </c:when>
+            </c:choose>
+        </c:forEach> 
     </ui:define>
 
-<ui:define name="ultimosScripts">
+    <ui:define name="ultimosScripts">
         <script >
             /* function openModal() {
              #("myModal").modal("show");

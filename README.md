@@ -7,9 +7,13 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 
 	- corregido los nombre de los modulos y controladores (camelCase).
 	
-	- corregido el redireccionamiento al index del sistema cuando se hace clic en el nombre del rol.
+	- corregido el redireccionamiento al index del dashboard cuando se hace clic en el nombre del rol.
 	
 	- varios fix a la hora de redireccionar (redireccionamiento en los controladores).
+	
+	- correccion en el modulo proveedores->listarProveedores,
+ahora permite listar con dataTable();
+
   
 2) nuevo:
 
@@ -25,12 +29,16 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 
 	- se agregaron las imagenes del filtro de busqueda
 
+	-implementado el menu dinamico en todos los modulos->listarXxx.xxxxx, ahora no permite el acceso si no tiene el permiso.
+
 
 3) experimental:
 
 	-a la hora de hacer reportes en excel, ya no aparece la columna opciones y sus respectivos botones*
   
 	- se implementa la version 0.2 de los reportes en pdf, png, json, xml, txt, sql, cvs, word y excel y sus respectivas librerias
+
+	- Traduccion parcial de dataTable();
 
 4)ToDo:
 
@@ -43,14 +51,21 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 	- mejorar los reportes*.
 	
 	- implementar los reportes en pdf.
-	
-	~~- implementar el modulo de 'roles'~~.
-	
+		
 	- implementar el modulo de 'configuracion del usuario'.
 	
 	- implementar el modulo 'configuracion del sistema' a los usuarios root y administrador.
 	
-	- corregir los mensajes de error cuando se lista (todos los modulos).
+	- corregir los mensajes de error cuando se lista (todos los modulos).*
 	
 	- implementar la programacion, procedimientos y demas en la base de datos.
+
+	- implementar el menu dinamico en los reportes, estados...
+
+	- implementar el boton "cambiar estado" en todos los mudulos
+
+	- hacer la validacion del estado de los usuarios, roles...
+
+*por alguna razon ya no aparece el mensaje de error cuando de ingresa a cualquier modulo->listarXxx.xxxxx
+
   
