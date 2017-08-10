@@ -30,6 +30,8 @@ ahora permite listar con dataTable();
 	- se agregaron las imagenes del filtro de busqueda
 
 	-implementado el menu dinamico en todos los modulos->listarXxx.xxxxx, ahora no permite el acceso si no tiene el permiso.
+	
+	el sistema ahora permite validar si un usuario esta activo en el sistema
 
 
 3) experimental:

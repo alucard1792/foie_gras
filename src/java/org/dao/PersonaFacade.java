@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.entidades.Persona;
@@ -36,6 +38,9 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 
     public Persona iniciarSesion(int documento, String password) {
         Persona u = null;
+        FacesMessage fm;
+        FacesContext fc;
+        
         try {
             TypedQuery<Persona> q = getEntityManager().createNamedQuery("Persona.login", Persona.class);
             q.setParameter("documento", documento);

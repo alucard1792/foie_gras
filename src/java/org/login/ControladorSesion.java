@@ -92,7 +92,7 @@ public class ControladorSesion implements Serializable {
         FacesContext fc = FacesContext.getCurrentInstance();
         if ((documento != 0) && password != null && !password.equals("")) {
             p = pfl.iniciarSesion(documento, password);
-            if (p != null) {
+            if (p != null && p.getEstado().equals(1)) {
                 List<Rol> rolesUsuario = p.getRoles();//esto lo hacemos para aprovechar el mapeo bidireccional y traer todos los roles
                 if (rolesUsuario.size() > 0) { // se hace esta validacion para saber si el usuario tiene al menos un rol seleccionado para que no me retorne null
                     rolSeleccionado = rolesUsuario.get(0);
@@ -131,8 +131,8 @@ public class ControladorSesion implements Serializable {
 
                 }
 
-            } else {
-                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "contraseña o documento incorrecto", "intentelo de nuevo");
+            }else {
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "contraseña, documento incorrecto o usuario desactivado. ", "Contacte con el administrador");
                 fc.addMessage(null, fm);
             }
 
