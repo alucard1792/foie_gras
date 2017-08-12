@@ -42,6 +42,8 @@ ahora permite listar con dataTable();
 
 	- Traduccion parcial de dataTable();
 
+	- primera version del archivo properties
+
 4)ToDo:
 
 	- vincular la tabla detalles_pedidos al modulo pedidos.

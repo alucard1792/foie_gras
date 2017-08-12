@@ -4,12 +4,13 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
    <application>
-       <message-bundle>org.msg</message-bundle>
       <locale-config>
          <default-locale>es</default-locale>
+         <supported-locale>en</supported-locale>
       </locale-config>
+       <message-bundle>org.messages.msg</message-bundle>
       <resource-bundle>
-         <base-name>org.msg</base-name>
+         <base-name>org.messages.msg</base-name>
          <var>msg</var>
       </resource-bundle>
    </application>
