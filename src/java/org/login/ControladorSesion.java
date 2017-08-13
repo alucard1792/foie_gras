@@ -133,6 +133,7 @@ public class ControladorSesion implements Serializable {
 
             }else {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "contraseña, documento incorrecto o usuario desactivado. ", "Contacte con el administrador");
+                FacesMessage f = new FacesMessage(severity, password, password)
                 fc.addMessage(null, fm);
             }
 
