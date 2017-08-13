@@ -14,6 +14,9 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 	- correccion en el modulo proveedores->listarProveedores,
 ahora permite listar con dataTable();
 
+	- se corige el error de header (r) 
+
+
   
 2) nuevo:
 
@@ -32,6 +35,8 @@ ahora permite listar con dataTable();
 	-implementado el menu dinamico en todos los modulos->listarXxx.xxxxx, ahora no permite el acceso si no tiene el permiso.
 	
 	el sistema ahora permite validar si un usuario esta activo en el sistema
+
+	-mas texto en properties español
 
 
 3) experimental:
