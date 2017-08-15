@@ -47,7 +47,7 @@ ahora permite listar con dataTable();
 
 	- Traduccion parcial de dataTable();
 
-	- primera version del archivo properties
+	- Traduccion del index, contacto y login
 
 4)ToDo:
 

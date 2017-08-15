@@ -12,10 +12,11 @@
                 <li class="current" style="text-align: center"><a href="/foie_gras/admin/">Rol: #{controladorSesion.rolSeleccionado.nombreRol}</a></li>
                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                     <c:if test="#{p.permisoPadre eq null}">
-                        <li><h:link outcome="/#{p.url}" value="#{p.nombrePermiso}"><i class="#{p.icon}"></i></h:link></li>
+                        <li><h:link outcome="/#{p.url}" value="#{(idioma.languageSelect eq 'es_ES' ? p.nombrePermiso: p.nombrePermisoEn)}"><i class="#{p.icon}"></i></h:link></li>
                     </c:if>
                 </c:forEach>
             </ul>
         </div>
     </div>
+    
 </ui:fragment>

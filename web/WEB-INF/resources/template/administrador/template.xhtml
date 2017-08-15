@@ -3,41 +3,61 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <f:event type="preRenderView" listener="#{controladorSesion.validarSesion()}"></f:event>
-        <ui:include src="/WEB-INF/resources/template/administrador/head.xhtml"></ui:include>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <f:view locale="#{idioma.languageSelect}">
+                    <b:form id="form-lang" horizontal="true" prependId="false">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        #{msg.idioma} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <c:forEach items="#{idioma.supportLanguages}" var="l" >
+                            <li>
+                                <h:commandLink  value="#{msg[l.displayLanguage]}" action="#{idioma.cambiarIdioma(l)}">
+                                    <img src="#{request.contextPath}/resources/img/languages/#{l.language}.png" width="25px" alt="#{msg[l.displayLanguage]}"/>
+                                </h:commandLink>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </b:form>
+        <h:head>
+            <f:event type="preRenderView" listener="#{controladorSesion.validarSesion()}"></f:event>
+            <ui:include src="/WEB-INF/resources/template/administrador/head.xhtml"></ui:include>
 
-    </h:head>
+        </h:head>
 
-    <h:body>
+        <h:body>
 
-        <!--header-->
-        <ui:include src="/WEB-INF/resources/template/administrador/header.xhtml"></ui:include>
+            <!--header-->
+            <ui:include src="/WEB-INF/resources/template/administrador/header.xhtml"></ui:include>
 
-        <div class="page-content">
-            <div class="row">
-                <!--menu-->
-                <ui:include src="/WEB-INF/resources/template/administrador/menu.xhtml"></ui:include>
+            <div class="page-content">
+                <div class="row">
+                    <!--menu-->
+                    <ui:include src="/WEB-INF/resources/template/administrador/menu.xhtml"></ui:include>
 
-                <!--contenido principal-->
-                <div class="col-md-10">
+                    <!--contenido principal-->
+                    <div class="col-md-10">
 
-                    <ui:insert name="contenido">
-                        "no se cargo la plantilla del usuario correspondiente" 
-                    </ui:insert>
+                        <ui:insert name="contenido">
+                            "no se cargo la plantilla del usuario correspondiente" 
+                        </ui:insert>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+            <!--footer-->
 
-        <!--footer-->
+            <ui:include src="/WEB-INF/resources/template/administrador/footer.xhtml"></ui:include>
 
-        <ui:include src="/WEB-INF/resources/template/administrador/footer.xhtml"></ui:include>
-
-    </h:body>
-    
+        </h:body>
+    </f:view>
 </html>
 
