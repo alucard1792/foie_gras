@@ -23,7 +23,7 @@ import javax.faces.context.FacesContext;
  * @author David
  */
 @Named(value = "idioma")
-@ApplicationScoped
+@SessionScoped
 public class Idioma implements Serializable {
 
     private Locale languageSelected;

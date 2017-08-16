@@ -6,24 +6,24 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    
+
     <f:view locale="#{idioma.languageSelect}">
-                    <b:form id="form-lang" horizontal="true" prependId="false">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        #{msg.idioma} <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <c:forEach items="#{idioma.supportLanguages}" var="l" >
-                            <li>
-                                <h:commandLink  value="#{msg[l.displayLanguage]}" action="#{idioma.cambiarIdioma(l)}">
-                                    <img src="#{request.contextPath}/resources/img/languages/#{l.language}.png" width="25px" alt="#{msg[l.displayLanguage]}"/>
-                                </h:commandLink>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </b:form>
+        <b:form id="form-lang" horizontal="true" prependId="false">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    #{msg.idioma} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <c:forEach items="#{idioma.supportLanguages}" var="l" >
+                        <li>
+                            <h:commandLink  value="#{msg[l.displayLanguage]}" action="#{idioma.cambiarIdioma(l)}">
+                                <img src="#{request.contextPath}/resources/img/languages/#{l.language}.png" width="25px" alt="#{msg[l.displayLanguage]}"/>
+                            </h:commandLink>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </b:form>
         <h:head>
             <f:event type="preRenderView" listener="#{controladorSesion.validarSesion()}"></f:event>
             <ui:include src="/WEB-INF/resources/template/administrador/head.xhtml"></ui:include>

@@ -13,7 +13,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
+import org.dao.DetallePedidoFacadeLocal;
 import org.dao.PedidoFacadeLocal;
+import org.entidades.DetallePedido;
 import org.entidades.Pedido;
 
 /**
@@ -25,13 +27,14 @@ import org.entidades.Pedido;
 public class ListarPedidos implements Serializable {
 
     @EJB
-    private PedidoFacadeLocal pedidoFacadeLocal;
+    private DetallePedidoFacadeLocal detallePedidoFacadeLocal;
     @EJB
     private PedidoFacadeLocal pfl;
     @Inject
     private Conversation conversacion;
     private Pedido pedidoSeleccionado;
     private List<Pedido> listaPedidos;
+    private List<DetallePedido> listaDetallePedidos;
 
     public ListarPedidos() {
 
@@ -40,7 +43,12 @@ public class ListarPedidos implements Serializable {
     @PostConstruct
     public void init() {
         listaPedidos = pfl.findAll();
+        listaDetallePedidos = detallePedidoFacadeLocal.findAll();
 
+    }
+
+    public List<DetallePedido> getListaDetallePedidos() {
+        return listaDetallePedidos;
     }
 
     public List<Pedido> getListaPedidos() {
@@ -98,7 +106,7 @@ public class ListarPedidos implements Serializable {
     }
 
     public String eliminarPedido() {
-        pedidoFacadeLocal.remove(pedidoSeleccionado);
+        pfl.remove(pedidoSeleccionado);
         return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
         
     }

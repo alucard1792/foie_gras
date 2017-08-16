@@ -49,10 +49,13 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>nombre proyecto</th>
-                                                <th>descripcion</th>
-                                                <th>realizo pago</th>
-                                                <th>vendedor</th>
+                                                <th>Nombre proyecto</th>
+                                                <th>Descripcion</th>
+                                                <th>Realizo pago</th>
+                                                <th>Vendedor</th>
+                                                <th>Cantidad</th>
+                                                <th>Dimension alto</th>
+                                                <th>Dimension ancho</th>
                                                 <th>Opciones</th>
                                             </tr>
                                         </thead>
@@ -66,6 +69,16 @@
                                                     <td><h:outputText value="#{p.descripcion}"></h:outputText></td>
                                                     <td><h:outputText value="#{p.realizoPago}"></h:outputText></td>
                                                     <td><h:outputText value="#{p.personasIdPersona.nombre} #{p.personasIdPersona.apellido}"></h:outputText></td>
+
+                                                    <c:forEach items="#{listarPedidos.listaDetallePedidos}" var="dp">
+                                                        <c:choose>
+                                                            <c:when test="#{dp.pedidosIdPedido eq p.idPedido}">
+                                                                <td><h:outputText value="#{dp.cantidad}"></h:outputText></td>
+                                                                <td><h:outputText value="#{dp.dimensionAlto}"></h:outputText></td>
+                                                                <td><h:outputText value="#{dp.dimensionAncho}"></h:outputText></td>                                                            </c:when>
+                                                        </c:choose>
+                                                    </c:forEach>
+
                                                     <td>
                                                         <h:form>
                                                             <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="permiso">
