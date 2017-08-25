@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -91,22 +92,23 @@
 
                     <div id="right">
 
-                        <form id="formulario">
+                        <h:form id="formulario">
                             <div class="row">
                                 <label for="name">#{msg.labelNombre}</label><br />
                                 <input id="name" class="input" name="name" type="text" value="" placeholder="Nombre*" size="30" required="true"/><br />
                             </div>
                             <div class="row">
                                 <label for="email">#{msg.labelEmail}</label><br />
-                                <input id="email" class="input" name="email" type="text" value="" size="30" placeholder="Email*" required="true"/><br />
+                                <h:inputText id="email"   value="#{controllerEmail.contenido}" size="30"  required="true"/><br />
                             </div>
                             <div class="row">
-                                <label for="message">#{msg.labelMensaje}</label><br />
-                                <textarea id="message" class="input" name="message" rows="7" cols="30" placeholder="" required="true"></textarea><br />
+                                <label for="asunto">#{msg.labelMensaje}</label><br />
+                                <h:inputText id="asunto"  value="#{controllerEmail.asunto}" size="30"  required="true"/><br />
                             </div>
                             <label for="submit_button"></label>
-                            <input id="submit_button" type="submit" value="#{msg.botonEnviar}"/>
-                        </form> 
+                            <h:commandButton id="submit_button" value="Enviar" action="#{controllerEnviarCorreo.enviarEmail()}"/>
+
+                        </h:form>
 
                     </div>
                 </div>
