@@ -31,7 +31,7 @@ public class controllerEnviarCorreo implements Serializable {
     
     public void enviarEmail(){
        controllerEmail cemail = new controllerEmail("correofixedup@gmail.com", "fixedupsena", "orubio04@misena.edu.co");
-        cemail.enviar(cemail.getAsunto(), cemail.getContenido()); 
+        cemail.enviar("juan", "123"); 
     }
     
     
