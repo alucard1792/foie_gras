@@ -54,6 +54,8 @@ ahora permite listar con dataTable();
 
 	- prototipo envio email "orlando"
 
+	- primera implementacion del dashboard -incompleto-
+
 4)ToDo:
 
 	- vincular la tabla detalles_pedidos al modulo pedidos.
@@ -79,6 +81,8 @@ ahora permite listar con dataTable();
 	- implementar el boton "cambiar estado" en todos los mudulos
 
 	- hacer la validacion del estado de los usuarios, roles...
+
+	- el modulo de pedidos deberia mostrar tanto en vendedor que ingreso el pedido como el operario que esta asignado
 
 *por alguna razon ya no aparece el mensaje de error cuando de ingresa a cualquier modulo->listarXxx.xxxxx
 

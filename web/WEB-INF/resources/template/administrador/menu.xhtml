@@ -13,7 +13,9 @@
                 <li class="current" style="text-align: center"><a href="/foie_gras/admin/">Rol: #{controladorSesion.rolSeleccionado.nombreRol}</a></li>
                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                     <c:if test="#{p.permisoPadre eq null}">
-                        <li><h:link outcome="/#{p.url}" value="#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}"><i class="#{p.icon}"></i></h:link></li>
+                        <c:if test="#{p.idPermiso != 43}">
+                            <li><h:link outcome="/#{p.url}" value="#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}"><i class="#{p.icon}"></i></h:link></li>
+                        </c:if>
                     </c:if>
                 </c:forEach>
             </ul>

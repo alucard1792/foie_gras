@@ -67,8 +67,8 @@
                                                     <td><h:outputText value="#{p.idPedido}"></h:outputText></td>
                                                     <td><h:outputText value="#{p.nombreProyecto}"></h:outputText></td>
                                                     <td><h:outputText value="#{p.descripcion}"></h:outputText></td>
-                                                    <td><h:outputText value="#{p.realizoPago}"></h:outputText></td>
-                                                    <td><h:outputText value="#{p.cantidad}"></h:outputText></td>
+                                                    <td><h:outputText value="#{(p.realizoPago eq 1 ? 'si':'no')}"></h:outputText></td>
+                                                    <td><h:outputText value="#{p.cantidad} #{(p.cantidad eq 1 ? 'unidad': 'unidades')}"></h:outputText></td>
                                                     <td><h:outputText value="#{p.dimensionAlto} cm"> </h:outputText></td>
                                                     <td><h:outputText value="#{p.dimensionAncho} cm"></h:outputText></td>
                                                     <td><h:outputText value="#{p.personasIdPersona.nombre} #{p.personasIdPersona.apellido}"></h:outputText></td>

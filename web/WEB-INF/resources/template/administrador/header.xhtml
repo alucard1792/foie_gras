@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
-             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui">
 
     <div class="header">
         <div class="container">
@@ -34,7 +35,8 @@
                                     <ul class="dropdown-menu animated fadeInUp">
                                         <li>
                                             <h:form>
-                                                <h:commandLink actionListener ="#{controladorSesion.cerrarSesion()}" value="cerrar sesion"></h:commandLink>
+                                                <h:commandLink actionListener ="#{listarPerfil.PrepararEditarPerfil()}" value="#{msg.miCuenta}"></h:commandLink><br></br>
+                                                <h:commandLink actionListener ="#{controladorSesion.cerrarSesion()}" value="#{msg.cerrarSesion}"></h:commandLink>
                                             </h:form>
                                         </li>
                                     </ul>

@@ -5,12 +5,21 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    
+
     <ui:define name="titulo">Mi cuenta</ui:define>
-    
+
     <ui:define name="contenido">
-        
+
+        <div class="content-box-large">
+            <div class="panel-heading">
+                <div class="panel-title"><h2>Usuarios registrados</h2></div>
+                <div class="panel-options">
+                    <span><h:link outcome="/#{p.url}" value="Editar perfil">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                    </c:forEach>                       
+                </div>
+            </div>
+
     </ui:define>
-    
-    
+
+
 </ui:composition>
