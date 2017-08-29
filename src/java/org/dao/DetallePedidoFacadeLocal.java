@@ -8,6 +8,7 @@ package org.dao;
 import java.util.List;
 import javax.ejb.Local;
 import org.entidades.DetallePedido;
+import org.entidades.Pedido;
 
 /**
  *
@@ -29,5 +30,6 @@ public interface DetallePedidoFacadeLocal {
     List<DetallePedido> findRange(int[] range);
 
     int count();
+
     
 }

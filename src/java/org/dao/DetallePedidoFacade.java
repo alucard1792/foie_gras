@@ -5,10 +5,16 @@
  */
 package org.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import org.entidades.DetallePedido;
+import org.entidades.Pedido;
 
 /**
  *
@@ -28,5 +34,6 @@ public class DetallePedidoFacade extends AbstractFacade<DetallePedido> implement
     public DetallePedidoFacade() {
         super(DetallePedido.class);
     }
+
     
 }

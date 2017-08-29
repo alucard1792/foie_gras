@@ -47,8 +47,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Persona.findByEmail", query = "SELECT p FROM Persona p WHERE p.email = :email")})
 public class Persona implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "estado")
-    private Integer estado;
+    private int estado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -246,11 +248,11 @@ public class Persona implements Serializable {
         return "org.entidades.Persona[ idPersona=" + idPersona + " ]";
     }
 
-    public Integer getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     

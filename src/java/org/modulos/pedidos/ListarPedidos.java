@@ -34,7 +34,6 @@ public class ListarPedidos implements Serializable {
     private Conversation conversacion;
     private Pedido pedidoSeleccionado;
     private List<Pedido> listaPedidos;
-    private List<DetallePedido> listaDetallePedidos;
 
     public ListarPedidos() {
 
@@ -43,13 +42,9 @@ public class ListarPedidos implements Serializable {
     @PostConstruct
     public void init() {
         listaPedidos = pfl.findAll();
-        listaDetallePedidos = detallePedidoFacadeLocal.findAll();
 
     }
 
-    public List<DetallePedido> getListaDetallePedidos() {
-        return listaDetallePedidos;
-    }
 
     public List<Pedido> getListaPedidos() {
         return listaPedidos;
@@ -109,6 +104,10 @@ public class ListarPedidos implements Serializable {
         pfl.remove(pedidoSeleccionado);
         return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
         
+    }
+    
+    public Pedido buscarIdPedido(Pedido p){
+        return p;
     }
 
 }

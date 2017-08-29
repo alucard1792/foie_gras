@@ -14,7 +14,10 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 	- correccion en el modulo proveedores->listarProveedores,
 ahora permite listar con dataTable();
 
-	- se corige el error de header (r) 
+	- se corige el error de header (r)
+	
+	- se corrige el modulo de pedidos, en la base de datos se unifican detalles pedidos y pedidos.
+ 
 
 
   
@@ -48,6 +51,8 @@ ahora permite listar con dataTable();
 	- Traduccion parcial de dataTable();
 
 	- Traduccion del index, contacto y login
+
+	- prototipo envio email "orlando"
 
 4)ToDo:
 

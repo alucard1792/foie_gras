@@ -1,9 +1,9 @@
+********************Actualizado: 29-08-2017*********************
+
 Este es el dump de la base de datos para que pueda funcionar el proyecto. ejecutar en workbench y listo
 ~~*Nota *: para que el proyecto funcionen les toca crear un usuario que se llame fixed_up y la contraseña 123, si no lo hacen les toca configurar el archivo glassfish resources.xml con el usuario root. Si crean el usuario le deben dar todos los permisos, desde phpMyAdmin es facil.~~
 *Nota 1: el sistema ya tiene como usuario por defecto root.
 *Nota 2: Si actualizan la base de datos, por favor cargar de nuevo el dump describiendo los cambios. gracias.
-
----------****************************************************************************************************************----------
 
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
@@ -245,7 +245,7 @@ CREATE TABLE `materias_prima` (
   `dimension_alto` int(11) NOT NULL COMMENT 'alto de la lamina',
   `estado` int(11) NOT NULL,
   PRIMARY KEY (`id_materia`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,7 +254,7 @@ CREATE TABLE `materias_prima` (
 
 LOCK TABLES `materias_prima` WRITE;
 /*!40000 ALTER TABLE `materias_prima` DISABLE KEYS */;
-INSERT INTO `materias_prima` VALUES (1,'acrilico transparent','acrilico',2,70,70,1),(2,'acrilico templado','acrilico',2,50,50,1),(3,'acrilico acriflex','acrilico',6,80,80,1),(4,'poliestireno blanco','poliestireno',10,50,50,1),(5,'poliestireno amarill','poliestireno',10,50,50,1),(8,'prueba','plastico',10,150,10,1),(9,'Yt34456','madera',63,633,654,1),(10,'pl34566','Acrilico Azul-naranj',255,23,86,1),(11,'pruebapp','Acrilico Azul-nara',5,10,10,1);
+INSERT INTO `materias_prima` VALUES (1,'acrilico transparent','acrilico',2,70,70,1),(2,'acrilico templado','acrilico',2,50,50,1),(3,'acrilico acriflex','acrilico',6,80,80,1),(4,'poliestireno blanco','poliestireno',10,50,50,1),(5,'poliestireno amarill','poliestireno',10,50,50,1),(8,'prueba','plastico',10,150,10,1),(9,'Yt34456','madera',63,633,654,1),(10,'pl34566','Acrilico Azul-naranj',255,23,86,1),(11,'pruebapp','Acrilico Azul-nara',5,10,10,1),(12,'p','p',3,3,3,1);
 /*!40000 ALTER TABLE `materias_prima` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,6 +270,9 @@ CREATE TABLE `pedidos` (
   `nombre_proyecto` varchar(30) NOT NULL,
   `descripcion` varchar(50) NOT NULL COMMENT 'detalles especificos del proyecto',
   `realizo_pago` tinyint(4) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `dimension_ancho` double NOT NULL,
+  `dimension_alto` double NOT NULL,
   `personas_id_persona` int(11) NOT NULL,
   `materias_prima_id_materia` int(11) NOT NULL,
   PRIMARY KEY (`id_pedido`),
@@ -278,7 +281,7 @@ CREATE TABLE `pedidos` (
   CONSTRAINT `c_borrar_cascada_personas_pedidos` FOREIGN KEY (`personas_id_persona`) REFERENCES `personas` (`id_persona`) ON DELETE CASCADE,
   CONSTRAINT `fk_pedidos_materias_prima1` FOREIGN KEY (`materias_prima_id_materia`) REFERENCES `materias_prima` (`id_materia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_pedidos_personas1` FOREIGN KEY (`personas_id_persona`) REFERENCES `personas` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -287,7 +290,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,'letras segundarias','letras de colores',1,4,1),(2,'emergencia bodega','señalizacion extintores',1,5,2),(3,'señalizacion oficina nextel','letrero de salida de emergecia',1,4,3),(4,'logotipo eps sura','logotipo entrada eps sura carrera 68',1,5,4),(6,'señalizacion sena','señales de parqueo sena carrera 63',0,5,1),(7,'123','12',0,1,1),(8,'123','12',0,1,1),(9,'letras primaria','letras de colores',1,4,1),(10,'letras primaria','letras de colores',1,4,1),(11,'buzon','buzon color rojo',0,1,1),(12,'buzon','buzon color rojo',0,1,1),(20,'pueba','pruebas',0,1,1);
+INSERT INTO `pedidos` VALUES (1,'letras segundarias','letras de colores',1,5,10,20,4,1),(2,'emergencia bodega','senalizacion extintores',1,10,50,90,5,2),(3,'senalizacion oficina nextel','letrero de salida de emergecia',1,50,15,20,4,3),(4,'logotipo eps sura','logotipo entrada eps sura carrera 68',1,5,10,20,5,4),(5,'senalizacion sena','senales de parqueo sena carrera 63',0,5,10,20,5,1);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -301,6 +304,7 @@ DROP TABLE IF EXISTS `permisos`;
 CREATE TABLE `permisos` (
   `id_permiso` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_permiso` varchar(45) NOT NULL,
+  `nombre_permiso_en` varchar(45) DEFAULT NULL,
   `estado` int(11) NOT NULL,
   `url` text,
   `icon` varchar(45) DEFAULT NULL,
@@ -308,7 +312,7 @@ CREATE TABLE `permisos` (
   PRIMARY KEY (`id_permiso`),
   KEY `permiso_padre` (`permiso_padre`),
   CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`permiso_padre`) REFERENCES `permisos` (`id_permiso`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,7 +321,7 @@ CREATE TABLE `permisos` (
 
 LOCK TABLES `permisos` WRITE;
 /*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
-INSERT INTO `permisos` VALUES (1,'Usuarios',1,'admin/usuarios/listarUsuarios.xhtml','glyphicon glyphicon-user',NULL),(2,'Crear usuarios',1,'admin/usuarios/crearUsuario1.xhtml','',1),(3,'Listar usuarios',1,'admin/usuarios/listarUsuarios.xhtml',NULL,1),(4,'Eliminar usuarios',1,NULL,NULL,1),(5,'Editar usuarios',1,'admin/usuarios/editar.xhtml',NULL,1),(6,'Estados usuarios',1,NULL,NULL,1),(7,'Reportes usuarios',1,NULL,NULL,1),(8,'Materia prima',1,'admin/materiaPrima/listarMateriaPrima.xhtml','glyphicon glyphicon-list',NULL),(9,'Crear materia prima',1,'admin/materiaPrima/crearMateriaPrima.xhtml',NULL,8),(10,'Listar materia prima',1,NULL,'',8),(11,'Eliminar materia prima',1,NULL,NULL,8),(12,'Editar materia prima',1,'admin/materiaPrima/editarMateriaPrima.xhtml',NULL,8),(13,'Estados materia prima',1,NULL,NULL,8),(14,'Reportes materia prima',1,NULL,NULL,8),(15,'Proveedores',1,'admin/provedores/listarProveedores.xhtml','glyphicon glyphicon-stats',NULL),(16,'Crear proveedores',1,'admin/provedores/crearProveedor.xhtml',NULL,15),(17,'Listar proveedores',1,NULL,'',15),(18,'Eliminar proveedores',1,NULL,NULL,15),(19,'Editar proveedores',1,'admin/provedores/editarProveedor.xhtml',NULL,15),(20,'Estados proveedores',1,NULL,NULL,15),(21,'Reportes proveedores',1,NULL,NULL,15),(22,'Pedidos',1,'admin/pedidos/listarPedidos.xhtml','glyphicon glyphicon-briefcase',NULL),(23,'Crear pedidos',1,'admin/pedidos/crearPedido.xhtml',NULL,22),(24,'Listar pedidos',1,NULL,'',22),(25,'Eliminar pedidos',1,NULL,NULL,22),(26,'Editar pedidos',1,'admin/pedidos/editarPedido.xhtml',NULL,22),(27,'Estados pedidos',1,NULL,NULL,22),(28,'Reportes pedidos',1,NULL,NULL,22),(29,'Proyectos',1,'admin/proyectos/listarProyectos.xhtml','glyphicon glyphicon-tasks',NULL),(30,'Crear proyectos',1,'admin/proyectos/crearProyecto.xhtml',NULL,29),(31,'Listar proyectos',1,NULL,'',29),(32,'Eliminar proyectos',1,NULL,NULL,29),(33,'Editar proyectos',1,'admin/proyectos/editarProyecto.xhtml',NULL,29),(34,'Estados proyectos',1,NULL,NULL,29),(35,'Reportes proyectos',1,NULL,NULL,29),(36,'Roles',1,NULL,NULL,NULL),(37,'Crear roles',1,NULL,NULL,36),(38,'Listar roles',1,NULL,NULL,36),(39,'Eliminar roles',1,NULL,NULL,36),(40,'Editar roles',1,NULL,NULL,36),(41,'Estados roles',1,NULL,NULL,36),(42,'Reportes roles',1,NULL,NULL,36);
+INSERT INTO `permisos` VALUES (1,'Usuarios','Users',1,'admin/usuarios/listarUsuarios.xhtml','glyphicon glyphicon-user',NULL),(2,'Crear usuarios',NULL,1,'admin/usuarios/crearUsuario1.xhtml','',1),(3,'Listar usuarios',NULL,1,'admin/usuarios/listarUsuarios.xhtml',NULL,1),(4,'Eliminar usuarios',NULL,1,NULL,NULL,1),(5,'Editar usuarios',NULL,1,'admin/usuarios/editar.xhtml',NULL,1),(6,'Estados usuarios',NULL,1,NULL,NULL,1),(7,'Reportes usuarios',NULL,1,NULL,NULL,1),(8,'Materia prima','raw materials',1,'admin/materiaPrima/listarMateriaPrima.xhtml','glyphicon glyphicon-list',NULL),(9,'Crear materia prima',NULL,1,'admin/materiaPrima/crearMateriaPrima.xhtml',NULL,8),(10,'Listar materia prima',NULL,1,NULL,'',8),(11,'Eliminar materia prima',NULL,1,NULL,NULL,8),(12,'Editar materia prima',NULL,1,'admin/materiaPrima/editarMateriaPrima.xhtml',NULL,8),(13,'Estados materia prima',NULL,1,NULL,NULL,8),(14,'Reportes materia prima',NULL,1,NULL,NULL,8),(15,'Proveedores','Suppliers',1,'admin/provedores/listarProveedores.xhtml','glyphicon glyphicon-stats',NULL),(16,'Crear proveedores',NULL,1,'admin/provedores/crearProveedor.xhtml',NULL,15),(17,'Listar proveedores',NULL,1,NULL,'',15),(18,'Eliminar proveedores',NULL,1,NULL,NULL,15),(19,'Editar proveedores',NULL,1,'admin/provedores/editarProveedor.xhtml',NULL,15),(20,'Estados proveedores',NULL,1,NULL,NULL,15),(21,'Reportes proveedores',NULL,1,NULL,NULL,15),(22,'Pedidos','Orders',1,'admin/pedidos/listarPedidos.xhtml','glyphicon glyphicon-briefcase',NULL),(23,'Crear pedidos',NULL,1,'admin/pedidos/crearPedido.xhtml',NULL,22),(24,'Listar pedidos',NULL,1,NULL,'',22),(25,'Eliminar pedidos',NULL,1,NULL,NULL,22),(26,'Editar pedidos',NULL,1,'admin/pedidos/editarPedido.xhtml',NULL,22),(27,'Estados pedidos',NULL,1,NULL,NULL,22),(28,'Reportes pedidos',NULL,1,NULL,NULL,22),(29,'Proyectos','Projects',1,'admin/proyectos/listarProyectos.xhtml','glyphicon glyphicon-tasks',NULL),(30,'Crear proyectos',NULL,1,'admin/proyectos/crearProyecto.xhtml',NULL,29),(31,'Listar proyectos',NULL,1,NULL,'',29),(32,'Eliminar proyectos',NULL,1,NULL,NULL,29),(33,'Editar proyectos',NULL,1,'admin/proyectos/editarProyecto.xhtml',NULL,29),(34,'Estados proyectos',NULL,1,NULL,NULL,29),(35,'Reportes proyectos',NULL,1,NULL,NULL,29),(36,'Roles','Rols',1,'admin/roles/listarRoles.xhtml','glyphicon glyphicon-sort-by-attributes-alt',NULL),(37,'Crear roles',NULL,1,'admin/roles/crearRoles.xhtml',NULL,36),(38,'Listar roles',NULL,1,NULL,NULL,36),(39,'Eliminar roles',NULL,1,NULL,NULL,36),(40,'Editar roles',NULL,1,NULL,NULL,36),(41,'Estados roles',NULL,1,NULL,NULL,36),(42,'Reportes roles',NULL,1,NULL,NULL,36),(43,'Mi cuenta','My account',1,'admin/dashboard/miCuenta.xhtml',NULL,NULL),(44,'Listar cuenta',NULL,1,NULL,NULL,43),(45,'Editar Cuenta',NULL,1,NULL,NULL,43);
 /*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +377,7 @@ CREATE TABLE `proveedores` (
   PRIMARY KEY (`id_proveedor`),
   KEY `fk_proveedores_ciudades1_idx` (`ciudades_id_ciudad`),
   CONSTRAINT `fk_proveedores_ciudades1` FOREIGN KEY (`ciudades_id_ciudad`) REFERENCES `ciudades` (`id_ciudad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +386,7 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
-INSERT INTO `proveedores` VALUES (1,'2021','acricol','calle 5',2233,'daniel ortega',1),(2,'2022','acribest','calle 6',3344,'rubio moreno',2),(3,'2023','acrilicos de bogota','calle 7',4455,'fernando ojeda',3),(4,'2024','acrilicos de cundinamarca','calle 8',5566,'luis fernando',4),(5,'2025','acrilicos internacional','calle 9',6677,'ismael alveiro rondón',5),(6,'999888','123321123','999999',0,'ismael alveiro rondón',1);
+INSERT INTO `proveedores` VALUES (1,'2021','acricol','calle 5',2233,'daniel ortega',1),(2,'2022','acribest','calle 6',3344,'rubio moreno',2),(3,'2023','acrilicos de bogota','calle 7',4455,'fernando ojeda',3),(4,'2024','acrilicos de cundinamarca','calle 8',5566,'luis fernando',4),(5,'2025','acrilicos internacional','calle 9',6677,'ismael alveiro rondon',5),(6,'999888','123321123','999999',0,'ismael alveiro rondon',1),(15,'9','9','9',9,'9',1),(16,'2','2','2',2,'2',1),(17,'3','3','3',3,'3',1),(18,'10','10','10',10,'10',1);
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -439,7 +443,7 @@ CREATE TABLE `proyectos` (
   CONSTRAINT `fk_proyectos_estados1` FOREIGN KEY (`estados_id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_pedidos1` FOREIGN KEY (`pedidos_id_pedido`) REFERENCES `pedidos` (`id_pedido`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_personas1` FOREIGN KEY (`personas_id_persona`) REFERENCES `personas` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -448,7 +452,7 @@ CREATE TABLE `proyectos` (
 
 LOCK TABLES `proyectos` WRITE;
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` VALUES (1,'letras primaria','2017-06-01',8,6,1,2,1),(2,'letreros emergencia bodega','2017-05-25',30,7,2,1,2),(3,'señalizacion oficina nextel','2017-05-12',30,6,1,2,3),(4,'logotipo eps sura','2017-06-06',5,7,3,2,4),(6,'letras primaria','2017-06-01',6,6,1,2,9),(7,'letras primaria','2017-06-01',6,6,1,2,10),(8,'prueba','2017-06-30',0,1,1,1,1),(9,'prueba2','2017-06-30',0,1,1,1,1),(10,'prueba3','2017-06-30',0,1,1,1,1),(11,'prueba3','2017-06-30',0,1,1,1,1),(12,'prueba4','2017-06-30',0,1,1,1,1),(13,'prueba4','2017-06-30',0,1,1,1,1);
+INSERT INTO `proyectos` VALUES (1,'letras primaria','2017-06-01',8,6,1,2,1),(2,'letreros emergencia bodega','2017-05-25',30,7,2,1,2),(3,'senalizacion oficina nextel','2017-05-12',30,6,1,2,3),(4,'logotipo eps sura','2017-06-06',5,7,3,2,4),(6,'letras primaria','2017-06-01',6,6,1,2,9),(7,'letras primaria','2017-06-01',6,6,1,2,10);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -473,7 +477,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'root',1),(2,'administrador',1),(3,'vendedor',1),(4,'operario',1),(5,'vendedor ayudante',1),(6,'operario ayudante',1);
+INSERT INTO `roles` VALUES (1,'root',1),(2,'administrador',1),(3,'vendedor',1),(4,'operario',1),(5,'operario ayudante',1),(6,'vendedor ayudante',1);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -500,7 +504,7 @@ CREATE TABLE `roles_permisos` (
 
 LOCK TABLES `roles_permisos` WRITE;
 /*!40000 ALTER TABLE `roles_permisos` DISABLE KEYS */;
-INSERT INTO `roles_permisos` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(1,33),(1,34),(1,35),(1,36),(1,37),(1,38),(1,39),(1,40),(1,41),(1,42),(2,1),(2,2),(2,3),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,40),(2,41),(2,42),(3,22),(3,23),(3,24),(3,26),(3,27),(3,28),(4,29),(4,30),(4,31),(4,33),(4,34),(4,35),(5,22),(5,24),(5,27),(6,29),(6,31),(6,34);
+INSERT INTO `roles_permisos` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(1,33),(1,34),(1,35),(1,36),(1,37),(1,38),(1,39),(1,40),(1,41),(1,42),(2,1),(2,2),(2,3),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,40),(2,41),(2,42),(3,22),(3,23),(3,24),(3,26),(3,27),(3,28),(4,29),(4,30),(4,31),(4,33),(4,34),(4,35),(6,29),(6,31),(6,34),(1,43),(1,44),(1,45);
 /*!40000 ALTER TABLE `roles_permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -527,7 +531,7 @@ CREATE TABLE `roles_personas` (
 
 LOCK TABLES `roles_personas` WRITE;
 /*!40000 ALTER TABLE `roles_personas` DISABLE KEYS */;
-INSERT INTO `roles_personas` VALUES (1,1),(2,2),(2,3),(3,4),(3,5),(4,6),(4,7),(5,8),(6,9);
+INSERT INTO `roles_personas` VALUES (1,1),(2,2),(2,3),(3,4),(3,5),(4,6),(4,7),(5,9),(6,8);
 /*!40000 ALTER TABLE `roles_personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -602,4 +606,5 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-05 19:49:00
+-- Dump completed on 2017-08-29 12:44:26
+

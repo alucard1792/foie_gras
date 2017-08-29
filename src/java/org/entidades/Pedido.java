@@ -40,6 +40,19 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pedido.findByRealizoPago", query = "SELECT p FROM Pedido p WHERE p.realizoPago = :realizoPago")})
 public class Pedido implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "cantidad")
+    private int cantidad;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "dimension_ancho")
+    private double dimensionAncho;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "dimension_alto")
+    private double dimensionAlto;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -151,6 +164,30 @@ public class Pedido implements Serializable {
         this.detallePedidoList = detallePedidoList;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getDimensionAncho() {
+        return dimensionAncho;
+    }
+
+    public void setDimensionAncho(double dimensionAncho) {
+        this.dimensionAncho = dimensionAncho;
+    }
+
+    public double getDimensionAlto() {
+        return dimensionAlto;
+    }
+
+    public void setDimensionAlto(double dimensionAlto) {
+        this.dimensionAlto = dimensionAlto;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -175,5 +212,4 @@ public class Pedido implements Serializable {
     public String toString() {
         return "org.entidades.Pedido[ idPedido=" + idPedido + " ]";
     }
-    
 }
