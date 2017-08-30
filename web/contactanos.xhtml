@@ -94,19 +94,15 @@
                         
                         <h:form id="formulario" prependId="false" role="form">
                             <div class="row">
-                                <label for="name">#{msg.labelNombre}</label><br />
-                                <input id="name" class="input" name="name" type="text" placeholder="Nombre*" size="30" required="true"/><br />
-                            </div>
-                            <div class="row">
                                 <label for="email">#{msg.labelEmail}</label><br />
-                                <h:inputText id="email"  class="form-control" value="#{controllerEmail.contenido}" size="30"  required="true"/><br />
+                                <h:inputText id="email"  class="form-control" value="#{MainController.message}" size="30"  required="true"/><br />
                             </div>
                             <div class="row">
                                 <label for="asunto">#{msg.labelMensaje}</label><br />
-                                <h:inputText id="asunto" class="form-control" value="#{controllerEmail.asunto}" size="30"  required="true"/><br />
+                                <h:inputText id="asunto" class="form-control" value="#{MainController.subject}" size="30"  required="true"/><br />
                             </div>
                             <label for="submit_button"></label>
-                            <h:commandButton id="submit_button" value="Enviar" action="#{controllerEnviarCorreo.enviarEmail()}"/>
+                            <h:commandButton id="submit_button" value="Enviar" action="#{MainController.send()}"/>
 
                         </h:form>
 
