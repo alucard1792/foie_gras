@@ -93,6 +93,7 @@ public class ControladorSesion implements Serializable {
         if ((documento != 0) && password != null && !password.equals("")) {
             p = pfl.iniciarSesion(documento, password);
             if (p != null && p.getEstado() == 1) {
+                System.out.println(p.getNombre() + p.getApellido() + p.getEmail());
                 List<Rol> rolesUsuario = p.getRoles();//esto lo hacemos para aprovechar el mapeo bidireccional y traer todos los roles
                 if (rolesUsuario.size() > 0) { // se hace esta validacion para saber si el usuario tiene al menos un rol seleccionado para que no me retorne null
                     rolSeleccionado = rolesUsuario.get(0);

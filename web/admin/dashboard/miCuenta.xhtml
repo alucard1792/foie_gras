@@ -26,13 +26,18 @@
 
                             <div class="form-group">
                                 <p>
-                                    <label for="documento" class="col-sm-2 control-label">Documento</label>
                                     <div class="col-sm-10">
-                                        #{listarPerfil.personaSeleccionada.nombre}
+                                        <h:outputText value="documento: #{controladorSesion.p.documento}" ></h:outputText><br/>
+                                        <h:outputText value="nombre: #{controladorSesion.p.nombre}"></h:outputText><br/>
+                                        <h:outputText value="apellido: #{controladorSesion.p.apellido}"></h:outputText><br/>
+                                        <h:outputText value="contraseña: #{controladorSesion.p.password}"></h:outputText><br/>
+                                        <h:outputText value="telefono: #{controladorSesion.p.telefono}"></h:outputText><br/>
+                                        <h:outputText value="direccion: #{controladorSesion.p.direccion}"></h:outputText><br/>
+                                        <h:outputText value="email: #{controladorSesion.p.email}"></h:outputText><br/>
+
                                     </div>
                                 </p>
                             </div>
-
 
                         </h:form>
                     </div>
