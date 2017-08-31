@@ -35,7 +35,7 @@
                                     <ul class="dropdown-menu animated fadeInUp">
                                         <li>
                                             <h:form>
-                                                <h:commandLink actionListener ="#{listarPerfil.PrepararEditarPerfil()}" value="#{msg.miCuenta}"></h:commandLink><br></br>
+                                                <h:commandLink actionListener ="#{listarPerfil.PrepararEditarPerfil(controladorSesion.p)}" value="#{msg.miCuenta}"></h:commandLink><br></br>
                                                 <h:commandLink actionListener ="#{controladorSesion.cerrarSesion()}" value="#{msg.cerrarSesion}"></h:commandLink>
                                             </h:form>
                                         </li>
