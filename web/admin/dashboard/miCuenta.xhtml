@@ -24,22 +24,23 @@
 
                         <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
 
-                            <div class="form-group">
-                                <p>
-                                    <div class="col-sm-10">
-                                        <h:outputText value="documento: #{controladorSesion.p.documento}" ></h:outputText><br/>
-                                        <h:outputText value="nombre: #{controladorSesion.p.nombre}"></h:outputText><br/>
-                                        <h:outputText value="apellido: #{controladorSesion.p.apellido}"></h:outputText><br/>
-                                        <h:outputText value="contraseña: #{controladorSesion.p.password}"></h:outputText><br/>
-                                        <h:outputText value="telefono: #{controladorSesion.p.telefono}"></h:outputText><br/>
-                                        <h:outputText value="direccion: #{controladorSesion.p.direccion}"></h:outputText><br/>
-                                        <h:outputText value="email: #{controladorSesion.p.email}"></h:outputText><br/>
-
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="list-group" id="list-tab" role="tablist">
+                                        <li class="list-group-item">documento: #{controladorSesion.p.documento}</li>
+                                        <li class="list-group-item">nombre: #{controladorSesion.p.nombre}</li>
+                                        <li class="list-group-item">apellido: #{controladorSesion.p.apellido}</li>
+                                        <li class="list-group-item">contraseña: #{controladorSesion.p.password}</li>
+                                        <li class="list-group-item">telefono: #{controladorSesion.p.telefono}</li>
+                                        <li class="list-group-item">direccion: #{controladorSesion.p.direccion}</li>
+                                        <li class="list-group-item">email: #{controladorSesion.p.email}</li>
                                     </div>
-                                </p>
+                                </div>
                             </div>
 
+                            <h:commandButton action="#{listarPerfil.PrepararEditarPerfil(controladorSesion.p)}" value="editar perfil" class="btn btn-primary"></h:commandButton>
                         </h:form>
+
                     </div>
 
                 </div>

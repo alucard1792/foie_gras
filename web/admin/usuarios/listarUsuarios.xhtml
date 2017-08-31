@@ -146,13 +146,7 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <h1>No tiene permisos para ver esta pagina, sera redirigido al inicio de su modulo correspondiente en 2 segundos</h1>
-                    <script>
-                        //primera forma...
-                        //window.location.replace("#{request.contextPath}/admin/index.xhtml?faces-redirect=true");
-                        //segunda forma con un timer...
-                        setTimeout("location.href = '#{request.contextPath}/admin/index.xhtml?faces-redirect=true';", 2000);
-                    </script>
+
                 </c:otherwise>
             </c:choose>
         </c:forEach> 

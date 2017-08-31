@@ -59,19 +59,18 @@ public class ListarPerfil implements Serializable {
 
     public String cancelar() {
         terminarConversacion();
-        return "../admin/dashboard/miCuenta.xhtml?faces-redirect=true";
+        return "/admin/dashboard/miCuenta.xhtml?faces-redirect=true";
     }
     
     public String PrepararEditarPerfil(Persona p){
         iniciarConversacion();
         personaSeleccionada = p;
-        return "/admin/dashboard/miCuenta.xhtml?faces-redirect=true";
+        return "/admin/dashboard/editarPerfil.xhtml?faces-redirect=true";
     
     }
     
-    public void actualizarPerfil(){
+    public String actualizarPerfil(){
         personaFacadeLocal.edit(personaSeleccionada);
-        cancelar();
-    
+        return cancelar();
     }
 }

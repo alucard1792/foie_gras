@@ -10,16 +10,39 @@
 
     <ui:define name="contenido">
 
-        <div class="content-box-large">
-            <div class="panel-heading">
-                <div class="panel-title"><h2>Usuarios registrados</h2></div>
-                <div class="panel-options">
-                    <span><h:link outcome="/#{p.url}" value="Editar perfil">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                    </c:forEach>                       
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="content-box-large">
+                    <div class="panel-heading">
+                        <div class="panel-title"><h2>Edicion de perfil</h2></div>
+                        <div class="panel-options">
+
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+                        <h:form class="form-group">
+
+                            <label class="col-sm-2 col-form-label" for="contraseña" >contraseña: </label>
+                            <h:inputText class="form-control" value="#{listarPerfil.personaSeleccionada.password}" id="contraseña"></h:inputText><br/><br/>
+                            <label class="col-sm-2 col-form-label" for="telefono">telefono: </label>
+                            <h:inputText class="form-control" value="#{listarPerfil.personaSeleccionada.telefono}" id="telefono"></h:inputText><br/><br/>
+                            <label class="col-sm-2 col-form-label" for="direccion">contraseña: </label>
+                            <h:inputText class="form-control" value="#{listarPerfil.personaSeleccionada.direccion}" id="direccion"></h:inputText><br/><br/>
+                            <label class="col-sm-2 col-form-label" for="email">email: </label>
+                            <h:inputText class="form-control" value="#{listarPerfil.personaSeleccionada.email}" id="email"></h:inputText><br/><br/>
+
+                            <h:commandButton action="#{listarPerfil.actualizarPerfil()}" value="actualizar" class="btn btn-primary"></h:commandButton>
+                            <h:commandButton action="#{listarPerfil.cancelar()}" value="cancelar" class="btn btn-default"></h:commandButton>
+
+                        </h:form>
+                    </div>
+
                 </div>
             </div>
+        </div>
 
     </ui:define>
-
 
 </ui:composition>
