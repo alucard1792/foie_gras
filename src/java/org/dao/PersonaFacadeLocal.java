@@ -34,5 +34,7 @@ public interface PersonaFacadeLocal {
     Persona iniciarSesion(int documento, String password);
     
     List<Persona> filtroMultiCriterio (Map<String, Object>usuariosFiltro);
+
+    Persona recuperacontrasena(String email);
     
 }

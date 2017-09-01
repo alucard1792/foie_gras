@@ -36,6 +36,7 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
         super(Persona.class);
     }
 
+    @Override
     public Persona iniciarSesion(int documento, String password) {
         Persona u = null;
         FacesMessage fm;
@@ -52,6 +53,20 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 
         return u;
     }
+    
+    @Override
+    public Persona recuperacontrasena(String email){
+       Persona p = null;
+       try {
+           TypedQuery <Persona> q = getEntityManager().createNamedQuery("enviar.email", Persona.class);
+           q.setParameter("email", email);
+           p = q.getSingleResult();
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+       
+       return p;
+   }
 
     @Override
     public List<Persona> filtroMultiCriterio(Map<String, Object> usuariosFiltro) {
