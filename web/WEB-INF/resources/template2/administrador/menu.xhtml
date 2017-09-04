@@ -6,34 +6,19 @@
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <div class="sidebar" data-color="purple" data-image="#{request.contextPath}/resources/assets/img/sidebar-1.jpg">
-
         <div class="sidebar-wrapper">
-
             <div class="logo">
-
-                <a href="/foie_gras/admin/" class="simple-text">
+                <a href="#" class="simple-text">
                     #{controladorSesion.p.nombre} #{controladorSesion.p.apellido}<br/>
                     #{controladorSesion.rolSeleccionado.nombreRol}
                 </a>
             </div>
             <ul class="nav">
-                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-
-                    <c:if test="#{p.permisoPadre eq null}">
-                        <c:if test="#{p.idPermiso != 43}">
-                            <li >
-                                <h:link outcome="/#{p.url}">
-                                    <i class="material-icons">person</i>
-                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
-                                </h:link>
-                            </li>
-                        </c:if>
-                    </c:if>
-                </c:forEach>
-
+                <ui:insert name="menu">
+                    "no se cargo el menu" 
+                </ui:insert>
             </ul>
         </div>
-
     </div>
 
 </ui:fragment>
