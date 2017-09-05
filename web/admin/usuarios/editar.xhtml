@@ -45,7 +45,7 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/usuarios/listarUsuarios.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Usuarios</a>
+        <a href="/foie_gras/admin/usuarios/listarUsuarios.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Listar usuarios</a>
         <a href="#" class="btn btn-info ">Editar usuarios</a>
     </ui:define>
 
@@ -119,12 +119,12 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{listarUsuarios.cancelar}" class="btn" value="Cancelar"></h:commandButton>
+                                    <h:form>
+                                        <h:commandButton action="#{listarUsuarios.actualizarUsuario()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
+                                    </h:form>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:form>
-                                        <h:commandButton action="#{listarUsuarios.actualizarUsuario()}" class="btn btn-primary" value="Guardar"></h:commandButton>
-                                    </h:form>
+                                    <h:commandButton action="#{listarUsuarios.cancelar}" class="btn" value="Cancelar"></h:commandButton>
                                 </div>
                             </div>
                         </h:form>
