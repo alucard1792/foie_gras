@@ -19,24 +19,12 @@
             <c:if test="#{p.permisoPadre eq null}">
                 <c:if test="#{p.idPermiso != 43}">
                     <!--valida el menu actual para renderizar la opcion active-->
-                    <c:choose>
-                        <c:when test="#{p.idPermiso == 1}">
-                            <li class="active">
-                                <h:link outcome="/#{p.url}">
-                                    <i class="material-icons">person</i>
-                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
-                                </h:link>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li >
-                                <h:link outcome="/#{p.url}">
-                                    <i class="material-icons">person</i>
-                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
-                                </h:link>
-                            </li>
-                        </c:otherwise>
-                    </c:choose>
+                    <li >
+                        <h:link outcome="/#{p.url}">
+                            <i class="material-icons">person</i>
+                            <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                        </h:link>
+                    </li>
                 </c:if>
             </c:if>
         </c:forEach>
@@ -45,7 +33,7 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/dashboard/miCuenta.xhtmll" class="btn btn-default visible-lg-block visible-md-block ">Mi perfil</a>
+        <a href="/foie_gras/admin/dashboard/miCuenta.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Mi perfil</a>
         <a href="#" class="btn btn-info ">Editar perfil</a>
     </ui:define>
 
