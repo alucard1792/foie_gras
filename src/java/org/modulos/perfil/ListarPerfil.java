@@ -29,7 +29,7 @@ public class ListarPerfil implements Serializable {
     @Inject
     private Conversation conversacion;
     private Persona personaSeleccionada;
-    
+
     public ListarPerfil() {
     }
 
@@ -52,7 +52,7 @@ public class ListarPerfil implements Serializable {
     private void terminarConversacion() {
         if (!conversacion.isTransient()) {
             conversacion.end();
-            
+
         }
 
     }
@@ -61,15 +61,15 @@ public class ListarPerfil implements Serializable {
         terminarConversacion();
         return "/admin/dashboard/miCuenta.xhtml?faces-redirect=true";
     }
-    
-    public String PrepararEditarPerfil(Persona p){
+
+    public String PrepararEditarPerfil(Persona p) {
         iniciarConversacion();
         personaSeleccionada = p;
         return "/admin/dashboard/editarPerfil.xhtml?faces-redirect=true";
-    
+
     }
-    
-    public String actualizarPerfil(){
+
+    public String actualizarPerfil() {
         personaFacadeLocal.edit(personaSeleccionada);
         return cancelar();
     }
