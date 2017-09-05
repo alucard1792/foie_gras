@@ -1,53 +1,150 @@
-<ui:composition template="/WEB-INF/resources/template/administrador/template.xhtml"
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/resources/template2/administrador/templatePerfil.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf">
 
-    <ui:define name="titulo">Mi cuenta</ui:define>
+    <!--Nombre de la pagina-->
+    <ui:define name="titulo">
+        Mi cuenta
+    </ui:define>
 
+    <!--renderizacion del menu principal-->
+    <ui:define name="menu">
+        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+            <c:if test="#{p.permisoPadre eq null}">
+                <c:if test="#{p.idPermiso != 43}">
+                    <!--valida el menu actual para renderizar la opcion active-->
+                    <li >
+                        <h:link outcome="/#{p.url}">
+                            <i class="material-icons">person</i>
+                            <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                        </h:link>
+                    </li>
+                </c:if>
+            </c:if>
+        </c:forEach>
+    </ui:define>
+
+    <!--renderizacion del breadcrumb-->
+    <ui:define name="breadcrumb">
+        <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="#" class="btn btn-info ">Mi perfil</a>
+    </ui:define>
+
+    <!--renderizacion del cardboard-->
+    <ui:define name="tituloCarta">
+        <h4 class="title">Mi perfil</h4>
+
+    </ui:define>
+
+    <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
 
         <div class="row">
-            <div class="col-md-12">
-
-                <div class="content-box-large">
-                    <div class="panel-heading">
-                        <div class="panel-title"><h2>Mi cuenta</h2></div>
-                        <div class="panel-options">
-
-                        </div>
-                    </div>
-                    <div class="panel-body">
-
-                        <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
-
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="list-group" id="list-tab" role="tablist">
-                                        <li class="list-group-item">documento: #{controladorSesion.p.documento}</li>
-                                        <li class="list-group-item">nombre: #{controladorSesion.p.nombre}</li>
-                                        <li class="list-group-item">apellido: #{controladorSesion.p.apellido}</li>
-                                        <li class="list-group-item">contraseña: #{controladorSesion.p.password}</li>
-                                        <li class="list-group-item">telefono: #{controladorSesion.p.telefono}</li>
-                                        <li class="list-group-item">direccion: #{controladorSesion.p.direccion}</li>
-                                        <li class="list-group-item">email: #{controladorSesion.p.email}</li>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h:commandButton action="#{listarPerfil.PrepararEditarPerfil(controladorSesion.p)}" value="editar perfil" class="btn btn-primary"></h:commandButton>
-                        </h:form>
-
-                    </div>
-
+            <div class="col-md-5">
+                <div class="form-group label-floating">
+                    <label class="control-label">Documento</label>
+                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.documento}"></input>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group label-floating">
+                    <label class="control-label">nombre</label>
+                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.nombre}"></input>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    <label class="control-label">apellido</label>
+                    <input type="email" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.apellido}"></input>
                 </div>
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group label-floating">
+                    <label class="control-label">contraseña</label>
+                    <input type="password" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.password}"></input>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group label-floating">
+                    <label class="control-label">telefono</label>
+                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.telefono}"></input>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group label-floating">
+                    <label class="control-label">direccion</label>
+                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.direccion}"></input>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    <label class="control-label">correo electronico</label>
+                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.email}"></input>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    <label class="control-label">area</label>
+                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.areasIdArea.nombreArea}"></input>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    <label class="control-label">estado</label>
+                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.estado}"></input>
+                </div>
+            </div>
+        </div>
+        
+        <h:form>
+            <h:commandButton action="#{listarPerfil.PrepararEditarPerfil(controladorSesion.p)}" class="btn btn-primary btn-primary pull-right" value="Editar perfil"></h:commandButton>
+        </h:form>
+
+        <div class="clearfix"></div>
+
     </ui:define>
 
+    <ui:define name="perfil">
+
+        <div class="card-avatar">
+            <a href="#pablo">
+                <img class="img" src="../assets/img/faces/marc.jpg" />
+            </a>
+        </div>
+
+        <div class="content">
+            <h6 class="category text-gray">Foto de perfil</h6>
+            <h4 class="card-title"></h4>
+            <p class="card-content">
+            </p>
+            <a href="#pablo" class="btn btn-primary btn-round">Cambiar foto de perfil</a>
+        </div>
+
+    </ui:define>
+
+
+    <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
+    <ui:define name="ultimosScripts">
+
+        <script>
+
+        </script>
+    </ui:define>
 
 </ui:composition>
