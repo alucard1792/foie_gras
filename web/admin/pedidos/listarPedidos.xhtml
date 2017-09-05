@@ -66,14 +66,14 @@
                         <li>
                             <h:commandLink>
                                 a pdf
-                                <p:dataExporter type="pdf" target="dtPersona" fileName="reporte" pageOnly="true"/>
+                                <p:dataExporter type="pdf" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
                         <br/>
                         <li>
                             <h:commandLink>
                                 a excel
-                                <p:dataExporter type="xls" target="dtPersona" fileName="reporte" pageOnly="true"/>
+                                <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
                     </h:form>
@@ -93,7 +93,7 @@
             </div>
         </div>
 
-        <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="dtPersona">
+        <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla">
             <p:column headerText="id">
                 <p:outputLabel value="#{lp.idPedido}"></p:outputLabel>                                
             </p:column>
