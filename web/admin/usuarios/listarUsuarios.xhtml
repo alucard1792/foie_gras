@@ -86,7 +86,7 @@
                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                     <c:choose>
                         <c:when test="#{p.idPermiso eq 2}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="ingresar usuario">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            <span style="float: right"><h:link outcome="/#{p.url}" value="Crear usuario">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                         </c:when>
                     </c:choose>
                 </c:forEach>                       

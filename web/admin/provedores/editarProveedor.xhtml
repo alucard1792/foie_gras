@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="/WEB-INF/resources/template/administrador/template.xhtml"
+<ui:composition template="/WEB-INF/resources/template2/administrador/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -8,20 +8,58 @@
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <ui:define name="titulo">Editar proveedor</ui:define>
+    <!--Nombre de la pagina-->
+    <ui:define name="titulo">
+        Editar proveedor
+    </ui:define>
 
+    <!--renderizacion del menu principal-->
+    <ui:define name="menu">
+        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+            <c:if test="#{p.permisoPadre eq null}">
+                <c:if test="#{p.idPermiso != 43}">
+                    <!--valida el menu actual para renderizar la opcion active-->
+                    <c:choose>
+                        <c:when test="#{p.idPermiso == 15}">
+                            <li class="active">
+                                <h:link outcome="/#{p.url}">
+                                    <i class="material-icons">person</i>
+                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                                </h:link>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li >
+                                <h:link outcome="/#{p.url}">
+                                    <i class="material-icons">person</i>
+                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                                </h:link>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+            </c:if>
+        </c:forEach>
+    </ui:define>
+
+    <!--renderizacion del breadcrumb-->
+    <ui:define name="breadcrumb">
+        <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="/foie_gras/admin/provedores/listarProveedores.xhtml" class="btn btn-default visible-lg-block visible-md-block ">listar proveedores</a>
+        <a href="#" class="btn btn-info ">Editar proveedor</a>
+    </ui:define>
+
+    <!--renderizacion del cardboard-->
+    <ui:define name="tituloCarta">
+        <h4 class="title">Editar proveedor</h4>
+    </ui:define>
+
+    <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
         <div class="row">
             <div class="col-md-12">
 
                 <div class="content-box-large">
-                    <div class="panel-heading">
-                        <div class="panel-title"><h2>Editar proveedor</h2></div>
-                        <div class="panel-options">
-                            <!--<a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-                            <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>-->
-                        </div>
-                    </div>
                     <div class="panel-body">
 
                         <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
@@ -71,12 +109,12 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{listarProvedores.cancelar()}" class="btn" value="Cancelar"></h:commandButton>
-                                </div>
-                                <div class="col-sm-3">
                                     <h:form>
                                         <h:commandButton action="#{listarProvedores.actualizar()}" class="btn btn-primary" value="Guardar"></h:commandButton>
                                     </h:form>
+                                </div>
+                                <div class="col-sm-3">
+                                    <h:commandButton action="#{listarProvedores.cancelar()}" class="btn" value="Cancelar"></h:commandButton>
                                 </div>
                             </div>
 
@@ -86,6 +124,13 @@
                 </div>
             </div>
         </div>
+    </ui:define>
+
+    <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
+    <ui:define name="ultimosScripts">
+        <script>
+
+        </script>
     </ui:define>
 
 </ui:composition>
