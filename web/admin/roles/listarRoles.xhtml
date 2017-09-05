@@ -1,239 +1,122 @@
-<ui:composition template="/WEB-INF/resources/template/administrador/template.xhtml" 
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/resources/template2/administrador/template.xhtml" 
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">Listar roles</ui:define>
-
-    <ui:define name="contenido">
-        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="z">
-            <c:choose>
-                <c:when test="#{z.idPermiso eq 38}" rendered="">
-
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <button id="pdf">Exportar a pdf</button>
-                            <button id="png">Exportar a png</button>
-                            <button id="json">Exportar a json</button>
-                            <button id="xml">Exportar a xml</button>
-                            <button id="txt">Exportar a txt</button>
-                            <button id="sql">Exportar a sql</button>
-                            <button id="csv">Exportar a cvs</button>
-                            <button id="word">Exportar a word</button>
-                            <button id="excel">Exportar a excel</button>
-
-                            <div class="content-box-large">
-                                <div class="panel-heading">
-                                    <div class="panel-title"><h2>Roles registrados</h2></div>
-                                    <div class="panel-options">
-                                        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                                            <c:choose>
-                                                <c:when test="#{p.idPermiso eq 37}">
-                                                    <span><h:link outcome="/#{p.url}" value="ingresar rol">;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                                                </c:when>
-                                            </c:choose>
-                                        </c:forEach>                       
-                                    </div>
-                                </div>
-                                <div class="panel-body" >
-                                    <h4><h:messages showSummary="true" showDetail="true"></h:messages></h4>
-                                    <table class="table table-striped ">
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Nombre rol</th>
-                                                <th>Estado</th>
-                                                <th class="noExl">Opciones</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-
-                                            <c:forEach items="#{listarRoles.listaRoles}" var="r">
-                                                <tr>
-                                                    <td><h:outputText value="#{r.idRol}"></h:outputText></td>
-                                                    <td><h:outputText value="#{r.nombreRol}"></h:outputText></td>
-                                                    <td><h:outputText value="#{r.estado}"></h:outputText></td>
-                                                    <td class="noExl">
-                                                        <h:form>
-                                                            <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="permiso">
-                                                                <c:choose>
-                                                                    <c:when test="#{permiso.idPermiso eq 40}">
-                                                                        <h:commandButton action="#{listarRoles.prepararEditar(r)}" value="Editar"></h:commandButton>
-                                                                    </c:when>
-                                                                    <c:when test="#{permiso.idPermiso eq 39}">
-                                                                        <h:commandButton class="btnModal1"  value="Elminar">
-                                                                            <f:ajax event="click" listener="#{eliminarRol.prepararEliminar(r)}" render=":content-modal-eliminar"></f:ajax>
-                                                                        </h:commandButton>
-                                                                    </c:when>
-
-                                                                </c:choose>
-                                                            </c:forEach>
-
-                                                        </h:form>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-
-                                        </tbody>
-                                    </table>
-
-                                    <div id="myModal" class="modal fade" role="dialog">
-                                        <div class="modal-dialog">
-                                            <h:form id="form-eliminar-usuario" prependId="false">
-                                                <h:panelGroup id="content-modal-eliminar" layout="block" class="modal-content">
-                                                    <!-- Modal content-->
-
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"></button>
-                                                        <h4 class="modal-title">Eliminar</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Desea eliminar a: ${eliminarRol.rolSeleccionado.nombreRol}</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <h:commandButton class="btn btn-primary" value="ELIMINAR" action="#{eliminarRol.eliminar()}"></h:commandButton>
-                                                    </div>
-                                                </h:panelGroup>
-                                            </h:form>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:when>
-            </c:choose>
-        </c:forEach> 
+    <!--Nombre de la pagina-->
+    <ui:define name="titulo">
+        listar roles
     </ui:define>
 
+    <!--renderizacion del menu principal-->
+    <ui:define name="menu">
+        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+            <c:if test="#{p.permisoPadre eq null}">
+                <c:if test="#{p.idPermiso != 43}">
+                    <!--valida el menu actual para renderizar la opcion active-->
+                    <c:choose>
+                        <c:when test="#{p.idPermiso == 36}">
+                            <li class="active">
+                                <h:link outcome="/#{p.url}">
+                                    <i class="material-icons">person</i>
+                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                                </h:link>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li >
+                                <h:link outcome="/#{p.url}">
+                                    <i class="material-icons">person</i>
+                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                                </h:link>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+            </c:if>
+        </c:forEach>
+    </ui:define>
+
+    <!--renderizacion del breadcrumb-->
+    <ui:define name="breadcrumb">
+        <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="#" class="btn btn-info ">Listar roles</a>
+    </ui:define>
+
+    <!--renderizacion del cardboard-->
+    <ui:define name="tituloCarta">
+        <h4 class="title">roles registrados.</h4>
+    </ui:define>
+
+    <!--renderizacion del body 'contenido principal'-->
+    <ui:define name="contenido">
+        <ul class="nav navbar-nav navbar-link">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="material-icons">file_download</i>
+                </a>
+                <ul class="dropdown-menu">
+                    <h:form>
+                        <li>
+                            <h:commandLink>
+                                a pdf
+                                <p:dataExporter type="pdf" target="dt" fileName="reporte" pageOnly="true"/>
+                            </h:commandLink>
+                        </li>
+                        <br/>
+                        <li>
+                            <h:commandLink>
+                                a excel
+                                <p:dataExporter type="xls" target="dt" fileName="reporte" pageOnly="true"/>
+                            </h:commandLink>
+                        </li>
+                    </h:form>
+                </ul>
+            </li>
+        </ul>
+        <br/>
+        <div class="panel-heading">
+            <div class="panel-options">
+                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                    <c:choose>
+                        <c:when test="#{p.idPermiso eq 37}">
+                            <span style="float: right"><h:link outcome="/#{p.url}" value="ingresar rol">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                        </c:when>
+                    </c:choose>
+                </c:forEach>                       
+            </div>
+        </div>
+
+        <p:dataTable value="#{listarRoles.listaRoles}" var="lp" id="dt">
+            <p:column headerText="id">
+                <p:outputLabel value="#{lp.idRol}"></p:outputLabel>                                
+            </p:column>
+            <p:column headerText="Documento">
+                <p:outputLabel value="#{lp.nombreRol}"></p:outputLabel>                
+            </p:column>
+            <p:column headerText="Nombre">
+                <p:outputLabel value="#{lp.estado}"></p:outputLabel>                
+            </p:column>
+            <p:column headerText="Opciones" exportable="false">
+                <h:form>
+                    <p:commandButton value="Editar" action="#{listarRoles.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
+                </h:form>
+            </p:column>
+        </p:dataTable>
+
+    </ui:define>
+
+    <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
-        <script >
-            /* function openModal() {
-             #("myModal").modal("show");
-             
-             }*/
-
-            $().ready(function () {
-                $("#btnModal").click(function () {
-                    $("#myModal").modal("show");
-                });
-            });
-
-            $().ready(function () {
-                $(".btnModal1").click(function () {
-                    $("#myModal").modal("show");
-                });
-            });
-
-            $(document).ready(function () {
-                $('.table').DataTable();
-            });
-
-            /*$("button").click(function () {
-             $(".table").table2excel({
-             // exclude CSS class
-             exclude: ".noExl",
-             name: "Worksheet Name",
-             filename: "SomeFile" //do not include extension
-             });
-             });*/
-
-            // $(document).ready(function (e){ preguntar al profe porque falla los reportes con linea
-
-            $("#pdf").click(function (e) {
-                $(".table").tableExport({
-                    type: 'pdf',
-                    escape: 'false',
-                    pdfFontSize: '8',
-                    ignoreColumn: []
-
-                });
-
-
-            });
-
-            $("#png").click(function (e) {
-                $(".table").tableExport({
-                    type: 'png',
-                    escape: 'false'
-
-                });
-
-
-            });
-
-            $("#json").click(function (e) {
-                $(".table").tableExport({
-                    type: 'json',
-                    escape: 'false'
-
-                });
-
-
-            });
-
-            $("#xml").click(function (e) {
-                $(".table").tableExport({
-                    type: 'xml',
-                    escape: 'false'
-
-                });
-
-            });
-
-            $("#txt").click(function (e) {
-                $(".table").tableExport({
-                    type: 'txt',
-                    escape: 'false'
-
-                });
-
-            });
-
-            $("#sql").click(function (e) {
-                $(".table").tableExport({
-                    type: 'sql',
-                    escape: 'false'
-
-                });
-
-            });
-
-            $("#csv").click(function (e) {
-                $(".table").tableExport({
-                    type: 'csv',
-                    escape: 'false'
-
-                });
-
-            });
-
-            $("#word").click(function (e) {
-                $(".table").tableExport({
-                    type: 'doc',
-                    escape: 'false'
-
-                });
-
-            });
-
-            $("#excel").click(function (e) {
-                $(".table").tableExport({
-                    type: 'excel',
-                    escape: 'false'
-
-                });
-
-            });
-
-            //});
-
+        <script>
+            
         </script>
     </ui:define>
+
 </ui:composition>

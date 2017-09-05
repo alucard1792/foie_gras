@@ -38,7 +38,7 @@ public class AreaConverter implements Converter{
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if(value != null && value instanceof Area){
             Area area = (Area) value;
-            return area.getIdArea().toString();
+            return area.getNombreArea();
         
         }
         return  null;

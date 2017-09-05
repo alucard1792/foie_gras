@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -96,7 +97,7 @@ public class Persona implements Serializable {
     @JoinTable(name = "roles_personas", joinColumns = {
         @JoinColumn(name = "personas_id_persona", referencedColumnName = "id_persona")}, inverseJoinColumns = {
         @JoinColumn(name = "roles_id_rol", referencedColumnName = "id_rol")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Rol> roles;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personasIdPersona")
     private List<Pedido> pedidoList;

@@ -1,143 +1,148 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="/WEB-INF/resources/template/administrador/template.xhtml"
+<ui:composition template="/WEB-INF/resources/template2/administrador/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">Crear usuario</ui:define>
+    <!--Nombre de la pagina-->
+    <ui:define name="titulo">
+        listar usuarios
+    </ui:define>
 
+    <ui:define name="breadcrumb">
+        <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="/foie_gras/admin/usuarios/listarUsuarios.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Usuarios</a>
+        <a href="#" class="btn btn-info ">Crear usuario</a>
+    </ui:define>
+
+    <!--renderizacion del menu principal-->
+    <ui:define name="menu">
+        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+            <c:if test="#{p.permisoPadre eq null}">
+                <c:if test="#{p.idPermiso != 43}">
+                    <!--valida el menu actual para renderizar la opcion active-->
+                    <c:choose>
+                        <c:when test="#{p.idPermiso == 1}">
+                            <li class="active">
+                                <h:link outcome="/#{p.url}">
+                                    <i class="material-icons">person</i>
+                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                                </h:link>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li >
+                                <h:link outcome="/#{p.url}">
+                                    <i class="material-icons">person</i>
+                                    <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                                </h:link>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+            </c:if>
+        </c:forEach>
+    </ui:define>
+
+    <!--renderizacion del cardboard-->
+    <ui:define name="tituloCarta">
+        <h4 class="title">Ingresar usuario.</h4>
+    </ui:define>
+    
+    <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-
         <div class="row">
             <div class="col-md-12">
-
                 <div class="content-box-large">
-                    <div class="panel-heading">
-                        <div class="panel-title"><h2>Ingresar nuevo usuario</h2></div>
-
-
-                    </div>
                     <div class="panel-body">
-
                         <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
-
                             <div class="form-group">
                                 <label for="documento" class="col-sm-2 control-label">Documento</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="documento" a:placeholder="ingrese el documento" value="#{crearUsuario.documento}" required="true"/>
+                                    <h:inputText class="form-control" id="documento" a:placeholder="Ingrese el documento" required="true" value="#{crearUsuario.documento}"><f:validateRequired /></h:inputText>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="nombre" class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="nombre" a:placeholder="ingrese el nombre" value="#{crearUsuario.nombre}" required="true"/>
+                                    <h:inputText class="form-control" id="nombre" a:placeholder="Ingrese el nombre" required="true" value="#{crearUsuario.nombre}"><f:validateRequired /></h:inputText>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="apellido" class="col-sm-2 control-label">Apellido</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="apellido" a:placeholder="ingrese el apellido" value="#{crearUsuario.apellido}" required="true"/>
+                                    <h:inputText class="form-control" id="apellido" a:placeholder="Ingrese el apellido" required="true" value="#{crearUsuario.apellido}"><f:validateRequired /></h:inputText>
                                 </div>
                             </div>
-
-
                             <div class="form-group">
-                                <label for="contraseña" class="col-sm-2 control-label">Contraseña</label>
+                                <label for="password" class="col-sm-2 control-label">Contraseña</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="contraseña" a:placeholder="ingrese la contraseña" value="#{crearUsuario.password}" required="true"/>
+                                    <h:inputText class="form-control" id="password" a:placeholder="Ingrese la contraseña" required="true" value="#{crearUsuario.password}"><f:validateRequired /></h:inputText>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="telefono" class="col-sm-2 control-label">Telefono</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="telefono" a:placeholder="ingrese el telefono" value="#{crearUsuario.telefono}" required="true"/>
+                                    <h:inputText class="form-control" id="telefono" a:placeholder="Ingrese el telefono" required="true" value="#{crearUsuario.telefono}"><f:validateRequired /></h:inputText>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="direccion" class="col-sm-2 control-label">Direccion</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="direccion" a:placeholder="ingrese la direccion" value="#{crearUsuario.direccion}" required="true"/>
+                                    <h:inputText class="form-control" id="direccion" a:placeholder="Ingrese la direccion" required="true" value="#{crearUsuario.direccion}"><f:validateRequired /></h:inputText>
                                 </div>
                             </div>
-
-
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="email" a:placeholder="ingrese el email" value="#{crearUsuario.email}" required="true"/>
+                                    <h:inputText class="form-control" id="email" a:placeholder="Ingrese el email" required="true" a:type="email" value="#{crearUsuario.email}"><f:validateRequired /></h:inputText>
                                 </div>
                             </div>
-
-
                             <div class="form-group">
-                                <label for="rol" class="col-sm-2 control-label">Rol</label>
+                                <label for="estado" class="col-sm-2 control-label">Estado inicial</label>
                                 <div class="col-sm-10">
-                                    <h:selectOneMenu value="#{crearUsuario.r}">
-                                        <f:selectItems value="#{rolController.roles}" var="td" itemLabel="#{td.nombreRol}"/>
-                                    </h:selectOneMenu>                                 
+                                    <h:inputText class="form-control" id="estado" a:placeholder="Ingrese el estado inicial del usuario. 0 desactivado 1 activados" required="true" value="#{crearUsuario.estado}"><f:validateRequired /></h:inputText>
                                 </div>
                             </div>
-
-
+                            <h:message for="estado" style="color:red" />
                             <div class="form-group">
                                 <label for="area" class="col-sm-2 control-label">Area</label>
                                 <div class="col-sm-10">
-                                    <h:selectOneMenu value="#{crearUsuario.p.areasIdArea}" converter="rolConverter">
-                                        <f:selectItems value="#{areasControlador.areaLista}" var="td" itemLabel="#{td.nombreArea}"/>
+                                    <h:selectOneMenu value="#{crearUsuario.area.idArea}" >
+                                        <f:selectItems value="#{areasControlador.areaLista}" var="td" itemLabel="#{td.nombreArea}" itemValue="#{td.idArea}"/>
                                     </h:selectOneMenu> 
                                 </div>
                             </div>
-                            
                             <div class="form-group">
-                                
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{crearUsuario.crearUsuario()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
+                                    <p:commandButton action="#{crearUsuario.crearUsuario()}" class="btn btn-primary" value="Aceptar" onclick="isEmpty();"></p:commandButton> 
                                 </div>
-
                                 <div class="col-sm-3">
-                                    <h:commandButton action="#{crearUsuario.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
+                                    <h:commandButton actionListener="#{crearUsuario.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
                                 </div>
-                                
                             </div>
-
                         </h:form>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </ui:define>
 
     <ui:define name="ultimosScripts">
         <script>
-            /* function openModal() {
-             #("myModal").modal("show");
-             
-             }*/
-
-            $().ready(function () {
-                $("#btnModal").click(function () {
-                    $("#myModal").modal("show");
-                });
-            });
-
-            $().ready(function () {
-                $(".btnModal1").click(function () {
-                    $("#myModal").modal("show");
-                });
-            });
-
+            function isEmpty() {
+                if (document.getElementById("nombre").value.length == 0)
+                {
+                    alert("empty");
+                }
+            }
         </script>
     </ui:define>
-</ui:composition>
 
+</ui:composition>
