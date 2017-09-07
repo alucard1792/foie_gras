@@ -76,6 +76,12 @@
                                 <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
+                        <li>
+                            <h:commandLink>
+                                reporte
+                                <h:commandLink value="reporte jasper" actionListener="#{reporteUsuarios.exportarPDF()}"></h:commandLink>
+                            </h:commandLink>
+                        </li>
                     </h:form>
                 </ul>
             </li>
@@ -137,7 +143,7 @@
 
         </p:dataTable>
 
-      
+
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
