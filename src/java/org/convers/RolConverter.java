@@ -48,10 +48,14 @@ public class RolConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-
+        System.out.println(value);
+        
         if (value != null && value instanceof Rol) {
+            System.out.println("si es");
             return ((Rol) value).getIdRol().toString();
-
+        }else{
+            System.out.println("no es");
+            
         }
         return "";
 

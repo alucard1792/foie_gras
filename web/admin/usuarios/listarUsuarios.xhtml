@@ -119,7 +119,7 @@
                 <p:outputLabel value="#{lp.email}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Rol">
-                <p:outputLabel value="#{lp.roles}">
+                <p:outputLabel value="#{lp.roles.get(0).nombreRol}" >
                 </p:outputLabel>                
             </p:column>
             <p:column headerText="Area">
