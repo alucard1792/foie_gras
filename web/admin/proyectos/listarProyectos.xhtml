@@ -94,20 +94,14 @@
         </div>
 
         <p:dataTable value="#{listarProyectos.proyecto}" var="lp" id="tabla">
-            <p:column headerText="id">
+            <p:column headerText="Id proyecto">
                 <p:outputLabel value="#{lp.idProyecto}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="Nombre proyecto">
-                <p:outputLabel value="#{lp.nombreProyecto}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Fecha inicio">
                 <p:outputLabel value="#{lp.fechaInicio}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Tiempo estimado">
                 <p:outputLabel value="#{lp.tiempoEstimado}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Operario asignado">
-                <p:outputLabel value="#{lp.personasIdPersona.nombre}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Estado">
                 <p:outputLabel value="#{lp.estadosIdEstado.descripcionEstado}"></p:outputLabel>                
@@ -117,6 +111,9 @@
             </p:column>
             <p:column headerText="Id pedido">
                 <p:outputLabel value="#{lp.pedidosIdPedido.idPedido}"></p:outputLabel>                
+            </p:column>
+            <p:column headerText="Operario asignado">
+                <p:outputLabel value="#{lp.operarioIdPersona.nombre}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Opciones" exportable="false">
                 <h:form>

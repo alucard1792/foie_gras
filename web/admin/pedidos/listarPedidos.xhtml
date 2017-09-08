@@ -94,7 +94,7 @@
         </div>
 
         <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla">
-            <p:column headerText="id">
+            <p:column headerText="Id pedido">
                 <p:outputLabel value="#{lp.idPedido}"></p:outputLabel>                                
             </p:column>
             <p:column headerText="Nombre del proyecto">
@@ -104,30 +104,22 @@
                 <p:outputLabel value="#{lp.descripcion}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Realizo pago">
-                <p:outputLabel value="#{lp.realizoPago}"></p:outputLabel>                
+                <p:outputLabel value="#{(lp.realizoPago == 1 ? 'si':'no')}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Cantidad">
                 <p:outputLabel value="#{lp.cantidad}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Ancho">
-                <p:outputLabel value="#{lp.dimensionAncho}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Largo">
-                <p:outputLabel value="#{lp.dimensionAlto}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Vendedor asignado">
-                <p:outputLabel value="#{lp.personasIdPersona.nombre}"></p:outputLabel>                
-            </p:column>
             <p:column headerText="Materia prima">
                 <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
+            </p:column>
+            <p:column headerText="Vendedor">
+                <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Opciones" exportable="false">
                 <h:form>
                     <p:commandButton value="Editar" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                 </h:form>
-
             </p:column>
-
         </p:dataTable>
 
     </ui:define>
@@ -135,8 +127,8 @@
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script>
+            
         </script>
-
     </ui:define>
 
 </ui:composition>
