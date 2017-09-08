@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,7 +48,7 @@ public class Dificultad implements Serializable {
     @Size(min = 1, max = 25)
     @Column(name = "descripcion_dificultad")
     private String descripcionDificultad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dificultadesIdDificultad")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dificultadesIdDificultad", fetch = FetchType.EAGER)
     private List<Proyecto> proyectoList;
 
     public Dificultad() {

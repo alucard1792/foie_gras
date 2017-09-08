@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,7 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Proyecto.findAll", query = "SELECT p FROM Proyecto p")
     , @NamedQuery(name = "Proyecto.findByIdProyecto", query = "SELECT p FROM Proyecto p WHERE p.idProyecto = :idProyecto")
-    , @NamedQuery(name = "Proyecto.findByNombreProyecto", query = "SELECT p FROM Proyecto p WHERE p.nombreProyecto = :nombreProyecto")
     , @NamedQuery(name = "Proyecto.findByFechaInicio", query = "SELECT p FROM Proyecto p WHERE p.fechaInicio = :fechaInicio")
     , @NamedQuery(name = "Proyecto.findByTiempoEstimado", query = "SELECT p FROM Proyecto p WHERE p.tiempoEstimado = :tiempoEstimado")})
 public class Proyecto implements Serializable {
@@ -47,11 +46,6 @@ public class Proyecto implements Serializable {
     private Integer idProyecto;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "nombre_proyecto")
-    private String nombreProyecto;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha_inicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
@@ -59,18 +53,18 @@ public class Proyecto implements Serializable {
     @NotNull
     @Column(name = "tiempo_estimado")
     private int tiempoEstimado;
-    @JoinColumn(name = "personas_id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
-    private Persona personasIdPersona;
     @JoinColumn(name = "dificultades_id_dificultad", referencedColumnName = "id_dificultad")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Dificultad dificultadesIdDificultad;
     @JoinColumn(name = "estados_id_estado", referencedColumnName = "id_estado")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Estado estadosIdEstado;
     @JoinColumn(name = "pedidos_id_pedido", referencedColumnName = "id_pedido")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pedido pedidosIdPedido;
+    @JoinColumn(name = "operario_id_persona", referencedColumnName = "id_persona")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Persona operarioIdPersona;
 
     public Proyecto() {
     }
@@ -79,9 +73,8 @@ public class Proyecto implements Serializable {
         this.idProyecto = idProyecto;
     }
 
-    public Proyecto(Integer idProyecto, String nombreProyecto, Date fechaInicio, int tiempoEstimado) {
+    public Proyecto(Integer idProyecto, Date fechaInicio, int tiempoEstimado) {
         this.idProyecto = idProyecto;
-        this.nombreProyecto = nombreProyecto;
         this.fechaInicio = fechaInicio;
         this.tiempoEstimado = tiempoEstimado;
     }
@@ -92,14 +85,6 @@ public class Proyecto implements Serializable {
 
     public void setIdProyecto(Integer idProyecto) {
         this.idProyecto = idProyecto;
-    }
-
-    public String getNombreProyecto() {
-        return nombreProyecto;
-    }
-
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
     }
 
     public Date getFechaInicio() {
@@ -116,14 +101,6 @@ public class Proyecto implements Serializable {
 
     public void setTiempoEstimado(int tiempoEstimado) {
         this.tiempoEstimado = tiempoEstimado;
-    }
-
-    public Persona getPersonasIdPersona() {
-        return personasIdPersona;
-    }
-
-    public void setPersonasIdPersona(Persona personasIdPersona) {
-        this.personasIdPersona = personasIdPersona;
     }
 
     public Dificultad getDificultadesIdDificultad() {
@@ -148,6 +125,14 @@ public class Proyecto implements Serializable {
 
     public void setPedidosIdPedido(Pedido pedidosIdPedido) {
         this.pedidosIdPedido = pedidosIdPedido;
+    }
+
+    public Persona getOperarioIdPersona() {
+        return operarioIdPersona;
+    }
+
+    public void setOperarioIdPersona(Persona operarioIdPersona) {
+        this.operarioIdPersona = operarioIdPersona;
     }
 
     @Override

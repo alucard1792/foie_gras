@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,7 +61,7 @@ public class Stock implements Serializable {
     @Column(name = "materias_prima_referencia")
     private String materiasPrimaReferencia;
     @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MateriaPrima materiasPrimaIdMateria;
 
     public Stock() {

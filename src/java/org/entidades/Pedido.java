@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,21 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pedido.findByIdPedido", query = "SELECT p FROM Pedido p WHERE p.idPedido = :idPedido")
     , @NamedQuery(name = "Pedido.findByNombreProyecto", query = "SELECT p FROM Pedido p WHERE p.nombreProyecto = :nombreProyecto")
     , @NamedQuery(name = "Pedido.findByDescripcion", query = "SELECT p FROM Pedido p WHERE p.descripcion = :descripcion")
-    , @NamedQuery(name = "Pedido.findByRealizoPago", query = "SELECT p FROM Pedido p WHERE p.realizoPago = :realizoPago")})
+    , @NamedQuery(name = "Pedido.findByRealizoPago", query = "SELECT p FROM Pedido p WHERE p.realizoPago = :realizoPago")
+    , @NamedQuery(name = "Pedido.findByCantidad", query = "SELECT p FROM Pedido p WHERE p.cantidad = :cantidad")})
 public class Pedido implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cantidad")
-    private int cantidad;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "dimension_ancho")
-    private double dimensionAncho;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "dimension_alto")
-    private double dimensionAlto;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -73,16 +62,18 @@ public class Pedido implements Serializable {
     @NotNull
     @Column(name = "realizo_pago")
     private short realizoPago;
-    @JoinColumn(name = "personas_id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
-    private Persona personasIdPersona;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "cantidad")
+    private int cantidad;
     @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MateriaPrima materiasPrimaIdMateria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosIdPedido")
+    @JoinColumn(name = "vendedor_id_persona", referencedColumnName = "id_persona")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Persona vendedorIdPersona;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosIdPedido", fetch = FetchType.EAGER)
     private List<Proyecto> proyectoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosIdPedido")
-    private List<DetallePedido> detallePedidoList;
 
     public Pedido() {
     }
@@ -91,11 +82,12 @@ public class Pedido implements Serializable {
         this.idPedido = idPedido;
     }
 
-    public Pedido(Integer idPedido, String nombreProyecto, String descripcion, short realizoPago) {
+    public Pedido(Integer idPedido, String nombreProyecto, String descripcion, short realizoPago, int cantidad) {
         this.idPedido = idPedido;
         this.nombreProyecto = nombreProyecto;
         this.descripcion = descripcion;
         this.realizoPago = realizoPago;
+        this.cantidad = cantidad;
     }
 
     public Integer getIdPedido() {
@@ -130,12 +122,12 @@ public class Pedido implements Serializable {
         this.realizoPago = realizoPago;
     }
 
-    public Persona getPersonasIdPersona() {
-        return personasIdPersona;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setPersonasIdPersona(Persona personasIdPersona) {
-        this.personasIdPersona = personasIdPersona;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public MateriaPrima getMateriasPrimaIdMateria() {
@@ -144,6 +136,14 @@ public class Pedido implements Serializable {
 
     public void setMateriasPrimaIdMateria(MateriaPrima materiasPrimaIdMateria) {
         this.materiasPrimaIdMateria = materiasPrimaIdMateria;
+    }
+
+    public Persona getVendedorIdPersona() {
+        return vendedorIdPersona;
+    }
+
+    public void setVendedorIdPersona(Persona vendedorIdPersona) {
+        this.vendedorIdPersona = vendedorIdPersona;
     }
 
     @XmlTransient
@@ -155,39 +155,6 @@ public class Pedido implements Serializable {
         this.proyectoList = proyectoList;
     }
 
-    @XmlTransient
-    public List<DetallePedido> getDetallePedidoList() {
-        return detallePedidoList;
-    }
-
-    public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
-        this.detallePedidoList = detallePedidoList;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public double getDimensionAncho() {
-        return dimensionAncho;
-    }
-
-    public void setDimensionAncho(double dimensionAncho) {
-        this.dimensionAncho = dimensionAncho;
-    }
-
-    public double getDimensionAlto() {
-        return dimensionAlto;
-    }
-
-    public void setDimensionAlto(double dimensionAlto) {
-        this.dimensionAlto = dimensionAlto;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -212,4 +179,5 @@ public class Pedido implements Serializable {
     public String toString() {
         return "org.entidades.Pedido[ idPedido=" + idPedido + " ]";
     }
+    
 }

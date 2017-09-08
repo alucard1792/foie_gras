@@ -6,7 +6,9 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:p="http://primefaces.org/ui">
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -61,62 +63,105 @@
                 <div class="content-box-large">
                     <div class="panel-body">
                         <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
+                            <h:messages showSummary="true" showDetail="true"/>
+                            <h:message for="form-usuario" showSummary="true" showDetail="true"/>
                             <div class="form-group">
                                 <label for="documento" class="col-sm-2 control-label">Documento</label>
                                 <div class="col-sm-10">
                                     <h:inputText class="form-control" id="documento" a:placeholder="Ingrese el documento" value="#{listarUsuarios.personaSeleccionado.documento}"/>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="nombre" class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-10">
                                     <h:inputText class="form-control" id="nombre" a:placeholder="Ingrese el nombre" value="#{listarUsuarios.personaSeleccionado.nombre}"/>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="apellido" class="col-sm-2 control-label">Apellido</label>
                                 <div class="col-sm-10">
                                     <h:inputText class="form-control" id="apellido" a:placeholder="Ingrese el apellido" value="#{listarUsuarios.personaSeleccionado.apellido}"/>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="contraseña" class="col-sm-2 control-label">Contraseña</label>
                                 <div class="col-sm-10">
                                     <h:inputText class="form-control" id="contraseña" a:placeholder="Ingrese la contraseña" value="#{listarUsuarios.personaSeleccionado.password}"/>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="telefono" class="col-sm-2 control-label">Telefono</label>
                                 <div class="col-sm-10">
                                     <h:inputText class="form-control" id="telefono" a:placeholder="Ingrese el telefono" value="#{listarUsuarios.personaSeleccionado.telefono}"/>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="direccion" class="col-sm-2 control-label">Direccion</label>
                                 <div class="col-sm-10">
                                     <h:inputText class="form-control" id="direccion" a:placeholder="Ingrese la direccion" value="#{listarUsuarios.personaSeleccionado.direccion}"/>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
                                     <h:inputText class="form-control" id="email" a:placeholder="Ingrese el email" value="#{listarUsuarios.personaSeleccionado.email}"/>
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <label for="estado" class="col-sm-2 control-label">Email</label>
+                                <label for="fechaNacimiento" class="col-sm-2 control-label">Fecha de nacimiento</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="estado" a:placeholder="Ingrese el estado del usuario" value="#{listarUsuarios.personaSeleccionado.estado}"/>
+                                    <h:inputText class="form-control" id="fechaNacimiento" a:placeholder="Ingrese la fecha de nacimiento" value="#{listarUsuarios.personaSeleccionado.fechaNacimiento}"/>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="fechaIngreso" class="col-sm-2 control-label">Fecha de ingreso</label>
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="fechaIngreso" a:placeholder="Ingrese la fecha de ingreso" value="#{listarUsuarios.personaSeleccionado.fechaIngreso}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fechaDespido" class="col-sm-2 control-label">Fecha de despido</label>
+                                <div class="col-sm-10">
+                                    <h:inputText required="false" class="form-control" id="fechaDespido" a:placeholder="Ingrese la fecha de despido" value="#{listarUsuarios.personaSeleccionado.fechaDespido}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="imagen" class="col-sm-2 control-label">imagen</label>
+                                <div class="col-sm-10">
+                                    <h:inputText required="false" class="form-control" id="imagen" a:placeholder="imagen" value="#{listarUsuarios.personaSeleccionado.imagen}"/>
+                                </div>
+                            </div>
+                            <p:calendar value="#{listarUsuarios.personaSeleccionado.fechaDespido}"></p:calendar>
+                            
+                            <div class="form-group">
+                                <label for="estado" class="col-sm-2 control-label">Estado</label>
+                                <div class="col-sm-10">
+                                    <h:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.estado}"> 
+                                        <f:selectItem itemValue = "0" itemLabel = "Inactivo" /> 
+                                        <f:selectItem itemValue = "1" itemLabel = "Activo" /> 
+                                    </h:selectOneMenu> 	
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="rol" class="col-sm-2 control-label">Rol</label>
-                                <div class="col-sm-10">
-                                    <h:selectManyCheckbox class="form-control" id="rol" value="#{listarUsuarios.personaSeleccionado.roles}" converter="rolConverter">
+                                <div class="col-sm-2">
+                                    <h:selectOneMenu class="form-control" id="rol" value="#{listarUsuarios.personaSeleccionado.roles}" converter="rolConverter">
                                         <f:selectItems value="#{rolController.roles}" var="r" itemLabel="#{r.nombreRol}"/>
-                                    </h:selectManyCheckbox>
+                                    </h:selectOneMenu>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
                                     <h:form>
@@ -127,6 +172,7 @@
                                     <h:commandButton action="#{listarUsuarios.cancelar}" class="btn" value="Cancelar"></h:commandButton>
                                 </div>
                             </div>
+
                         </h:form>
 
                     </div>
@@ -137,6 +183,7 @@
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
+        		<script name="jquery/jquery.js" library="primefaces"></script>
         <script>
 
         </script>

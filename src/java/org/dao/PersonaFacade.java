@@ -14,8 +14,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.entidades.Persona;
 import javax.persistence.TypedQuery;
+import org.entidades.Persona;
 
 /**
  *
@@ -41,7 +41,7 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
         Persona u = null;
         FacesMessage fm;
         FacesContext fc;
-        
+
         try {
             TypedQuery<Persona> q = getEntityManager().createNamedQuery("Persona.login", Persona.class);
             q.setParameter("documento", documento);
@@ -53,20 +53,20 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 
         return u;
     }
-    
+
     @Override
-    public Persona recuperacontrasena(String email){
-       Persona p = null;
-       try {
-           TypedQuery <Persona> q = getEntityManager().createNamedQuery("enviar.email", Persona.class);
-           q.setParameter("email", email);
-           p = q.getSingleResult();
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-       
-       return p;
-   }
+    public Persona recuperacontrasena(String email) {
+        Persona p = null;
+        try {
+            TypedQuery<Persona> q = getEntityManager().createNamedQuery("enviar.email", Persona.class);
+            q.setParameter("email", email);
+            p = q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return p;
+    }
 
     @Override
     public List<Persona> filtroMultiCriterio(Map<String, Object> usuariosFiltro) {
@@ -84,7 +84,7 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
             while (it.hasNext()) {
                 String key = it.next();
                 sql += key + " =: " + key + (it.hasNext() ? " AND " : "");
-                   
+
             }
 
             Persona = q.getResultList();

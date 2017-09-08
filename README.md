@@ -5,25 +5,22 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 	
  1. arreglos:
 	
-	- correccion bug en el modulo pedidos
+	- correccion bug en la relacion personas y pedidos y personas y proyectos
 	
 2) nuevo:
 	
-	-implementado tim creative materialize 
+	-implementado jasper report
 	
-	-implementado primefaces 6.1
+	-Nuevos dao y dto
 	
-	-implementado reportes con primefaces
-	
-	-implementado el dashboard
-	
-	-edicion de la base de datos (tabla pedidos, columna imagen en personas)
+	-cambios en la base de datos
 	
 3) experimental:
 	
-	- prototipo envio email "orlando"
+
 	
 4)ToDo:
+	-CORREGIR LOS CAMBIOS REALIZADOS EN LAS VISTAS POR LA BASE DE DATOS, DAO Y DTO *URGENTE
 
 	-implementar los items de la fase 4b
 	

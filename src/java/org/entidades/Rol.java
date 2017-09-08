@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,11 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r")
     , @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol")
-    , @NamedQuery(name = "Rol.findByNombreRol", query = "SELECT r FROM Rol r WHERE r.nombreRol = :nombreRol")})
+    , @NamedQuery(name = "Rol.findByNombreRol", query = "SELECT r FROM Rol r WHERE r.nombreRol = :nombreRol")
+    , @NamedQuery(name = "Rol.findByEstado", query = "SELECT r FROM Rol r WHERE r.estado = :estado")})
 public class Rol implements Serializable {
-
-    @Column(name = "estado")
-    private int estado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,10 +48,14 @@ public class Rol implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "nombre_rol")
     private String nombreRol;
-    @ManyToMany(mappedBy = "roles")
-    private List<Persona> personas; //todos los usuarios que tienen asignado ese permiso 
-    @ManyToMany(mappedBy = "roles")
-    private List<Permiso> permisos; //los permisos que estan asosiados a ese rol
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "estado")
+    private int estado;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    private List<Persona> personas;//todos los usuarios que tienen asignado ese permiso 
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    private List<Permiso> permisos;//los permisos que estan asosiados a ese rol
 
     public Rol() {
     }
@@ -61,16 +64,10 @@ public class Rol implements Serializable {
         this.idRol = idRol;
     }
 
-    public Rol(Integer idRol, String nombreRol) {
-        this.idRol = idRol;
-        this.nombreRol = nombreRol;
-    }
-    
     public Rol(Integer idRol, String nombreRol, int estado) {
         this.idRol = idRol;
         this.nombreRol = nombreRol;
         this.estado = estado;
-        
     }
 
     public Integer getIdRol() {
@@ -87,6 +84,14 @@ public class Rol implements Serializable {
 
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     @XmlTransient
@@ -130,14 +135,6 @@ public class Rol implements Serializable {
     @Override
     public String toString() {
         return "org.entidades.Rol[ idRol=" + idRol + " ]";
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
     }
     
 }

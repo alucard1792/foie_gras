@@ -32,9 +32,9 @@ public interface PersonaFacadeLocal {
     int count();
 
     Persona iniciarSesion(int documento, String password);
-    
-    List<Persona> filtroMultiCriterio (Map<String, Object>usuariosFiltro);
+
+    List<Persona> filtroMultiCriterio(Map<String, Object> usuariosFiltro);
 
     Persona recuperacontrasena(String email);
-    
+
 }

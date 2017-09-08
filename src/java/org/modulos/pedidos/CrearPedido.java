@@ -75,9 +75,9 @@ public class CrearPedido implements Serializable {
     public String crear() {
         p = pfl.find(1);
         MateriaPrima materiaPrima = materiaPrimaFacadeLocal.find(1);
-        Pedido pedido = new Pedido(null, nombreProyecto, descripcion, realizoPago);
+        Pedido pedido = new Pedido(null, nombreProyecto, descripcion, realizoPago, 5);
         pedido.setMateriasPrimaIdMateria(materiaPrima);
-        pedido.setPersonasIdPersona(p);
+        pedido.setVendedorIdPersona(p);
         pedidoFacadeLocal.create(pedido);
         return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
         

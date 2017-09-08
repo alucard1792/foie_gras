@@ -7,6 +7,8 @@ package org.modulos.usuarios;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -182,7 +184,8 @@ public class CrearUsuario implements Serializable {
     }
 
     public String crearUsuario() {
-        p = new Persona(null, documento, nombre, apellido, password, telefono, direccion, email, estado);
+        Date d = new Date(1992, 10, 5);
+        p = new Persona(null, documento, nombre, apellido, password, telefono, direccion, email, estado, d, d);
         Area area = afl.find(1);
         Rol rol = rfl.find(1);
         p.setAreasIdArea(afl.find(area.getIdArea()));

@@ -78,7 +78,6 @@
                         </li>
                         <li>
                             <h:commandLink>
-                                reporte
                                 <h:commandLink value="reporte jasper" actionListener="#{reporteUsuarios.exportarPDF()}"></h:commandLink>
                             </h:commandLink>
                         </li>
@@ -123,6 +122,18 @@
             </p:column>
             <p:column headerText="Email">
                 <p:outputLabel value="#{lp.email}"></p:outputLabel>                
+            </p:column>
+            <p:column headerText="Estado">
+                <p:outputLabel value="#{lp.estado}"></p:outputLabel>                
+            </p:column>
+            <p:column headerText="Fecha nacimiento">
+                <p:outputLabel value="#{lp.fechaNacimiento}"></p:outputLabel>                
+            </p:column>
+            <p:column headerText="Fecha ingreso">
+                <p:outputLabel value="#{lp.fechaIngreso}"></p:outputLabel>                
+            </p:column>
+            <p:column headerText="Fecha despido">
+                <p:outputLabel value="#{(lp.fechaDespido == null ? 'n/a':lp.fechaDespido)}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Rol">
                 <p:outputLabel value="#{lp.roles.get(0).nombreRol}" >

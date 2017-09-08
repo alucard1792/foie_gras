@@ -13,9 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
-import org.dao.DetallePedidoFacadeLocal;
 import org.dao.PedidoFacadeLocal;
-import org.entidades.DetallePedido;
 import org.entidades.Pedido;
 
 /**
@@ -25,9 +23,6 @@ import org.entidades.Pedido;
 @Named(value = "listarPedidos")
 @ConversationScoped
 public class ListarPedidos implements Serializable {
-
-    @EJB
-    private DetallePedidoFacadeLocal detallePedidoFacadeLocal;
     @EJB
     private PedidoFacadeLocal pfl;
     @Inject

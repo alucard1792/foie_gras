@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,11 +44,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "MateriaPrima.findByDimensionAlto", query = "SELECT m FROM MateriaPrima m WHERE m.dimensionAlto = :dimensionAlto")})
 public class MateriaPrima implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "estado")
-    private int estado;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,11 +75,11 @@ public class MateriaPrima implements Serializable {
     @JoinTable(name = "proveedores_materias_prima", joinColumns = {
         @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")}, inverseJoinColumns = {
         @JoinColumn(name = "proveedores_id_proveedor", referencedColumnName = "id_proveedor")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Proveedor> proveedorList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiasPrimaIdMateria")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiasPrimaIdMateria", fetch = FetchType.EAGER)
     private List<Pedido> pedidoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiasPrimaIdMateria")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiasPrimaIdMateria", fetch = FetchType.EAGER)
     private List<Stock> stockList;
 
     public MateriaPrima() {
@@ -93,14 +89,13 @@ public class MateriaPrima implements Serializable {
         this.idMateria = idMateria;
     }
 
-    public MateriaPrima(Integer idMateria, String referencia, String tipoMateriaPrima, int calibre, int dimensionLargo, int dimensionAlto, int estado) {
+    public MateriaPrima(Integer idMateria, String referencia, String tipoMateriaPrima, int calibre, int dimensionLargo, int dimensionAlto) {
         this.idMateria = idMateria;
         this.referencia = referencia;
         this.tipoMateriaPrima = tipoMateriaPrima;
         this.calibre = calibre;
         this.dimensionLargo = dimensionLargo;
         this.dimensionAlto = dimensionAlto;
-        this.estado = estado;
     }
 
     public Integer getIdMateria() {
@@ -201,14 +196,6 @@ public class MateriaPrima implements Serializable {
     @Override
     public String toString() {
         return "org.entidades.MateriaPrima[ idMateria=" + idMateria + " ]";
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
     }
     
 }

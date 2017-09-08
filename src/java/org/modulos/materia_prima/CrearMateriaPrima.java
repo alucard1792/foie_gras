@@ -99,7 +99,7 @@ public class CrearMateriaPrima implements Serializable {
     public String crear() {
         try {
             System.out.println("entro");
-            materiaPrima = new MateriaPrima(null, referencia, tipoMateriaPrima, calibre, dimensionLargo, dimensionAlto, estado);
+            materiaPrima = new MateriaPrima(null, referencia, tipoMateriaPrima, calibre, dimensionLargo, dimensionAlto);
             materiaPrimaFacadeLocal.create(materiaPrima);
             return "/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true";
 

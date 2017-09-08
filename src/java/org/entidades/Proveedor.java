@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -71,10 +72,10 @@ public class Proveedor implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "representante_legal")
     private String representanteLegal;
-    @ManyToMany(mappedBy = "proveedorList")
+    @ManyToMany(mappedBy = "proveedorList", fetch = FetchType.EAGER)
     private List<MateriaPrima> materiaPrimaList;
     @JoinColumn(name = "ciudades_id_ciudad", referencedColumnName = "id_ciudad")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Ciudad ciudadesIdCiudad;
 
     public Proveedor() {

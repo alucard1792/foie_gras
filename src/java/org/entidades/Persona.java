@@ -6,6 +6,7 @@
 package org.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,6 +24,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,17 +45,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre")
     , @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido")
     , @NamedQuery(name = "Persona.findByPassword", query = "SELECT p FROM Persona p WHERE p.password = :password")
-    , @NamedQuery(name = "Persona.login", query = "SELECT p FROM Persona p WHERE p.documento = :documento AND p.password = :password")
     , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
-    , @NamedQuery(name = "enviar.email", query = "SELECT p FROM Persona p WHERE p.email = :email")
     , @NamedQuery(name = "Persona.findByDireccion", query = "SELECT p FROM Persona p WHERE p.direccion = :direccion")
-    , @NamedQuery(name = "Persona.findByEmail", query = "SELECT p FROM Persona p WHERE p.email = :email")})
+    , @NamedQuery(name = "Persona.findByEmail", query = "SELECT p FROM Persona p WHERE p.email = :email")
+    , @NamedQuery(name = "Persona.findByEstado", query = "SELECT p FROM Persona p WHERE p.estado = :estado")
+    , @NamedQuery(name = "Persona.findByFechaNacimiento", query = "SELECT p FROM Persona p WHERE p.fechaNacimiento = :fechaNacimiento")
+    , @NamedQuery(name = "Persona.findByFechaIngreso", query = "SELECT p FROM Persona p WHERE p.fechaIngreso = :fechaIngreso")
+    , @NamedQuery(name = "Persona.findByFechaDespido", query = "SELECT p FROM Persona p WHERE p.fechaDespido = :fechaDespido")
+    , @NamedQuery(name = "Persona.login", query = "SELECT p FROM Persona p WHERE p.documento = :documento AND p.password = :password")
+    , @NamedQuery(name = "Persona.findByImagen", query = "SELECT p FROM Persona p WHERE p.imagen = :imagen")})
 public class Persona implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "estado")
-    private int estado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -76,7 +78,7 @@ public class Persona implements Serializable {
     private String apellido;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 25)
+    @Size(min = 1, max = 200)
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
@@ -94,17 +96,37 @@ public class Persona implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "email")
     private String email;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "estado")
+    private int estado;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha_nacimiento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha_ingreso")
+    @Temporal(TemporalType.DATE)
+    private Date fechaIngreso;
+    @Column(name = "fecha_despido")
+    @Temporal(TemporalType.DATE)
+    private Date fechaDespido;
+    @Size(max = 250)
+    @Column(name = "imagen")
+    private String imagen;
     @JoinTable(name = "roles_personas", joinColumns = {
         @JoinColumn(name = "personas_id_persona", referencedColumnName = "id_persona")}, inverseJoinColumns = {
         @JoinColumn(name = "roles_id_rol", referencedColumnName = "id_rol")})
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Rol> roles;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personasIdPersona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorIdPersona", fetch = FetchType.EAGER)
     private List<Pedido> pedidoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personasIdPersona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "operarioIdPersona", fetch = FetchType.EAGER)
     private List<Proyecto> proyectoList;
     @JoinColumn(name = "areas_id_area", referencedColumnName = "id_area")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Area areasIdArea;
 
     public Persona() {
@@ -114,7 +136,7 @@ public class Persona implements Serializable {
         this.idPersona = idPersona;
     }
 
-    public Persona(Integer idPersona, int documento, String nombre, String apellido, String password, int telefono, String direccion, String email, int estado) {
+    public Persona(Integer idPersona, int documento, String nombre, String apellido, String password, int telefono, String direccion, String email, int estado, Date fechaNacimiento, Date fechaIngreso) {
         this.idPersona = idPersona;
         this.documento = documento;
         this.nombre = nombre;
@@ -124,6 +146,8 @@ public class Persona implements Serializable {
         this.direccion = direccion;
         this.email = email;
         this.estado = estado;
+        this.fechaNacimiento = fechaNacimiento;
+        this.fechaIngreso = fechaIngreso;
     }
 
     public Integer getIdPersona() {
@@ -190,6 +214,46 @@ public class Persona implements Serializable {
         this.email = email;
     }
 
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Date getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    public Date getFechaDespido() {
+        return fechaDespido;
+    }
+
+    public void setFechaDespido(Date fechaDespido) {
+        this.fechaDespido = fechaDespido;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     @XmlTransient
     public List<Rol> getRoles() {
         return roles;
@@ -248,14 +312,6 @@ public class Persona implements Serializable {
     @Override
     public String toString() {
         return "org.entidades.Persona[ idPersona=" + idPersona + " ]";
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
     }
     
 }

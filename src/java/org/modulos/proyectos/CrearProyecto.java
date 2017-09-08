@@ -41,7 +41,6 @@ public class CrearProyecto implements Serializable{
     private PersonaFacadeLocal personaFacadeLocal;
 
     private int idProyecto;
-    private String nombreProyecto;
     private Date fechaInicio;
     private int tiempoEstimado;
 
@@ -54,14 +53,6 @@ public class CrearProyecto implements Serializable{
 
     public void setIdProyecto(int idProyecto) {
         this.idProyecto = idProyecto;
-    }
-
-    public String getNombreProyecto() {
-        return nombreProyecto;
-    }
-
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
     }
 
     public Date getFechaInicio() {
@@ -91,11 +82,11 @@ public class CrearProyecto implements Serializable{
         dificultad = dfl.find(1);
         persona = personaFacadeLocal.find(1);
 
-        Proyecto p = new Proyecto(null, nombreProyecto, null, tiempoEstimado);
+        Proyecto p = new Proyecto(null, null, tiempoEstimado);
 
         p.setDificultadesIdDificultad(dificultad);
         p.setEstadosIdEstado(estado);
-        p.setPersonasIdPersona(persona);
+        p.setOperarioIdPersona(persona);
         p.setPedidosIdPedido(pedido);
         Date date = new Date();
         p.setFechaInicio(date);
