@@ -64,12 +64,12 @@ public class CrearRol implements Serializable{
     public String crear(){
         rol = new Rol(null, nombreRol, estado);
         rolFacadeLocal.create(rol);
-        return "listarRoles.xhtml?faces-redirect=true";
+        return "/admin/roles/listarRoles.xhtml?faces-redirect=true";
         
     }
     
     public String cancelar(){
-        return "/admin/roles/editarRoles.xhtml?faces-redirect=true";
+        return "/admin/roles/listarRoles.xhtml?faces-redirect=true";
         
     }
        

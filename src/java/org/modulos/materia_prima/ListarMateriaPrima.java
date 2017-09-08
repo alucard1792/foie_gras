@@ -14,7 +14,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 import org.dao.MateriaPrimaFacadeLocal;
+import org.dao.StockFacadeLocal;
 import org.entidades.MateriaPrima;
+import org.entidades.Stock;
 
 /**
  *
@@ -27,8 +29,11 @@ public class ListarMateriaPrima implements Serializable {
     @Inject
     private Conversation conversacion;
     @EJB
+    private StockFacadeLocal stockFacadeLocal;
+    @EJB
     private MateriaPrimaFacadeLocal materiaPrimaFacadeLocal;
     private List<MateriaPrima> listaMateriaPrima;
+    private List<Stock> listaStock;
     private MateriaPrima materiaPrimaSeleccionada;
     
     public ListarMateriaPrima() {
@@ -51,6 +56,14 @@ public class ListarMateriaPrima implements Serializable {
 
     public void setMateriaPrimaSeleccionada(MateriaPrima materiaPrimaSeleccionada) {
         this.materiaPrimaSeleccionada = materiaPrimaSeleccionada;
+    }
+
+    public List<Stock> getListaStock() {
+        return listaStock;
+    }
+
+    public void setListaStock(List<Stock> listaStock) {
+        this.listaStock = listaStock;
     }
     
     private void iniciarConversacion() {
@@ -88,26 +101,3 @@ public class ListarMateriaPrima implements Serializable {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

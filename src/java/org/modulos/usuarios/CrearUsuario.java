@@ -200,7 +200,7 @@ public class CrearUsuario implements Serializable {
     }
 
     public String cancelar() {
-        return "/admin/usuarios/listarUsuarios.xhtml?faces-reditect=true";
+        return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
 
     }
 

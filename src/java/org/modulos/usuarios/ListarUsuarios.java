@@ -46,9 +46,6 @@ public class ListarUsuarios implements Serializable {
 
     @PostConstruct
     public void init() {
-        Map<String, Object> miFiltro = new HashMap<>();
-        miFiltro.put("documento", 1);
-        miFiltro.put("nombre", "david");
         persona = pfl.findAll();
         rol = rfl.findAll();
         

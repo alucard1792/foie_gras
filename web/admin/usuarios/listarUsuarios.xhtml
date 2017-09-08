@@ -127,13 +127,13 @@
                 <p:outputLabel value="#{lp.estado}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Fecha nacimiento">
-                <p:outputLabel value="#{lp.fechaNacimiento}"></p:outputLabel>                
+                <p:outputLabel value="#{lp.fechaNacimiento}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
             <p:column headerText="Fecha ingreso">
-                <p:outputLabel value="#{lp.fechaIngreso}"></p:outputLabel>                
+                <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
             <p:column headerText="Fecha despido">
-                <p:outputLabel value="#{(lp.fechaDespido == null ? 'n/a':lp.fechaDespido)}"></p:outputLabel>                
+                <p:outputLabel value="#{(lp.fechaDespido == null ? 'n/a':lp.fechaDespido)}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
             <p:column headerText="Rol">
                 <p:outputLabel value="#{lp.roles.get(0).nombreRol}" >

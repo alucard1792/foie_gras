@@ -8,7 +8,8 @@
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -61,56 +62,69 @@
             <div class="col-md-12">
                 <div class="content-box-large">
                     <div class="panel-body">
-                        <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
+
+                        <h:form id="form" prependId="false" class="form-horizontal" role="form">
+
+                            <b:row>
+                                <b:messages only-most-severe="true" large-screen="full-width" />
+                            </b:row>
+
                             <div class="form-group">
                                 <label for="documento" class="col-sm-2 control-label">Documento</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="documento" a:placeholder="Ingrese el documento" required="true" value="#{crearUsuario.documento}"><f:validateRequired /></h:inputText>
+                                    <h:inputText a:type="number" class="form-control" id="documento" a:placeholder="Ingrese el documento" value="#{crearUsuario.documento}"></h:inputText>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="nombre" class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="nombre" a:placeholder="Ingrese el nombre" required="true" value="#{crearUsuario.nombre}"><f:validateRequired /></h:inputText>
+                                    <h:inputText  a:type="text" class="form-control" id="nombre" a:placeholder="Ingrese el nombre" value="#{crearUsuario.nombre}"></h:inputText>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="apellido" class="col-sm-2 control-label">Apellido</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="apellido" a:placeholder="Ingrese el apellido" required="true" value="#{crearUsuario.apellido}"><f:validateRequired /></h:inputText>
+                                    <h:inputText  a:type="text" class="form-control" id="apellido" a:placeholder="Ingrese el apellido" value="#{crearUsuario.apellido}"></h:inputText>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="password" class="col-sm-2 control-label">Contraseña</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="password" a:placeholder="Ingrese la contraseña" required="true" value="#{crearUsuario.password}"><f:validateRequired /></h:inputText>
+                                    <h:inputText  a:type="password" class="form-control" id="password" a:placeholder="Ingrese la contraseña" value="#{crearUsuario.password}"></h:inputText>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="telefono" class="col-sm-2 control-label">Telefono</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="telefono" a:placeholder="Ingrese el telefono" required="true" value="#{crearUsuario.telefono}"><f:validateRequired /></h:inputText>
+                                    <h:inputText  a:type="number" class="form-control" id="telefono" a:placeholder="Ingrese el telefono" value="#{crearUsuario.telefono}"></h:inputText>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="direccion" class="col-sm-2 control-label">Direccion</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="direccion" a:placeholder="Ingrese la direccion" required="true" value="#{crearUsuario.direccion}"><f:validateRequired /></h:inputText>
+                                    <h:inputText  a:type="text" class="form-control" id="direccion" a:placeholder="Ingrese la direccion" value="#{crearUsuario.direccion}"></h:inputText>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="email" a:placeholder="Ingrese el email" required="true" a:type="email" value="#{crearUsuario.email}"><f:validateRequired /></h:inputText>
+                                    <h:inputText class="form-control" id="email" a:placeholder="Ingrese el email" a:type="email" value="#{crearUsuario.email}"></h:inputText>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="estado" class="col-sm-2 control-label">Estado inicial</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="estado" a:placeholder="Ingrese el estado inicial del usuario. 0 desactivado 1 activados" required="true" value="#{crearUsuario.estado}"><f:validateRequired /></h:inputText>
+                                    <h:inputText class="form-control" id="estado" a:placeholder="Ingrese el estado inicial del usuario. 0 desactivado 1 activados" value="#{crearUsuario.estado}"></h:inputText>
                                 </div>
                             </div>
-                            <h:message for="estado" style="color:red" />
+
                             <div class="form-group">
                                 <label for="area" class="col-sm-2 control-label">Area</label>
                                 <div class="col-sm-10">
@@ -119,15 +133,18 @@
                                     </h:selectOneMenu> 
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
                                     <p:commandButton action="#{crearUsuario.crearUsuario()}" class="btn btn-primary" value="Aceptar" onclick="isEmpty();"></p:commandButton> 
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:commandButton actionListener="#{crearUsuario.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
+                                    <h:commandButton action="#{crearUsuario.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
                                 </div>
                             </div>
+
                         </h:form>
+
                     </div>
                 </div>
             </div>
