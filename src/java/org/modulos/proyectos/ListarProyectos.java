@@ -76,10 +76,6 @@ public class ListarProyectos implements Serializable {
         return "/admin/proyectos/listarProyectos.xhtml?faces-redirect=true";
 
     }
-    public String prueba(){
-        terminarConversacion();
-        return "/admin/proyectos/listarProyectos.xhtml?faces-redirect=true";
-    }
 
     public String preparacionEditar(Proyecto p) {
         iniciarConversacion();

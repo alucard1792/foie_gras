@@ -98,7 +98,7 @@
                 <p:outputLabel value="#{lp.idProyecto}"></p:outputLabel>                                
             </p:column>
             <p:column headerText="Fecha inicio">
-                <p:outputLabel value="#{lp.fechaInicio}"></p:outputLabel>                
+                <p:outputLabel value="#{lp.fechaInicio}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
             <p:column headerText="Tiempo estimado">
                 <p:outputLabel value="#{lp.tiempoEstimado}"></p:outputLabel>                

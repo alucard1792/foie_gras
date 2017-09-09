@@ -6,7 +6,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:b="http://bootsfaces.net/ui">
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -61,41 +62,44 @@
                 <div class="content-box-large">
                     <div class="panel-body">
 
-                        <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
+                        <h:form id="form" prependId="false" class="form-horizontal" role="form">
+
+                            <b:row>
+                                <b:messages only-most-severe="true" large-screen="full-width" />
+                            </b:row>
 
                             <div class="form-group">
                                 <label for="referencia" class="col-sm-2 control-label">Referencia</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="referencia" a:placeholder="ingrese la referencia" value="#{listarMateriaPrima.materiaPrimaSeleccionada.referencia}"/>
+                                    <h:inputText a:type="text" class="form-control" id="referencia" a:placeholder="ingrese la referencia" value="#{listarMateriaPrima.materiaPrimaSeleccionada.referencia}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="tipoMateriaPrima" class="col-sm-2 control-label">Tipo materia prima</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="tipoMateriaPrima" a:placeholder="primer nombre" value="#{listarMateriaPrima.materiaPrimaSeleccionada.tipoMateriaPrima}"/>
+                                    <h:inputText a:type="text" class="form-control" id="tipoMateriaPrima" a:placeholder="ingrese el tipo de materia prima" value="#{listarMateriaPrima.materiaPrimaSeleccionada.tipoMateriaPrima}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="calibre" class="col-sm-2 control-label">Calibre</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="calibre" a:placeholder="Ingrese calibre" value="#{listarMateriaPrima.materiaPrimaSeleccionada.calibre}"/>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="dimensionLargo" class="col-sm-2 control-label">Dimension largo</label>
-                                <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="dimensionLargo" a:placeholder="Ingrese largo lamina" value="#{listarMateriaPrima.materiaPrimaSeleccionada.dimensionLargo}"/>
+                                    <h:inputText a:type="number" class="form-control" id="calibre" a:placeholder="Ingrese el calibre" value="#{listarMateriaPrima.materiaPrimaSeleccionada.calibre}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="dimensionAlto" class="col-sm-2 control-label">Dimension alto</label>
+                                <label for="dimensionLargo" class="col-sm-2 control-label">Largo lamina</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="dimensionAlto" a:placeholder="Ingrese alto lamina" value="#{listarMateriaPrima.materiaPrimaSeleccionada.dimensionAlto}"/>
+                                    <h:inputText a:type="number" class="form-control" id="dimensionLargo" a:placeholder="Ingrese el largo de la lamina" value="#{listarMateriaPrima.materiaPrimaSeleccionada.dimensionLargo}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dimensionAlto" class="col-sm-2 control-label">Alto lamina</label>
+                                <div class="col-sm-10">
+                                    <h:inputText a:type="number" class="form-control" id="dimensionAlto" a:placeholder="Ingrese el alto de la lamina" value="#{listarMateriaPrima.materiaPrimaSeleccionada.dimensionAlto}"/>
                                 </div>
                             </div>
 
@@ -105,13 +109,13 @@
                                         <h:commandButton action="#{listarMateriaPrima.actializarMateriaPrima()}" class="btn btn-primary" value="Guardar"></h:commandButton>
                                     </h:form>
                                 </div>
-
                                 <div class="col-sm-3">
                                     <h:commandButton action="#{listarMateriaPrima.cancelar()}" class="btn" value="cancelar"></h:commandButton>
                                 </div>
-
                             </div>
+
                         </h:form>
+
                     </div>
                 </div>
             </div>
