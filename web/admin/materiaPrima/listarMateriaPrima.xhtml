@@ -76,12 +76,16 @@
                                 <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
+                        <br/>
+                        <li>
+                            <h:commandLink value="reporte jasper" actionListener="#{reporteMateriaPrima.exportarPDF()}"></h:commandLink>
+                        </li>
                     </h:form>
                 </ul>
             </li>
         </ul>
         <br/>
-        
+
         <div class="panel-heading">
             <div class="panel-options">
                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">

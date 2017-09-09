@@ -145,7 +145,7 @@
                             <div class="form-group">
                                 <label for="area" class="col-sm-2 control-label">Area</label>
                                 <div class="col-sm-10">
-                                    <h:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.areasIdArea}"> 
+                                    <h:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.areasIdArea}" converter="areaConverter"> 
                                         <f:selectItems value="#{listarUsuarios.listaAreas}" var="al" itemValue = "#{al.idArea}" itemLabel = "#{al.nombreArea}" /> 
                                     </h:selectOneMenu> 	
                                 </div>
