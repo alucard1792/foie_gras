@@ -5,13 +5,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <f:view locale="#{idioma.languageSelect}">
 
         <h:head>
             <f:event type="preRenderView" listener="#{controladorSesion.validarSesion()}"></f:event>
             <ui:include src="/WEB-INF/resources/template2/administrador/head.xhtml"></ui:include>
+            <p:growl/>  
         </h:head>
 
         <h:body>

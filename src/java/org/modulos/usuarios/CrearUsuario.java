@@ -6,9 +6,9 @@
 package org.modulos.usuarios;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -16,12 +16,14 @@ import javax.faces.view.ViewScoped;
 import org.dao.PersonaFacadeLocal;
 import org.entidades.Persona;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.dao.AreaFacadeLocal;
-import org.dao.PermisoFacadeLocal;
 import org.dao.RolFacadeLocal;
 import org.entidades.Area;
-import org.entidades.Permiso;
 import org.entidades.Rol;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -37,8 +39,6 @@ public class CrearUsuario implements Serializable {
     private RolFacadeLocal rfl;
     @EJB
     private AreaFacadeLocal afl;
-    @EJB
-    private PermisoFacadeLocal permisoFacadeLocal;
 
     private int idPersona;
     private int documento;
@@ -49,27 +49,23 @@ public class CrearUsuario implements Serializable {
     private String direccion;
     private String email;
     private int estado;
-    private int idRol;
+    private int rol;
+    private int area;
+
     private Persona p;
-    private Rol r;
-    private Area area; 
+    private Date fechaNacimiento;
+    private Date fechaIngreso;
+    private List<Rol> roles;
+    private Area areas;
+    private List<Rol> listaRoles;
+    private List<Area> listaAreas;
 
     @PostConstruct
     public void init() {
-        p = new Persona();
-        r= new Rol();
-        area = new Area();
+        listaAreas = afl.findAll();
+        listaRoles = rfl.findAll();
 
     }
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
-    
 
     public Persona getP() {
         return p;
@@ -77,14 +73,6 @@ public class CrearUsuario implements Serializable {
 
     public void setP(Persona p) {
         this.p = p;
-    }
-
-    public int getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(int idRol) {
-        this.idRol = idRol;
     }
 
     public int getIdPersona() {
@@ -159,49 +147,102 @@ public class CrearUsuario implements Serializable {
         this.estado = estado;
     }
 
-    public PersonaFacadeLocal getPfl() {
-        return pfl;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setPfl(PersonaFacadeLocal pfl) {
-        this.pfl = pfl;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
-    public RolFacadeLocal getRfl() {
-        return rfl;
+    public Date getFechaIngreso() {
+        return fechaIngreso;
     }
 
-    public void setRfl(RolFacadeLocal rfl) {
-        this.rfl = rfl;
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
     }
 
-    public Rol getR() {
-        return r;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-    public void setR(Rol r) {
-        this.r = r;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 
+    public int getRol() {
+        return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public Area getAreas() {
+        return areas;
+    }
+
+    public void setAreas(Area areas) {
+        this.areas = areas;
+    }
+
+    public List<Rol> getListaRoles() {
+        return listaRoles;
+    }
+
+    public void setListaRoles(List<Rol> listaRoles) {
+        this.listaRoles = listaRoles;
+    }
+
+    public List<Area> getListaAreas() {
+        return listaAreas;
+    }
+
+    public void setListaAreas(List<Area> listaAreas) {
+        this.listaAreas = listaAreas;
+    }
+
+    
     public String crearUsuario() {
-        Date d = new Date(1992, 10, 5);
-        p = new Persona(null, documento, nombre, apellido, password, telefono, direccion, email, estado, d, d);
-        Area area = afl.find(1);
-        Rol rol = rfl.find(1);
-        p.setAreasIdArea(afl.find(area.getIdArea()));
-        System.out.println(area);
-        List<Rol> roles = new ArrayList();
-        roles.add(rol);
+        p = new Persona(idPersona, documento, nombre, apellido, password, telefono, direccion, email, estado, fechaNacimiento, fechaIngreso);
+
+        areas = afl.find(area);
+        p.setAreasIdArea(areas);
+
+        roles = new ArrayList<>();
+        roles.add(rfl.find(rol));
         p.setRoles(roles);
+
         pfl.create(p);
+
         return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
-        
-        
+
     }
 
     public String cancelar() {
         return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
 
+    }
+
+    public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+
+    public void click() {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.update("form:display");
+        requestContext.execute("PF('dlg').show()");
     }
 
 }
