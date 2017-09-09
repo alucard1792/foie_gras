@@ -63,7 +63,7 @@
             <div class="col-md-12">
                 <div class="content-box-large">
                     <div class="panel-body">
-                        
+
                         <h:form id="form" prependId="false" class="form-horizontal" role="form">
 
                             <b:row>
@@ -118,54 +118,48 @@
                                     <h:inputText a:type="email" class="form-control" id="email" a:placeholder="Ingrese el email" value="#{listarUsuarios.personaSeleccionado.email}"/>
                                 </div>
                             </div>
-                            
-                            <!--modificar por calendario de primefaces-->
+
                             <div class="form-group">
-                                <label for="fechaNacimiento" class="col-sm-2 control-label">Fecha de nacimiento</label>
+                                <label for="fechaNacimiento" class="col-sm-2 control-label">fecha nacimiento</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="fechaNacimiento" a:placeholder="Ingrese la fecha de nacimiento" value="#{listarUsuarios.personaSeleccionado.fechaNacimiento}"><f:convertDateTime pattern="yyyy/MM/dd" /></h:inputText>
+                                    <p:calendar id="fechaNacimiento" value="#{listarUsuarios.personaSeleccionado.fechaNacimiento}" locale="de" navigator="true" pattern="yyyy-MM-dd" />                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fechaRegistro" class="col-sm-2 control-label">fecha registro</label>
+                                <div class="col-sm-10">
+                                    <p:calendar id="fechaRegistro" value="#{listarUsuarios.personaSeleccionado.fechaIngreso}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="fechaIngreso" class="col-sm-2 control-label">Fecha de ingreso</label>
-                                <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="fechaIngreso" a:placeholder="Ingrese la fecha de ingreso" value="#{listarUsuarios.personaSeleccionado.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></h:inputText>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="fechaDespido" class="col-sm-2 control-label">Fecha de despido</label>
-                                <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="fechaDespido" a:placeholder="Ingrese la fecha de despido" value="#{listarUsuarios.personaSeleccionado.fechaDespido}"><f:convertDateTime pattern="yyyy/MM/dd" /></h:inputText>
-                                </div>
-                            </div>
-                            <!--modificar por calendario de primefaces-->
-
-                            
-                            <p:calendar value="#{listarUsuarios.personaSeleccionado.fechaDespido}"></p:calendar>
-
-                            <div class="form-group">
-                                <label for="estado" class="col-sm-2 control-label">Estado</label>
+                                <label for="estado" class="col-sm-2 control-label">Estado inicial</label>
                                 <div class="col-sm-10">
                                     <h:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.estado}"> 
-                                        <f:selectItem itemValue = "0" itemLabel = "Inactivo" /> 
-                                        <f:selectItem itemValue = "1" itemLabel = "Activo" /> 
+                                        <f:selectItem itemValue = "0" itemLabel = "Activo" /> 
+                                        <f:selectItem itemValue = "1" itemLabel = "Inactivo" /> 
                                     </h:selectOneMenu> 	
                                 </div>
                             </div>
-                            
-                            <!--
+
                             <div class="form-group">
-                                <label for="rol" class="col-sm-2 control-label">Rol</label>
-                                <div class="col-sm-2">
-                                    <h:selectOneMenu class="form-control" id="rol" value="#{listarUsuarios.personaSeleccionado.roles}" converter="rolConverter">
-                                        <f:selectItems value="#{rolController.roles}" var="r" itemValue="#{r.idRol}" itemLabel="#{r.nombreRol}"/>
-                                    </h:selectOneMenu>
+                                <label for="area" class="col-sm-2 control-label">Area</label>
+                                <div class="col-sm-10">
+                                    <h:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.areasIdArea}"> 
+                                        <f:selectItems value="#{listarUsuarios.listaAreas}" var="al" itemValue = "#{al.idArea}" itemLabel = "#{al.nombreArea}" /> 
+                                    </h:selectOneMenu> 	
                                 </div>
                             </div>
-                            -->
-                            
+
+                            <div class="form-group">
+                                <label for="rol" class="col-sm-2 control-label">Rol</label>
+                                <div class="col-sm-10">
+                                    <h:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.roles}" converter="rolConverter"> 
+                                        <f:selectItems value="#{listarUsuarios.listaRoles}" var="rl" itemValue = "#{rl.idRol}" itemLabel = "#{rl.nombreRol}" /> 
+                                    </h:selectOneMenu> 	
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
                                     <h:form>

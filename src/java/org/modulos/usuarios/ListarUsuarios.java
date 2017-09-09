@@ -6,6 +6,7 @@
 package org.modulos.usuarios;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +18,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.dao.AreaFacadeLocal;
 import org.dao.PersonaFacadeLocal;
 import org.dao.RolFacadeLocal;
+import org.entidades.Area;
 import org.entidades.Persona;
 import org.entidades.Rol;
 
@@ -34,12 +37,21 @@ public class ListarUsuarios implements Serializable {
     private PersonaFacadeLocal pfl;
     @EJB
     private RolFacadeLocal rfl;
+    @EJB
+    private AreaFacadeLocal afl;
     @Inject
     private Conversation conversacion;
     private Persona personaSeleccionado;
+    
+    private int rol;
+    private int area;
+    private Date fechaNacimiento;
+    private Date fechaIngreso;
+    private List<Rol> roles;
+    private Area areas;
     private List<Persona> persona;
-    private List<Rol> rol;
-
+    private List<Rol> listaRoles;
+    private List<Area> listaAreas;
     public ListarUsuarios() {
 
     }
@@ -47,7 +59,8 @@ public class ListarUsuarios implements Serializable {
     @PostConstruct
     public void init() {
         persona = pfl.findAll();
-        rol = rfl.findAll();
+        listaAreas = afl.findAll();
+        listaRoles = rfl.findAll();
         
     }
 
@@ -64,8 +77,68 @@ public class ListarUsuarios implements Serializable {
         this.personaSeleccionado = personaSeleccionado;
     }
 
-    public List<Rol> getRol() {
+    public int getRol() {
         return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Date getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
+    public Area getAreas() {
+        return areas;
+    }
+
+    public void setAreas(Area areas) {
+        this.areas = areas;
+    }
+
+    public List<Rol> getListaRoles() {
+        return listaRoles;
+    }
+
+    public void setListaRoles(List<Rol> listaRoles) {
+        this.listaRoles = listaRoles;
+    }
+
+    public List<Area> getListaAreas() {
+        return listaAreas;
+    }
+
+    public void setListaAreas(List<Area> listaAreas) {
+        this.listaAreas = listaAreas;
     }
 
     private void iniciarConversacion() {
