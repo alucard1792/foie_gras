@@ -55,11 +55,9 @@ public class Stock implements Serializable {
     @Column(name = "fecha_ingreso")
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "materias_prima_referencia")
-    private String materiasPrimaReferencia;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_actualizacion")
+    private Date fechaActualizacion;
     @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MateriaPrima materiasPrimaIdMateria;
@@ -71,11 +69,11 @@ public class Stock implements Serializable {
         this.idStock = idStock;
     }
 
-    public Stock(Integer idStock, int stock, Date fechaIngreso, String materiasPrimaReferencia) {
+    public Stock(Integer idStock, int stock, Date fechaIngreso, Date fechaActualizacion) {
         this.idStock = idStock;
         this.stock = stock;
         this.fechaIngreso = fechaIngreso;
-        this.materiasPrimaReferencia = materiasPrimaReferencia;
+        this.fechaActualizacion = fechaActualizacion;
     }
 
     public Integer getIdStock() {
@@ -102,12 +100,12 @@ public class Stock implements Serializable {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public String getMateriasPrimaReferencia() {
-        return materiasPrimaReferencia;
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
     }
 
-    public void setMateriasPrimaReferencia(String materiasPrimaReferencia) {
-        this.materiasPrimaReferencia = materiasPrimaReferencia;
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
     }
 
     public MateriaPrima getMateriasPrimaIdMateria() {
