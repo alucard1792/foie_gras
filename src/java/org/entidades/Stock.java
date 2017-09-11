@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Stock.findByIdStock", query = "SELECT s FROM Stock s WHERE s.idStock = :idStock")
     , @NamedQuery(name = "Stock.findByStock", query = "SELECT s FROM Stock s WHERE s.stock = :stock")
     , @NamedQuery(name = "Stock.findByFechaIngreso", query = "SELECT s FROM Stock s WHERE s.fechaIngreso = :fechaIngreso")
-    , @NamedQuery(name = "Stock.findByMateriasPrimaReferencia", query = "SELECT s FROM Stock s WHERE s.materiasPrimaReferencia = :materiasPrimaReferencia")})
+    , @NamedQuery(name = "Stock.findByfechaActualizacion", query = "SELECT s FROM Stock s WHERE s.fechaActualizacion = :fechaActualizacion")})
 public class Stock implements Serializable {
 
     private static final long serialVersionUID = 1L;
