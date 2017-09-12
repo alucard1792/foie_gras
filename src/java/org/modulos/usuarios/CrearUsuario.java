@@ -8,7 +8,6 @@ package org.modulos.usuarios;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -40,192 +39,67 @@ public class CrearUsuario implements Serializable {
     @EJB
     private AreaFacadeLocal afl;
 
-    private int idPersona;
-    private int documento;
-    private String nombre;
-    private String apellido;
-    private String password;
-    private int telefono;
-    private String direccion;
-    private String email;
-    private int estado;
-    private int rol;
-    private int area;
+    private Persona persona;
 
-    private Persona p;
-    private Date fechaNacimiento;
-    private Date fechaIngreso;
-    private List<Rol> roles;
-    private Area areas;
     private List<Rol> listaRoles;
+    private Rol rol;
+    private List<Rol> rolesAsignados;
     private List<Area> listaAreas;
 
     @PostConstruct
     public void init() {
         listaAreas = afl.findAll();
         listaRoles = rfl.findAll();
+        persona = new Persona();
 
     }
 
-    public Persona getP() {
-        return p;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setP(Persona p) {
-        this.p = p;
-    }
-
-    public int getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(int idPersona) {
-        this.idPersona = idPersona;
-    }
-
-    public int getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(int documento) {
-        this.documento = documento;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Date getFechaIngreso() {
-        return fechaIngreso;
-    }
-
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
-    }
-
-    public List<Rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Rol> roles) {
-        this.roles = roles;
-    }
-
-    public int getRol() {
-        return rol;
-    }
-
-    public void setRol(int rol) {
-        this.rol = rol;
-    }
-
-    public int getArea() {
-        return area;
-    }
-
-    public void setArea(int area) {
-        this.area = area;
-    }
-
-    public Area getAreas() {
-        return areas;
-    }
-
-    public void setAreas(Area areas) {
-        this.areas = areas;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
     public List<Rol> getListaRoles() {
         return listaRoles;
     }
 
-    public void setListaRoles(List<Rol> listaRoles) {
-        this.listaRoles = listaRoles;
-    }
 
     public List<Area> getListaAreas() {
         return listaAreas;
     }
 
-    public void setListaAreas(List<Area> listaAreas) {
-        this.listaAreas = listaAreas;
+    public List<Rol> getRolesAsignados() {
+        return rolesAsignados;
     }
 
+    public void setRolesAsignados(List<Rol> rolesAsignados) {
+        this.rolesAsignados = rolesAsignados;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
     
     public String crearUsuario() {
-        p = new Persona(idPersona, documento, nombre, apellido, password, telefono, direccion, email, estado, fechaNacimiento, fechaIngreso);
-
-        areas = afl.find(area);
-        p.setAreasIdArea(areas);
-
-        roles = new ArrayList<>();
-        roles.add(rfl.find(rol));
-        p.setRoles(roles);
-
-        pfl.create(p);
-
-        return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
-
+        if(persona != null){
+            rolesAsignados = new ArrayList<>();
+            rolesAsignados.add(rfl.find(rol.getIdRol()));
+            persona.setRoles(rolesAsignados);
+            pfl.create(persona);
+            return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
+            
+        }else{
+            return "";
+        
+        }
+        
     }
 
     public String cancelar() {
