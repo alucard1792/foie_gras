@@ -38,7 +38,6 @@ public class CrearUsuario implements Serializable {
     private RolFacadeLocal rfl;
     @EJB
     private AreaFacadeLocal afl;
-
     private Persona persona;
 
     private List<Rol> listaRoles;

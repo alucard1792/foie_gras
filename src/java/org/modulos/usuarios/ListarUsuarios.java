@@ -6,6 +6,7 @@
 package org.modulos.usuarios;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -42,18 +43,14 @@ public class ListarUsuarios implements Serializable {
     @Inject
     private Conversation conversacion;
     private Persona personaSeleccionado;
-    
-    private int rol;
-    private int area;
-    private Date fechaNacimiento;
-    private Date fechaIngreso;
-    private List<Rol> roles;
-    private Area areas;
-    private List<Persona> persona;
-    private List<Rol> listaRoles;
-    private List<Area> listaAreas;
-    public ListarUsuarios() {
 
+    private Rol rol;
+    private List<Persona> persona;
+    private List<Area> listaAreas;
+    private List<Rol> listaRoles;
+    private List<Rol> rolesAsignados;
+
+    public ListarUsuarios() {
     }
 
     @PostConstruct
@@ -61,11 +58,6 @@ public class ListarUsuarios implements Serializable {
         persona = pfl.findAll();
         listaAreas = afl.findAll();
         listaRoles = rfl.findAll();
-        
-    }
-
-    public List<Persona> getPersona() {
-        return persona;
 
     }
 
@@ -77,52 +69,28 @@ public class ListarUsuarios implements Serializable {
         this.personaSeleccionado = personaSeleccionado;
     }
 
-    public int getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(int rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
-    public int getArea() {
-        return area;
+    public List<Persona> getPersona() {
+        return persona;
     }
 
-    public void setArea(int area) {
-        this.area = area;
+    public void setPersona(List<Persona> persona) {
+        this.persona = persona;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public List<Area> getListaAreas() {
+        return listaAreas;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Date getFechaIngreso() {
-        return fechaIngreso;
-    }
-
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
-    }
-
-    public List<Rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Rol> roles) {
-        this.roles = roles;
-    }
-
-    public Area getAreas() {
-        return areas;
-    }
-
-    public void setAreas(Area areas) {
-        this.areas = areas;
+    public void setListaAreas(List<Area> listaAreas) {
+        this.listaAreas = listaAreas;
     }
 
     public List<Rol> getListaRoles() {
@@ -133,12 +101,12 @@ public class ListarUsuarios implements Serializable {
         this.listaRoles = listaRoles;
     }
 
-    public List<Area> getListaAreas() {
-        return listaAreas;
+    public List<Rol> getRolesAsignados() {
+        return rolesAsignados;
     }
 
-    public void setListaAreas(List<Area> listaAreas) {
-        this.listaAreas = listaAreas;
+    public void setRolesAsignados(List<Rol> rolesAsignados) {
+        this.rolesAsignados = rolesAsignados;
     }
 
     private void iniciarConversacion() {
@@ -152,7 +120,7 @@ public class ListarUsuarios implements Serializable {
     private void terminarConversacion() {
         if (!conversacion.isTransient()) {
             conversacion.end();
-            
+
         }
 
     }
@@ -171,6 +139,9 @@ public class ListarUsuarios implements Serializable {
     }
 
     public String actualizarUsuario() {
+        rolesAsignados = new ArrayList<>();
+        rolesAsignados.add(rfl.find(rol.getIdRol()));
+        personaSeleccionado.setRoles(rolesAsignados);
         pfl.edit(personaSeleccionado);
         return cancelar();
 
