@@ -23,7 +23,7 @@
                 <c:if test="#{p.idPermiso != 43}">
                     <!--valida el menu actual para renderizar la opcion active-->
                     <c:choose>
-                        <c:when test="#{p.idPermiso == 29}">
+                        <c:when test="#{p.idPermiso == 46}">
                             <li class="active">
                                 <h:link outcome="/#{p.url}">
                                     <i class="material-icons">person</i>
@@ -48,8 +48,8 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/proyectos/listarProyectos.xhtml" class="btn btn-default visible-lg-block visible-md-block">Listar proyectos</a>
-        <a href="#" class="btn btn-info ">Editar proyecto</a>
+        <a href="/foie_gras/admin/stock/listarStock.xhtml" class="btn btn-default visible-lg-block visible-md-block">Listar stock</a>
+        <a href="#" class="btn btn-info ">Editar stock</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
@@ -71,54 +71,33 @@
                             </b:row>
                             
                             <div class="form-group">
-                                <label for="fechaInicio" class="col-sm-2 control-label">Fecha de inicio </label>
+                                <label for="stock" class="col-sm-2 control-label">Stock </label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="date" class="form-control" id="fechaInicio" a:placeholder="Ingrese la fecha de inicio" value="#{listarProyectos.proyectoSeleccionado.fechaInicio}"><f:convertDateTime pattern="yyyy/MM/dd" /></h:inputText>
+                                    <h:inputText a:type="number" class="form-control" id="stock" a:placeholder="Ingrese las existencias" value="#{listarStock.stockSeleccionado.stock}"></h:inputText>
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="tiempoEstimado" class="col-sm-2 control-label">tiempo estimado </label>
+                                <label for="fechaIngreso" class="col-sm-2 control-label">Fecha Ingreso </label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="tiempoEstimado" a:placeholder="Ingrese el tiempo estimado" value="#{listarProyectos.proyectoSeleccionado.tiempoEstimado}"/>
+                                    <p:calendar id="fechaNacimiento" value="#{listarStock.stockSeleccionado.fechaIngreso}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="estado" class="col-sm-2 control-label">Estado </label>
+                                <label for="fechaActualizacion" class="col-sm-2 control-label">Fecha actualizacion </label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="estado" a:placeholder="Ingrese el nuevo estado" value="#{listarProyectos.proyectoSeleccionado.estadosIdEstado.descripcionEstado}"/>
+                                    <p:calendar id="fechaActualizacion" value="#{listarStock.stockSeleccionado.fechaActualizacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="dificultad" class="col-sm-2 control-label">Dificultad </label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="dificultad" a:placeholder="Ingrese la dificultad" value="#{listarProyectos.proyectoSeleccionado.dificultadesIdDificultad.descripcionDificultad}"/>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="pedido" class="col-sm-2 control-label">nombre del pedido </label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="pedido" a:placeholder="Ingrese el pedido asociado" value="#{listarProyectos.proyectoSeleccionado.pedidosIdPedido.nombreProyecto}"/>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="operario" class="col-sm-2 control-label">nombre del operario </label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="operario" a:placeholder="seleccione el operario del proyecto" value="#{listarProyectos.proyectoSeleccionado.operarioIdPersona.nombre}"></h:inputText>
-                                </div>
-                            </div>
-
+ 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{listarProyectos.actualizarProyecto()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
+                                    <h:commandButton action="#{listarStock.actualizarStock()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
                                 </div>
                                 <div class="col-sm-3">
                                     <h:form>
-                                        <h:commandButton action="#{listarProyectos.cancelar()}" class="btn" value="Cancelar"></h:commandButton>
+                                        <h:commandButton action="#{listarStock.cancelar()}" class="btn" value="Cancelar"></h:commandButton>
                                     </h:form>
                                 </div>
                             </div>

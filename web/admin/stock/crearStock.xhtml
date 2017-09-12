@@ -23,7 +23,7 @@
                 <c:if test="#{p.idPermiso != 43}">
                     <!--valida el menu actual para renderizar la opcion active-->
                     <c:choose>
-                        <c:when test="#{p.idPermiso == 29}">
+                        <c:when test="#{p.idPermiso == 46}">
                             <li class="active">
                                 <h:link outcome="/#{p.url}">
                                     <i class="material-icons">person</i>
@@ -48,36 +48,21 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/proyectos/listarProyectos.xhtml" class="btn btn-default visible-lg-block visible-md-block">Listar proyectos</a>
-        <a href="#" class="btn btn-info ">Crear proyecto</a>
+        <a href="/foie_gras/admin/stock/listarStock.xhtml" class="btn btn-default visible-lg-block visible-md-block">Listar stock</a>
+        <a href="#" class="btn btn-info ">Crear stock</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Proyectos registrados</h4>
+        <h4 class="title">Crear stock</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-
-
-
-
         <div class="row">
             <div class="col-md-12">
-
                 <div class="content-box-large">
-                    <div class="panel-heading">
-                        <div class="panel-title"><h2>Crear proyecto</h2></div>
-
-                        <div class="panel-options">
-                            <!--<a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-                            <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>-->
-
-                        </div>
-                    </div>
                     <div class="panel-body">
-
                         <h:form id="form" prependId="false" class="form-horizontal" role="form">
 
                             <b:row>
@@ -85,19 +70,36 @@
                             </b:row>
 
                             <div class="form-group">
-                                <label for="tiempoEstimando" class="col-sm-2 control-label">Tiempo estimado</label>
+                                <label for="stock" class="col-sm-2 control-label">Stock </label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="tiempoEstimando" a:placeholder="Ingrese el tiempo estimado" value="#{crearProyecto.tiempoEstimado}"/>
+                                    <h:inputText a:type="number" class="form-control" id="stock" a:placeholder="Ingrese las existencias" value="#{crearStock.stockEntidad.stock}"></h:inputText>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fechaIngreso" class="col-sm-2 control-label">Fecha Ingreso </label>
+                                <div class="col-sm-10">
+                                    <p:calendar id="fechaNacimiento" value="#{crearStock.stockEntidad.fechaIngreso}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="materiaPrima" class="col-sm-2 control-label">Materia prima </label>
+                                <div class="col-sm-10">
+                                    <b:selectOneMenu value = "#{crearStock.stockEntidad.materiasPrimaIdMateria}"> 
+                                        <f:selectItems value="#{crearStock.listaMateriaPrima}" var="mp" itemLabel = "#{mp.referencia}" /> 
+                                    </b:selectOneMenu>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{crearProyecto.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
+                                    <h:commandButton action="#{crearStock.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:commandButton action="#{crearProyecto.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
+                                    <h:commandButton action="#{crearStock.cancelar()}" class="btn" value="Cancelar"></h:commandButton>
                                 </div>
+
                             </div>
 
                         </h:form>

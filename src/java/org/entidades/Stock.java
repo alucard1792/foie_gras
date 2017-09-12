@@ -8,6 +8,7 @@ package org.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,7 +60,7 @@ public class Stock implements Serializable {
     @Column(name = "fecha_actualizacion")
     private Date fechaActualizacion;
     @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private MateriaPrima materiasPrimaIdMateria;
 
     public Stock() {
@@ -69,6 +70,14 @@ public class Stock implements Serializable {
         this.idStock = idStock;
     }
 
+    public Stock(Integer idStock, int stock, Date fechaIngreso, Date fechaActualizacion, MateriaPrima materiasPrimaIdMateria) {
+        this.idStock = idStock;
+        this.stock = stock;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaActualizacion = fechaActualizacion;
+        this.materiasPrimaIdMateria = materiasPrimaIdMateria;
+    }
+    
     public Stock(Integer idStock, int stock, Date fechaIngreso, Date fechaActualizacion) {
         this.idStock = idStock;
         this.stock = stock;

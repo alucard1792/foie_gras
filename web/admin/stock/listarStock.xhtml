@@ -21,7 +21,7 @@
                 <c:if test="#{p.idPermiso != 43}">
                     <!--valida el menu actual para renderizar la opcion active-->
                     <c:choose>
-                        <c:when test="#{p.idPermiso == 29}">
+                        <c:when test="#{p.idPermiso == 46}">
                             <li class="active">
                                 <h:link outcome="/#{p.url}">
                                     <i class="material-icons">person</i>
@@ -46,12 +46,12 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info ">Listar proyectos</a>
+        <a href="#" class="btn btn-info ">Listar stock</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Proyectos registrados</h4>
+        <h4 class="title">Stock registrados</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -85,39 +85,33 @@
             <div class="panel-options">
                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                     <c:choose>
-                        <c:when test="#{p.idPermiso eq 30}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="ingresar proyecto">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                        <c:when test="#{p.idPermiso eq 47}">
+                            <span style="float: right"><h:link outcome="/#{p.url}" value="Crear stock">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                         </c:when>
                     </c:choose>
                 </c:forEach>                       
             </div>
         </div>
 
-        <p:dataTable value="#{listarProyectos.proyecto}" var="lp" id="tabla">
-            <p:column headerText="Id proyecto">
-                <p:outputLabel value="#{lp.idProyecto}"></p:outputLabel>                                
+        <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla">
+            <p:column headerText="Id stock">
+                <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
             </p:column>
-            <p:column headerText="Fecha inicio">
-                <p:outputLabel value="#{lp.fechaInicio}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+            <p:column headerText="existencias">
+                <p:outputLabel value="#{lp.stock}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Tiempo estimado">
-                <p:outputLabel value="#{lp.tiempoEstimado}"></p:outputLabel>                
+            <p:column headerText="fecha de ingreso">
+                <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
-            <p:column headerText="Estado">
-                <p:outputLabel value="#{lp.estadosIdEstado.descripcionEstado}"></p:outputLabel>                
+            <p:column headerText="fecha de actualizacion">
+                <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
-            <p:column headerText="Dificultad">
-                <p:outputLabel value="#{lp.dificultadesIdDificultad.descripcionDificultad}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Id pedido">
-                <p:outputLabel value="#{lp.pedidosIdPedido.idPedido}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Operario asignado">
-                <p:outputLabel value="#{lp.operarioIdPersona.nombre}"></p:outputLabel>                
+            <p:column headerText="referencia materia prima">
+                <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
             </p:column>
             <p:column headerText="Opciones" exportable="false">
                 <h:form>
-                    <p:commandButton value="Editar" action="#{listarProyectos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                    <p:commandButton value="Editar" action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                 </h:form>
 
             </p:column>
