@@ -20,7 +20,7 @@
                 <c:if test="#{p.idPermiso != 43}">
                     <li >
                         <h:link outcome="/#{p.url}">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons">#{p.icon}</i>
                             <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
                         </h:link>
                     </li>

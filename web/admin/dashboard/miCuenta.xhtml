@@ -22,7 +22,7 @@
                     <!--valida el menu actual para renderizar la opcion active-->
                     <li >
                         <h:link outcome="/#{p.url}">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons">#{p.icon}</i>
                             <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
                         </h:link>
                     </li>
