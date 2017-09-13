@@ -12,7 +12,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        listar pedidos
+        #{msg.listarPedidos}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -47,12 +47,12 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info ">listar pedidos</a>
+        <a href="#" class="btn btn-info ">#{msg.listarPedidos}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Pedidos registrados</h4>
+        <h4 class="title">#{msg.pedidosRegistrados}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -87,7 +87,7 @@
                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                     <c:choose>
                         <c:when test="#{p.idPermiso eq 23}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="Crear pedido">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.crearPedido}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                         </c:when>
                     </c:choose>
                 </c:forEach>                       
@@ -95,30 +95,30 @@
         </div>
 
         <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla">
-            <p:column headerText="Id pedido">
+            <p:column headerText="#{msg.idPedidos}">
                 <p:outputLabel value="#{lp.idPedido}"></p:outputLabel>                                
             </p:column>
-            <p:column headerText="Nombre del proyecto">
+            <p:column headerText="#{msg.nombreProyecto}">
                 <p:outputLabel value="#{lp.nombreProyecto}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Descripcion">
+            <p:column headerText="#{msg.descripcion}">
                 <p:outputLabel value="#{lp.descripcion}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Realizo pago">
+            <p:column headerText="#{msg.realizoPago}">
                 <p:outputLabel value="#{(lp.realizoPago == 1 ? 'si':'no')}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Cantidad">
+            <p:column headerText="#{msg.cantidad}">
                 <p:outputLabel value="#{lp.cantidad}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Materia prima">
+            <p:column headerText="#{msg.materiaPrima}">
                 <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Vendedor">
+            <p:column headerText="#{msg.vendedor}">
                 <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"></p:outputLabel>                
             </p:column>
-            <p:column class="" headerText="Opciones" exportable="false" >
+            <p:column class="" headerText="#{msg.opciones}" exportable="false" >
                 <h:form>
-                    <p:commandButton value="Editar" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
+                    <p:commandButton value="#{msg.editar}" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
                     <p:row rendered="#{lp.realizoPago == 1}">
                         <p:commandButton value="nuevo" type="button" onclick="PF('dlg1').show();" />
                         <p:dialog header="asignacion de operario" widgetVar="dlg1" minHeight="40">
