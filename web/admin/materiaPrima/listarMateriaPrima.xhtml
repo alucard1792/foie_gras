@@ -11,7 +11,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        listar Materia prima
+        #{msg.listarMateria}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -46,12 +46,12 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info ">Listar materia prima</a>
+        <a href="#" class="btn btn-info "> #{msg.listarMateria}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Materia prima registrada</h4>
+        <h4 class="title">#{msg.materiaRegistrada}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -102,24 +102,24 @@
             <p:column headerText="id">
                 <p:outputLabel value="#{lp.idMateria}"></p:outputLabel>                                
             </p:column>
-            <p:column headerText="referencia">
+            <p:column headerText="#{msg.referencia}">
                 <p:outputLabel value="#{lp.referencia}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="tipo">
+            <p:column headerText="#{msg.tipo}">
                 <p:outputLabel value="#{lp.tipoMateriaPrima}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="calibre">
+            <p:column headerText="#{msg.calibre}">
                 <p:outputLabel value="#{lp.calibre}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="largo lamina">
+            <p:column headerText="#{msg.largoLamina}">
                 <p:outputLabel value="#{lp.dimensionLargo}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="alto lamina">
+            <p:column headerText="#{msg.altoLamina}">
                 <p:outputLabel value="#{lp.dimensionAlto}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Opciones" exportable="false">
+            <p:column headerText="#{msg.opciones}" exportable="false">
                 <h:form>
-                    <p:commandButton value="Editar" action="#{listarMateriaPrima.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
+                    <p:commandButton value="#{msg.editar}" action="#{listarMateriaPrima.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
                 </h:form>
             </p:column>
         </p:dataTable>

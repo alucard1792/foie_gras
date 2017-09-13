@@ -11,7 +11,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        listar usuarios
+        #{msg.listarUsuarios}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -46,12 +46,12 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info ">Listar usuarios</a>
+        <a href="#" class="btn btn-info "> #{msg.listarUsuarios}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Usuarios registrados</h4>
+        <h4 class="title">#{msg.usuariosRegistrados}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -102,52 +102,46 @@
             <p:column headerText="id">
                 <p:outputLabel value="#{lp.idPersona}"></p:outputLabel>                                
             </p:column>
-            <p:column headerText="Documento">
+            <p:column headerText="#{msg.documento}">
                 <p:outputLabel value="#{lp.documento}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Nombre">
+            <p:column headerText="#{msg.nombre}">
                 <p:outputLabel value="#{lp.nombre}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Apellido">
+            <p:column headerText="#{msg.apellido}">
                 <p:outputLabel value="#{lp.apellido}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Contraseña">
+            <p:column headerText="#{msg.clave}">
                 <p:outputLabel value="#{lp.password}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Telefono">
+            <p:column headerText="#{msg.telefeno}">
                 <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Direccion">
+            <p:column headerText="#{msg.direccion}">
                 <p:outputLabel value="#{lp.direccion}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Email">
+            <p:column headerText="#{msg.correo}">
                 <p:outputLabel value="#{lp.email}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Estado">
-                <p:outputLabel value="#{lp.estado}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Fecha nacimiento">
+            <p:column headerText="#{msg.fechaNacimiento}">
                 <p:outputLabel value="#{lp.fechaNacimiento}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
-            <p:column headerText="Fecha ingreso">
+            <p:column headerText="#{msg.fechaIngreso}">
                 <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
-            <p:column headerText="Fecha despido">
-                <p:outputLabel value="#{(lp.fechaDespido == null ? 'n/a':lp.fechaDespido)}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Rol">
+            <p:column headerText="#{msg.rol}">
                 <p:outputLabel value="#{(lp.roles.get(0) != null ? lp.roles.get(0).nombreRol:'')}" >
                 </p:outputLabel>                
             </p:column>
-            <p:column headerText="Area">
+            <p:column headerText="#{msg.area}">
                 <p:outputLabel value="#{lp.areasIdArea}" converter="areaConverter"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Estado">
+            <p:column headerText="#{msg.estado}">
                 <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Opciones" exportable="false">
+            <p:column headerText="#{msg.opciones}" exportable="false">
                 <h:form>
-                    <p:commandButton value="Editar" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                    <p:commandButton value="#{msg.editar}" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                 </h:form>
 
             </p:column>
