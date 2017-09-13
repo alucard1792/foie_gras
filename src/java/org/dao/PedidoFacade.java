@@ -5,10 +5,15 @@
  */
 package org.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import org.entidades.Pedido;
+import org.entidades.Persona;
+import org.entidades.Rol;
 
 /**
  *
@@ -28,5 +33,22 @@ public class PedidoFacade extends AbstractFacade<Pedido> implements PedidoFacade
     public PedidoFacade() {
         super(Pedido.class);
     }
-    
+
+    @Override
+    public List<Persona> buscarOperarios() {
+        List<Persona> operariosDisponibles = new ArrayList<>();
+        Rol rol = new Rol(4);
+        try {
+            TypedQuery<Persona> q = getEntityManager().createNamedQuery("Persona.findOperarios", Persona.class);
+            q.setParameter("rol", rol);
+            operariosDisponibles = q.getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return operariosDisponibles;
+
+    }
+
 }

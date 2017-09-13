@@ -7,8 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:b="http://bootsfaces.net/ui">
+                xmlns:p="http://primefaces.org/ui">
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -121,21 +120,6 @@
                     <p:commandButton value="Editar" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
                     <p:row rendered="#{lp.realizoPago == 1}">
                         <p:commandButton value="salida" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
-                        <h:link styleClass="btn btn" outcome="/admin/pedidos/asignarOperario.xhtml?faces-redirect=true" value="salida"/>
-                        <p:commandButton value="Basic" type="button" onclick="PF('dlg1').show();" />
-                        <p:link outcome="/admin/pedidos/asignarOperario.xhtml?faces-redirect=true" value="salida" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"></p:link>
-                        <p:dialog header="asignacion de operario" widgetVar="dlg1" minHeight="40">
-                            <h:outputText value="Por favor, seleccione un operario"></h:outputText>
-
-                            <b:selectOneMenu value = "#{enviarPedidoAProyecto.operarioAsignado}"> 
-                                <f:selectItems value="#{enviarPedidoAProyecto.listaOperariosDisponibles}" var="lod" itemLabel="#{lod.nombre} #{lod.apellido}" /> 
-                            </b:selectOneMenu>
-
-                            <h:form>
-                                <p:commandButton value="enviar" action="#{enviarPedidoAProyecto.asignarOperarioAProyecto(lp)}" ajax="false"></p:commandButton>
-                            </h:form>
-
-                        </p:dialog>
                     </p:row>
                 </h:form>
             </p:column>
@@ -145,10 +129,20 @@
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
-
         <script>
 
         </script>
     </ui:define>
 
-</ui:composition>
+</ui:composition><?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+    </h:body>
+</html>
+

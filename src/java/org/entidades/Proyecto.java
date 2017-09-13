@@ -45,12 +45,10 @@ public class Proyecto implements Serializable {
     @Column(name = "id_proyecto")
     private Integer idProyecto;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha_inicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "tiempo_estimado")
     private int tiempoEstimado;
     @JoinColumn(name = "dificultades_id_dificultad", referencedColumnName = "id_dificultad")
@@ -73,7 +71,7 @@ public class Proyecto implements Serializable {
         this.idProyecto = idProyecto;
     }
 
-    public Proyecto(Integer idProyecto, Date fechaInicio, int tiempoEstimado) {
+    public Proyecto(Integer idProyecto, Date fechaInicio, Integer tiempoEstimado) {
         this.idProyecto = idProyecto;
         this.fechaInicio = fechaInicio;
         this.tiempoEstimado = tiempoEstimado;
@@ -99,7 +97,7 @@ public class Proyecto implements Serializable {
         return tiempoEstimado;
     }
 
-    public void setTiempoEstimado(int tiempoEstimado) {
+    public void setTiempoEstimado(Integer tiempoEstimado) {
         this.tiempoEstimado = tiempoEstimado;
     }
 
