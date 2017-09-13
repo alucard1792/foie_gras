@@ -79,7 +79,10 @@
                             <div class="form-group">
                                 <label for="tipoMateriaPrima" class="col-sm-2 control-label">Tipo materia prima</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="tipoMateriaPrima" a:placeholder="ingrese el tipo de materia prima" value="#{crearMateriaPrima.materiaPrima.tipoMateriaPrima}" />
+                                    <b:selectOneMenu value = "#{crearMateriaPrima.materiaPrima.tipoMateriaPrima}" > 
+                                        <f:selectItem itemValue="Poliestireno" itemLabel = "Poliestireno" /> 
+                                        <f:selectItem itemValue="Acrilico" itemLabel = "Acrilico"  /> 
+                                    </b:selectOneMenu>
                                 </div>
                             </div>
 
