@@ -107,13 +107,11 @@
             <p:column headerText="#{msg.realizoPago}">
                 <p:outputLabel value="#{(lp.realizoPago == 1 ? 'si':'no')}"></p:outputLabel>                
             </p:column>
-<<<<<<< Updated upstream
             <p:column headerText="#{msg.cantidad}">
-=======
             <p:column headerText="esta asignado">
                 <p:outputLabel value="#{lp.estaAsignado }"></p:outputLabel>                
             </p:column>            <p:column headerText="Cantidad">
->>>>>>> Stashed changes
+
                 <p:outputLabel value="#{lp.cantidad}"></p:outputLabel>                
             </p:column>
             <p:column headerText="#{msg.materiaPrima}">
@@ -126,6 +124,7 @@
                 <h:form>
                     <p:commandButton value="#{msg.editar}" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
                     <p:row rendered="#{lp.realizoPago == 1 and lp.estaAsignado == 0}">
+
 
                         <p:commandButton value="nuevo" type="button" onclick="PF('dlg1').show();" />
                         <p:dialog header="asignacion de operario" widgetVar="dlg1" minHeight="40">
