@@ -120,21 +120,15 @@
                 <h:form>
                     <p:commandButton value="Editar" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
                     <p:row rendered="#{lp.realizoPago == 1}">
-                        <p:commandButton value="salida" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
-                        <h:link styleClass="btn btn" outcome="/admin/pedidos/asignarOperario.xhtml?faces-redirect=true" value="salida"/>
-                        <p:commandButton value="Basic" type="button" onclick="PF('dlg1').show();" />
-                        <p:link outcome="/admin/pedidos/asignarOperario.xhtml?faces-redirect=true" value="salida" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"></p:link>
+                        <p:commandButton value="nuevo" type="button" onclick="PF('dlg1').show();" />
                         <p:dialog header="asignacion de operario" widgetVar="dlg1" minHeight="40">
                             <h:outputText value="Por favor, seleccione un operario"></h:outputText>
-
                             <b:selectOneMenu value = "#{enviarPedidoAProyecto.operarioAsignado}"> 
                                 <f:selectItems value="#{enviarPedidoAProyecto.listaOperariosDisponibles}" var="lod" itemLabel="#{lod.nombre} #{lod.apellido}" /> 
                             </b:selectOneMenu>
-
                             <h:form>
                                 <p:commandButton value="enviar" action="#{enviarPedidoAProyecto.asignarOperarioAProyecto(lp)}" ajax="false"></p:commandButton>
                             </h:form>
-
                         </p:dialog>
                     </p:row>
                 </h:form>
