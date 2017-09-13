@@ -86,38 +86,35 @@
                 <br></br>                       
             </div>
         </div>
-
-        <p:dataTable value="#{listarProyectos.proyecto}" var="lp" id="tabla">
-            <p:column headerText="Id proyecto">
-                <p:outputLabel value="#{lp.idProyecto}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="Fecha inicio">
-                <p:outputLabel value="#{lp.fechaInicio}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Tiempo estimado">
-                <p:outputLabel value="#{lp.tiempoEstimado}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Estado">
-                <p:outputLabel value="#{lp.estadosIdEstado.descripcionEstado}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Dificultad">
-                <p:outputLabel value="#{lp.dificultadesIdDificultad.descripcionDificultad}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Id pedido">
-                <p:outputLabel value="#{lp.pedidosIdPedido.idPedido}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Operario asignado">
-                <p:outputLabel value="#{lp.operarioIdPersona.nombre}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Opciones" exportable="false">
-                <h:form>
-                    <p:commandButton value="Editar" action="#{listarProyectos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
-                </h:form>
-
-            </p:column>
-
+        
+        <p:dataTable value="#{(listarProyectos.proyecto)}" var="lp" id="tabla">
+                <p:column headerText="Id proyecto">
+                    <p:outputLabel value="#{lp.idProyecto}"></p:outputLabel>                                
+                </p:column>
+                <p:column headerText="Fecha inicio">
+                    <p:outputLabel value="#{lp.fechaInicio}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Tiempo estimado">
+                    <p:outputLabel value="#{lp.tiempoEstimado}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Estado">
+                    <p:outputLabel value="#{lp.estadosIdEstado.descripcionEstado}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Dificultad">
+                    <p:outputLabel value="#{lp.dificultadesIdDificultad.descripcionDificultad}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Id pedido">
+                    <p:outputLabel value="#{lp.pedidosIdPedido.idPedido}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Operario asignado">
+                    <p:outputLabel value="#{lp.operarioIdPersona.nombre}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Opciones" exportable="false">
+                    <h:form>
+                        <p:commandButton value="Editar" action="#{listarProyectos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                    </h:form>
+                </p:column>
         </p:dataTable>
-
 
     </ui:define>
 

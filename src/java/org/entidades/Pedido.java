@@ -64,6 +64,10 @@ public class Pedido implements Serializable {
     private short realizoPago;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "esta_asignado")
+    private int estaAsignado;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "cantidad")
     private int cantidad;
     @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")
@@ -120,6 +124,14 @@ public class Pedido implements Serializable {
 
     public void setRealizoPago(short realizoPago) {
         this.realizoPago = realizoPago;
+    }
+
+    public int getEstaAsignado() {
+        return estaAsignado;
+    }
+
+    public void setEstaAsignado(int estaAsignado) {
+        this.estaAsignado = estaAsignado;
     }
 
     public int getCantidad() {
@@ -179,5 +191,6 @@ public class Pedido implements Serializable {
     public String toString() {
         return "org.entidades.Pedido[ idPedido=" + idPedido + " ]";
     }
+
     
 }

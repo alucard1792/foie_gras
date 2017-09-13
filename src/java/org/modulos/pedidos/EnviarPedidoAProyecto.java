@@ -33,6 +33,7 @@ public class EnviarPedidoAProyecto implements Serializable {
     @EJB
     private ProyectoFacadeLocal proyectoFacadeLocal;
     private List<Persona> listaOperariosDisponibles;
+    private List<Proyecto> listaProyectos;
     private Proyecto proyecto;
     private Persona operarioAsignado;
     private Dificultad dificultad;
@@ -63,8 +64,17 @@ public class EnviarPedidoAProyecto implements Serializable {
         this.operarioAsignado = operarioAsignado;
     }
 
+    public List<Proyecto> getListaProyectos() {
+        return listaProyectos;
+    }
+
+    public void setListaProyectos(List<Proyecto> listaProyectos) {
+        this.listaProyectos = listaProyectos;
+    }
+    
     public void asignarOperarioAProyecto(Pedido pedido) {
 
+        System.out.println(pedido.getIdPedido());
        try {
             dificultad.setIdDificultad(4);
             estado.setIdEstado(5);
@@ -74,10 +84,28 @@ public class EnviarPedidoAProyecto implements Serializable {
             proyecto.setPedidosIdPedido(pedido);
             proyecto.setOperarioIdPersona(operarioAsignado);
             proyectoFacadeLocal.create(proyecto);
+            pedido.setEstaAsignado(1);
+            pedidoFacadeLocal.edit(pedido);
         } catch (Exception e) {
             e.printStackTrace();
             
         }
+        
+    }
+    
+    public boolean isProyectoAsignado(Pedido p){
+        boolean bandera = false;
+        listaProyectos = proyectoFacadeLocal.findAll();
+        for(Proyecto proyecto:listaProyectos){
+            System.out.println(proyecto);
+            if(p.getIdPedido().equals(proyecto.getPedidosIdPedido().getIdPedido())){
+            System.out.println("si es igual");
+                bandera = true;
+            
+            }
+            
+        }
+        return bandera;
         
     }
 
