@@ -24,12 +24,6 @@ public class CrearMateriaPrima implements Serializable {
     @EJB
     private MateriaPrimaFacadeLocal materiaPrimaFacadeLocal;
     private MateriaPrima materiaPrima;
-    private String referencia,
-            tipoMateriaPrima;
-    private int calibre,
-            dimensionLargo,
-            dimensionAlto,
-            estado;
 
     public CrearMateriaPrima() {
 
@@ -48,62 +42,13 @@ public class CrearMateriaPrima implements Serializable {
         this.materiaPrima = materiaPrima;
     }
 
-    public String getReferencia() {
-        return referencia;
-    }
-
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
-    }
-
-    public String getTipoMateriaPrima() {
-        return tipoMateriaPrima;
-    }
-
-    public void setTipoMateriaPrima(String tipoMateriaPrima) {
-        this.tipoMateriaPrima = tipoMateriaPrima;
-    }
-
-    public int getCalibre() {
-        return calibre;
-    }
-
-    public void setCalibre(int calibre) {
-        this.calibre = calibre;
-    }
-
-    public int getDimensionLargo() {
-        return dimensionLargo;
-    }
-
-    public void setDimensionLargo(int dimensionLargo) {
-        this.dimensionLargo = dimensionLargo;
-    }
-
-    public int getDimensionAlto() {
-        return dimensionAlto;
-    }
-
-    public void setDimensionAlto(int dimensionAlto) {
-        this.dimensionAlto = dimensionAlto;
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-
     public String crear() {
         try {
-            System.out.println("entro");
-            materiaPrima = new MateriaPrima(null, referencia, tipoMateriaPrima, calibre, dimensionLargo, dimensionAlto);
             materiaPrimaFacadeLocal.create(materiaPrima);
             return "/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true";
 
         } catch (Exception e) {
+            e.printStackTrace();
             return "";
 
         }
@@ -111,11 +56,6 @@ public class CrearMateriaPrima implements Serializable {
     }
 
     public String cancelar() {
-        return "/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true";
-
-    }
-
-    public String prueba() {
         return "/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true";
 
     }

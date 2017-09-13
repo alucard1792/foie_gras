@@ -6,7 +6,6 @@
 package org.modulos.usuarios;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -15,14 +14,10 @@ import javax.faces.view.ViewScoped;
 import org.dao.PersonaFacadeLocal;
 import org.entidades.Persona;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import org.dao.AreaFacadeLocal;
 import org.dao.RolFacadeLocal;
 import org.entidades.Area;
 import org.entidades.Rol;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -65,7 +60,6 @@ public class CrearUsuario implements Serializable {
         return listaRoles;
     }
 
-
     public List<Area> getListaAreas() {
         return listaAreas;
     }
@@ -85,37 +79,31 @@ public class CrearUsuario implements Serializable {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-    
+
     public String crearUsuario() {
-        if(persona != null){
-            rolesAsignados = new ArrayList<>();
-            rolesAsignados.add(rfl.find(rol.getIdRol()));
-            persona.setRoles(rolesAsignados);
-            pfl.create(persona);
-            return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
-            
-        }else{
+        try {
+            if (persona != null) {
+                rolesAsignados = new ArrayList<>();
+                rolesAsignados.add(rfl.find(rol.getIdRol()));
+                persona.setRoles(rolesAsignados);
+                pfl.create(persona);
+                return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
+
+            } else {
+                return "";
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return "";
-        
+
         }
-        
+
     }
 
     public String cancelar() {
         return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
 
-    }
-
-    public void onDateSelect(SelectEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-
-    public void click() {
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.update("form:display");
-        requestContext.execute("PF('dlg').show()");
     }
 
 }

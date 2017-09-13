@@ -72,21 +72,21 @@
                             <div class="form-group">
                                 <label for="referencia" class="col-sm-2 control-label">Referencia</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="referencia" a:placeholder="ingrese la referencia" value="#{crearMateriaPrima.referencia}" />
+                                    <h:inputText a:type="text" class="form-control" id="referencia" a:placeholder="ingrese la referencia" value="#{crearMateriaPrima.materiaPrima.referencia}" />
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="tipoMateriaPrima" class="col-sm-2 control-label">Tipo materia prima</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="tipoMateriaPrima" a:placeholder="ingrese el tipo de materia prima" value="#{crearMateriaPrima.tipoMateriaPrima}" />
+                                    <h:inputText a:type="text" class="form-control" id="tipoMateriaPrima" a:placeholder="ingrese el tipo de materia prima" value="#{crearMateriaPrima.materiaPrima.tipoMateriaPrima}" />
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="calibre" class="col-sm-2 control-label">Calibre</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="calibre" a:placeholder="ingrese el calibre" value="#{crearMateriaPrima.calibre}" />
+                                    <h:inputText a:type="number" class="form-control" id="calibre" a:placeholder="ingrese el calibre" value="#{crearMateriaPrima.materiaPrima.calibre}" />
                                 </div>
                             </div>
 
@@ -94,14 +94,14 @@
                             <div class="form-group">
                                 <label for="dimensionLargo" class="col-sm-2 control-label">Largo lamina</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="dimensionLargo" a:placeholder="ingrese el largo de la lamina" value="#{crearMateriaPrima.dimensionLargo}" />
+                                    <h:inputText a:type="number" class="form-control" id="dimensionLargo" a:placeholder="ingrese el largo de la lamina" value="#{crearMateriaPrima.materiaPrima.dimensionLargo}" />
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="dimensionAlto" class="col-sm-2 control-label">Alto lamina</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="dimensionAlto" a:placeholder="ingrese el alto de la lamina" value="#{crearMateriaPrima.dimensionAlto}" />
+                                    <h:inputText a:type="number" class="form-control" id="dimensionAlto" a:placeholder="ingrese el alto de la lamina" value="#{crearMateriaPrima.materiaPrima.dimensionAlto}" />
                                 </div>
                             </div>
 
@@ -110,7 +110,7 @@
                                     <h:commandButton action="#{crearMateriaPrima.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:commandButton action="#{crearMateriaPrima.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
+                                    <h:link styleClass="btn btn" outcome="/admin/materiaPrima/listarMateriaPrima.xhtml?faces-redirect=true" value="cancelar"/>
                                 </div>
                             </div>
 

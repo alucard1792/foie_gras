@@ -89,7 +89,7 @@
                                     <h:commandButton action="#{crearRol.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:commandButton action="#{crearRol.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
+                                    <h:link styleClass="btn btn" outcome="/admin/roles/listarRoles.xhtml?faces-redirect=true" value="cancelar"/>
                                 </div>
                             </div>
 

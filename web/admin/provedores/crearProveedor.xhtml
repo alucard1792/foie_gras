@@ -110,7 +110,7 @@
                                     <h:commandButton action="#{crearProveedor.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:commandButton action="#{crearProveedor.cancelar()}" class="btn btn" value="Cancelar"></h:commandButton> 
+                                    <h:link styleClass="btn btn" outcome="/admin/provedores/listarProveedores.xhtml?faces-redirect=true" value="cancelar"/>
                                 </div>
                             </div>
 

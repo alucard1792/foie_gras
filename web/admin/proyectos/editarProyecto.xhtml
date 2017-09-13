@@ -69,28 +69,28 @@
                             <b:row>
                                 <b:messages only-most-severe="true" large-screen="full-width" />
                             </b:row>
-                            
+
                             <div class="form-group">
                                 <label for="fechaInicio" class="col-sm-2 control-label">Fecha de inicio </label>
                                 <div class="col-sm-10">
                                     <h:inputText a:type="date" class="form-control" id="fechaInicio" a:placeholder="Ingrese la fecha de inicio" value="#{listarProyectos.proyectoSeleccionado.fechaInicio}"><f:convertDateTime pattern="yyyy/MM/dd" /></h:inputText>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="tiempoEstimado" class="col-sm-2 control-label">tiempo estimado </label>
                                 <div class="col-sm-10">
                                     <h:inputText a:type="number" class="form-control" id="tiempoEstimado" a:placeholder="Ingrese el tiempo estimado" value="#{listarProyectos.proyectoSeleccionado.tiempoEstimado}"/>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="estado" class="col-sm-2 control-label">Estado </label>
                                 <div class="col-sm-10">
                                     <h:inputText a:type="text" class="form-control" id="estado" a:placeholder="Ingrese el nuevo estado" value="#{listarProyectos.proyectoSeleccionado.estadosIdEstado.descripcionEstado}"/>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="dificultad" class="col-sm-2 control-label">Dificultad </label>
                                 <div class="col-sm-10">
@@ -117,9 +117,7 @@
                                     <h:commandButton action="#{listarProyectos.actualizarProyecto()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:form>
-                                        <h:commandButton action="#{listarProyectos.cancelar()}" class="btn" value="Cancelar"></h:commandButton>
-                                    </h:form>
+                                    <h:link styleClass="btn btn" outcome="/admin/proyectos/listarProyectos.xhtml?faces-redirect=true" value="cancelar"/>
                                 </div>
                             </div>
 
