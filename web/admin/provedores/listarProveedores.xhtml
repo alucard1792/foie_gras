@@ -11,7 +11,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        listar proveedores 
+         #{msg.listarProveedores} 
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -46,12 +46,12 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info ">listar proveedores</a>
+        <a href="#" class="btn btn-info "> #{msg.listarProveedores}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Listar proveedores</h4>
+        <h4 class="title"> #{msg.listarProveedores}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -97,27 +97,27 @@
             <p:column headerText="id">
                 <p:outputLabel value="#{lp.idProveedor}"></p:outputLabel>                                
             </p:column>
-            <p:column headerText="Nit proveedor">
+            <p:column headerText="#{msg.nitProveedor}">
                 <p:outputLabel value="#{lp.nitProveedor}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Nombre empresa">
+            <p:column headerText="#{msg.nombreEmpresa}">
                 <p:outputLabel value="#{lp.nombreEmpresa}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Direccion">
+            <p:column headerText="#{msg.direccion}">
                 <p:outputLabel value="#{lp.direccion}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Telefono">
+            <p:column headerText="#{msg.telefeno}">
                 <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Representante legal">
+            <p:column headerText="#{msg.representanteLegal}">
                 <p:outputLabel value="#{lp.representanteLegal}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Ciudad">
+            <p:column headerText="#{msg.ciudad}">
                 <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Opciones" exportable="false">
+            <p:column headerText="#{msg.opciones}" exportable="false">
                 <h:form>
-                    <p:commandButton value="Editar" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
+                    <p:commandButton value="#{msg.editar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
                 </h:form>
             </p:column>
         </p:dataTable>
