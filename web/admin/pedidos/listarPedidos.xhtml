@@ -115,9 +115,16 @@
             <p:column headerText="Vendedor">
                 <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Opciones" exportable="false">
+            <p:column headerText="Opciones" exportable="false" >
                 <h:form>
-                    <p:commandButton value="Editar" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+
+                    <p:commandButton value="Editar" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
+                    <p:row rendered="#{lp.realizoPago == 1}">
+
+                        <p:commandButton value="" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"><i class="material-icons">person_add</i></p:commandButton>
+                    </p:row>
+
+
                 </h:form>
             </p:column>
         </p:dataTable>
@@ -127,7 +134,7 @@
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script>
-            
+
         </script>
     </ui:define>
 

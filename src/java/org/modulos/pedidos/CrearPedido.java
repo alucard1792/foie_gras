@@ -6,15 +6,17 @@
 package org.modulos.pedidos;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import org.dao.MateriaPrimaFacadeLocal;
 import org.dao.PedidoFacadeLocal;
-import org.dao.PersonaFacadeLocal;
 import org.entidades.MateriaPrima;
 import org.entidades.Pedido;
-import org.entidades.Persona;
+import org.login.ControladorSesion;
 
 /**
  *
@@ -24,60 +26,53 @@ import org.entidades.Persona;
 @ViewScoped
 public class CrearPedido implements Serializable {
 
-    @EJB
-    private PersonaFacadeLocal pfl;
+
     @EJB
     private PedidoFacadeLocal pedidoFacadeLocal;
     @EJB
     private MateriaPrimaFacadeLocal materiaPrimaFacadeLocal;
-    private int idPedido;
-    private String nombreProyecto;
-    private String descripcion;
-    private short realizoPago;
-    private Persona p;
+    @Inject
+    private ControladorSesion controladorSesion;
+    private List<MateriaPrima>listaMateriaPrima;
+    private Pedido pedido;
 
     public CrearPedido() {
+    }
+    
+    @PostConstruct
+    public void init(){
+        listaMateriaPrima = materiaPrimaFacadeLocal.findAll();
+        pedido = new Pedido();
 
     }
 
-    public int getIdPedido() {
-        return idPedido;
+    public ControladorSesion getControladorSesion() {
+        return controladorSesion;
     }
 
-    public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
+    public void setControladorSesion(ControladorSesion controladorSesion) {
+        this.controladorSesion = controladorSesion;
     }
 
-    public String getNombreProyecto() {
-        return nombreProyecto;
+    public List<MateriaPrima> getListaMateriaPrima() {
+        return listaMateriaPrima;
     }
 
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
+    public void setListaMateriaPrima(List<MateriaPrima> listaMateriaPrima) {
+        this.listaMateriaPrima = listaMateriaPrima;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
-
-    public short getRealizoPago() {
-        return realizoPago;
-    }
-
-    public void setRealizoPago(short realizoPago) {
-        this.realizoPago = realizoPago;
-    }
-
+    
     public String crear() {
-        p = pfl.find(1);
-        MateriaPrima materiaPrima = materiaPrimaFacadeLocal.find(1);
-        Pedido pedido = new Pedido(null, nombreProyecto, descripcion, realizoPago, 5);
-        pedido.setMateriasPrimaIdMateria(materiaPrima);
-        pedido.setVendedorIdPersona(p);
+        pedido.setIdPedido(null);
+        pedido.setVendedorIdPersona(controladorSesion.getP());
         pedidoFacadeLocal.create(pedido);
         return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
         
