@@ -7,7 +7,8 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:jsf="http://xmlns.jcp.org/jsf">
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:p="http://primefaces.org/ui">
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -133,7 +134,15 @@
             <h4 class="card-title"></h4>
             <p class="card-content">
             </p>
-            <a href="#pablo" class="btn btn-primary btn-round">Cambiar foto de perfil</a>
+
+            <h:form enctype="multipart/form-data">
+                <p:growl id="messages" showDetail="true" />
+
+                <p:fileUpload value="#{subirArchivoQuemado.file}" mode="simple" skinSimple="true"/>
+
+                <p:commandButton value="Submit" ajax="false" actionListener="#{subirArchivoQuemado.upload()}" disabled="true" />
+            </h:form>
+            <!--<a href="#pablo" class="btn btn-primary btn-round">Cambiar foto de perfil</a>-->
         </div>
 
     </ui:define>

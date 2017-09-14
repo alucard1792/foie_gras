@@ -36,7 +36,7 @@ public class GraficoRule {
     public String getGraficoPruebaDato(){
         try {
             DefaultPieDataset dataset = getDatasetDatos(getDatosGraficoPrueba());
-            JFreeChart chart = ChartFactory.createPieChart("Sales", dataset, true, true, Locale.ENGLISH);
+            JFreeChart chart = ChartFactory.createPieChart("Acrilicos", dataset, true, true, Locale.ENGLISH);
             BufferedImage bufferedImage = chart.createBufferedImage(300, 300);
             //return Base64.getEncoder().encodeToString(ChartUtilities.encodeAsPNG(bufferedImage));
             return "data:image/png;base64," + new String(Base64.getEncoder().encode(ChartUtilities.encodeAsPNG(bufferedImage)));
@@ -49,11 +49,11 @@ public class GraficoRule {
     private List<Dato> getDatosGraficoPrueba(){
         List<Dato> datos = new ArrayList<>();
         //Consulta BD y Organización
-        datos.add(new Dato("Item1", 10.0));
-        datos.add(new Dato("Item2", 15.0));
-        datos.add(new Dato("Item3", 20.0));
-        datos.add(new Dato("Item4", 5.0));
-        datos.add(new Dato("Item5", 35.0));
+        datos.add(new Dato("Acrilicos rojos", 10.0));
+        datos.add(new Dato("Acrilicos azules", 15.0));
+        datos.add(new Dato("Acrilicos verde", 20.0));
+        datos.add(new Dato("Acrilicos amarillo", 5.0));
+        datos.add(new Dato("Acrilicos fusia", 35.0));
         return datos;
     }
     

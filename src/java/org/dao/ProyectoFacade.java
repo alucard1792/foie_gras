@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.entidades.Persona;
+import org.entidades.Estado;
 import org.entidades.Proyecto;
 
 /**
@@ -52,5 +53,24 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         return listaProyectos;
         
     }
+    public List<Proyecto> buscarProyectosTerminados() {
+        
+        List<Proyecto> proyectosTerminados = new ArrayList<>();
+        
+        Estado estado = new Estado(3);
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("proyectosTerminados", Proyecto.class);
+            q.setParameter("estado", estado);
+            
+            proyectosTerminados = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return proyectosTerminados;
+    }
+
+   
     
 }

@@ -50,13 +50,13 @@ public class JFreeChartController {
         try {
             FacesContext fc = FacesContext.getCurrentInstance();
             DefaultPieDataset dataset = new DefaultPieDataset();
-            dataset.setValue("Item1", 10);
-            dataset.setValue("Item2", 15);
-            dataset.setValue("Item3", 8);
-            dataset.setValue("Item4", 12.5);
-            dataset.setValue("Item5", 30);
-            dataset.setValue("Item5", 60);
-            JFreeChart chart = ChartFactory.createPieChart("Sales", dataset, true, true, Locale.ENGLISH);
+            dataset.setValue("Acrilicos rojos", 10);
+            dataset.setValue("Acrilicos azules", 15);
+            dataset.setValue("Acrilicos verde", 8);
+            dataset.setValue("Acrilicos amarillo", 12.5);
+            dataset.setValue("Acrilicos fucsia", 30);
+           
+            JFreeChart chart = ChartFactory.createPieChart("Acrilicos", dataset, true, true, Locale.ENGLISH);
             File f = new File(fc.getExternalContext().getRealPath("/") + "img.png");
             ChartUtilities.saveChartAsPNG(f, chart, 300, 300);
         } catch (IOException ex) {

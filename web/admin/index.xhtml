@@ -42,7 +42,24 @@
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
         <img src="#{jFreeChartController.grafico}" style="width: 300px"/>
+              
+        <p:chart type="bar" model="#{graficaProyectosQuemada.barModel}" style="width:300px; margin-left: 600px; margin-top: -300px;"/>
+        <br></br>
+        <p:chart type="bar" model="#{graficaProyectosQuemadados.barModel}" style="width:300px;" />
+        
+        <p:chart type="bar" model="#{graficaProyectosQuemadostres.barModel}" style="width:300px; margin-left: 600px; margin-top: -300px;"/>
+
+     
     </ui:define>
+    
+    
+            
+        <h:commandButton value="Generar Reporte" actionListener="#{graficaProyectos.init()}" p:update="reporte" />
+            
+            <h:panelGroup id="reporte" layout="block">
+                <p:chart type="pie" model="#{graficaProyectos.piemodel}"  />
+            </h:panelGroup>
+    
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">

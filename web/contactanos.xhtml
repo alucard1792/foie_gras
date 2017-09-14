@@ -21,6 +21,7 @@
             <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/fonts/icomoon.eot"/>
             <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/fonts/style.css"/>
             <link href="#{request.contextPath}/resources/css/styles(2).css" rel="stylesheet"/>
+            <link href="resources/css/estiloscontact.css" rel="stylesheet" type="text/css"/>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/jquery.slides.js"></script>
         </h:head>
@@ -45,69 +46,58 @@
             </div>
 
             <div id="contenedormain">
-                <b:form id="form-lang" horizontal="true" prependId="false">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            #{msg.idioma} <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <c:forEach items="#{idioma.supportLanguages}" var="l" >
-                                <li>
-                                    <h:commandLink  value="#{msg[l.displayLanguage]}" action="#{idioma.cambiarIdioma(l)}">
-                                        <img src="#{request.contextPath}/resources/img/languages/#{l.language}.png" width="25px" alt="#{msg[l.displayLanguage]}"/>
-                                    </h:commandLink>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-                </b:form>
-                <div class="fullmain">
+                
+                <div class="wrapper clearfix">
 
-                    <div id="contactanos">
+            <div id="contact-wrapper" class="clearfix">
 
+                <div class="form-wrapper clearfix">
 
-                        <h1 id="textocontactenos"></h1> 
+                    <h2>Contactanos</h2>
 
-                    </div>
-                    <div id="left">
-                        <h2>#{msg.tituloContactenos}</h2>
-                        <label>#{msg.labelDireccion}</label> 
-                        <a href="">#{msg.direccion}</a>
-                        <br/>
-                        <label>#{msg.labelTelefono}</label> 
-                        <a href="">#{msg.telefono}</a>
-                        <br/>
-                        <label>#{msg.labelHorarioAtencion}</label> 
-                        <a href="">#{msg.horarioAtencion}</a>
-                        <br/>
-                        <label>#{msg.labelCorreoElectronico}</label>
-                        <a href="">#{msg.correoElectronico}</a>
-                        <br/>
-                        <br/>
-                        <h3>#{msg.tituloMapa}</h3>
-
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6687.760352831895!2d-74.10002786983699!3d4.671170481289166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b0b582d4c35%3A0x8d5a835aae232cc3!2sAcr%C3%ADlicos+Innovacryl-LD!5e0!3m2!1ses!2ses!4v1498413421234" width="600" height="450" frameborder="0" style="border:0"></iframe>
-
+                    <div class="message">
                     </div>
 
-                    <div id="right">
-                        
-                        <h:form id="formulario" prependId="false" role="form">
-                            <div class="row">
-                                <label for="email">#{msg.labelEmail}</label><br />
-                                <h:inputText id="email"  class="form-control" value="#{MainController.message}" size="30"  required="true"/><br />
-                            </div>
-                            <div class="row">
+                    <h:form id="contact-form" >
+
+                        <fieldset>
+
+                            <label for="email">#{msg.labelEmail}</label><br />
+                            <h:inputText id="email"  class="form-control" value="#{MainController.message}" size="30"  required="true"/><br />
+
+                            
                                 <label for="asunto">#{msg.labelMensaje}</label><br />
                                 <h:inputText id="asunto" class="form-control" value="#{MainController.subject}" size="30"  required="true"/><br />
+                            
+
+
+
+                            <div class="field submit">
+                                <label for="submit_button"></label>
+                                <h:commandButton id="submit_button" value="Enviar" action="#{MainController.send()}"/>
                             </div>
-                            <label for="submit_button"></label>
-                            <h:commandButton id="submit_button" value="Enviar" action="#{MainController.send()}"/>
 
-                        </h:form>
+                        </fieldset>
 
-                    </div>
+                    </h:form>
                 </div>
+
+                <div class="address-wrapper clearfix">
+                    <!-- This is the container for the map -->
+                    <div class="street-address">
+                        <h5>INNOVARYL-LD</h5>
+                        
+                    </div>
+                    <div id="map-outer">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15906.243484604493!2d-74.099755!3d4.672092!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8d5a835aae232cc3!2sAcr%C3%ADlicos+Innovacryl-LD!5e0!3m2!1ses!2s!4v1505417033683" width="250" height="190" frameborder="0" style="border:0" ></iframe>
+                        <div id="map">&nbsp;</div>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
 
                 <footer>
                     <div class="contenedor">

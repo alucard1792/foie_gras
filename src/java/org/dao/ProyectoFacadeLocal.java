@@ -32,5 +32,8 @@ public interface ProyectoFacadeLocal {
     int count();
     
     List<Proyecto>listarProyectosOperariosAsignados(Persona p);
+    List<Proyecto> buscarProyectosTerminados();
+    
+   
     
 }

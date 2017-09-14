@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 
 /**
  *
- * @author Niyaz-laptop
+ * @author ORLANDO
  */
 public class MailSender implements Serializable{
             public final static String HOST_EMAIL_GMAIL = "smtp.gmail.com";

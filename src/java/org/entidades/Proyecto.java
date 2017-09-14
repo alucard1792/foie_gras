@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Proyecto.findByIdProyecto", query = "SELECT p FROM Proyecto p WHERE p.idProyecto = :idProyecto")
     , @NamedQuery(name = "Proyecto.findByFechaInicio", query = "SELECT p FROM Proyecto p WHERE p.fechaInicio = :fechaInicio")
     , @NamedQuery(name = "Proyecto.findByOperarioAsignado", query = "SELECT p FROM Proyecto p WHERE p.operarioIdPersona = :operarioIdPersona")
+    , @NamedQuery(name = "proyectosTerminados", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
     , @NamedQuery(name = "Proyecto.findByTiempoEstimado", query = "SELECT p FROM Proyecto p WHERE p.tiempoEstimado = :tiempoEstimado")})
 public class Proyecto implements Serializable {
 
