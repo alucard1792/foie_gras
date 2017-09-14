@@ -5,9 +5,13 @@
  */
 package org.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import org.entidades.Persona;
 import org.entidades.Proyecto;
 
 /**
@@ -27,6 +31,26 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
 
     public ProyectoFacade() {
         super(Proyecto.class);
+    }
+
+    @Override
+    public List<Proyecto> listarProyectosOperariosAsignados(Persona p) {
+        List<Proyecto>listaProyectos = new ArrayList<>();
+        Persona persona =  new Persona();
+        persona.setIdPersona(p.getIdPersona());
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("Proyecto.findByOperarioAsignado", Proyecto.class);
+            q.setParameter("operarioIdPersona", persona);
+            listaProyectos = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+        return listaProyectos;
+        
     }
     
 }

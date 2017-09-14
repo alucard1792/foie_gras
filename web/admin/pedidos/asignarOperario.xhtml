@@ -7,11 +7,13 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        listar pedidos
+        Asignar operario
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -46,84 +48,50 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info ">listar pedidos</a>
+        <a href="#" class="btn btn-info ">Asignar operario</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Pedidos registrados</h4>
+        <h4 class="title">Asignar operario</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
-    <ui:define name="contenido">
-        <ul class="nav navbar-nav navbar-link">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">file_download</i>
-                </a>
-                <ul class="dropdown-menu">
-                    <h:form>
-                        <li>
-                            <h:commandLink>
-                                a pdf
-                                <p:dataExporter type="pdf" target="tabla" fileName="reporte" pageOnly="true"/>
-                            </h:commandLink>
-                        </li>
-                        <br/>
-                        <li>
-                            <h:commandLink>
-                                a excel
-                                <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
-                            </h:commandLink>
-                        </li>
-                    </h:form>
-                </ul>
-            </li>
-        </ul>
-        <br/>
-        <div class="panel-heading">
-            <div class="panel-options">
-                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                    <c:choose>
-                        <c:when test="#{p.idPermiso eq 23}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="Crear pedido">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>                       
+    <ui:define name="contenido">        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box-large">
+                    <div class="panel-body">
+
+                        <h:form id="form" prependId="false" class="form-horizontal" role="form">
+
+                            <b:row>
+                                <b:messages large-screen="full-width" />
+                            </b:row>
+
+                            <div class="form-group">
+                                <label for="area" class="col-sm-2 control-label">Operario disponible para el pedido: #{enviarPedidoAProyecto.pedidoSeleccionado.idPedido}</label>
+                                <div class="col-sm-10">
+                                    <b:selectOneMenu value = "#{enviarPedidoAProyecto.operarioAsignado}" > 
+                                        <f:selectItems value="#{enviarPedidoAProyecto.listaOperariosDisponibles}" var="l" itemLabel = "#{l.nombre} #{l.apellido}" /> 
+                                    </b:selectOneMenu> 	
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-3">
+                                    <b:commandButton action="#{enviarPedidoAProyecto.asignarOperarioAProyecto()}" class="btn btn-primary" value="Aceptar"></b:commandButton>
+                                </div>
+                                <div class="col-sm-3">
+                                    <h:link styleClass="btn btn" outcome="/admin/pedidos/listarPedidos.xhtml?faces-redirect=true" value="cancelar"/>
+                                </div>
+                            </div>
+
+                        </h:form>
+
+                    </div>
+                </div>
             </div>
         </div>
-
-        <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla">
-            <p:column headerText="Id pedido">
-                <p:outputLabel value="#{lp.idPedido}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="Nombre del proyecto">
-                <p:outputLabel value="#{lp.nombreProyecto}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Descripcion">
-                <p:outputLabel value="#{lp.descripcion}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Realizo pago">
-                <p:outputLabel value="#{(lp.realizoPago == 1 ? 'si':'no')}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Cantidad">
-                <p:outputLabel value="#{lp.cantidad}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Materia prima">
-                <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Vendedor">
-                <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"></p:outputLabel>                
-            </p:column>
-            <p:column class="" headerText="Opciones" exportable="false" >
-                <h:form>
-                    <p:commandButton value="Editar" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
-                    <p:row rendered="#{lp.realizoPago == 1}">
-                        <p:commandButton value="salida" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
-                    </p:row>
-                </h:form>
-            </p:column>
-        </p:dataTable>
 
     </ui:define>
 
@@ -134,15 +102,4 @@
         </script>
     </ui:define>
 
-</ui:composition><?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
-
+</ui:composition>

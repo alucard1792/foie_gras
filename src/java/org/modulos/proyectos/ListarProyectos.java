@@ -17,6 +17,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.dao.ProyectoFacadeLocal;
 import org.entidades.Proyecto;
+import org.entidades.Rol;
+import org.login.ControladorSesion;
 
 /**
  *
@@ -30,6 +32,8 @@ public class ListarProyectos implements Serializable {
     private ProyectoFacadeLocal pfl;
     @Inject
     private Conversation conversacion;
+    @Inject
+    private ControladorSesion controladorSesion;
     private Proyecto proyectoSeleccionado;
     private List<Proyecto> proyecto;
 
@@ -39,10 +43,29 @@ public class ListarProyectos implements Serializable {
 
     @PostConstruct
     public void init() {
-        proyecto = pfl.findAll();
+        for(Rol rol:controladorSesion.getP().getRoles()){
+            if (rol.getIdRol() == 1 || rol.getIdRol() == 2) {
+                proyecto = pfl.findAll();
+                
+            }else if(rol.getIdRol() == 4 || rol.getIdRol() == 5){
+                proyecto = pfl.listarProyectosOperariosAsignados(controladorSesion.getP());
+            
+            }
 
+        }
+        
     }
 
+    public ControladorSesion getControladorSesion() {
+        return controladorSesion;
+    }
+
+    public void setControladorSesion(ControladorSesion controladorSesion) {
+        this.controladorSesion = controladorSesion;
+    }
+
+    
+    
     public List<Proyecto> getProyecto() {
         return proyecto;
     }

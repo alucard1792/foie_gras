@@ -93,54 +93,42 @@
                 </c:forEach>                       
             </div>
         </div>
+        <h:form>
+            <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla" >
+                <p:column headerText="#{msg.idPedidos}">
+                    <p:outputLabel value="#{lp.idPedido}"></p:outputLabel>                                
+                </p:column>
+                <p:column headerText="#{msg.nombreProyecto}">
+                    <p:outputLabel value="#{lp.nombreProyecto}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.descripcion}">
+                    <p:outputLabel value="#{lp.descripcion}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.realizoPago}">
+                    <p:outputLabel value="#{(lp.realizoPago == 1 ? 'si':'no')}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.cantidad}">
+                    <p:outputLabel value="#{lp.cantidad }"></p:outputLabel> 
+                </p:column>
+                <p:column headerText="esta asignado">
+                    <p:outputLabel value="#{lp.estaAsignado }"></p:outputLabel>                
+                </p:column>
 
-        <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla">
-            <p:column headerText="#{msg.idPedidos}">
-                <p:outputLabel value="#{lp.idPedido}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="#{msg.nombreProyecto}">
-                <p:outputLabel value="#{lp.nombreProyecto}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.descripcion}">
-                <p:outputLabel value="#{lp.descripcion}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.realizoPago}">
-                <p:outputLabel value="#{(lp.realizoPago == 1 ? 'si':'no')}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.cantidad}">
-            <p:column headerText="esta asignado">
-                <p:outputLabel value="#{lp.estaAsignado }"></p:outputLabel>                
-            </p:column>            <p:column headerText="Cantidad">
-
-                <p:outputLabel value="#{lp.cantidad}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.materiaPrima}">
-                <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.vendedor}">
-                <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"></p:outputLabel>                
-            </p:column>
-            <p:column class="" headerText="#{msg.opciones}" exportable="false" >
-                <h:form>
+                <p:column headerText="#{msg.materiaPrima}">
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.vendedor}">
+                    <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"></p:outputLabel>                
+                </p:column>
+                <p:column class="" headerText="#{msg.opciones}" exportable="false" >
                     <p:commandButton value="#{msg.editar}" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
                     <p:row rendered="#{lp.realizoPago == 1 and lp.estaAsignado == 0}">
-
-
-                        <p:commandButton value="nuevo" type="button" onclick="PF('dlg1').show();" />
-                        <p:dialog header="asignacion de operario" widgetVar="dlg1" minHeight="40">
-                            <h:outputText value="Por favor, seleccione un operario"></h:outputText>
-                            <b:selectOneMenu value = "#{enviarPedidoAProyecto.operarioAsignado}"> 
-                                <f:selectItems value="#{enviarPedidoAProyecto.listaOperariosDisponibles}" var="lod" itemLabel="#{lod.nombre} #{lod.apellido}" /> 
-                            </b:selectOneMenu>
-                            <h:form>
-                                <p:commandButton value="enviar" action="#{enviarPedidoAProyecto.asignarOperarioAProyecto(lp)}" ajax="false"></p:commandButton>
-                            </h:form>
-                        </p:dialog>
+                        <p:commandButton value="asignar proyecto" action="#{enviarPedidoAProyecto.preparacionAsignarOperario(lp)}"></p:commandButton>
                     </p:row>
-                </h:form>
-            </p:column>
-        </p:dataTable>
-
+                </p:column>
+  
+            </p:dataTable>
+        </h:form>
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->

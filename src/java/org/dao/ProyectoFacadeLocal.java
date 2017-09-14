@@ -7,6 +7,7 @@ package org.dao;
 
 import java.util.List;
 import javax.ejb.Local;
+import org.entidades.Persona;
 import org.entidades.Proyecto;
 
 /**
@@ -29,5 +30,7 @@ public interface ProyectoFacadeLocal {
     List<Proyecto> findRange(int[] range);
 
     int count();
+    
+    List<Proyecto>listarProyectosOperariosAsignados(Persona p);
     
 }
