@@ -12,6 +12,8 @@ import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.dao.MateriaPrimaFacadeLocal;
 import org.dao.StockFacadeLocal;
 import org.entidades.MateriaPrima;
@@ -64,9 +66,16 @@ public class CrearStock implements Serializable {
     }
 
     public String crear() {
-        stockFacadeLocal.create(stockEntidad);     
-        return "/admin/stock/listarStock.xhtml?faces-redirect=true";
-
+        try {
+            stockFacadeLocal.create(stockEntidad);            
+            return "/admin/stock/listarStock.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el stock, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+            return "";
+            
+        }
     }
 
     public String cancelar() {

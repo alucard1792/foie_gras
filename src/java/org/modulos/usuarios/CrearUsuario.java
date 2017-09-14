@@ -7,6 +7,7 @@ package org.modulos.usuarios;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -14,6 +15,8 @@ import javax.faces.view.ViewScoped;
 import org.dao.PersonaFacadeLocal;
 import org.entidades.Persona;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.dao.AreaFacadeLocal;
 import org.dao.RolFacadeLocal;
 import org.entidades.Area;
@@ -83,6 +86,8 @@ public class CrearUsuario implements Serializable {
     public String crearUsuario() {
         try {
             if (persona != null) {
+                Calendar cal = Calendar.getInstance();
+                persona.setFechaIngreso(cal.getTime());
                 rolesAsignados = new ArrayList<>();
                 rolesAsignados.add(rfl.find(rol.getIdRol()));
                 persona.setRoles(rolesAsignados);
@@ -95,6 +100,8 @@ public class CrearUsuario implements Serializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el usuario, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
             return "";
 
         }

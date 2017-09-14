@@ -8,6 +8,8 @@ package org.modulos.roles;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.dao.RolFacadeLocal;
@@ -62,9 +64,17 @@ public class CrearRol implements Serializable{
     }
     
     public String crear(){
-        rol = new Rol(null, nombreRol, estado);
-        rolFacadeLocal.create(rol);
-        return "/admin/roles/listarRoles.xhtml?faces-redirect=true";
+        try {
+            rol = new Rol(null, nombreRol, estado);
+            rolFacadeLocal.create(rol);
+            return "/admin/roles/listarRoles.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el rol, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+            return "";
+            
+        }
         
     }
     

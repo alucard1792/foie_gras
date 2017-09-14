@@ -7,6 +7,8 @@ package org.modulos.provedores;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.dao.CiudadFacadeLocal;
@@ -96,11 +98,19 @@ public class CrearProveedor implements Serializable{
     }
     
     public String crear(){
-        proveedor = new Proveedor(null, nitProveedor, nombreEmpresa, direccion, telefono, representanteLegal);
-        Ciudad ciudad  = ciudadFacadeLocal.find(1);
-        proveedor.setCiudadesIdCiudad(ciudad);
-        proveedorFacadeLocal.create(proveedor);
-        return "/admin/provedores/listarProveedores.xhtml?faces-redirect=true";
+        try {
+            proveedor = new Proveedor(null, nitProveedor, nombreEmpresa, direccion, telefono, representanteLegal);
+            Ciudad ciudad = ciudadFacadeLocal.find(1);
+            proveedor.setCiudadesIdCiudad(ciudad);
+            proveedorFacadeLocal.create(proveedor);
+            return "/admin/provedores/listarProveedores.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el proveedor, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+            return "";
+            
+        }
         
     }
     

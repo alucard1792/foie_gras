@@ -8,6 +8,8 @@ package org.modulos.proyectos;
 import java.io.Serializable;
 import java.util.Date;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.dao.DificultadFacadeLocal;
@@ -72,27 +74,35 @@ public class CrearProyecto implements Serializable{
     }
 
     public String crear() {
-        Estado estado;
-        Dificultad dificultad;
-        Persona persona;
-        Pedido pedido;
-
-        pedido = pedidoFacadeLocal.find(1);
-        estado = efl.find(1);
-        dificultad = dfl.find(1);
-        persona = personaFacadeLocal.find(1);
-
-        Proyecto p = new Proyecto(null, null, null);
-
-        p.setDificultadesIdDificultad(dificultad);
-        p.setEstadosIdEstado(estado);
-        p.setOperarioIdPersona(persona);
-        p.setPedidosIdPedido(pedido);
-        Date date = new Date();
-        p.setFechaInicio(date);
-        pfl.create(p);
-        return "/admin/proyectos/listarProyectos.xhtml?faces-redirect=true";
-
+        try {
+            Estado estado;
+            Dificultad dificultad;
+            Persona persona;
+            Pedido pedido;
+            
+            pedido = pedidoFacadeLocal.find(1);
+            estado = efl.find(1);
+            dificultad = dfl.find(1);
+            persona = personaFacadeLocal.find(1);
+            
+            Proyecto p = new Proyecto(null, null, null);
+            
+            p.setDificultadesIdDificultad(dificultad);
+            p.setEstadosIdEstado(estado);
+            p.setOperarioIdPersona(persona);
+            p.setPedidosIdPedido(pedido);
+            Date date = new Date();
+            p.setFechaInicio(date);
+            pfl.create(p);
+            return "/admin/proyectos/listarProyectos.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el proyecto, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+            return "";
+            
+        }
+        
     }
     
     public String cancelar() {

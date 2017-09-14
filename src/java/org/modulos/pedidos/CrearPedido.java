@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -71,10 +73,19 @@ public class CrearPedido implements Serializable {
     }
     
     public String crear() {
-        pedido.setIdPedido(null);
-        pedido.setVendedorIdPersona(controladorSesion.getP());
-        pedidoFacadeLocal.create(pedido);
-        return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
+        try {
+            pedido.setIdPedido(null);
+            pedido.setVendedorIdPersona(controladorSesion.getP());
+            pedidoFacadeLocal.create(pedido);
+            return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el pedido, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+            return "";
+            
+        }
         
     }
     
