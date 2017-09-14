@@ -11,7 +11,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        listar proyectos
+        #{msg.listarStock}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -86,7 +86,7 @@
                 <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                     <c:choose>
                         <c:when test="#{p.idPermiso eq 47}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="Crear stock">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.crearStock}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                         </c:when>
                     </c:choose>
                 </c:forEach>                       
@@ -94,24 +94,24 @@
         </div>
 
         <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla">
-            <p:column headerText="Id stock">
+            <p:column headerText="Id Stock">
                 <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
             </p:column>
-            <p:column headerText="existencias">
+            <p:column headerText="#{msg.stock}">
                 <p:outputLabel value="#{lp.stock}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="fecha de ingreso">
+            <p:column headerText="#{msg.fechaIngreso}">
                 <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
-            <p:column headerText="fecha de actualizacion">
+            <p:column headerText="#{msg.fechaActualizacion}">
                 <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
             </p:column>
-            <p:column headerText="referencia materia prima">
+            <p:column headerText="#{msg.referenciaMateria}">
                 <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Opciones" exportable="false">
+            <p:column headerText="#{msg.opciones}" exportable="false">
                 <h:form>
-                    <p:commandButton value="Editar" action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                    <p:commandButton value="#{msg.editar}" action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                 </h:form>
 
             </p:column>
