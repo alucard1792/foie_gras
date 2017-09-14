@@ -57,13 +57,13 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <ul class="nav navbar-nav navbar-link">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">file_download</i>
-                </a>
-                <ul class="dropdown-menu">
-                    <h:form>
+        <h:form>
+            <ul class="nav navbar-nav navbar-link">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">file_download</i>
+                    </a>
+                    <ul class="dropdown-menu">
                         <li>
                             <h:commandLink>
                                 a pdf
@@ -77,44 +77,38 @@
                                 <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
-                    </h:form>
-                </ul>
-            </li>
-        </ul>
-        <br/>
-        <div class="panel-heading">
-            <div class="panel-options">
-                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                    <c:choose>
-                        <c:when test="#{p.idPermiso eq 23}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.crearPedido}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>                       
+                    </ul>
+                </li>
+            </ul>
+            <br/>
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                        <c:choose>
+                            <c:when test="#{p.idPermiso eq 23}">
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.crearPedido}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>                       
+                </div>
             </div>
-        </div>
-        <h:form>
             <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla" >
                 <p:column headerText="#{msg.idPedidos}">
                     <p:outputLabel value="#{lp.idPedido}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.nombreProyecto}">
+                <p:column headerText="#{msg.nombreProyecto}" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.nombreProyecto}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.descripcion}">
+                <p:column headerText="#{msg.descripcion}" filterBy="#{lp.descripcion}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.descripcion}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.realizoPago}">
+                <p:column headerText="#{msg.realizoPago}" filterBy="#{lp.realizoPago}" filterMatchMode="contains">
                     <p:outputLabel value="#{(lp.realizoPago == 1 ? 'si':'no')}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.cantidad}">
+                <p:column headerText="#{msg.cantidad}" filterBy="#{lp.cantidad}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.cantidad }"></p:outputLabel> 
                 </p:column>
-                <p:column headerText="esta asignado">
-                    <p:outputLabel value="#{lp.estaAsignado }"></p:outputLabel>                
-                </p:column>
-
-                <p:column headerText="#{msg.materiaPrima}">
+                <p:column headerText="#{msg.materiaPrima}" filterBy="#{lp.nombre}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.vendedor}">
@@ -126,7 +120,7 @@
                         <p:commandButton value="asignar proyecto" action="#{enviarPedidoAProyecto.preparacionAsignarOperario(lp)}"></p:commandButton>
                     </p:row>
                 </p:column>
-  
+
             </p:dataTable>
         </h:form>
     </ui:define>

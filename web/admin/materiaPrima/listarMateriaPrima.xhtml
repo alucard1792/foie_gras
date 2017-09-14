@@ -56,13 +56,13 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <ul class="nav navbar-nav navbar-link">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">file_download</i>
-                </a>
-                <ul class="dropdown-menu">
-                    <h:form>
+        <h:form>
+            <ul class="nav navbar-nav navbar-link">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">file_download</i>
+                    </a>
+                    <ul class="dropdown-menu">
                         <li>
                             <h:commandLink>
                                 a pdf
@@ -80,50 +80,47 @@
                         <li>
                             <h:commandLink value="reporte jasper" actionListener="#{reporteMateriaPrima.exportarPDF()}"></h:commandLink>
                         </li>
-                    </h:form>
-                </ul>
-            </li>
-        </ul>
-        <br/>
+                    </ul>
+                </li>
+            </ul>
+            <br/>
 
-        <div class="panel-heading">
-            <div class="panel-options">
-                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                    <c:choose>
-                        <c:when test="#{p.idPermiso eq 9}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="ingresar materia prima">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>                       
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                        <c:choose>
+                            <c:when test="#{p.idPermiso eq 9}">
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="ingresar materia prima">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>                       
+                </div>
             </div>
-        </div>
 
-        <p:dataTable value="#{listarMateriaPrima.listaMateriaPrima}" var="lp" id="tabla">
-            <p:column headerText="id">
-                <p:outputLabel value="#{lp.idMateria}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="#{msg.referencia}">
-                <p:outputLabel value="#{lp.referencia}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.tipo}">
-                <p:outputLabel value="#{lp.tipoMateriaPrima}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.calibre}">
-                <p:outputLabel value="#{lp.calibre}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.largoLamina}">
-                <p:outputLabel value="#{lp.dimensionLargo}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.altoLamina}">
-                <p:outputLabel value="#{lp.dimensionAlto}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.opciones}" exportable="false">
-                <h:form>
+            <p:dataTable value="#{listarMateriaPrima.listaMateriaPrima}" var="lp" id="tabla">
+                <p:column headerText="id">
+                    <p:outputLabel value="#{lp.idMateria}"></p:outputLabel>                                
+                </p:column>
+                <p:column headerText="#{msg.referencia}" filterBy="#{lp.referencia}" filterMatchMode="contains" >
+                    <p:outputLabel value="#{lp.referencia}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.tipo}"  filterBy="#{lp.tipoMateriaPrima}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.tipoMateriaPrima}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.calibre}" filterBy="#{lp.calibre}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.calibre}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.largoLamina}" filterBy="#{lp.dimensionLargo}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.dimensionLargo}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.altoLamina}"  filterBy="#{lp.dimensionAlto}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.dimensionAlto}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.opciones}" exportable="false">
                     <p:commandButton value="#{msg.editar}" action="#{listarMateriaPrima.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
-                </h:form>
-            </p:column>
-        </p:dataTable>
-
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->

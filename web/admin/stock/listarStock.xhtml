@@ -94,7 +94,7 @@
         </div>
 
         <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla">
-            <p:column headerText="Id Stock">
+            <p:column headerText="#{msg.idStock}">
                 <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
             </p:column>
             <p:column headerText="#{msg.stock}">
