@@ -47,11 +47,16 @@ public class Proyecto implements Serializable {
     private Integer idProyecto;
     @Basic(optional = false)
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInicio;
     @Basic(optional = false)
+    @Column(name = "fecha_finalizado")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaFinalizado;
+    @Basic(optional = false)
     @Column(name = "tiempo_estimado")
-    private int tiempoEstimado;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date tiempoEstimado;
     @JoinColumn(name = "dificultades_id_dificultad", referencedColumnName = "id_dificultad")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Dificultad dificultadesIdDificultad;
@@ -72,7 +77,7 @@ public class Proyecto implements Serializable {
         this.idProyecto = idProyecto;
     }
 
-    public Proyecto(Integer idProyecto, Date fechaInicio, Integer tiempoEstimado) {
+    public Proyecto(Integer idProyecto, Date fechaInicio, Date tiempoEstimado) {
         this.idProyecto = idProyecto;
         this.fechaInicio = fechaInicio;
         this.tiempoEstimado = tiempoEstimado;
@@ -94,11 +99,19 @@ public class Proyecto implements Serializable {
         this.fechaInicio = fechaInicio;
     }
 
-    public int getTiempoEstimado() {
+    public Date getFechaFinalizado() {
+        return fechaFinalizado;
+    }
+
+    public void setFechaFinalizado(Date fechaFinalizado) {
+        this.fechaFinalizado = fechaFinalizado;
+    }
+    
+    public Date getTiempoEstimado() {
         return tiempoEstimado;
     }
 
-    public void setTiempoEstimado(Integer tiempoEstimado) {
+    public void setTiempoEstimado(Date tiempoEstimado) {
         this.tiempoEstimado = tiempoEstimado;
     }
 

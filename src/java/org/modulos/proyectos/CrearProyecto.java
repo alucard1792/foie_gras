@@ -82,7 +82,7 @@ public class CrearProyecto implements Serializable{
         dificultad = dfl.find(1);
         persona = personaFacadeLocal.find(1);
 
-        Proyecto p = new Proyecto(null, null, tiempoEstimado);
+        Proyecto p = new Proyecto(null, null, null);
 
         p.setDificultadesIdDificultad(dificultad);
         p.setEstadosIdEstado(estado);
