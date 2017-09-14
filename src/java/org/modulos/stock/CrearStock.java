@@ -76,6 +76,7 @@ public class CrearStock implements Serializable {
             return "";
             
         }
+        
     }
 
     public String cancelar() {

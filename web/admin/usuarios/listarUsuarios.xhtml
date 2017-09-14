@@ -56,13 +56,14 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <ul class="nav navbar-nav navbar-link">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">file_download</i>
-                </a>
-                <ul class="dropdown-menu">
-                    <h:form>
+        <h:form>
+            <ul class="nav navbar-nav navbar-link">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">file_download</i>
+                    </a>
+                    <ul class="dropdown-menu">
+
                         <li>
                             <h:commandLink>
                                 a pdf
@@ -80,80 +81,76 @@
                         <li>
                             <h:commandLink value="reporte jasper" actionListener="#{reporteUsuarios.exportarPDF()}"></h:commandLink>
                         </li>
-
-                    </h:form>
-                </ul>
-            </li>
-        </ul>
-        <br/>
-        <div class="panel-heading">
-            <div class="panel-options">
-                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                    <c:choose>
-                        <c:when test="#{p.idPermiso eq 2}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="Crear usuario">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>                       
+                    </ul>
+                </li>
+            </ul>
+            <br/>
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                        <c:choose>
+                            <c:when test="#{p.idPermiso eq 2}">
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="Crear usuario">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>                       
+                </div>
             </div>
-        </div>
-
-        <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla">
-            <p:column headerText="id">
-                <p:outputLabel value="#{lp.idPersona}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="#{msg.documento}">
-                <p:outputLabel value="#{lp.documento}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.nombre}">
-                <p:outputLabel value="#{lp.nombre}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.apellido}">
-                <p:outputLabel value="#{lp.apellido}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.clave}">
-                <p:outputLabel value="#{lp.password}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.telefeno}">
-                <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.direccion}">
-                <p:outputLabel value="#{lp.direccion}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.correo}">
-                <p:outputLabel value="#{lp.email}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.fechaNacimiento}">
-                <p:outputLabel value="#{lp.fechaNacimiento}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.fechaIngreso}">
-                <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.rol}">
-                <p:outputLabel value="#{(lp.roles.get(0) != null ? lp.roles.get(0).nombreRol:'')}" >
-                </p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.area}">
-                <p:outputLabel value="#{lp.areasIdArea}" converter="areaConverter"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.estado}">
-                <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.opciones}" exportable="false">
-                <h:form>
+            <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla">
+                <p:column headerText="id">
+                    <p:outputLabel value="#{lp.idPersona}"></p:outputLabel>                                
+                </p:column>
+                <p:column headerText="#{msg.documento}">
+                    <p:outputLabel value="#{lp.documento}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.nombre}" filterBy="#{lp.nombre}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.nombre}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.apellido}" filterBy="#{lp.apellido}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.apellido}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.clave}">
+                    <p:outputLabel value="#{lp.password}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.telefeno}">
+                    <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.direccion}" filterBy="#{lp.direccion}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.direccion}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.correo}" filterBy="#{lp.email}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.email}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.fechaNacimiento}">
+                    <p:outputLabel value="#{lp.fechaNacimiento}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.fechaIngreso}">
+                    <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.rol}" filterBy="#{lp.roles}" filterMatchMode="contains">
+                    <p:outputLabel value="#{(lp.roles.get(0) != null ? lp.roles.get(0).nombreRol:'')}" >
+                    </p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.area}"  filterBy="#{lp.areasIdArea.nombreArea}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.areasIdArea}" converter="areaConverter"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.estado}">
+                    <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.opciones}" exportable="false">
                     <p:commandButton value="#{msg.editar}" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
-                </h:form>
+                </p:column>
 
-            </p:column>
-
-        </p:dataTable>
-
+            </p:dataTable>
+        </h:form>
 
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script>
+
+
         </script>
 
     </ui:define>
