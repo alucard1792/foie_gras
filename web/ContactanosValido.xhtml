@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+
+        <link href="resources/css/estiloscontact.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+
+
+        <div class="wrapper clearfix">
+
+            <div id="contact-wrapper" class="clearfix">
+
+                <div class="form-wrapper clearfix">
+
+                    <h2>Contact Us</h2>
+
+                    <div class="message">
+                    </div>
+
+                    <h:form id="contact-form" >
+
+                        <fieldset>
+
+                            <label for="email">#{msg.labelEmail}</label><br />
+                            <h:inputText id="email"  class="form-control" value="#{MainController.message}" size="30"  required="true"/><br />
+
+                            <div class="field" title="sadfsadf">
+                                <label for="asunto">#{msg.labelMensaje}</label><br />
+                                <h:inputText id="asunto" class="form-control" value="#{MainController.subject}" size="30"  required="true"/><br />
+                            </div>
+
+
+
+                            <div class="field submit">
+                                <label for="submit_button"></label>
+                                <h:commandButton id="submit_button" value="Enviar" action="#{MainController.send()}"/>
+                            </div>
+
+                        </fieldset>
+
+                    </h:form>
+                </div>
+
+                <div class="address-wrapper clearfix">
+                    <!-- This is the container for the map -->
+                    <div class="street-address">123 Imaginary St, Suite 200 <br/>Atlanta, GA 30314</div>
+                    <div id="map-outer">
+                        <div id="map">&nbsp;</div>
+                    </div>
+                    <a href="#" class="get-directions-button" rel="#map-overlay">Get Directions</a>
+                </div>
+
+            </div>
+        </div>
+
+
+    </h:body>
+</html>
+

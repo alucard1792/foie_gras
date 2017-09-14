@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/resources/template2/administrador/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <!--Nombre de la pagina-->
+    <ui:define name="titulo">
+        Editar usuario
+    </ui:define>
+
+    <!--renderizacion del menu principal-->
+    <ui:define name="menu">
+        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+            <c:if test="#{p.permisoPadre eq null}">
+                <c:if test="#{p.idPermiso != 43}">
+                    <!--valida el menu actual para renderizar la opcion active-->
+                    <li >
+                        <h:link outcome="/#{p.url}">
+                            <i class="material-icons">person</i>
+                            <p>#{(idioma.languageSelect.language.startsWith('es', 0) ? p.nombrePermiso: p.nombrePermisoEn)}</p>
+                        </h:link>
+                    </li>
+                </c:if>
+            </c:if>
+        </c:forEach>
+    </ui:define>
+
+    <!--renderizacion del breadcrumb-->
+    <ui:define name="breadcrumb">
+        <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="/foie_gras/admin/dashboard/miCuenta.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Mi perfil</a>
+        <a href="#" class="btn btn-info ">Editar perfil</a>
+    </ui:define>
+
+    <!--renderizacion del cardboard-->
+    <ui:define name="tituloCarta">
+        <h4 class="title">Editar perfil</h4>
+    </ui:define>
+
+    <!--renderizacion del body 'contenido principal'-->
+    <ui:define name="contenido">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box-large">
+                    <div class="panel-body">
+                        <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
+
+                            <div class="form-group">
+                                <label for="correo" class="col-sm-2 control-label">Tu correo:</label>
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="correo" a:placeholder="Ingresa tu correo" value="#{controller.fromMail}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="usuario" class="col-sm-2 control-label">Tu usuario</label>
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="usuario" a:placeholder="Ingrese el usuario" value="#{controller.username}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="clave" class="col-sm-2 control-label">Ingresa tu contraseña</label>
+                                <div class="col-sm-10">
+                                    <h:inputText a:type="password" class="form-control" id="clave"  a:placeholder="Ingresa tu clave"  value="#{controller.password}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="destinatario" class="col-sm-2 control-label">Email del destinatario</label>
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="destinatario" a:placeholder="Ingrese el email del destinatario" value="#{controller.toMail}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="asunto" class="col-sm-2 control-label">Asunto</label>
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="asunto" a:placeholder="Ingrese el asunto"  value="#{controller.subject}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mensaje" class="col-sm-2 control-label">Mensaje</label>
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="mensaje" a:placeholder="Ingrese el mensaje"  value="#{controller.message}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-3">
+                                    <h:form>
+
+                                        <h:commandButton action="#{controller.EmailEnviar()}" class="btn btn-primary" value="Enviar" onclick="enviar()" p:oncomplete="limpiarForm()"></h:commandButton>
+                                    </h:form>
+                                </div>
+                                <div class="col-sm-3">
+                                    <h:link styleClass="btn btn" outcome="/admin/index?faces-redirect=true" value="cancelar"/>
+                                </div>
+                            </div>
+                        </h:form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+    <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
+    <ui:define name="ultimosScripts">
+        <script>
+                function enviar() {
+                    alert("Tu correo se ha enviado");
+                } 
+                
+                function limpiarForm(){
+                    document.getElementById("form-usuario").reset();
+                }
+            </script>
+    </ui:define>
+
+</ui:composition>
+        
+        
