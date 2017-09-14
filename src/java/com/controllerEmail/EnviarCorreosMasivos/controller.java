@@ -80,7 +80,7 @@ public class controller implements Serializable {
     public String EmailEnviar() {
         try {
             EnviarEmail mailSender=new EnviarEmail();
-            mailSender.sendMail(fromMail, username, password, toMail, subject, message);
+            mailSender.sendMail("correofixedup@gmail.com", "correofixedup@gmail.com", "fixedupsena", toMail, subject, message);
            
         } catch (Exception e) {
         }

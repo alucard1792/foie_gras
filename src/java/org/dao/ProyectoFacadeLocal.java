@@ -33,7 +33,5 @@ public interface ProyectoFacadeLocal {
     
     List<Proyecto>listarProyectosOperariosAsignados(Persona p);
     List<Proyecto> buscarProyectosTerminados();
-    
-   
-    
+
 }
