@@ -6,10 +6,11 @@ Este es el dump de la base de datos para que pueda funcionar el proyecto. ejecut
 *Nota 2: Si actualizan la base de datos, por favor cargar de nuevo el dump describiendo los cambios. gracias.
 
 	1. nuevo
-		nuevos campos en la tabla proyectos 
+		restriccion unique en la tabla usuarios, documento y email
 
 create database proyecto_v3;
 use proyecto_v3;
+
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: proyecto_v3
@@ -321,9 +322,10 @@ CREATE TABLE `personas` (
   `fecha_despido` date DEFAULT NULL,
   `imagen` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id_persona`),
+  UNIQUE KEY `documento` (`documento`),
   KEY `fk_personas_areas1_idx` (`areas_id_area`),
   CONSTRAINT `fk_personas_areas1` FOREIGN KEY (`areas_id_area`) REFERENCES `areas` (`id_area`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +334,7 @@ CREATE TABLE `personas` (
 
 LOCK TABLES `personas` WRITE;
 /*!40000 ALTER TABLE `personas` DISABLE KEYS */;
-INSERT INTO `personas` VALUES (1,10,'david','zamora','123',1525536,' occidente','david@mail.com',1,1,'1992-10-04','2016-03-17',NULL,''),(2,11,'alex','ramos benavides','123',2,'calle occidente','alex@mail.com',1,1,'1992-10-05','2016-06-22',NULL,NULL),(3,12,'orlando','rubio','123',3,'calle occidente','orlando@mail.com',1,1,'1992-10-05','2016-06-22',NULL,NULL),(4,13,'harrison','copasachoa','123',4,'calle occidente','harrison@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(5,14,'manolo ','cardenas','123',5,'calle occidente','manolo@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(6,15,'kevin','galeano','123',6,'calle occidente','kevin@mail.com',3,1,'1992-10-05','2016-06-22',NULL,NULL),(7,16,'sofia ','henao','123',7,'calle occidente','3',3,1,'1992-10-05','2016-06-22',NULL,NULL),(8,17,'vendedor','ayudante','123',8,'calle occidente','vendedorayudante@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(9,18,'operarioa','ayudante','123',9,'calle occidente','operarioayudante@mail.com',3,1,'1992-09-30','2016-06-17',NULL,''),(10,56,'65','1056','123',123,'xzc','shalashaska-1992@hotmail.com',1,0,'2007-09-07','2017-09-01',NULL,NULL),(11,99,'99','99','99',95,'99','shalashaska-1992@hotmail.com',2,0,'2017-09-06','2017-09-08',NULL,NULL),(12,1073719742,'Valentina','Rociasco','1234',9020666,'soacha','vrociasco@misena.edu.co',2,0,'2007-04-26','2017-09-11',NULL,NULL),(13,6,'60','60','60',60,'60','ska-1992@hotmail.coml',1,0,'2017-09-01','2017-09-02',NULL,NULL),(14,61,'61','61','61',16,'61','shalashaska-1992@hotmail.com',3,0,'2017-09-01','2017-09-02',NULL,NULL),(15,62,'62','62','62',62,'62','ska-1992@hotmail.coml',1,0,'2017-09-05','2017-09-09',NULL,NULL),(16,70,'70','70','70',70,'70','shalashaska-1992@hotmail.com',2,0,'2017-09-01','2017-09-02',NULL,NULL),(17,90,'90','90','90',90,'90','a@mail.com',1,0,'2017-09-05','2017-09-12',NULL,NULL);
+INSERT INTO `personas` VALUES (1,10,'david','zamora','123',1525536,' occidente','david@mail.com',1,1,'1992-10-04','2016-03-17',NULL,''),(2,11,'alex','ramos benavides','123',2,'calle occidente','alex@mail.com',1,1,'1992-10-05','2016-06-22',NULL,NULL),(3,12,'orlando','rubio','123',3,'calle occidente','orlando@mail.com',1,1,'1992-10-05','2016-06-22',NULL,NULL),(4,13,'harrison','copasachoa','123',4,'calle occidente','harrison@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(5,14,'manolo ','cardenas','123',5,'calle occidente','manolo@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(6,15,'kevin','galeano','123',6,'calle occidente','kevin@mail.com',3,1,'1992-10-05','2016-06-22',NULL,NULL),(7,16,'sofia ','henao','123',7,'calle occidente','3',3,1,'1992-10-05','2016-06-22',NULL,NULL),(8,17,'vendedor','ayudante','123',8,'calle occidente','vendedorayudante@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(9,18,'operarioa','ayudante','123',9,'calle occidente','operarioayudante@mail.com',3,1,'1992-09-30','2016-06-17',NULL,''),(23,111,'10','10','10',10,'10','shalashaska-1992@hotmail.com',1,1,'2017-09-14','2017-09-14',NULL,NULL);
 /*!40000 ALTER TABLE `personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -506,7 +508,7 @@ CREATE TABLE `roles_personas` (
 
 LOCK TABLES `roles_personas` WRITE;
 /*!40000 ALTER TABLE `roles_personas` DISABLE KEYS */;
-INSERT INTO `roles_personas` VALUES (1,1),(2,2),(2,3),(3,4),(3,5),(4,6),(4,7),(5,8),(6,9),(2,10),(5,11),(3,12),(1,13),(3,14),(1,15),(4,16),(1,17);
+INSERT INTO `roles_personas` VALUES (1,1),(2,2),(2,3),(3,4),(3,5),(4,6),(4,7),(5,8),(6,9),(2,10),(5,11),(3,12),(1,13),(3,14),(1,15),(4,16),(1,17),(1,23);
 /*!40000 ALTER TABLE `roles_personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -581,4 +583,5 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-14 13:10:42
+-- Dump completed on 2017-09-14 13:42:08
+
