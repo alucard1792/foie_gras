@@ -1,4 +1,3 @@
 dist/
-nbproject/project.properties
+nbproject/*
 build/
-nbproject
