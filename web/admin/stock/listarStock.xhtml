@@ -56,13 +56,14 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <ul class="nav navbar-nav navbar-link">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">file_download</i>
-                </a>
-                <ul class="dropdown-menu">
-                    <h:form>
+        <h:form>
+
+            <ul class="nav navbar-nav navbar-link">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">file_download</i>
+                    </a>
+                    <ul class="dropdown-menu">
                         <li>
                             <h:commandLink>
                                 a pdf
@@ -76,48 +77,46 @@
                                 <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
-                    </h:form>
-                </ul>
-            </li>
-        </ul>
-        <br/>
-        <div class="panel-heading">
-            <div class="panel-options">
-                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                    <c:choose>
-                        <c:when test="#{p.idPermiso eq 47}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.crearStock}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>                       
+                    </ul>
+                </li>
+            </ul>
+            <br/>
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                        <c:choose>
+                            <c:when test="#{p.idPermiso eq 47}">
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.crearStock}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>                       
+                </div>
             </div>
-        </div>
 
-        <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla">
-            <p:column headerText="#{msg.idStock}">
-                <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="#{msg.stock}">
-                <p:outputLabel value="#{lp.stock}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.fechaIngreso}">
-                <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.fechaActualizacion}">
-                <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.referenciaMateria}">
-                <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.opciones}" exportable="false">
-                <h:form>
+            <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla">
+                <p:column headerText="#{msg.idStock}">
+                    <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
+                </p:column>
+                <p:column headerText="#{msg.stock}">
+                    <p:outputLabel value="#{lp.stock}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.fechaIngreso}">
+                    <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.fechaActualizacion}">
+                    <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.referenciaMateria}"  filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.opciones}" exportable="false">
                     <p:commandButton value="#{msg.editar}" action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
-                </h:form>
 
-            </p:column>
+                </p:column>
 
-        </p:dataTable>
+            </p:dataTable>
 
+        </h:form>
 
     </ui:define>
 

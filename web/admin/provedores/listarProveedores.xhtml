@@ -11,7 +11,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-         #{msg.listarProveedores} 
+        #{msg.listarProveedores} 
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -56,13 +56,14 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <ul class="nav navbar-nav navbar-link">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">file_download</i>
-                </a>
-                <ul class="dropdown-menu">
-                    <h:form>
+        <h:form>
+
+            <ul class="nav navbar-nav navbar-link">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">file_download</i>
+                    </a>
+                    <ul class="dropdown-menu">
                         <li>
                             <h:commandLink>
                                 a pdf
@@ -76,52 +77,49 @@
                                 <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
-                    </h:form>
-                </ul>
-            </li>
-        </ul>
-        <br/>
-        <div class="panel-heading">
-            <div class="panel-options">
-                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                    <c:choose>
-                        <c:when test="#{p.idPermiso eq 16}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="Crear proveedor">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>                       
+                    </ul>
+                </li>
+            </ul>
+            <br/>
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                        <c:choose>
+                            <c:when test="#{p.idPermiso eq 16}">
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="Crear proveedor">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>                       
+                </div>
             </div>
-        </div>
 
-        <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla">
-            <p:column headerText="id">
-                <p:outputLabel value="#{lp.idProveedor}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="#{msg.nitProveedor}">
-                <p:outputLabel value="#{lp.nitProveedor}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.nombreEmpresa}">
-                <p:outputLabel value="#{lp.nombreEmpresa}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.direccion}">
-                <p:outputLabel value="#{lp.direccion}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.telefeno}">
-                <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.representanteLegal}">
-                <p:outputLabel value="#{lp.representanteLegal}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.ciudad}">
-                <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="#{msg.opciones}" exportable="false">
-                <h:form>
+            <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla">
+                <p:column headerText="id" >
+                    <p:outputLabel value="#{lp.idProveedor}"></p:outputLabel>                                
+                </p:column>
+                <p:column headerText="#{msg.nitProveedor}" filterBy="#{lp.nitProveedor}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.nitProveedor}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.nombreEmpresa}"  filterBy="#{lp.nombreEmpresa}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.nombreEmpresa}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.direccion}">
+                    <p:outputLabel value="#{lp.direccion}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.telefeno}">
+                    <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.representanteLegal}"  filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.representanteLegal}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.ciudad}">
+                    <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.opciones}" exportable="false">
                     <p:commandButton value="#{msg.editar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
-                </h:form>
-            </p:column>
-        </p:dataTable>
-
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->

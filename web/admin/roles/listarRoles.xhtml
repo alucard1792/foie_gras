@@ -56,13 +56,14 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <ul class="nav navbar-nav navbar-link">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">file_download</i>
-                </a>
-                <ul class="dropdown-menu">
-                    <h:form>
+        <h:form>
+
+            <ul class="nav navbar-nav navbar-link">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">file_download</i>
+                    </a>
+                    <ul class="dropdown-menu">
                         <li>
                             <h:commandLink>
                                 a pdf
@@ -76,46 +77,44 @@
                                 <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
-                    </h:form>
-                </ul>
-            </li>
-        </ul>
-        <br/>
-        <div class="panel-heading">
-            <div class="panel-options">
-                <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                    <c:choose>
-                        <c:when test="#{p.idPermiso eq 37}">
-                            <span style="float: right"><h:link outcome="/#{p.url}" value="ingresar rol">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>                       
+                    </ul>
+                </li>
+            </ul>
+            <br/>
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                        <c:choose>
+                            <c:when test="#{p.idPermiso eq 37}">
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="ingresar rol">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>                       
+                </div>
             </div>
-        </div>
 
-        <p:dataTable value="#{listarRoles.listaRoles}" var="lp" id="tabla">
-            <p:column headerText="id">
-                <p:outputLabel value="#{lp.idRol}"></p:outputLabel>                                
-            </p:column>
-            <p:column headerText="Nombre rol">
-                <p:outputLabel value="#{lp.nombreRol}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Estado">
-                <p:outputLabel value="#{lp.estado}"></p:outputLabel>                
-            </p:column>
-            <p:column headerText="Opciones" exportable="false">
-                <h:form>
+            <p:dataTable value="#{listarRoles.listaRoles}" var="lp" id="tabla">
+                <p:column headerText="id">
+                    <p:outputLabel value="#{lp.idRol}"></p:outputLabel>                                
+                </p:column>
+                <p:column headerText="Nombre rol" filterBy="#{lp.nombreRol}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.nombreRol}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Estado">
+                    <p:outputLabel value="#{lp.estado}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Opciones" exportable="false">
                     <p:commandButton value="Editar" action="#{listarRoles.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
-                </h:form>
-            </p:column>
-        </p:dataTable>
+                </p:column>
+            </p:dataTable>
+        </h:form>
 
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script>
-            
+
         </script>
     </ui:define>
 
