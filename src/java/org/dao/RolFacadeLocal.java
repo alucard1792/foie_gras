@@ -30,4 +30,6 @@ public interface RolFacadeLocal {
 
     int count();
     
+    List<Rol>findRolByUsuarioEnSesion(int idRol);
+    
 }

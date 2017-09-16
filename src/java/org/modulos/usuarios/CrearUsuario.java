@@ -17,10 +17,12 @@ import org.entidades.Persona;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import org.dao.AreaFacadeLocal;
 import org.dao.RolFacadeLocal;
 import org.entidades.Area;
 import org.entidades.Rol;
+import org.login.ControladorSesion;
 
 /**
  *
@@ -36,6 +38,8 @@ public class CrearUsuario implements Serializable {
     private RolFacadeLocal rfl;
     @EJB
     private AreaFacadeLocal afl;
+    @Inject
+    ControladorSesion controladorSesion;
     private Persona persona;
 
     private List<Rol> listaRoles;
@@ -46,7 +50,10 @@ public class CrearUsuario implements Serializable {
     @PostConstruct
     public void init() {
         listaAreas = afl.findAll();
-        listaRoles = rfl.findAll();
+        for(Rol rol:controladorSesion.getP().getRoles()){
+            listaRoles = rfl.findRolByUsuarioEnSesion(rol.getIdRol());
+            System.out.println(rol.getIdRol());
+        }
         persona = new Persona();
 
     }

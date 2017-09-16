@@ -5,9 +5,12 @@
  */
 package org.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import org.entidades.Rol;
 
 /**
@@ -27,6 +30,22 @@ public class RolFacade extends AbstractFacade<Rol> implements RolFacadeLocal {
 
     public RolFacade() {
         super(Rol.class);
+    }
+
+    @Override
+    public List<Rol> findRolByUsuarioEnSesion(int idRol) {
+        List<Rol>listaRoles = new ArrayList<>();
+        try {
+            TypedQuery<Rol> q = getEntityManager().createNamedQuery("Rol.findRolByUsuarioEnSesion", Rol.class);
+            q.setParameter("idRol", idRol);
+            listaRoles = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        return listaRoles;
+        
     }
     
 }
