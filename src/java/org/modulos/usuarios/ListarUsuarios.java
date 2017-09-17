@@ -25,6 +25,7 @@ import org.dao.RolFacadeLocal;
 import org.entidades.Area;
 import org.entidades.Persona;
 import org.entidades.Rol;
+import org.login.ControladorSesion;
 
 /**
  *
@@ -42,6 +43,8 @@ public class ListarUsuarios implements Serializable {
     private AreaFacadeLocal afl;
     @Inject
     private Conversation conversacion;
+    @Inject
+    private ControladorSesion controladorSesion;
     private Persona personaSeleccionado;
 
     private Rol rol;
@@ -57,8 +60,11 @@ public class ListarUsuarios implements Serializable {
     public void init() {
         persona = pfl.findAll();
         listaAreas = afl.findAll();
-        listaRoles = rfl.findAll();
-
+        for(Rol rol:controladorSesion.getP().getRoles()){
+            listaRoles = rfl.findRolByUsuarioEnSesion(rol.getIdRol());
+            System.out.println(rol.getIdRol());
+        }
+        
     }
 
     public Persona getPersonaSeleccionado() {
