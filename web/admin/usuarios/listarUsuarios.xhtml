@@ -96,7 +96,7 @@
                     </c:forEach>                       
                 </div>
             </div>
-            <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla">
+            <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla" class="table" scrollable="true">
                 <p:column headerText="id">
                     <p:outputLabel value="#{lp.idPersona}"></p:outputLabel>                                
                 </p:column>
@@ -143,6 +143,56 @@
 
             </p:dataTable>
         </h:form>
+        <table class="table">
+            <thead class="text-primary">
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Salary</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Salary</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Salary</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Salary</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Salary</th>  
+                <th>Country</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dakota Rice</td>
+                    <td>Niger</td>
+                    <td>Oud-Turnhout</td>
+                    <td class="text-primary">$36,738</td>
+                    <td>Dakota Rice</td>
+                    <td>Niger</td>
+                    <td>Oud-Turnhout</td>
+                    <td >$36,738</td>
+                    <td>Dakota Rice</td>
+                    <td>Niger</td>
+                    <td>Oud-Turnhout</td>
+                    <td>$36,738</td>
+                    <td>Dakota Rice</td>
+                    <td>Niger</td>
+                    <td>Oud-Turnhout</td>
+                    <td>$36,738</td>
+                    <td>Dakota Rice</td>
+                    <td>Niger</td>
+                    <td>Oud-Turnhout</td>
+                    <td>$36,738</td>
+                    <td>Dakota Rice</td>
+                </tr>
+            </tbody>
+        </table>
 
     </ui:define>
 
