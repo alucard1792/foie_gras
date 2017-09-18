@@ -51,7 +51,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Persona.findByEstado", query = "SELECT p FROM Persona p WHERE p.estado = :estado")
     , @NamedQuery(name = "Persona.findByFechaNacimiento", query = "SELECT p FROM Persona p WHERE p.fechaNacimiento = :fechaNacimiento")
     , @NamedQuery(name = "Persona.findByFechaIngreso", query = "SELECT p FROM Persona p WHERE p.fechaIngreso = :fechaIngreso")
-    , @NamedQuery(name = "Persona.findByFechaDespido", query = "SELECT p FROM Persona p WHERE p.fechaDespido = :fechaDespido")
+    , @NamedQuery(name = "Persona.findByUltimaVez", query = "SELECT p FROM Persona p WHERE p.ultimaVez = :ultimaVez")
     , @NamedQuery(name = "Persona.login", query = "SELECT p FROM Persona p WHERE p.documento = :documento AND p.password = :password")
     , @NamedQuery(name = "Persona.findOperarios", query = "SELECT p FROM Persona p WHERE p.roles = :rol")
     , @NamedQuery(name = "enviar.email", query = "SELECT p FROM Persona p WHERE p.email = :email")
@@ -112,9 +112,9 @@ public class Persona implements Serializable {
     @Column(name = "fecha_ingreso")
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
-    @Column(name = "fecha_despido")
+    @Column(name = "ultima_vez")
     @Temporal(TemporalType.DATE)
-    private Date fechaDespido;
+    private Date ultimaVez;
     @Size(max = 250)
     @Column(name = "imagen")
     private String imagen;
@@ -240,12 +240,12 @@ public class Persona implements Serializable {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Date getFechaDespido() {
-        return fechaDespido;
+    public Date getUltimaVez() {
+        return ultimaVez;
     }
 
-    public void setFechaDespido(Date fechaDespido) {
-        this.fechaDespido = fechaDespido;
+    public void setUltimaVez(Date ultimaVez) {
+        this.ultimaVez = ultimaVez;
     }
 
     public String getImagen() {

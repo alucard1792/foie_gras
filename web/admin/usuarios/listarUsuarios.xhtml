@@ -127,6 +127,9 @@
                 <p:column headerText="#{msg.fechaIngreso}" width="200">
                     <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
+                <p:column headerText="#{msg.fechaIngreso}" width="200">
+                    <p:outputLabel value="#{(lp.ultimaVez eq null ? 'no se ha validado':lp.ultimaVez)}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                </p:column>
                 <p:column headerText="#{msg.rol}" filterBy="#{lp.roles}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.roles.get(0) != null ? lp.roles.get(0).nombreRol:'')}" >
                     </p:outputLabel>                
