@@ -107,11 +107,15 @@
                     <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.referenciaMateria}"  filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains">
-                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
+                  
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}" converter="materiaPrimaStockConverter"></p:outputLabel>                
+               
+                </p:column>
+                <p:column headerText="materia prima" exportable="false">
+                    <p:commandButton value="#{listarStock.listaStock}" ajax="false"></p:commandButton>                    
                 </p:column>
                 <p:column headerText="#{msg.opciones}" exportable="false">
                     <p:commandButton value="#{msg.editar}" action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
-
                 </p:column>
 
             </p:dataTable>
