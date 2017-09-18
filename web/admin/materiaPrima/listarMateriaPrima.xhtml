@@ -113,8 +113,11 @@
                 <p:column headerText="#{msg.largoLamina}" filterBy="#{lp.dimensionLargo}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.dimensionLargo}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.altoLamina}"  filterBy="#{lp.dimensionAlto}" filterMatchMode="contains">
-                    <p:outputLabel value="#{lp.dimensionAlto}"></p:outputLabel>                
+                <p:column headerText="proveedor"  filterBy="#{lp.proveedor}" filterMatchMode="contains">
+                    <ui:repeat value="#{lp.proveedorList}" var="lp1">
+                        <p:outputLabel value="#{lp1.nombreEmpresa}"></p:outputLabel>                
+
+                    </ui:repeat>
                 </p:column>
                 <p:column headerText="#{msg.opciones}" exportable="false">
                     <p:commandButton value="#{msg.editar}" action="#{listarMateriaPrima.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
