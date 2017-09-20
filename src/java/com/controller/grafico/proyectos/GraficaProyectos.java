@@ -7,6 +7,7 @@ package com.controller.grafico.proyectos;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -29,6 +30,9 @@ public class GraficaProyectos implements Serializable{
     @EJB
     private ProyectoFacadeLocal pfl;
     List<Proyecto> ProyectosTerminados;
+    List<Proyecto> ProyectosIniciados;
+    List<Proyecto> ProyectosPausados;
+    List<Proyecto> ProyectosSinComenzar;
     private PieChartModel piemodel;
     private Proyecto proyecto;
 
@@ -67,21 +71,28 @@ public class GraficaProyectos implements Serializable{
     }
     
     
-    
+    @PostConstruct
     public void init(){
         ProyectosTerminados = pfl.buscarProyectosTerminados();
+        ProyectosIniciados = pfl.buscarProyectosIniciados();
+        ProyectosPausados = pfl.buscarProyectosPausados();
+        ProyectosSinComenzar = pfl.buscarProyectosSinComenzar();
         
-        reporte(ProyectosTerminados);
+        reporte(ProyectosTerminados, ProyectosIniciados, ProyectosPausados, ProyectosSinComenzar);
+        
     }
     
     
-    public void reporte(List<Proyecto> ProyectosTerminados){
+    public void reporte(List<Proyecto> ProyectosTerminados, List<Proyecto> ProyectosIniciados, List<Proyecto> ProyectosPausados, List<Proyecto> ProyectosSinComenzar){
         
         piemodel = new PieChartModel();
         
-        for(Proyecto p : ProyectosTerminados){
+       
             piemodel.set("Proyectos terminados", ProyectosTerminados.size());
-        }
+            piemodel.set("Proyectos Iniciados", ProyectosIniciados.size());
+            piemodel.set("Proyectos Pausados", ProyectosPausados.size());
+            piemodel.set("Proyectos sin comenzar", ProyectosSinComenzar.size());
+        
         
         
         piemodel.setTitle("Proyectos");

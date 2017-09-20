@@ -58,10 +58,15 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         List<Proyecto> proyectosTerminados = new ArrayList<>();
         
         Estado estado = new Estado(3);
+        Estado estado1 = new Estado(3);
+        Estado estado2 = new Estado(3);
+        
         
         try {
             TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("proyectosTerminados", Proyecto.class);
             q.setParameter("estado", estado);
+            q.setParameter("estado", estado1);
+            q.setParameter("estado", estado2);
             
             proyectosTerminados = q.getResultList();
             
@@ -70,7 +75,64 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         }
         return proyectosTerminados;
     }
-
-   
     
+    public List<Proyecto> buscarProyectosIniciados(){
+        
+        List<Proyecto> proyectosIniciados = new ArrayList<>();
+        
+        
+        Estado estado = new Estado(1);
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("ProyectosIniciados", Proyecto.class);
+            q.setParameter("estado", estado);
+            
+            proyectosIniciados = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return proyectosIniciados;
+    }
+    
+    
+    public List<Proyecto> buscarProyectosPausados(){
+        
+        List<Proyecto> proyectosPausados = new ArrayList<>();
+        
+        Estado estado = new Estado(2);
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("ProyectosPausados", Proyecto.class);
+            q.setParameter("estado", estado);
+            
+            proyectosPausados = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return proyectosPausados;
+    }
+
+    @Override
+    public List<Proyecto> buscarProyectosSinComenzar() {
+        
+        List<Proyecto> proyectosSinComenzar = new ArrayList<>();
+        
+        Estado estado = new Estado(5);
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("ProyectosSinComenzar", Proyecto.class);
+            q.setParameter("estado", estado);
+            
+            proyectosSinComenzar = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return proyectosSinComenzar;
+
+
+    }
+ 
 }
