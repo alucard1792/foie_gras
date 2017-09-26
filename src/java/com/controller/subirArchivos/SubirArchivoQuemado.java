@@ -34,6 +34,7 @@ public class SubirArchivoQuemado {
      
     public void upload() {
         if(file != null) {
+            
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }

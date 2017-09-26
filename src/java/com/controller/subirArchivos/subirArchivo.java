@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.dao.PersonaFacadeLocal;
+import org.entidades.Persona;
 import org.login.ControladorSesion;
 import org.primefaces.model.UploadedFile;
 
@@ -31,6 +32,7 @@ public class subirArchivo implements Serializable {
     
     @EJB
     private PersonaFacadeLocal pfl;
+    private Persona personaPersonaSeleccionada;
             
 
     @Inject
@@ -78,7 +80,7 @@ public class subirArchivo implements Serializable {
                 //c.close();
                 
                 
-                pfl.edit(cs.getP());
+                /*pfl.edit(cs.ge);*/
                 
                 FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);

@@ -41,33 +41,39 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <img src="#{jFreeChartController.grafico}" style="width: 300px"/>
-        
-        
-        <p:chart type="pie" model="#{graficaProyectos.piemodel}" />
-    
-        
-        
-        
-        
-      
+        <!--<img src="#{jFreeChartController.grafico}" style="width: 300px"/>-->
 
-     
+
+        <p:chart type="pie" model="#{graficaProyectos.piemodel}" style="width:500px;height:300px" widgetVar="chart"/>
+
+        <p:commandButton type="button" value="Imagen" icon="ui-icon-extlink" onclick="exportChart()"></p:commandButton>
+
+        <p:commandLink onclick="exportChartInPDF()">
+            Export Chart To PDF
+        </p:commandLink>
+
+
+        <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Imagen del grafico" resizable="false">
+            <p:outputPanel id="output" layout="block" style="width:500px;height:300px"/>
+        </p:dialog>
+
+        
     </ui:define>
-    
-    
-            
-        <h:commandButton value="Generar Reporte" actionListener="#{graficaProyectos.init()}" p:update="reporte" />
-            
-            <h:panelGroup id="reporte" layout="block">
-                <p:chart type="pie" model="#{graficaProyectos.piemodel}"  />
-            </h:panelGroup>
-    
+
+
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script type="text/javascript">
+            function exportChart() {
+                //export image
+                $('#output').empty().append(PF('chart').exportAsImage());
 
+                //show the dialog
+                PF('dlg').show();
+            }
+            
+            
         </script>
     </ui:define>
 
