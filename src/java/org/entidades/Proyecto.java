@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "ProyectosIniciados", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
     , @NamedQuery(name = "ProyectosPausados", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
     , @NamedQuery(name = "ProyectosSinComenzar", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
+    , @NamedQuery(name = "ProyectosConNovedad", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
     , @NamedQuery(name = "Proyecto.findByTiempoEstimado", query = "SELECT p FROM Proyecto p WHERE p.tiempoEstimado = :tiempoEstimado")})
 public class Proyecto implements Serializable {
 

@@ -33,6 +33,7 @@ public class GraficaProyectos implements Serializable{
     List<Proyecto> ProyectosIniciados;
     List<Proyecto> ProyectosPausados;
     List<Proyecto> ProyectosSinComenzar;
+    List<Proyecto> ProyectosConNovedad;
     private PieChartModel piemodel;
     private Proyecto proyecto;
 
@@ -77,13 +78,16 @@ public class GraficaProyectos implements Serializable{
         ProyectosIniciados = pfl.buscarProyectosIniciados();
         ProyectosPausados = pfl.buscarProyectosPausados();
         ProyectosSinComenzar = pfl.buscarProyectosSinComenzar();
+        ProyectosConNovedad = pfl.buscarProyectosConNovedad();
         
-        reporte(ProyectosTerminados, ProyectosIniciados, ProyectosPausados, ProyectosSinComenzar);
+        
+        reporte(ProyectosTerminados, ProyectosIniciados, ProyectosPausados, ProyectosSinComenzar, ProyectosConNovedad);
         
     }
+   
     
     
-    public void reporte(List<Proyecto> ProyectosTerminados, List<Proyecto> ProyectosIniciados, List<Proyecto> ProyectosPausados, List<Proyecto> ProyectosSinComenzar){
+    public void reporte(List<Proyecto> ProyectosTerminados, List<Proyecto> ProyectosIniciados, List<Proyecto> ProyectosPausados, List<Proyecto> ProyectosSinComenzar, List<Proyecto> ProyectosConNovedad){
         
         piemodel = new PieChartModel();
         
@@ -92,10 +96,11 @@ public class GraficaProyectos implements Serializable{
             piemodel.set("Proyectos Iniciados", ProyectosIniciados.size());
             piemodel.set("Proyectos Pausados", ProyectosPausados.size());
             piemodel.set("Proyectos sin comenzar", ProyectosSinComenzar.size());
+            piemodel.set("Proyectos con novedad",ProyectosConNovedad.size());
         
         
         
-        piemodel.setTitle("Proyectos");
+        piemodel.setTitle("Estados de proyectos");
         piemodel.setLegendPosition("e");
         piemodel.setFill(false);
         piemodel.setShowDataLabels(true);

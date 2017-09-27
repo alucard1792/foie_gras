@@ -40,5 +40,7 @@ public interface ProyectoFacadeLocal {
     List<Proyecto> buscarProyectosPausados();
     
     List<Proyecto> buscarProyectosSinComenzar();
+    
+    List<Proyecto> buscarProyectosConNovedad();
 
 }

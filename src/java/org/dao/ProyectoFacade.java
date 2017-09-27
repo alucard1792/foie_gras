@@ -134,5 +134,24 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
 
 
     }
+
+    @Override
+    public List<Proyecto> buscarProyectosConNovedad() {
+        
+        List<Proyecto> ProyectosConNovedad = new ArrayList<>();
+        
+        Estado estado = new Estado(4);
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("ProyectosConNovedad", Proyecto.class);
+            q.setParameter("estado", estado);
+            
+            ProyectosConNovedad = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ProyectosConNovedad;
+    }
  
 }
