@@ -6,6 +6,8 @@
 package org.modulos.provedores;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -28,80 +30,64 @@ public class CrearProveedor implements Serializable{
     private ProveedorFacadeLocal proveedorFacadeLocal;
     @EJB
     private CiudadFacadeLocal ciudadFacadeLocal;
+    private List<Ciudad>listaCiudades;
     private Proveedor proveedor;
-    private String nombreEmpresa,
-            representanteLegal,
-            direccion,
-            nitProveedor;
-    private int idProveedor,
-            telefono,
-            ciudadesIdCiudad;
+    private Ciudad ciudad;
     
     public CrearProveedor() {
         
     }
-
-    public String getNombreEmpresa() {
-        return nombreEmpresa;
+    
+    @PostConstruct
+    public void init(){
+        listaCiudades = ciudadFacadeLocal.findAll();
+        ciudad = new Ciudad();
+        proveedor = new Proveedor();
+        
     }
 
-    public void setNombreEmpresa(String nombreEmpresa) {
-        this.nombreEmpresa = nombreEmpresa;
+    public ProveedorFacadeLocal getProveedorFacadeLocal() {
+        return proveedorFacadeLocal;
     }
 
-    public String getRepresentanteLegal() {
-        return representanteLegal;
+    public void setProveedorFacadeLocal(ProveedorFacadeLocal proveedorFacadeLocal) {
+        this.proveedorFacadeLocal = proveedorFacadeLocal;
     }
 
-    public void setRepresentanteLegal(String representanteLegal) {
-        this.representanteLegal = representanteLegal;
+    public CiudadFacadeLocal getCiudadFacadeLocal() {
+        return ciudadFacadeLocal;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public void setCiudadFacadeLocal(CiudadFacadeLocal ciudadFacadeLocal) {
+        this.ciudadFacadeLocal = ciudadFacadeLocal;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public List<Ciudad> getListaCiudades() {
+        return listaCiudades;
     }
 
-    public String getNitProveedor() {
-        return nitProveedor;
+    public void setListaCiudades(List<Ciudad> listaCiudades) {
+        this.listaCiudades = listaCiudades;
     }
 
-    public void setNitProveedor(String nitProveedor) {
-        this.nitProveedor = nitProveedor;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public int getIdProveedor() {
-        return idProveedor;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
-    public void setIdProveedor(int idProveedor) {
-        this.idProveedor = idProveedor;
+    public Ciudad getCiudad() {
+        return ciudad;
     }
 
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
-
-    public int getCiudadesIdCiudad() {
-        return ciudadesIdCiudad;
-    }
-
-    public void setCiudadesIdCiudad(int ciudadesIdCiudad) {
-        this.ciudadesIdCiudad = ciudadesIdCiudad;
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
     }
     
     public String crear(){
         try {
-            proveedor = new Proveedor(null, nitProveedor, nombreEmpresa, direccion, telefono, representanteLegal);
-            Ciudad ciudad = ciudadFacadeLocal.find(1);
-            proveedor.setCiudadesIdCiudad(ciudad);
             proveedorFacadeLocal.create(proveedor);
             return "/admin/provedores/listarProveedores.xhtml?faces-redirect=true";
         } catch (Exception e) {
