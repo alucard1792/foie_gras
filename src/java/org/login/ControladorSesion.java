@@ -95,6 +95,12 @@ public class ControladorSesion implements Serializable {
             if (p != null && p.getEstado() == 1) {
                 System.out.println(p.getNombre() + p.getApellido() + p.getEmail());
                 List<Rol> rolesUsuario = p.getRoles();//esto lo hacemos para aprovechar el mapeo bidireccional y traer todos los roles
+               
+                for(Rol rolUsuario:rolesUsuario){
+                    rol = rolUsuario.getIdRol();
+                
+                }
+                
                 if (rolesUsuario.size() > 0) { // se hace esta validacion para saber si el usuario tiene al menos un rol seleccionado para que no me retorne null
                     rolSeleccionado = rolesUsuario.get(0);
                     List<Permiso> permisosRol = rolSeleccionado.getPermisos();
@@ -132,7 +138,7 @@ public class ControladorSesion implements Serializable {
 
                 }
 
-            }else {
+            } else {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "contraseña, documento incorrecto o usuario desactivado. ", "Contacte con el administrador");
                 fc.addMessage(null, fm);
             }
