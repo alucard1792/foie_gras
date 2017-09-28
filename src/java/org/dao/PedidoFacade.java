@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.entidades.Pedido;
 import org.entidades.Persona;
+import org.entidades.Proyecto;
 import org.entidades.Rol;
 
 /**
@@ -48,6 +49,26 @@ public class PedidoFacade extends AbstractFacade<Pedido> implements PedidoFacade
 
         }
         return operariosDisponibles;
+
+    }
+
+    @Override
+    public List<Pedido> listarPedidosVendedorAsignados(Persona p) {
+        List<Pedido> listaPedidos = new ArrayList<>();
+        Persona persona = new Persona();
+        persona.setIdPersona(p.getIdPersona());
+        
+        try {
+            TypedQuery<Pedido> q = getEntityManager().createNamedQuery("Pedido.findByVendedorAsignado", Pedido.class);
+            q.setParameter("vendedorIdPersona", persona);
+            listaPedidos = q.getResultList();
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+        return listaPedidos;
 
     }
 

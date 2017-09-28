@@ -15,6 +15,8 @@ import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 import org.dao.PedidoFacadeLocal;
 import org.entidades.Pedido;
+import org.entidades.Rol;
+import org.login.ControladorSesion;
 
 /**
  *
@@ -27,6 +29,8 @@ public class ListarPedidos implements Serializable {
     private PedidoFacadeLocal pfl;
     @Inject
     private Conversation conversacion;
+    @Inject
+    private ControladorSesion controladorSesion;
     private Pedido pedidoSeleccionado;
     private List<Pedido> listaPedidos;
 
@@ -36,10 +40,19 @@ public class ListarPedidos implements Serializable {
 
     @PostConstruct
     public void init() {
-        listaPedidos = pfl.findAll();
+        
+        for(Rol rol:controladorSesion.getP().getRoles()){
+            if (rol.getIdRol() == 1 || rol.getIdRol() == 2) {
+                listaPedidos = pfl.findAll();
+                
+            }else if(rol.getIdRol() == 3 || rol.getIdRol() == 6){
+                listaPedidos = pfl.listarPedidosVendedorAsignados(controladorSesion.getP());
+            
+            }
+            
+        }
 
     }
-
 
     public List<Pedido> getListaPedidos() {
         return listaPedidos;

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Local;
 import org.entidades.Pedido;
 import org.entidades.Persona;
+import org.entidades.Proyecto;
 
 /**
  *
@@ -32,5 +33,7 @@ public interface PedidoFacadeLocal {
     int count();
     
     List<Persona> buscarOperarios();
+    
+    List<Pedido>listarPedidosVendedorAsignados(Persona p);
     
 }
