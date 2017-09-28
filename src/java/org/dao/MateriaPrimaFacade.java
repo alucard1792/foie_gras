@@ -5,10 +5,14 @@
  */
 package org.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import org.entidades.MateriaPrima;
+import org.entidades.Proyecto;
 
 /**
  *
@@ -27,6 +31,22 @@ public class MateriaPrimaFacade extends AbstractFacade<MateriaPrima> implements 
 
     public MateriaPrimaFacade() {
         super(MateriaPrima.class);
+    }
+
+    @Override
+    public List<MateriaPrima> listarPorStockMayor0() {
+        List<MateriaPrima> listaMateriaPrima = new ArrayList<>();
+        try {
+            TypedQuery<MateriaPrima> q = getEntityManager().createNamedQuery("MateriaPrima.findByExistencias", MateriaPrima.class);
+            listaMateriaPrima = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+        return listaMateriaPrima;
+
     }
     
 }

@@ -47,7 +47,7 @@ public class ListarPedidos implements Serializable {
                 
             }else if(rol.getIdRol() == 3 || rol.getIdRol() == 6){
                 listaPedidos = pfl.listarPedidosVendedorAsignados(controladorSesion.getP());
-            
+                
             }
             
         }

@@ -30,4 +30,6 @@ public interface MateriaPrimaFacadeLocal {
 
     int count();
     
+    List<MateriaPrima> listarPorStockMayor0();
+    
 }

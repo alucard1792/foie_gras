@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "MateriaPrima.findByTipoMateriaPrima", query = "SELECT m FROM MateriaPrima m WHERE m.tipoMateriaPrima = :tipoMateriaPrima")
     , @NamedQuery(name = "MateriaPrima.findByCalibre", query = "SELECT m FROM MateriaPrima m WHERE m.calibre = :calibre")
     , @NamedQuery(name = "MateriaPrima.findByDimensionLargo", query = "SELECT m FROM MateriaPrima m WHERE m.dimensionLargo = :dimensionLargo")
+    , @NamedQuery(name = "MateriaPrima.findByExistencias", query = "SELECT m FROM MateriaPrima m, IN (m.stockList) s WHERE s.stock > 0")
     , @NamedQuery(name = "MateriaPrima.findByDimensionAlto", query = "SELECT m FROM MateriaPrima m WHERE m.dimensionAlto = :dimensionAlto")})
 public class MateriaPrima implements Serializable {
 

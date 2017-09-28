@@ -43,7 +43,7 @@ public class CrearPedido implements Serializable {
     
     @PostConstruct
     public void init(){
-        listaMateriaPrima = materiaPrimaFacadeLocal.findAll();
+        listaMateriaPrima = materiaPrimaFacadeLocal.listarPorStockMayor0();
         pedido = new Pedido();
 
     }
