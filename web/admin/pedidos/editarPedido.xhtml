@@ -83,13 +83,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="pago" class="col-sm-2 control-label">realizo pago </label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="pago" a:placeholder="Ingrese 1 se ya se realizo el pago, 0 si no lo ha realizado" value="#{listarPedidos.pedidoSeleccionado.realizoPago}"/>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="cantidad" class="col-sm-2 control-label">Cantidad </label>
                                 <div class="col-sm-10">
                                     <h:inputText a:type="number" class="form-control" id="cantidad" a:placeholder="Ingrese la cantidad de pedidos" value="#{listarPedidos.pedidoSeleccionado.cantidad}"/>
@@ -97,16 +90,28 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="materiaPrima" class="col-sm-2 control-label">Materia prima </label>
+                                <label for="pago" class="col-sm-2 control-label">Realizo pago</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="materiaPrima" a:placeholder="selecione la materia prima del proyecto" value="#{listarPedidos.pedidoSeleccionado.materiasPrimaIdMateria.tipoMateriaPrima}"/>
+                                    <b:selectOneMenu value = "#{listarPedidos.pedidoSeleccionado.realizoPago}"> 
+                                        <f:selectItem itemValue = "0" itemLabel = "No" /> 
+                                        <f:selectItem itemValue = "1" itemLabel = "Si" /> 
+                                    </b:selectOneMenu> 
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="materiaPrima" class="col-sm-2 control-label">Materia prima utilizada</label>
+                                <div class="col-sm-10">
+                                    <b:selectOneMenu value = "#{listarPedidos.pedidoSeleccionado.materiasPrimaIdMateria}"> 
+                                        <f:selectItems value="#{crearPedido.listaMateriaPrima}" var="lmp" itemLabel="#{lmp.referencia}" /> 
+                                    </b:selectOneMenu> 
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="vendedor" class="col-sm-2 control-label">Vendedor </label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="vendedor" a:placeholder="seleccione el vendedor" value="#{listarPedidos.pedidoSeleccionado.vendedorIdPersona.nombre}"/>
+                                    <h:inputText disabled="true" a:type="text" class="form-control" id="vendedor" a:placeholder="seleccione el vendedor" value="#{listarPedidos.pedidoSeleccionado.vendedorIdPersona.nombre} #{listarPedidos.pedidoSeleccionado.vendedorIdPersona.apellido}"/>
                                 </div>
                             </div>
 
