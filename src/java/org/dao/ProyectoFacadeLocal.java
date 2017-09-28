@@ -43,4 +43,9 @@ public interface ProyectoFacadeLocal {
     
     List<Proyecto> buscarProyectosConNovedad();
 
+
+    public List<Proyecto> findByfechaFinalizado();
+    
+   
+
 }

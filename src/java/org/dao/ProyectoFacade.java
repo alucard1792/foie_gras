@@ -58,16 +58,12 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         List<Proyecto> proyectosTerminados = new ArrayList<>();
         
         Estado estado = new Estado(3);
-        Estado estado1 = new Estado(3);
-        Estado estado2 = new Estado(3);
-        
+       
         
         try {
             TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("proyectosTerminados", Proyecto.class);
             q.setParameter("estado", estado);
-            q.setParameter("estado", estado1);
-            q.setParameter("estado", estado2);
-            
+           
             proyectosTerminados = q.getResultList();
             
         } catch (Exception e) {
@@ -153,5 +149,14 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         }
         return ProyectosConNovedad;
     }
+
+  
+
+    @Override
+    public List<Proyecto> findByfechaFinalizado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
  
 }

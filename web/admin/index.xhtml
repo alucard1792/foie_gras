@@ -43,38 +43,51 @@
     <ui:define name="contenido">
         <!--<img src="#{jFreeChartController.grafico}" style="width: 300px"/>-->
 
+        <h:form id="form">
 
-        <p:chart type="pie" model="#{graficaProyectos.piemodel}" style="width:500px;height:300px" widgetVar="chart"/>
-
-        <p:commandButton type="button" value="Imagen" icon="ui-icon-extlink" onclick="exportChart()"></p:commandButton>
-
-        <p:commandLink onclick="exportChartInPDF()">
-            Export Chart To PDF
-        </p:commandLink>
+            <p:chart type="pie" model="#{graficaProyectos.piemodel}" style="height:300px"  widgetVar="pieWV"/>
 
 
-        <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Imagen del grafico" resizable="false">
-            <p:outputPanel id="output" layout="block" style="width:500px;height:300px"/>
-        </p:dialog>
 
-        
+
+            <div class="row">
+                <div class="col-md-12 text-center m-t-50">
+                    <p:commandLink onclick="exportChartInPDF()" styleClass="btn btn-primary">
+                        <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
+                        Exportar a pdf
+                    </p:commandLink>
+                </div>
+            </div>
+        </h:form>
+
+        <h:outputScript name="js/pdfmake/pdfmake.min.js" />
+        <h:outputScript name="js/pdfmake/vfs_fonts.js" />
+
+
+        <script type="text/javascript">
+            function exportChartInPDF() {
+                var docDefinition = {
+                    content: [
+                        'Estado de los proyectos',
+                        {
+                            image: $(PF('pieWV').exportAsImage()).attr('src'),
+                            width: 520
+                        }
+                    ]
+                };
+                pdfMake.createPdf(docDefinition).open();
+                pdfMake.createPdf(docDefinition).download('primefaces-charts.pdf');
+            }
+
+
+        </script>
     </ui:define>
 
 
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
-        <script type="text/javascript">
-            function exportChart() {
-                //export image
-                $('#output').empty().append(PF('chart').exportAsImage());
 
-                //show the dialog
-                PF('dlg').show();
-            }
-            
-            
-        </script>
     </ui:define>
 
 </ui:composition>

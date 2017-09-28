@@ -81,6 +81,7 @@ public class GraficaProyectos implements Serializable{
         ProyectosConNovedad = pfl.buscarProyectosConNovedad();
         
         
+        
         reporte(ProyectosTerminados, ProyectosIniciados, ProyectosPausados, ProyectosSinComenzar, ProyectosConNovedad);
         
     }
