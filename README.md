@@ -5,15 +5,16 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 	
  1. arreglos:
 	
-	- correccion bug en la relacion personas y pedidos y personas y proyectos
+	- correccion bug de persistencia en todos los modulos
 	
 2) nuevo:
 	
-	-implementado jasper report
-	
-	-Nuevos dao y dto
-	
-	-cambios en la base de datos
+	- unificacion de los modulos stock y pedidos
+
+	- reportes en primefaces y pdf
+
+	- los usuarios root y admin solo pueden registrar roles inferiores a ellos
+
 	
 3) experimental:
 	
@@ -24,21 +25,20 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 
 	-implementar los items de la fase 4b
 	
-	- implementar los campos restantes en el modulo proyectos (converters).
-	
 	- quitar la columna opciones cuando se validan los ayudantes.
-		
-	- corregir los mensajes de error cuando se lista (todos los modulos).*
 	
 	- implementar la programacion, procedimientos y demas en la base de datos.
 		
 	- implementar el boton "cambiar estado" en todos los mudulos
 	
-	- hacer la validacion del estado de los usuarios, roles...
+	- hacer la validacion del estado de los roles...
+	
+	- terminar el modulo roles&permisos (asignacion de permisos)
+	
+	- a nivel de base de datos agregar las columnas del cliente en la tabla pedidos
 
-	- el modulo de pedidos deberia mostrar tanto en vendedor que ingreso el pedido como el operario que esta asignado
-	
-	-corregir los errores de los botones cancelar en la mayoria de los modulos
-	
-	-terminar el modulo roles&permisos (asignacion de permisos)
-	
+	- filter login
+
+	- terminar reglas de negocio...
+
+	- envio de correos en los modulos de pedido y proyecto
