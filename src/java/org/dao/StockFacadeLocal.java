@@ -30,4 +30,6 @@ public interface StockFacadeLocal {
 
     int count();
     
+    List<Stock> findAllWithMateriaPrima();
+    
 }

@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Stock.findAll", query = "SELECT s FROM Stock s")
+    //, @NamedQuery(name = "Stock.findAllWithMateriaPrima", query = "SELECT s FROM Stock s, IN (s.materiasPrimaIdMateria) m")
     , @NamedQuery(name = "Stock.findByIdStock", query = "SELECT s FROM Stock s WHERE s.idStock = :idStock")
     , @NamedQuery(name = "Stock.findByStock", query = "SELECT s FROM Stock s WHERE s.stock = :stock")
     , @NamedQuery(name = "Stock.findByFechaIngreso", query = "SELECT s FROM Stock s WHERE s.fechaIngreso = :fechaIngreso")

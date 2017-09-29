@@ -53,12 +53,12 @@ public class MateriaPrima implements Serializable {
     private Integer idMateria;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "referencia")
     private String referencia;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "tipo_materia_prima")
     private String tipoMateriaPrima;
     @Basic(optional = false)
@@ -78,9 +78,9 @@ public class MateriaPrima implements Serializable {
         @JoinColumn(name = "proveedores_id_proveedor", referencedColumnName = "id_proveedor")})
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Proveedor> proveedorList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiasPrimaIdMateria", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "materiasPrimaIdMateria", fetch = FetchType.EAGER)
     private List<Pedido> pedidoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiasPrimaIdMateria", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "materiasPrimaIdMateria", fetch = FetchType.EAGER)
     private List<Stock> stockList;
 
     public MateriaPrima() {

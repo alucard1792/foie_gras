@@ -16,8 +16,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import org.dao.MateriaPrimaFacadeLocal;
 import org.dao.PedidoFacadeLocal;
+import org.dao.StockFacadeLocal;
 import org.entidades.MateriaPrima;
 import org.entidades.Pedido;
+import org.entidades.Stock;
 import org.login.ControladorSesion;
 
 /**
@@ -33,10 +35,14 @@ public class CrearPedido implements Serializable {
     private PedidoFacadeLocal pedidoFacadeLocal;
     @EJB
     private MateriaPrimaFacadeLocal materiaPrimaFacadeLocal;
+    @EJB
+    private StockFacadeLocal stockFacadeLocal;
     @Inject
     private ControladorSesion controladorSesion;
     private List<MateriaPrima>listaMateriaPrima;
     private Pedido pedido;
+    private Stock stockMateriaPrima;
+    private MateriaPrima materiaPrima;
 
     public CrearPedido() {
     }
@@ -74,6 +80,17 @@ public class CrearPedido implements Serializable {
     
     public String crear() {
         try {
+            System.out.println(stockMateriaPrima);
+            materiaPrima = materiaPrimaFacadeLocal.find(pedido.getMateriasPrimaIdMateria().getIdMateria());
+            System.out.println(materiaPrima.getIdMateria());
+            for(Stock stock:materiaPrima.getStockList()){
+                System.out.println(stock.getStock());
+            
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*try {
             pedido.setIdPedido(null);
             pedido.setVendedorIdPersona(controladorSesion.getP());
             pedidoFacadeLocal.create(pedido);
@@ -86,7 +103,8 @@ public class CrearPedido implements Serializable {
             return "";
             
         }
-        
+        */
+            return "";
     }
     
     public String cancelar() {

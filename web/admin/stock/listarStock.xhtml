@@ -18,7 +18,7 @@
     <ui:define name="menu">
         <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
             <c:if test="#{p.permisoPadre eq null}">
-                <c:if test="#{p.idPermiso != 43}">
+                <c:if test="#{p.idPermiso != 43 and p.idPermiso != 8}">
                     <!--valida el menu actual para renderizar la opcion active-->
                     <c:choose>
                         <c:when test="#{p.idPermiso == 46}">
@@ -94,6 +94,24 @@
             </div>
 
             <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla">
+                <p:column headerText="id">
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.idMateria}"></p:outputLabel>                                
+                </p:column>
+                <p:column headerText="#{msg.referencia}" filterBy="#{lp.referencia}" filterMatchMode="contains" >
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.tipo}"  filterBy="#{lp.tipoMateriaPrima}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.tipoMateriaPrima}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.calibre}" filterBy="#{lp.calibre}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.calibre}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.largoLamina}" filterBy="#{lp.dimensionLargo}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionLargo}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="#{msg.altoLamina}"  filterBy="#{lp.dimensionAlto}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionAlto}"></p:outputLabel>                
+                </p:column>
                 <p:column headerText="#{msg.idStock}">
                     <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
                 </p:column>
@@ -107,12 +125,12 @@
                     <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.referenciaMateria}"  filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains">
-                  
-                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}" converter="materiaPrimaStockConverter"></p:outputLabel>                
-               
+                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="materia prima" exportable="false">
-                    <p:commandButton value="#{listarStock.listaStock}" ajax="false"></p:commandButton>                    
+                <p:column headerText="proveedor"  filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains">
+                    <ui:repeat value="#{lp.materiasPrimaIdMateria.proveedorList}" var="pl">
+                        <p:outputLabel value="#{pl.nombreEmpresa}"></p:outputLabel>                
+                    </ui:repeat>
                 </p:column>
                 <p:column headerText="#{msg.opciones}" exportable="false">
                     <p:commandButton value="#{msg.editar}" action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    

@@ -19,7 +19,7 @@
     <ui:define name="menu">
         <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
             <c:if test="#{p.permisoPadre eq null}">
-                <c:if test="#{p.idPermiso != 43}">
+                <c:if test="#{p.idPermiso != 43 and p.idPermiso != 8}">
                     <!--valida el menu actual para renderizar la opcion active-->
                     <c:choose>
                         <c:when test="#{p.idPermiso == 22}">

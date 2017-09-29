@@ -5,9 +5,12 @@
  */
 package org.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import org.entidades.Stock;
 
 /**
@@ -27,6 +30,22 @@ public class StockFacade extends AbstractFacade<Stock> implements StockFacadeLoc
 
     public StockFacade() {
         super(Stock.class);
+    }
+
+    @Override
+    public List<Stock> findAllWithMateriaPrima() {
+        
+        List<Stock>listaStock = new ArrayList<>();
+        try {
+            TypedQuery<Stock> q = getEntityManager().createNamedQuery("Stock.findAllWithMateriaPrima", Stock.class);
+            listaStock = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+        return listaStock;        
     }
     
 }
