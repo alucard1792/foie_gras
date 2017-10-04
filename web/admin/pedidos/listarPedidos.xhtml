@@ -125,9 +125,9 @@
                 </p:column>
                 <p:column class="" headerText="#{msg.opciones}" exportable="false" >
                     <p:row rendered="#{controladorSesion.rol == 1 || controladorSesion.rol == 2 || lp.estaAsignado == 0}">
-                        <p:commandButton value="#{msg.editar}" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
+                        <p:commandButton icon="ui-icon-pencil" title="Editar pedido" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
                         <p:row rendered="#{lp.realizoPago == 1 and lp.estaAsignado == 0}">
-                            <p:commandButton value="asignar proyecto" action="#{enviarPedidoAProyecto.preparacionAsignarOperario(lp)}"></p:commandButton>
+                            <p:commandButton  icon="ui-icon-extlink" title="asignar operario" action="#{enviarPedidoAProyecto.preparacionAsignarOperario(lp)}"></p:commandButton>
                         </p:row>
                     </p:row>
                 </p:column>
