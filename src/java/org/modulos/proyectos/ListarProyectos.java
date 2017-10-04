@@ -211,6 +211,8 @@ public class ListarProyectos implements Serializable {
             Calendar cal = Calendar.getInstance();
             proyectoSeleccionado = p;
             proyectoSeleccionado.setFechaFinalizado(cal.getTime());
+            estado = new Estado(3);
+            proyectoSeleccionado.setEstadosIdEstado(estado);
             pfl.edit(proyectoSeleccionado);
             return cancelar();
         } catch (Exception e) {

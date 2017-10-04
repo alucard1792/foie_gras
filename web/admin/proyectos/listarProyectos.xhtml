@@ -117,7 +117,7 @@
                     <p:row rendered="#{lp.estadosIdEstado.idEstado == 5}">
                         <p:commandButton value="iniciar proyecto" action="#{listarProyectos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
-                    <p:row rendered="#{lp.estadosIdEstado.idEstado != 5}">
+                    <p:row rendered="#{lp.estadosIdEstado.idEstado == 1}">
                         <p:commandButton value="finalizar" action="#{listarProyectos.finalizarProyecto(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
                 </p:column>
