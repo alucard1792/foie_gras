@@ -5,6 +5,7 @@
  */
 package org.modulos.proyectos;
 
+import com.controllerEmail.EnviarCorreosMasivos.controller;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
@@ -54,7 +55,8 @@ public class ListarProyectos implements Serializable {
     private List<Estado> listaEstados;
     private List<Dificultad> listaDificultades;
     private Date currentDate;
-    
+    private controller c;
+
     public ListarProyectos() {
 
     }
@@ -62,6 +64,8 @@ public class ListarProyectos implements Serializable {
     @PostConstruct
     public void init() {
         currentDate = new Date();
+        c = new controller();
+
         for (Rol rol : controladorSesion.getP().getRoles()) {
             if (rol.getIdRol() == 1 || rol.getIdRol() == 2) {
                 proyecto = pfl.findAll();
@@ -165,23 +169,54 @@ public class ListarProyectos implements Serializable {
         return "/admin/proyectos/editarProyecto.xhtml?faces-redirect=true";
 
     }
-     
+
     public String iniciarProyecto() {
-        Calendar cal = Calendar.getInstance();
-        proyectoSeleccionado.setFechaInicio(cal.getTime());
-        estado = new Estado(1);
-        proyectoSeleccionado.setEstadosIdEstado(estado);
-        pfl.edit(proyectoSeleccionado);
-        return cancelar();
+        try {
+            String mensaje = "Estimado cliente " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/><br/>Nos permitimos informarle que su proyecto acaba de iniciar. aproximadamente su proyecto sale de la linea de produccion el dia " + proyectoSeleccionado.getTiempoEstimado() + ".<br/><br/>Cuando el operario acabe su labor le notificara via email. gracias.<br/><br/>";
+            mensaje += "resumen del proyecto: <br/><br/>"
+                    + "nombre pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
+                    + "descripcion pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
+                    + "cantidad pedido = " + proyectoSeleccionado.getPedidosIdPedido().getCantidad() + "<br/>"
+                    + "nombre cliente = " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/>"
+                    + "telefono cliente = " + proyectoSeleccionado.getPedidosIdPedido().getTelefonoCliente() + "<br/>"
+                    + "correo cliente = " + proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente() + "<br/>"
+                    + "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia() + "<br/>";
+            c.enviarEmailCliente(proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente(), "Notificacion inicio proyecto", mensaje);
+            Calendar cal = Calendar.getInstance();
+            proyectoSeleccionado.setFechaInicio(cal.getTime());
+            estado = new Estado(1);
+            proyectoSeleccionado.setEstadosIdEstado(estado);
+            pfl.edit(proyectoSeleccionado);
+            return cancelar();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
 
     }
-     
+
     public String finalizarProyecto(Proyecto p) {
-        Calendar cal = Calendar.getInstance();
-        proyectoSeleccionado = p;
-        proyectoSeleccionado.setFechaFinalizado(cal.getTime());
-        pfl.edit(proyectoSeleccionado);
-        return cancelar();
+        try {
+            proyectoSeleccionado = p;
+            String mensaje = "Estimado cliente " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/><br/>Nos permitimos informarle que su proyecto acaba de finalizar. Puede acercarce a nuestra bodega para hacer la entrega del proyecto. gracias.<br/><br/>";
+            mensaje += "resumen del proyecto: <br/><br/>"
+                    + "nombre pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
+                    + "descripcion pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
+                    + "cantidad pedido = " + proyectoSeleccionado.getPedidosIdPedido().getCantidad() + "<br/>"
+                    + "nombre cliente = " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/>"
+                    + "telefono cliente = " + proyectoSeleccionado.getPedidosIdPedido().getTelefonoCliente() + "<br/>"
+                    + "correo cliente = " + proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente() + "<br/>"
+                    + "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia() + "<br/>";
+            c.enviarEmailCliente(proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente(), "Notificacion finalizacion proyecto", mensaje);
+            Calendar cal = Calendar.getInstance();
+            proyectoSeleccionado = p;
+            proyectoSeleccionado.setFechaFinalizado(cal.getTime());
+            pfl.edit(proyectoSeleccionado);
+            return cancelar();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
 
     }
 
