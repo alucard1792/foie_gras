@@ -7,6 +7,7 @@ package org.modulos.pedidos;
 
 import com.controllerEmail.EnviarCorreosMasivos.controller;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -53,6 +54,7 @@ public class CrearPedido implements Serializable {
         listaMateriaPrima = materiaPrimaFacadeLocal.listarPorStockMayor0();
         pedido = new Pedido();
         c = new controller();
+        
 
     }
 
@@ -80,8 +82,25 @@ public class CrearPedido implements Serializable {
         this.pedido = pedido;
     }
 
+    public Stock getStockMateriaPrima() {
+        return stockMateriaPrima;
+    }
+
+    public void setStockMateriaPrima(Stock stockMateriaPrima) {
+        this.stockMateriaPrima = stockMateriaPrima;
+    }
+
+    public MateriaPrima getMateriaPrima() {
+        return materiaPrima;
+    }
+
+    public void setMateriaPrima(MateriaPrima materiaPrima) {
+        this.materiaPrima = materiaPrima;
+    }
+
     public String crear() {
         try {
+            Date date = new Date();
             String mensaje = "";
             if(pedido.getRealizoPago() == 1){
                 mensaje += "Señor(a) " + pedido.getNombreCliente() + "<br/><br/>Nos permitimos informarle que su pedido se ha ingresado exitosamente al sistema, dentro de poco se le enviara un email notificando el inicio de su pedido.<br/><br/>gracias";
@@ -90,11 +109,21 @@ public class CrearPedido implements Serializable {
                 mensaje = "Señor(a) " + pedido.getNombreCliente() + "<br/><br/>Nos permitimos informarle que su pedido se ha ingresado exitosamente al sistema. Le recordamos realizar el pago de su pedido para que pueda iniciar la produccion de su pedido.<br/><br/>gracias.";
 
             }
-            c.enviarEmailCliente(pedido.getCorreoCliente(), "Notificacion ingreso pedido: " + pedido.getNombreProyecto(), mensaje);
+            for(Stock stock:pedido.getMateriasPrimaIdMateria().getStockList()){
+                stockMateriaPrima = stockFacadeLocal.find(stock.getIdStock());
+                System.out.println(stock);
+                
+            }
             materiaPrima = materiaPrimaFacadeLocal.find(pedido.getMateriasPrimaIdMateria().getIdMateria());
             pedido.setMateriasPrimaIdMateria(materiaPrima);
             pedido.setVendedorIdPersona(controladorSesion.getP());
             pedidoFacadeLocal.create(pedido);
+            
+            //stockMateriaPrima.setMateriasPrimaIdMateria(pedido.getMateriasPrimaIdMateria());
+            stockMateriaPrima.setFechaActualizacion(date);
+            stockFacadeLocal.edit(stockMateriaPrima);
+            
+            c.enviarEmailCliente(pedido.getCorreoCliente(), "Notificacion ingreso pedido: " + pedido.getNombreProyecto(), mensaje);
             return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
 
         } catch (Exception e) {
