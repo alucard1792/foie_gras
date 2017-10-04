@@ -5,6 +5,7 @@
  */
 package org.modulos.pedidos;
 
+import com.controllerEmail.EnviarCorreosMasivos.controller;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -42,6 +43,7 @@ public class CrearPedido implements Serializable {
     private Pedido pedido;
     private Stock stockMateriaPrima;
     private MateriaPrima materiaPrima;
+    private controller c;
 
     public CrearPedido() {
     }
@@ -50,6 +52,7 @@ public class CrearPedido implements Serializable {
     public void init() {
         listaMateriaPrima = materiaPrimaFacadeLocal.listarPorStockMayor0();
         pedido = new Pedido();
+        c = new controller();
 
     }
 
@@ -79,6 +82,15 @@ public class CrearPedido implements Serializable {
 
     public String crear() {
         try {
+            String mensaje = "";
+            if(pedido.getRealizoPago() == 1){
+                mensaje += "Señor " + pedido.getNombreCliente() + "<br/><br/>Nos permitimos informarle que su pedido se ha ingresado exitosamente al sistema, dentro de poco se le enviara un email notificando el inicio de su pedido.<br/><br/>gracias";
+           
+            }else{
+                mensaje = "Señor " + pedido.getNombreCliente() + "<br/><br/>Nos permitimos informarle que su pedido se ha ingresado exitosamente al sistema. Le recordamos realizar el pago de su pedido para que pueda iniciar la produccion de su pedido.<br/><br/>gracias.";
+
+            }
+            c.enviarEmailCliente(pedido.getCorreoCliente(), "Notificacion ingreso pedido: " + pedido.getNombreProyecto(), mensaje);
             materiaPrima = materiaPrimaFacadeLocal.find(pedido.getMateriasPrimaIdMateria().getIdMateria());
             pedido.setMateriasPrimaIdMateria(materiaPrima);
             pedido.setVendedorIdPersona(controladorSesion.getP());

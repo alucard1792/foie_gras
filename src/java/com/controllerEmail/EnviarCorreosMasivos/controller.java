@@ -6,6 +6,7 @@
 package com.controllerEmail.EnviarCorreosMasivos;
 
 import com.enviarEmail.EnviarCorreosMasivos.EnviarEmail;
+import com.mailsender.MailSender;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -87,4 +88,14 @@ public class controller implements Serializable {
         return "";
     }
     
+    public void enviarEmailCliente(String toMail, String subject, String message) {
+        try {
+            MailSender mailSender=new MailSender();
+            mailSender.enviarEmailCliente(toMail, subject, message);
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
