@@ -5,6 +5,7 @@
  */
 package org.modulos.pedidos;
 
+import com.controllerEmail.EnviarCorreosMasivos.controller;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -42,6 +43,7 @@ public class EnviarPedidoAProyecto implements Serializable {
     private Dificultad dificultad;
     private Estado estado;
     private Pedido pedidoSeleccionado;
+    private controller c;
 
     public EnviarPedidoAProyecto() {
     }
@@ -53,7 +55,8 @@ public class EnviarPedidoAProyecto implements Serializable {
         proyecto = new Proyecto();
         dificultad = new Dificultad();
         estado = new Estado();
-
+        c = new controller();
+        
     }
 
     public List<Persona> getListaOperariosDisponibles() {
@@ -117,6 +120,18 @@ public class EnviarPedidoAProyecto implements Serializable {
 
         System.out.println(pedidoSeleccionado.getIdPedido());
         try {
+            String mensaje = "Estimado colaborador " + operarioAsignado.getNombre() + " " + operarioAsignado.getApellido() + "<br/><br/>Nos permitimos informarle que se ha asignadio un nuevo proyecto a su nombre.  por favor solicitamos inicializarlo lo mas pronto posible. gracias.<br/><br/>";
+            mensaje += "resumen del proyecto: <br/><br/>" +
+                    "id pedido = " + pedidoSeleccionado.getIdPedido() + "<br/>" +
+                    "nombre pedido = " + pedidoSeleccionado.getNombreProyecto() + "<br/>" +
+                    "descripcion pedido = " + pedidoSeleccionado.getNombreProyecto() + "<br/>" +
+                    "cantidad pedido = " + pedidoSeleccionado.getCantidad() + "<br/>" +
+                    "nombre cliente = " + pedidoSeleccionado.getNombreCliente() + "<br/>" +
+                    "telefono cliente = " + pedidoSeleccionado.getTelefonoCliente() + "<br/>" +
+                    "correo cliente = " + pedidoSeleccionado.getCorreoCliente() + "<br/>" +
+                    "materia prima = " + pedidoSeleccionado.getMateriasPrimaIdMateria().getReferencia() + "<br/>";
+
+            c.enviarEmailCliente(operarioAsignado.getEmail(), "Notificacion asignacion proyecto: " + pedidoSeleccionado.getNombreProyecto(), mensaje);
             dificultad.setIdDificultad(4);
             estado.setIdEstado(5);
             proyecto.setOperarioIdPersona(operarioAsignado);
