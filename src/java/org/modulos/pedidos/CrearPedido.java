@@ -30,7 +30,6 @@ import org.login.ControladorSesion;
 @ViewScoped
 public class CrearPedido implements Serializable {
 
-
     @EJB
     private PedidoFacadeLocal pedidoFacadeLocal;
     @EJB
@@ -39,16 +38,16 @@ public class CrearPedido implements Serializable {
     private StockFacadeLocal stockFacadeLocal;
     @Inject
     private ControladorSesion controladorSesion;
-    private List<MateriaPrima>listaMateriaPrima;
+    private List<MateriaPrima> listaMateriaPrima;
     private Pedido pedido;
     private Stock stockMateriaPrima;
     private MateriaPrima materiaPrima;
 
     public CrearPedido() {
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         listaMateriaPrima = materiaPrimaFacadeLocal.listarPorStockMayor0();
         pedido = new Pedido();
 
@@ -77,36 +76,24 @@ public class CrearPedido implements Serializable {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-    
+
     public String crear() {
         try {
-            System.out.println(stockMateriaPrima);
             materiaPrima = materiaPrimaFacadeLocal.find(pedido.getMateriasPrimaIdMateria().getIdMateria());
-            System.out.println(materiaPrima.getIdMateria());
-            for(Stock stock:materiaPrima.getStockList()){
-                System.out.println(stock.getStock());
-            
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /*try {
-            pedido.setIdPedido(null);
+            pedido.setMateriasPrimaIdMateria(materiaPrima);
             pedido.setVendedorIdPersona(controladorSesion.getP());
             pedidoFacadeLocal.create(pedido);
             return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el pedido, por favor contacte al admin", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
             return "";
-            
         }
-        */
-            return "";
+
     }
-    
+
     public String cancelar() {
         return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
 

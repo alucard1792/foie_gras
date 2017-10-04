@@ -71,6 +71,18 @@ public class Pedido implements Serializable {
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "nombre_cliente")
+    private String nombreCliente;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "telefono_cliente")
+    private String telefonoCliente;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "correo_cliente")
+    private String correoCliente;
     @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MateriaPrima materiasPrimaIdMateria;
@@ -94,7 +106,7 @@ public class Pedido implements Serializable {
         this.realizoPago = realizoPago;
         this.cantidad = cantidad;
     }
-
+    
     public Integer getIdPedido() {
         return idPedido;
     }
@@ -139,6 +151,30 @@ public class Pedido implements Serializable {
         return cantidad;
     }
 
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getTelefonoCliente() {
+        return telefonoCliente;
+    }
+
+    public void setTelefonoCliente(String telefonoCliente) {
+        this.telefonoCliente = telefonoCliente;
+    }
+
+    public String getCorreoCliente() {
+        return correoCliente;
+    }
+
+    public void setCorreoCliente(String correoCliente) {
+        this.correoCliente = correoCliente;
+    }
+    
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }

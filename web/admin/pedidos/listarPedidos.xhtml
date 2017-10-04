@@ -111,6 +111,15 @@
                 <p:column headerText="#{msg.materiaPrima}" filterBy="#{lp.nombre}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
                 </p:column>
+                <p:column headerText="nombre cliente" filterBy="#{lp.nombre}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.nombreCliente}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="telefono cliente" filterBy="#{lp.nombre}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.telefonoCliente}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="correo cliente" filterBy="#{lp.nombre}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.correoCliente}"></p:outputLabel>                
+                </p:column>
                 <p:column headerText="#{msg.vendedor}">
                     <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"></p:outputLabel>                
                 </p:column>
