@@ -54,7 +54,6 @@ public class CrearPedido implements Serializable {
         listaMateriaPrima = materiaPrimaFacadeLocal.listarPorStockMayor0();
         pedido = new Pedido();
         c = new controller();
-        
 
     }
 
@@ -102,30 +101,39 @@ public class CrearPedido implements Serializable {
         try {
             Date date = new Date();
             String mensaje = "";
-            if(pedido.getRealizoPago() == 1){
+            if (pedido.getRealizoPago() == 1) {
                 mensaje += "Señor(a) " + pedido.getNombreCliente() + "<br/><br/>Nos permitimos informarle que su pedido se ha ingresado exitosamente al sistema, dentro de poco se le enviara un email notificando el inicio de su pedido.<br/><br/>gracias";
-           
-            }else{
+
+            } else {
                 mensaje = "Señor(a) " + pedido.getNombreCliente() + "<br/><br/>Nos permitimos informarle que su pedido se ha ingresado exitosamente al sistema. Le recordamos realizar el pago de su pedido para que pueda iniciar la produccion de su pedido.<br/><br/>gracias.";
 
             }
-            for(Stock stock:pedido.getMateriasPrimaIdMateria().getStockList()){
+            for (Stock stock : pedido.getMateriasPrimaIdMateria().getStockList()) {
                 stockMateriaPrima = stockFacadeLocal.find(stock.getIdStock());
                 System.out.println(stock);
-                
-            }
-            materiaPrima = materiaPrimaFacadeLocal.find(pedido.getMateriasPrimaIdMateria().getIdMateria());
-            pedido.setMateriasPrimaIdMateria(materiaPrima);
-            pedido.setVendedorIdPersona(controladorSesion.getP());
-            pedidoFacadeLocal.create(pedido);
-            
-            //stockMateriaPrima.setMateriasPrimaIdMateria(pedido.getMateriasPrimaIdMateria());
-            stockMateriaPrima.setFechaActualizacion(date);
-            stockFacadeLocal.edit(stockMateriaPrima);
-            
-            c.enviarEmailCliente(pedido.getCorreoCliente(), "Notificacion ingreso pedido: " + pedido.getNombreProyecto(), mensaje);
-            return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
 
+            }
+
+            materiaPrima = materiaPrimaFacadeLocal.find(pedido.getMateriasPrimaIdMateria().getIdMateria());
+            
+            if (stockMateriaPrima.getStock() >= pedido.getCantidad()) {
+                pedido.setMateriasPrimaIdMateria(materiaPrima);
+                pedido.setVendedorIdPersona(controladorSesion.getP());
+                pedidoFacadeLocal.create(pedido);
+
+                stockMateriaPrima.setStock((stockMateriaPrima.getStock() - pedido.getCantidad()));
+                stockMateriaPrima.setFechaActualizacion(date);
+                stockFacadeLocal.edit(stockMateriaPrima);
+
+                c.enviarEmailCliente(pedido.getCorreoCliente(), "Notificacion ingreso pedido: " + pedido.getNombreProyecto(), mensaje);
+                return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
+                
+            } else {
+                FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "no tiene suficientes existencias de esa materia prima", "por favor ingrese mas existencias o ingrese menos cantidades de ese pedido. \nnumero de existencias = " + stockMateriaPrima.getStock());
+                FacesContext.getCurrentInstance().addMessage(null, msj);
+                return "";
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el pedido, por favor contacte al admin", "");
