@@ -9,13 +9,14 @@ import com.enviarEmail.EnviarCorreosMasivos.EnviarEmail;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Orlando.R.R
  */
 @Named(value = "controller")
-@SessionScoped
+@ViewScoped
 public class controller implements Serializable {
 
     
