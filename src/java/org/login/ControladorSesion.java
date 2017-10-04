@@ -11,6 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,6 +96,9 @@ public class ControladorSesion implements Serializable {
         if ((documento != 0) && password != null && !password.equals("")) {
             p = pfl.iniciarSesion(documento, password);
             if (p != null && p.getEstado() == 1) {
+                Date date = new Date();
+                p.setUltimaVez(date);
+                pfl.edit(p);
                 System.out.println(p.getNombre() + p.getApellido() + p.getEmail());
                 List<Rol> rolesUsuario = p.getRoles();//esto lo hacemos para aprovechar el mapeo bidireccional y traer todos los roles
                
