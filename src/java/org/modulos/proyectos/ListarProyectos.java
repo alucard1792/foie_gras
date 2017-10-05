@@ -172,7 +172,9 @@ public class ListarProyectos implements Serializable {
 
     public String iniciarProyecto() {
         try {
-            String mensaje = "Estimado cliente " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/><br/>Nos permitimos informarle que su proyecto acaba de iniciar. aproximadamente su proyecto sale de la linea de produccion el dia " + proyectoSeleccionado.getTiempoEstimado() + ".<br/><br/>Cuando el operario acabe su labor le notificara via email. gracias.<br/><br/>";
+            DateFormat readFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss aa");
+            
+            String mensaje = "Estimado cliente " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/><br/>Nos permitimos informarle que su proyecto acaba de iniciar. aproximadamente su proyecto sale de la linea de produccion el dia " + readFormat.format(proyectoSeleccionado.getTiempoEstimado()) + ".<br/><br/>Cuando el operario acabe su labor le notificara via email. gracias.<br/><br/>";
             mensaje += "resumen del proyecto: <br/><br/>"
                     + "nombre pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
                     + "descripcion pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
