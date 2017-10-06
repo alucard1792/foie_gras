@@ -49,6 +49,15 @@
                
                 
                 <p:chart id="proyectos" type="pie" model="#{graficaProyectos.piemodel}" style="height:300px; width:500px; margin: auto;"  widgetVar="pie"/>
+               
+                <div class="row">
+                    <div class="col-md-12 text-center m-t-50">
+                        <p:commandLink onclick="exportChartInPDFGRAFICA()" styleClass="btn btn-primary">
+                            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
+                            Exportar a pdf
+                        </p:commandLink>
+                    </div>
+                </div>
                 
                 <p:chart id="pedidos" type="pie" model="#{graficaPagosProyectos.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="pieWV"/>
 
@@ -79,15 +88,28 @@
             function exportChartInPDF() {
                 var docDefinition = {
                     content: [
-                        'Estado de los proyectos',
+                        'Pagos de los proyectos',
                         {
                             image: $(PF('pieWV').exportAsImage()).attr('src'),
-                            width: 520
+                            width: 430
                         }
                     ]
                 };
                 pdfMake.createPdf(docDefinition).open();
                 pdfMake.createPdf(docDefinition).download('primefaces-charts.pdf');
+            }
+            
+            function exportChartInPDFGRAFICA(){
+                var docDefinition = {
+                    content:[
+                        'Estado de los proyectos',
+                        {
+                            image: $(PF('pie').exportAsImage()).attr('src'),
+                        }
+                    ]
+                };
+                pdfMake.createPdf(docDefinition).open();
+                pdfMake.createPdf(docDefinition).download('PedidosSinPagar.pdf');
             }
 
 

@@ -34,8 +34,33 @@ public class GraficaPagosProyectos implements Serializable{
     private PieChartModel piemodel;
     private Pedido pedido;
     List<Pedido> listapedido;
+    List<Pedido> listapedidopago;
+
+    public PedidoFacadeLocal getPfl() {
+        return pfl;
+    }
+
+    public void setPfl(PedidoFacadeLocal pfl) {
+        this.pfl = pfl;
+    }
+
+    public List<Pedido> getListapedido() {
+        return listapedido;
+    }
+
+    public void setListapedido(List<Pedido> listapedido) {
+        this.listapedido = listapedido;
+    }
+
+    public List<Pedido> getListapedidopago() {
+        return listapedidopago;
+    }
+
+    public void setListapedidopago(List<Pedido> listapedidopago) {
+        this.listapedidopago = listapedidopago;
+    }
     
-    List<Proyecto> pagos;
+    
 
     
 
@@ -59,19 +84,21 @@ public class GraficaPagosProyectos implements Serializable{
     @PostConstruct
     public void init(){
         listapedido = pfl.pedidosSinPagar(0);
+        listapedidopago = pfl.pedidosSinPagar(1);
         
        
-        Reporte(listapedido);
+        Reporte(listapedido, listapedidopago);
     }
     
     
-    public void Reporte(List<Pedido> listapedido){
+    public void Reporte(List<Pedido> listapedido, List<Pedido> listapedidopago){
         
         piemodel = new PieChartModel();
         
-        piemodel.set("PAGOS", listapedido.size());
+        piemodel.set("Sin pagar", listapedido.size());
+        piemodel.set("Pagos", listapedidopago.size());
         
-        piemodel.setTitle("Fecha entrega de proyectos");
+        piemodel.setTitle("Pedidos pagos y sin pagar");
         piemodel.setLegendPosition("e");
         piemodel.setFill(false);
         piemodel.setShowDataLabels(true);
