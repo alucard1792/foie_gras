@@ -34,6 +34,8 @@ public interface PedidoFacadeLocal {
     
     List<Persona> buscarOperarios();
     
+    List<Pedido> pedidosSinPagar(int realizo_pago);
+    
     List<Pedido>listarPedidosVendedorAsignados(Persona p);
     
 }

@@ -71,5 +71,25 @@ public class PedidoFacade extends AbstractFacade<Pedido> implements PedidoFacade
         return listaPedidos;
 
     }
+    
+    
+    
+    @Override
+    public List<Pedido> pedidosSinPagar(int realizo_pago) {
+        List<Pedido> listaproyectossinpagar = null;
+        
+        try {
+            TypedQuery<Pedido> q = getEntityManager().createNamedQuery("Pedido.findByRealizoPago", Pedido.class);
+            q.setParameter("realizoPago", realizo_pago);
+            listaproyectossinpagar= q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return listaproyectossinpagar;
+    }
+
+    
 
 }

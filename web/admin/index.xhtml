@@ -46,7 +46,13 @@
         <h:form id="form">
 
             <p:row rendered="#{controladorSesion.rol == 1 || controladorSesion.rol == 2}">
-                <p:chart type="pie" model="#{graficaProyectos.piemodel}" style="height:300px"  widgetVar="pieWV"/>
+               
+                
+                <p:chart id="proyectos" type="pie" model="#{graficaProyectos.piemodel}" style="height:300px; width:500px; margin: auto;"  widgetVar="pie"/>
+                
+                <p:chart id="pedidos" type="pie" model="#{graficaPagosProyectos.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="pieWV"/>
+
+                
 
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">

@@ -11,7 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
-import org.dao.ProyectoFacadeLocal;
+import org.dao.PedidoFacadeLocal;
+import org.entidades.Pedido;
 import org.entidades.Proyecto;
 import org.primefaces.model.chart.PieChartModel;
 
@@ -19,24 +20,24 @@ import org.primefaces.model.chart.PieChartModel;
  *
  * @author Orlando.R.R
  */
-@Named(value = "graficaFechaEntregaProyectos")
+@Named(value = "graficaPagosProyectos")
 @ViewScoped
-public class GraficaFechaEntregaProyectos implements Serializable{
+public class GraficaPagosProyectos implements Serializable{
 
+    /**
+     * Creates a new instance of GraficaPagosProyectos
+     */
+    public GraficaPagosProyectos() {
+    }
     @EJB 
-    private ProyectoFacadeLocal pfl;
+    private PedidoFacadeLocal pfl;
     private PieChartModel piemodel;
-    private Proyecto proyecto;
+    private Pedido pedido;
+    List<Pedido> listapedido;
     
-    List<Proyecto> fechaEntrega;
+    List<Proyecto> pagos;
 
-    public ProyectoFacadeLocal getPfl() {
-        return pfl;
-    }
-
-    public void setPfl(ProyectoFacadeLocal pfl) {
-        this.pfl = pfl;
-    }
+    
 
     public PieChartModel getPiemodel() {
         return piemodel;
@@ -46,38 +47,29 @@ public class GraficaFechaEntregaProyectos implements Serializable{
         this.piemodel = piemodel;
     }
 
-    public Proyecto getProyecto() {
-        return proyecto;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
-    public List<Proyecto> getFechaEntrega() {
-        return fechaEntrega;
-    }
-
-    public void setFechaEntrega(List<Proyecto> fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
-    }
-
-    public GraficaFechaEntregaProyectos() {
-    }
-
-   
+    
+    @PostConstruct
     public void init(){
-        fechaEntrega = pfl.findByfechaFinalizado();
+        listapedido = pfl.pedidosSinPagar(0);
         
-        Reporte(fechaEntrega);
+       
+        Reporte(listapedido);
     }
     
     
-    public void Reporte(List<Proyecto> fechaEntrega){
+    public void Reporte(List<Pedido> listapedido){
         
         piemodel = new PieChartModel();
         
-        piemodel.set("Fechas de entrega", fechaEntrega.size());
+        piemodel.set("PAGOS", listapedido.size());
         
         piemodel.setTitle("Fecha entrega de proyectos");
         piemodel.setLegendPosition("e");
@@ -85,5 +77,7 @@ public class GraficaFechaEntregaProyectos implements Serializable{
         piemodel.setShowDataLabels(true);
         piemodel.setDiameter(150);
     }
+   
+    
     
 }
