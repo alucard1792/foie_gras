@@ -92,21 +92,24 @@
                     </c:forEach>                       
                 </div>
             </div>
+            
+            <p:dataTable value="#{listarRoles.listaRoles}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
 
-            <p:dataTable value="#{listarRoles.listaRoles}" var="lp" id="tabla">
-                <p:column headerText="id">
+                <p:column headerText="id" width="100"> 
                     <p:outputLabel value="#{lp.idRol}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="Nombre rol" filterBy="#{lp.nombreRol}" filterMatchMode="contains">
+                <p:column headerText="Nombre rol" width="200" filterBy="#{lp.nombreRol}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.nombreRol}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="Estado">
-                    <p:outputLabel value="#{lp.estado}"></p:outputLabel>                
+                <p:column headerText="Estado" width="200" filterBy="#{lp.estado}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.estado == 1 ? 'Activo':'inactivo'}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="Opciones" exportable="false">
-                    <p:commandButton value="Editar" action="#{listarRoles.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
+                <p:column headerText="#{msg.opciones}" exportable="false" style="text-align: center;" width="200">
+                    <p:commandButton icon="ui-icon-pencil" title="#{msg.editar}" action="#{listarRoles.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
                 </p:column>
+
             </p:dataTable>
+             
         </h:form>
 
     </ui:define>
