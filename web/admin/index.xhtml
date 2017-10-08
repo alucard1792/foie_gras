@@ -46,10 +46,10 @@
         <h:form id="form">
 
             <p:row rendered="#{controladorSesion.rol == 1 || controladorSesion.rol == 2}">
-               
-                
+
+
                 <p:chart id="proyectos" type="pie" model="#{graficaProyectos.piemodel}" style="height:300px; width:500px; margin: auto;"  widgetVar="pie"/>
-               
+
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
                         <p:commandLink onclick="exportChartInPDFGRAFICA()" styleClass="btn btn-primary">
@@ -58,10 +58,16 @@
                         </p:commandLink>
                     </div>
                 </div>
-                
+                <h:form>
+
+                    <div>
+                        <h:commandButton class="btn btn-primary" value="Reporte PDF" actionListener="#{controlladorDeReporte.exportarPDF()}"/>
+                    </div>
+                </h:form>
+
                 <p:chart id="pedidos" type="pie" model="#{graficaPagosProyectos.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="pieWV"/>
 
-                
+
 
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
@@ -98,10 +104,10 @@
                 pdfMake.createPdf(docDefinition).open();
                 pdfMake.createPdf(docDefinition).download('primefaces-charts.pdf');
             }
-            
-            function exportChartInPDFGRAFICA(){
+
+            function exportChartInPDFGRAFICA() {
                 var docDefinition = {
-                    content:[
+                    content: [
                         'Estado de los proyectos',
                         {
                             image: $(PF('pie').exportAsImage()).attr('src'),
