@@ -93,32 +93,35 @@
                 </div>
             </div>
 
-            <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla">
-                <p:column headerText="id" >
+            <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+
+                <p:column headerText="id" width="200"> 
                     <p:outputLabel value="#{lp.idProveedor}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.nitProveedor}" filterBy="#{lp.nitProveedor}" filterMatchMode="contains">
+                <p:column headerText="#{msg.nitProveedor}" width="200" filterBy="#{lp.nitProveedor}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.nitProveedor}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.nombreEmpresa}"  filterBy="#{lp.nombreEmpresa}" filterMatchMode="contains">
+                <p:column headerText="#{msg.nombreEmpresa}" filterBy="#{lp.nombreEmpresa}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.nombreEmpresa}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.direccion}">
-                    <p:outputLabel value="#{lp.direccion}"></p:outputLabel>                
+                <p:column headerText="#{msg.direccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
+                    <p:outputLabel value="#{(lp.direccion)}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.telefeno}">
+                <p:column headerText="#{msg.telefeno}" width="200">
                     <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.representanteLegal}"  filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+                <p:column headerText="#{msg.representanteLegal}" width="200">
                     <p:outputLabel value="#{lp.representanteLegal}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.ciudad}">
+                <p:column headerText="#{msg.ciudad}" filterBy="#{lp.ciudadesIdCiudad.nombreCiudad}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.opciones}" exportable="false">
-                    <p:commandButton value="#{msg.editar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
+                <p:column headerText="#{msg.opciones}" exportable="false" style="text-align: center;">
+                    <p:commandButton icon="ui-icon-pencil" title="#{msg.editar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
                 </p:column>
+
             </p:dataTable>
+
         </h:form>
     </ui:define>
 
