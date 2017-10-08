@@ -140,8 +140,8 @@
                 <p:column headerText="#{msg.estado}" width="200">
                     <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.opciones}" exportable="false" width="200">
-                    <p:commandButton value="#{msg.editar}" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                <p:column headerText="#{msg.opciones}" exportable="false" width="100" style="text-align: center;">
+                    <p:commandButton icon="ui-icon-pencil" title="Editar Usuario" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                 </p:column>
 
             </p:dataTable>

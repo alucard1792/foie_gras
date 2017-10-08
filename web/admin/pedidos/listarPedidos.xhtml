@@ -92,38 +92,40 @@
                     </c:forEach>                       
                 </div>
             </div>
-            <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla" >
-                <p:column headerText="#{msg.idPedidos}">
+
+            <p:dataTable value="#{listarPedidos.listaPedidos}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+                <p:column headerText="id" width="200"> 
                     <p:outputLabel value="#{lp.idPedido}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.nombreProyecto}" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+                <p:column headerText="#{msg.nombreProyecto}" width="200" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.nombreProyecto}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.descripcion}" filterBy="#{lp.descripcion}" filterMatchMode="contains">
+                <p:column headerText="#{msg.descripcion}" filterBy="#{lp.descripcion}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.descripcion}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.realizoPago}" filterBy="#{lp.realizoPago}" filterMatchMode="contains">
+
+                <p:column headerText="#{msg.realizoPago}" filterBy="#{lp.realizoPago}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.realizoPago == 1 ? 'si':'no')}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.cantidad}" filterBy="#{lp.cantidad}" filterMatchMode="contains">
-                    <p:outputLabel value="#{lp.cantidad }"></p:outputLabel> 
+                <p:column headerText="#{msg.cantidad}" width="200">
+                    <p:outputLabel value="#{lp.cantidad}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.materiaPrima}" filterBy="#{lp.nombre}" filterMatchMode="contains">
+                <p:column headerText="#{msg.materiaPrima}" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="nombre cliente" filterBy="#{lp.nombre}" filterMatchMode="contains">
+                <p:column headerText="nombre cliente" filterBy="#{lp.nombreCliente}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.nombreCliente}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="telefono cliente" filterBy="#{lp.nombre}" filterMatchMode="contains">
+                <p:column headerText="telefono cliente" filterBy="#{lp.telefonoCliente}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.telefonoCliente}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="correo cliente" filterBy="#{lp.nombre}" filterMatchMode="contains">
-                    <p:outputLabel value="#{lp.correoCliente}"></p:outputLabel>                
+                <p:column headerText="correo cliente" width="200" filterBy="#{lp.correoCliente}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.correoCliente}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.vendedor}">
-                    <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"></p:outputLabel>                
+                <p:column headerText="#{msg.vendedor}" width="200" filterBy="#{lp.vendedorIdPersona.nombre}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.vendedorIdPersona.nombre}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column class="" width="200" headerText="#{msg.opciones}" exportable="false" >
+                <p:column headerText="#{msg.opciones}" exportable="false" width="100" style="text-align: center;">
                     <p:row rendered="#{controladorSesion.rol == 1 || controladorSesion.rol == 2 || lp.estaAsignado == 0}">
                         <p:commandButton icon="ui-icon-pencil" title="Editar pedido" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
                         <p:row rendered="#{lp.realizoPago == 1 and lp.estaAsignado == 0}">
@@ -133,6 +135,7 @@
                 </p:column>
 
             </p:dataTable>
+
         </h:form>
     </ui:define>
 
