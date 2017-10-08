@@ -87,41 +87,46 @@
                 </div>
             </div>
 
-            <p:dataTable value="#{(listarProyectos.proyecto)}" var="lp" id="tabla">
-                <p:column headerText="Id proyecto">
+            <p:dataTable value="#{listarProyectos.proyecto}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+
+                <p:column headerText="id" width="200"> 
                     <p:outputLabel value="#{lp.idProyecto}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="Fecha inicio"  filterBy="#{lp.fechaInicio}" filterMatchMode="contains">
-                    <p:outputLabel value="#{lp.fechaInicio}" ><f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" /></p:outputLabel>                
+                <p:column headerText="Fecha inicio" width="200" filterBy="#{lp.fechaInicio}" filterMatchMode="contains">
+                    <p:outputLabel value="#{lp.fechaInicio}"><f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="Fecha finalizacion" filterBy="#{lp.fechaFinalizado}" filterMatchMode="contains">
+                <p:column headerText="Fecha finalizacion" filterBy="#{lp.fechaFinalizado}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.fechaFinalizado}"><f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" /></p:outputLabel>                
                 </p:column>
-
-                <p:column headerText="Tiempo estimado">
-                    <p:outputLabel value="#{lp.tiempoEstimado}"><f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" /></p:outputLabel>                
+                <p:column headerText="Estado" filterBy="#{lp.estadosIdEstado.descripcionEstado}" filterMatchMode="contains" width="200">
+                    <p:outputLabel value="#{(lp.estadosIdEstado.descripcionEstado)}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="Estado">
-                    <p:outputLabel value="#{lp.estadosIdEstado.descripcionEstado}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="Dificultad">
+                <p:column headerText="Dificultad" width="200">
                     <p:outputLabel value="#{lp.dificultadesIdDificultad.descripcionDificultad}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="Id pedido"  filterBy="#{lp.pedidosIdPedido}" filterMatchMode="contains">
-                    <p:outputLabel value="#{lp.pedidosIdPedido.idPedido}"></p:outputLabel>                
+                <p:column headerText="Nombre proyecto"  filterBy="#{lp.pedidosIdPedido.nombreProyecto}" filterMatchMode="contains" width="200">
+                    <p:outputLabel value="#{lp.pedidosIdPedido.nombreProyecto}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="Operario asignado">
+                <p:column headerText="Descripcion"  filterBy="#{lp.pedidosIdPedido.descripcion}" filterMatchMode="contains" width="200">
+                    <p:outputLabel value="#{lp.pedidosIdPedido.descripcion}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Cantidad"  filterBy="#{lp.pedidosIdPedido.cantidad}" filterMatchMode="contains" width="200">
+                    <p:outputLabel value="#{lp.pedidosIdPedido.cantidad}"></p:outputLabel>                
+                </p:column>
+                <p:column headerText="Operario asignado" width="200">
                     <p:outputLabel value="#{lp.operarioIdPersona.nombre} #{lp.operarioIdPersona.apellido}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="Opciones" exportable="false">
+                <p:column headerText="Opciones" exportable="false" width="100" style="text-align: center;">
                     <p:row rendered="#{lp.estadosIdEstado.idEstado == 5}">
-                        <p:commandButton value="iniciar proyecto" action="#{listarProyectos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                        <p:commandButton icon="ui-icon-play" title="Iniciar proyecto" action="#{listarProyectos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
                     <p:row rendered="#{lp.estadosIdEstado.idEstado == 1}">
-                        <p:commandButton value="finalizar" action="#{listarProyectos.finalizarProyecto(lp)}" ajax="false"></p:commandButton>                    
+                        <p:commandButton icon="ui-icon-check" title="Finalizar proyecto" action="#{listarProyectos.finalizarProyecto(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
                 </p:column>
+                  
             </p:dataTable>
+
         </h:form>
 
     </ui:define>

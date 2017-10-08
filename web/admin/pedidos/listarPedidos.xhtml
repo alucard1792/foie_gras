@@ -123,11 +123,13 @@
                     <p:outputLabel value="#{lp.correoCliente}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.vendedor}" width="200" filterBy="#{lp.vendedorIdPersona.nombre}" filterMatchMode="contains">
-                    <p:outputLabel value="#{lp.vendedorIdPersona.nombre}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                    <p:outputLabel value="#{lp.vendedorIdPersona.nombre} #{lp.vendedorIdPersona.apellido}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.opciones}" exportable="false" width="100" style="text-align: center;">
                     <p:row rendered="#{controladorSesion.rol == 1 || controladorSesion.rol == 2 || lp.estaAsignado == 0}">
-                        <p:commandButton icon="ui-icon-pencil" title="Editar pedido" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
+                        <p:row rendered="#{lp.estaAsignado != 1}">
+                            <p:commandButton icon="ui-icon-pencil" title="Editar pedido" action="#{listarPedidos.preparacionEditar(lp)}" ajax="false"></p:commandButton>
+                        </p:row>
                         <p:row rendered="#{lp.realizoPago == 1 and lp.estaAsignado == 0}">
                             <p:commandButton  icon="ui-icon-extlink" title="asignar operario" action="#{enviarPedidoAProyecto.preparacionAsignarOperario(lp)}"></p:commandButton>
                         </p:row>
