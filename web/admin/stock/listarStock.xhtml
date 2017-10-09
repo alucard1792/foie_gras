@@ -93,47 +93,47 @@
                 </div>
             </div>
 
-            <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla">
-                <p:column headerText="id">
+            <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla"  class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+                <p:column headerText="id" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.idMateria}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.referencia}" filterBy="#{lp.referencia}" filterMatchMode="contains" >
+                <p:column headerText="#{msg.referencia}" filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains"  width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.tipo}"  filterBy="#{lp.tipoMateriaPrima}" filterMatchMode="contains">
+                <p:column headerText="#{msg.tipo}"  filterBy="#{lp.materiasPrimaIdMateria.tipoMateriaPrima}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.tipoMateriaPrima}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.calibre}" filterBy="#{lp.calibre}" filterMatchMode="contains">
+                <p:column headerText="#{msg.calibre}" filterBy="#{lp.materiasPrimaIdMateria.calibre}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.calibre}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.largoLamina}" filterBy="#{lp.dimensionLargo}" filterMatchMode="contains">
+                <p:column headerText="#{msg.largoLamina}" filterBy="#{lp.materiasPrimaIdMateria.dimensionLargo}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionLargo}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.altoLamina}"  filterBy="#{lp.dimensionAlto}" filterMatchMode="contains">
+                <p:column headerText="#{msg.altoLamina}"  filterBy="#{lp.materiasPrimaIdMateria.dimensionAlto}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionAlto}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.idStock}">
+                <p:column headerText="#{msg.idStock}" width="200">
                     <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.stock}">
+                <p:column headerText="#{msg.stock}" width="200">
                     <p:outputLabel value="#{lp.stock}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.fechaIngreso}">
+                <p:column headerText="#{msg.fechaIngreso}" width="200">
                     <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.fechaActualizacion}">
+                <p:column headerText="#{msg.fechaActualizacion}" width="200">
                     <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.referenciaMateria}"  filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains">
+                <p:column headerText="#{msg.referenciaMateria}"  filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="proveedor"  filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains">
+                <p:column headerText="proveedor"  filterBy="#{pl.nombreEmpresa}" filterMatchMode="contains" width="200">
                     <ui:repeat value="#{lp.materiasPrimaIdMateria.proveedorList}" var="pl">
                         <p:outputLabel value="#{pl.nombreEmpresa}"></p:outputLabel>                
                     </ui:repeat>
                 </p:column>
-                <p:column headerText="#{msg.opciones}" exportable="false">
-                    <p:commandButton value="#{msg.editar}" action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                <p:column headerText="#{msg.opciones}" exportable="false" width="100">
+                    <p:commandButton icon="ui-icon-pencil" title="#{msg.editar}"  action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                 </p:column>
 
             </p:dataTable>

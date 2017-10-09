@@ -47,6 +47,7 @@ public abstract class AbstractFacade<T> {
     }
 
     public List<T> findRange(int[] range) {
+        getEntityManager().getEntityManagerFactory().getCache().evictAll();
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         javax.persistence.Query q = getEntityManager().createQuery(cq);

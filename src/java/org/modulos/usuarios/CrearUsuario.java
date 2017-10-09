@@ -23,7 +23,6 @@ import org.dao.RolFacadeLocal;
 import org.entidades.Area;
 import org.entidades.Rol;
 import org.login.ControladorSesion;
-
 /**
  *
  * @author David
