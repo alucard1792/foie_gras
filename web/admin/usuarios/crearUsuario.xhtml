@@ -167,6 +167,16 @@
                 </div>
             </div>
         </div>
+        <h:form id="form-load" prependId="false" enctype="multipart/form-data">
+            <h:panelGroup id="load-users" layout="block">
+                <h:inputFile id="file"/>
+            </h:panelGroup>
+
+
+            <h:commandButton value="Cargar" actionListener="#{cargaUsuarioController.cargarUsuarios()}"/>
+
+
+        </h:form>
     </ui:define>
 
     <ui:define name="ultimosScripts">

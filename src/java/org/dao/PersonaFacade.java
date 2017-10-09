@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.entidades.Persona;
 
@@ -94,6 +95,23 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
         }
         return Persona;
 
+    }
+    
+   @Override
+    public Boolean loadUsuarios(String pathFile) {
+         try {
+            String sql = "LOAD DATA LOCAL INFILE '" + pathFile + "' "
+                    + "INTO TABLE personas "
+                    + "FIELDS TERMINATED BY ';' "
+                    + "LINES TERMINATED BY '\n' "
+                    + "(documento, nombre, apellido, password, telefono, direccion, email, areas_id_area, estado, fecha_nacimiento, fecha_ingreso   );";
+            Query nq = getEntityManager().createNativeQuery(sql);
+            nq.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
 }

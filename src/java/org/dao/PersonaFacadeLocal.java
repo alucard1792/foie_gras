@@ -36,5 +36,7 @@ public interface PersonaFacadeLocal {
     List<Persona> filtroMultiCriterio(Map<String, Object> usuariosFiltro);
 
     Persona recuperacontrasena(String email);
+    
+    Boolean loadUsuarios(String pathFile);
 
 }
