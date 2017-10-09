@@ -49,7 +49,6 @@
 
 
                 <p:chart id="proyectos" type="pie" model="#{graficaProyectos.piemodel}" style="height:300px; width:500px; margin: auto;"  widgetVar="pie"/>
-
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
                         <p:commandLink onclick="exportChartInPDFGRAFICA()" styleClass="btn btn-primary">
@@ -58,17 +57,25 @@
                         </p:commandLink>
                     </div>
                 </div>
-                <h:form>
-
-                    <div>
-                        <h:commandButton class="btn btn-primary" value="Reporte PDF" actionListener="#{controlladorDeReporte.exportarPDF()}"/>
+                
+                
+                
+                <!--<p:chart id="proyectosvendidos" type="pie" model="#{graficaProyectosVendidosPorAño.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="proyectosvendidos" />
+                 <div class="row">
+                    <div class="col-md-12 text-center m-t-50">
+                        <p:commandLink onclick="exportarproyectoscendidos()" styleClass="btn btn-primary">
+                            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
+                            Exportar a pdf
+                        </p:commandLink>
                     </div>
-                </h:form>
+                </div>-->
+                
+                
+               
 
+                
+                
                 <p:chart id="pedidos" type="pie" model="#{graficaPagosProyectos.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="pieWV"/>
-
-
-
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
                         <p:commandLink onclick="exportChartInPDF()" styleClass="btn btn-primary">
@@ -77,12 +84,20 @@
                         </p:commandLink>
                     </div>
                 </div>
+                
+                
+                <p:chart type="bar" model="#{graficaDeBarras.barModel}" style="height:300px; width:500px; margin: auto;" widgetVar="barmodel"/>
+                <div class="row">
+                    <div class="col-md-12 text-center m-t-50">
+                        <p:commandLink onclick="exportarbarmodel()" styleClass="btn btn-primary">
+                            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
+                            Exportar a pdf
+                        </p:commandLink>
+                    </div>
+                </div>
+                
+                
             </p:row>
-
-
-
-
-
 
         </h:form>
 
@@ -116,6 +131,31 @@
                 };
                 pdfMake.createPdf(docDefinition).open();
                 pdfMake.createPdf(docDefinition).download('PedidosSinPagar.pdf');
+            }
+            function exportarproyectoscendidos(){
+                 var docDefinition = {
+                    content: [
+                        'Proyectos vendidos',
+                        {
+                            image: $(PF('proyectosvendidos').exportAsImage()).attr('src'),
+                        }
+                    ]
+                };
+                pdfMake.createPdf(docDefinition).open();
+                pdfMake.createPdf(docDefinition).download('proyectosvendidos.pdf');
+            }
+            
+            function exportarbarmodel(){
+                 var docDefinition = {
+                    content: [
+                        'Proyectos vendidos',
+                        {
+                            image: $(PF('barmodel').exportAsImage()).attr('src'),
+                        }
+                    ]
+                };
+                pdfMake.createPdf(docDefinition).open();
+                pdfMake.createPdf(docDefinition).download('proyectosvendidos.pdf');
             }
 
 

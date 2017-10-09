@@ -12,7 +12,7 @@ import org.entidades.Proyecto;
 
 /**
  *
- * @author David
+ * @author Orlando
  */
 @Local
 public interface ProyectoFacadeLocal {
@@ -42,6 +42,14 @@ public interface ProyectoFacadeLocal {
     List<Proyecto> buscarProyectosSinComenzar();
     
     List<Proyecto> buscarProyectosConNovedad();
+    
+    List<Proyecto> cantidaddeproyectosvendidos();
+    
+    List<Proyecto> cantidaddeproyectosvendidosenaños();
+    
+    List<Proyecto> cantidadDeproyectosVendidosEnDosMilDiesiseis();
+    
+    List<Proyecto> cantidadDeproyectosVendidosEnDosMilDiesisiete();
 
 
     public List<Proyecto> findByfechaFinalizado();

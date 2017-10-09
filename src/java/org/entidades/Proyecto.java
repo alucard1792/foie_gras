@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author David
+ * @author Orlando
  */
 @Entity
 @Table(name = "proyectos")
@@ -42,6 +42,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "ProyectosPausados", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
     , @NamedQuery(name = "ProyectosSinComenzar", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
     , @NamedQuery(name = "ProyectosConNovedad", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
+    , @NamedQuery(name = "Proyectosvendidos", query = "SELECT p FROM Proyecto p WHERE p.fechaInicio BETWEEN '2014-01-01' AND '2014-12-01'")
+    , @NamedQuery(name = "Proyectosvendidosenelaño", query = "SELECT p FROM Proyecto p WHERE p.fechaInicio BETWEEN '2015-01-01' AND '2015-12-01'")
+    , @NamedQuery(name = "ProyectosVendidosEnDosMilDiesiseis", query = "SELECT p FROM Proyecto p WHERE p.fechaInicio BETWEEN '2016-01-01' AND '2016-12-01'")
+    , @NamedQuery(name = "cantidadDeproyectosVendidosEnDosMilDiesisiete", query = "SELECT p FROM Proyecto p WHERE p.fechaInicio BETWEEN '2017-01-01' AND '2017-12-01'")
     , @NamedQuery(name = "Proyecto.findByTiempoEstimado", query = "SELECT p FROM Proyecto p WHERE p.tiempoEstimado = :tiempoEstimado")})
 public class Proyecto implements Serializable {
 

@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.dao.PedidoFacadeLocal;
+import org.dao.ProyectoFacadeLocal;
 import org.entidades.Pedido;
 import org.entidades.Proyecto;
 import org.primefaces.model.chart.PieChartModel;
@@ -31,10 +32,13 @@ public class GraficaPagosProyectos implements Serializable{
     }
     @EJB 
     private PedidoFacadeLocal pfl;
+    @EJB
+    private ProyectoFacadeLocal proyectofacadelocal;
     private PieChartModel piemodel;
     private Pedido pedido;
     List<Pedido> listapedido;
     List<Pedido> listapedidopago;
+    List<Proyecto> listaproyectosvendidos;
 
     public PedidoFacadeLocal getPfl() {
         return pfl;
@@ -85,6 +89,7 @@ public class GraficaPagosProyectos implements Serializable{
     public void init(){
         listapedido = pfl.pedidosSinPagar(0);
         listapedidopago = pfl.pedidosSinPagar(1);
+        
         
        
         Reporte(listapedido, listapedidopago);

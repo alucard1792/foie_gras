@@ -17,7 +17,7 @@ import org.entidades.Proyecto;
 
 /**
  *
- * @author David
+ * @author Orlando
  */
 @Stateless
 public class ProyectoFacade extends AbstractFacade<Proyecto> implements ProyectoFacadeLocal {
@@ -155,6 +155,62 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
     @Override
     public List<Proyecto> findByfechaFinalizado() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Proyecto> cantidaddeproyectosvendidos() {
+        List<Proyecto> proyectosvendidos = new ArrayList<>();
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("Proyectosvendidos", Proyecto.class);
+            proyectosvendidos = q.getResultList();
+            
+        } catch (Exception e) {
+        }
+        return proyectosvendidos;
+    }
+
+    @Override
+    public List<Proyecto> cantidaddeproyectosvendidosenaños() {
+        List<Proyecto> Proyectosvendidosenelaño = new ArrayList<>();
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("Proyectosvendidosenelaño", Proyecto.class);
+            Proyectosvendidosenelaño = q.getResultList();
+        } catch (Exception e) {
+            
+        }
+        
+        return Proyectosvendidosenelaño;
+    }
+
+    @Override
+    public List<Proyecto> cantidadDeproyectosVendidosEnDosMilDiesiseis() {
+        List<Proyecto> proyectosVendidosEnDosMilDiesiseis = new ArrayList<>();
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("ProyectosVendidosEnDosMilDiesiseis", Proyecto.class);
+            proyectosVendidosEnDosMilDiesiseis = q.getResultList();
+            
+        } catch (Exception e) {
+        }
+        
+        return proyectosVendidosEnDosMilDiesiseis;
+    }
+
+    @Override
+    public List<Proyecto> cantidadDeproyectosVendidosEnDosMilDiesisiete() {
+        List<Proyecto> cantidadDeproyectosVendidosEnDosMilDiesisiete = new ArrayList<>();
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("cantidadDeproyectosVendidosEnDosMilDiesisiete", Proyecto.class);
+            cantidadDeproyectosVendidosEnDosMilDiesisiete = q.getResultList();
+            
+            
+        } catch (Exception e) {
+        }
+        
+        return cantidadDeproyectosVendidosEnDosMilDiesisiete;
     }
 
     
