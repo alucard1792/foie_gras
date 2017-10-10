@@ -1,4 +1,4 @@
-﻿********************Actualizado: 04-10-2017*********************
+﻿********************Actualizado: 10-10-2017*********************
 
 Este es el dump de la base de datos para que pueda funcionar el proyecto. ejecutar en workbench y listo
 ~~*Nota *: para que el proyecto funcionen les toca crear un usuario que se llame fixed_up y la contraseña 123, si no lo hacen les toca configurar el archivo glassfish resources.xml con el usuario root. Si crean el usuario le deben dar todos los permisos, desde phpMyAdmin es facil.~~
@@ -6,7 +6,7 @@ Este es el dump de la base de datos para que pueda funcionar el proyecto. ejecut
 *Nota 2: Si actualizan la base de datos, por favor cargar de nuevo el dump describiendo los cambios. gracias.
 *Nota 3: Solo hacer respaldos desde workbench
 	1. nuevo
-		agregadas las columnas nombre_cliente, telefono_cliente y correo cliente en la tabla pedido
+		modificado nombres permisos
 
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
@@ -218,7 +218,7 @@ CREATE TABLE `materias_prima` (
   `dimension_largo` int(11) NOT NULL COMMENT 'largo de la lamina',
   `dimension_alto` int(11) NOT NULL COMMENT 'alto de la lamina',
   PRIMARY KEY (`id_materia`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +227,7 @@ CREATE TABLE `materias_prima` (
 
 LOCK TABLES `materias_prima` WRITE;
 /*!40000 ALTER TABLE `materias_prima` DISABLE KEYS */;
-INSERT INTO `materias_prima` VALUES (1,'poliestireno amarillo','Poliestireno',4,40,40);
+INSERT INTO `materias_prima` VALUES (1,'poliestireno amarillo','Poliestireno',4,40,40),(2,'poliestireno transparente','Poliestireno',2,2,2);
 /*!40000 ALTER TABLE `materias_prima` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +255,7 @@ CREATE TABLE `pedidos` (
   KEY `fk_pedidos_personas1_idx` (`vendedor_id_persona`),
   CONSTRAINT `fk_pedidos_materias_prima1` FOREIGN KEY (`materias_prima_id_materia`) REFERENCES `materias_prima` (`id_materia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_pedidos_personas1` FOREIGN KEY (`vendedor_id_persona`) REFERENCES `personas` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,7 +264,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,'prueba pedido','prueba pedido',1,0,1,'prueba pedido n','prueba pedido 1','prueba pedido @',1,1);
+INSERT INTO `pedidos` VALUES (1,'prueba pedido','prueba pedido',1,1,1,'prueba pedido n','prueba pedido 1','prueba pedido @',1,1),(2,'prueba pedido 2','prueba pedido 2',1,1,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(3,'prueba pedido 2','prueba pedido 2',1,1,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(4,'prueba pedido 2','prueba pedido 2',1,1,0,'edgar zamora','123','edzamora1@misena.edu.co',2,1),(5,'prueba pedido 2','prueba pedido 2',0,0,1,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(6,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(7,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(8,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(9,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(10,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(11,'prueba pedido 3','prueba pedido 3',1,1,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(12,'prueba stock 1','prueba stock 1',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(13,'prueba stock 1','prueba stock 1',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(14,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(15,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(16,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(17,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(18,'prueba pedido 2','prueba pedido 2',0,0,5,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(19,'prueba alex','prueba alex',0,0,10,'edgar zamora','123','edzamora1@misena.edu.co',2,1),(20,'prueba alex','prueba alex',0,0,1,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(21,'prueba alex','prueba alex',0,0,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(22,'prueba alex','prueba alex',0,0,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(23,'prueba pedido 2','motor electrico superior',0,0,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(24,'prueba alex','pri',0,0,0,'','','',1,1),(25,'prueba alex','prueba alex',1,1,1,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,7 +295,7 @@ CREATE TABLE `permisos` (
 
 LOCK TABLES `permisos` WRITE;
 /*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
-INSERT INTO `permisos` VALUES (1,'Usuarios','Users',1,'admin/usuarios/listarUsuarios.xhtml','account_box',NULL),(2,'Crear usuarios',NULL,1,'admin/usuarios/crearUsuario.xhtml','',1),(3,'Listar usuarios',NULL,1,'admin/usuarios/listarUsuarios.xhtml',NULL,1),(4,'Eliminar usuarios',NULL,1,NULL,NULL,1),(5,'Editar usuarios',NULL,1,'admin/usuarios/editar.xhtml',NULL,1),(6,'Estados usuarios',NULL,1,NULL,NULL,1),(7,'Reportes usuarios',NULL,1,NULL,NULL,1),(8,'Materia prima','raw materials',1,'admin/materiaPrima/listarMateriaPrima.xhtml','format_align_justify',NULL),(9,'Crear materia prima',NULL,1,'admin/materiaPrima/crearMateriaPrima.xhtml',NULL,8),(10,'Listar materia prima',NULL,1,NULL,'',8),(11,'Eliminar materia prima',NULL,1,NULL,NULL,8),(12,'Editar materia prima',NULL,1,'admin/materiaPrima/editarMateriaPrima.xhtml',NULL,8),(13,'Estados materia prima',NULL,1,NULL,NULL,8),(14,'Reportes materia prima',NULL,1,NULL,NULL,8),(15,'Proveedores','Suppliers',1,'admin/provedores/listarProveedores.xhtml','content_paste',NULL),(16,'Crear proveedores',NULL,1,'admin/provedores/crearProveedor.xhtml',NULL,15),(17,'Listar proveedores',NULL,1,NULL,'',15),(18,'Eliminar proveedores',NULL,1,NULL,NULL,15),(19,'Editar proveedores',NULL,1,'admin/provedores/editarProveedor.xhtml',NULL,15),(20,'Estados proveedores',NULL,1,NULL,NULL,15),(21,'Reportes proveedores',NULL,1,NULL,NULL,15),(22,'Pedidos','Orders',1,'admin/pedidos/listarPedidos.xhtml','attach_file',NULL),(23,'Crear pedidos',NULL,1,'admin/pedidos/crearPedido.xhtml',NULL,22),(24,'Listar pedidos',NULL,1,NULL,'',22),(25,'Eliminar pedidos',NULL,1,NULL,NULL,22),(26,'Editar pedidos',NULL,1,'admin/pedidos/editarPedido.xhtml',NULL,22),(27,'Estados pedidos',NULL,1,NULL,NULL,22),(28,'Reportes pedidos',NULL,1,NULL,NULL,22),(29,'Proyectos','Projects',1,'admin/proyectos/listarProyectos.xhtml','change_history',NULL),(30,'Crear proyectos',NULL,1,'admin/proyectos/crearProyecto.xhtml',NULL,29),(31,'Listar proyectos',NULL,1,NULL,'',29),(32,'Eliminar proyectos',NULL,1,NULL,NULL,29),(33,'Editar proyectos',NULL,1,'admin/proyectos/editarProyecto.xhtml',NULL,29),(34,'Estados proyectos',NULL,1,NULL,NULL,29),(35,'Reportes proyectos',NULL,1,NULL,NULL,29),(36,'Roles','Rols',1,'admin/roles/listarRoles.xhtml','group',NULL),(37,'Crear roles',NULL,1,'admin/roles/crearRoles.xhtml',NULL,36),(38,'Listar roles',NULL,1,NULL,NULL,36),(39,'Eliminar roles',NULL,1,NULL,NULL,36),(40,'Editar roles',NULL,1,NULL,NULL,36),(41,'Estados roles',NULL,1,NULL,NULL,36),(42,'Reportes roles',NULL,1,NULL,NULL,36),(43,'Mi cuenta','My account',1,'admin/dashboard/miCuenta.xhtml',NULL,NULL),(44,'Listar cuenta',NULL,1,NULL,NULL,43),(45,'Editar Cuenta',NULL,1,NULL,NULL,43),(46,'Stock','Stock',1,'admin/stock/listarStock.xhtml','remove_red_eye',NULL),(47,'Crear stock',NULL,1,'admin/stock/crearStock.xhtml',NULL,46),(48,'Listar stock',NULL,1,NULL,NULL,46),(49,'Eliminar stock',NULL,1,NULL,NULL,46),(50,'Editar stock',NULL,1,'admin/stock/editarStock.xhtml',NULL,46),(51,'Estado stock',NULL,1,NULL,NULL,46),(52,'Reporte stock',NULL,1,NULL,NULL,46),(53,'Asignar operario',NULL,1,'admin/pedidos/asignarOperario.xhtml',NULL,22);
+INSERT INTO `permisos` VALUES (1,'Usuarios','Users',1,'admin/usuarios/listarUsuarios.xhtml','account_box',NULL),(2,'Crear usuarios',NULL,1,'admin/usuarios/crearUsuario.xhtml','',1),(3,'Listar usuarios',NULL,1,'admin/usuarios/listarUsuarios.xhtml',NULL,1),(4,'Eliminar usuarios',NULL,1,NULL,NULL,1),(5,'Editar usuarios',NULL,1,'admin/usuarios/editar.xhtml',NULL,1),(6,'Estados usuarios',NULL,1,NULL,NULL,1),(7,'Reportes usuarios',NULL,1,NULL,NULL,1),(8,'Materia prima','raw materials',1,'admin/materiaPrima/listarMateriaPrima.xhtml','format_align_justify',NULL),(9,'Crear materia prima',NULL,1,'admin/materiaPrima/crearMateriaPrima.xhtml',NULL,8),(10,'Listar materia prima',NULL,1,NULL,'',8),(11,'Eliminar materia prima',NULL,1,NULL,NULL,8),(12,'Editar materia prima',NULL,1,'admin/materiaPrima/editarMateriaPrima.xhtml',NULL,8),(13,'Estados materia prima',NULL,1,NULL,NULL,8),(14,'Reportes materia prima',NULL,1,NULL,NULL,8),(15,'Proveedores','Suppliers',1,'admin/provedores/listarProveedores.xhtml','content_paste',NULL),(16,'Crear proveedores',NULL,1,'admin/provedores/crearProveedor.xhtml',NULL,15),(17,'Listar proveedores',NULL,1,NULL,'',15),(18,'Eliminar proveedores',NULL,1,NULL,NULL,15),(19,'Editar proveedores',NULL,1,'admin/provedores/editarProveedor.xhtml',NULL,15),(20,'Estados proveedores',NULL,1,NULL,NULL,15),(21,'Reportes proveedores',NULL,1,NULL,NULL,15),(22,'Pedidos','Orders',1,'admin/pedidos/listarPedidos.xhtml','attach_file',NULL),(23,'Crear pedidos',NULL,1,'admin/pedidos/crearPedido.xhtml',NULL,22),(24,'Listar pedidos',NULL,1,NULL,'',22),(25,'Eliminar pedidos',NULL,1,NULL,NULL,22),(26,'Editar pedidos',NULL,1,'admin/pedidos/editarPedido.xhtml',NULL,22),(27,'Estados pedidos',NULL,1,NULL,NULL,22),(28,'Reportes pedidos',NULL,1,NULL,NULL,22),(29,'Proyectos','Projects',1,'admin/proyectos/listarProyectos.xhtml','change_history',NULL),(30,'Crear proyectos',NULL,1,'admin/proyectos/crearProyecto.xhtml',NULL,29),(31,'Listar proyectos',NULL,1,NULL,'',29),(32,'Eliminar proyectos',NULL,1,NULL,NULL,29),(33,'Editar proyectos',NULL,1,'admin/proyectos/editarProyecto.xhtml',NULL,29),(34,'Estados proyectos',NULL,1,NULL,NULL,29),(35,'Reportes proyectos',NULL,1,NULL,NULL,29),(36,'Roles & permisos','Rols & permissions',1,'admin/roles/listarRoles.xhtml','group',NULL),(37,'Crear roles',NULL,1,'admin/roles/crearRoles.xhtml',NULL,36),(38,'Listar roles',NULL,1,NULL,NULL,36),(39,'Eliminar roles',NULL,1,NULL,NULL,36),(40,'Editar roles',NULL,1,NULL,NULL,36),(41,'Estados roles',NULL,1,NULL,NULL,36),(42,'Reportes roles',NULL,1,NULL,NULL,36),(43,'Mi cuenta','My account',1,'admin/dashboard/miCuenta.xhtml',NULL,NULL),(44,'Listar cuenta',NULL,1,NULL,NULL,43),(45,'Editar Cuenta',NULL,1,NULL,NULL,43),(46,'Stock & material','Stock & material',1,'admin/stock/listarStock.xhtml','remove_red_eye',NULL),(47,'Crear stock',NULL,1,'admin/stock/crearStock.xhtml',NULL,46),(48,'Listar stock',NULL,1,NULL,NULL,46),(49,'Eliminar stock',NULL,1,NULL,NULL,46),(50,'Editar stock',NULL,1,'admin/stock/editarStock.xhtml',NULL,46),(51,'Estado stock',NULL,1,NULL,NULL,46),(52,'Reporte stock',NULL,1,NULL,NULL,46),(53,'Asignar operario',NULL,1,'admin/pedidos/asignarOperario.xhtml',NULL,22);
 /*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +334,7 @@ CREATE TABLE `personas` (
 
 LOCK TABLES `personas` WRITE;
 /*!40000 ALTER TABLE `personas` DISABLE KEYS */;
-INSERT INTO `personas` VALUES (1,10,'david','zamora','123',1525536,' occidente','edzamora1@misena.edu.co',1,1,'1992-10-04','2016-03-17',NULL,''),(2,11,'alex','ramos benavides','123',2,'calle occidente','alex@mail.com',1,1,'1992-10-05','2016-06-22',NULL,NULL),(3,12,'orlando','rubio','123',3,'calle occidente','orlando@mail.com',1,1,'1992-10-05','2016-06-22',NULL,NULL),(4,13,'harrison','copasachoa','123',4,'calle occidente','harrison@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(5,14,'manolo ','cardenas','123',5,'calle occidente','manolo@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(6,15,'kevin','galeano','123',6,'calle occidente','kevin@mail.com',3,1,'1992-10-05','2016-06-22',NULL,NULL),(7,16,'sofia ','henao','123',7,'calle occidente','3',3,1,'1992-10-05','2016-06-22',NULL,NULL),(8,17,'vendedor','ayudante','123',8,'calle occidente','vendedorayudante@mail.com',2,1,'1992-10-05','2016-06-22',NULL,NULL),(9,18,'operarioa','ayudante','123',9,'calle occidente','operarioayudante@mail.com',3,1,'1992-09-30','2016-06-17',NULL,'');
+INSERT INTO `personas` VALUES (1,10,'david','zamora','123',1,' occidente','edzamora1@misena.edu.co',1,1,'1992-10-04','2016-06-22','2017-10-10',''),(2,11,'alex','ramos benavides','123',2,'calle occidente','edzamora1@misena.edu.co',1,1,'1992-10-05','2016-06-22',NULL,NULL),(3,12,'orlando','rubio','123',3,'calle occidente','edzamora1@misena.edu.co',1,1,'1992-10-05','2016-06-22',NULL,NULL),(4,13,'harrison','copasachoa','123',4,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22',NULL,NULL),(5,14,'manolo ','cardenas','123',5,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22',NULL,NULL),(6,15,'kevin','galeano','123',6,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-10-05','2016-06-22',NULL,NULL),(7,16,'sofia ','henao','123',7,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-10-05','2016-06-22',NULL,NULL),(8,17,'vendedor','ayudante','123',8,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22','2017-10-08',NULL),(9,18,'operarioa','ayudante','123',9,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-09-30','2016-06-17',NULL,'');
 /*!40000 ALTER TABLE `personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,7 +392,7 @@ CREATE TABLE `proveedores_materias_prima` (
 
 LOCK TABLES `proveedores_materias_prima` WRITE;
 /*!40000 ALTER TABLE `proveedores_materias_prima` DISABLE KEYS */;
-INSERT INTO `proveedores_materias_prima` VALUES (1,1);
+INSERT INTO `proveedores_materias_prima` VALUES (1,1),(2,2);
 /*!40000 ALTER TABLE `proveedores_materias_prima` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -421,7 +421,7 @@ CREATE TABLE `proyectos` (
   CONSTRAINT `fk_proyectos_estados1` FOREIGN KEY (`estados_id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_pedidos1` FOREIGN KEY (`pedidos_id_pedido`) REFERENCES `pedidos` (`id_pedido`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_personas1` FOREIGN KEY (`operario_id_persona`) REFERENCES `personas` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -430,6 +430,7 @@ CREATE TABLE `proyectos` (
 
 LOCK TABLES `proyectos` WRITE;
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
+INSERT INTO `proyectos` VALUES (1,'2017-10-04 13:31:09','2017-10-04 14:20:04','2017-10-05 14:30:00',3,2,11,6),(2,'2017-10-04 14:24:41','2017-10-04 14:25:05','2017-10-11 14:24:33',3,2,2,6),(3,'2017-10-04 14:28:37','2017-10-04 14:28:58','2017-10-11 14:28:29',3,2,3,7),(4,'2017-10-05 13:12:34','2017-10-05 13:12:58','2017-10-07 13:34:00',3,3,25,6),(5,'2017-10-05 14:59:54',NULL,'2017-10-05 17:00:00',1,3,4,6),(6,NULL,NULL,NULL,5,4,1,6);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,7 +509,7 @@ CREATE TABLE `roles_personas` (
 
 LOCK TABLES `roles_personas` WRITE;
 /*!40000 ALTER TABLE `roles_personas` DISABLE KEYS */;
-INSERT INTO `roles_personas` VALUES (1,1),(2,2),(2,3),(3,4),(3,5),(4,6),(4,7),(5,8),(6,9),(2,10),(5,11),(3,12),(3,13),(3,14),(3,15),(4,16),(3,17);
+INSERT INTO `roles_personas` VALUES (1,1),(2,2),(2,3),(3,4),(3,5),(4,6),(4,7),(5,8),(6,9);
 /*!40000 ALTER TABLE `roles_personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -528,7 +529,7 @@ CREATE TABLE `stocks` (
   PRIMARY KEY (`id_stock`),
   KEY `fk_stocks_materias_prima1_idx` (`materias_prima_id_materia`),
   CONSTRAINT `fk_stocks_materias_prima1` FOREIGN KEY (`materias_prima_id_materia`) REFERENCES `materias_prima` (`id_materia`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -537,7 +538,7 @@ CREATE TABLE `stocks` (
 
 LOCK TABLES `stocks` WRITE;
 /*!40000 ALTER TABLE `stocks` DISABLE KEYS */;
-INSERT INTO `stocks` VALUES (1,2,'2017-09-29',NULL,1);
+INSERT INTO `stocks` VALUES (1,97,'2017-09-29','2017-10-05',1),(2,0,'2017-10-04','2017-10-04',2);
 /*!40000 ALTER TABLE `stocks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -583,6 +584,7 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-04  7:41:44
+-- Dump completed on 2017-10-10 13:19:04
+
 
 
