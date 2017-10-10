@@ -7,6 +7,12 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:define name="primerosScripts">
+        <link href="#{request.contextPath}/resources/formValidation/css/formValidation.css" rel="stylesheet" />
+        <script src="#{request.contextPath}/resources/formValidation/js/formValidation.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/framework/bootstrap.js" type="text/javascript"></script>
+
+    </ui:define>
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -48,39 +54,46 @@
             <div class="col-md-12">
                 <div class="content-box-large">
                     <div class="panel-body">
+
                         <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
 
                             <div class="form-group">
-                                <label for="contraseña" class="col-sm-2 control-label">Contraseña</label>
+                                <label for="contrasena" class="col-sm-2 control-label">Contraseña</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="contraseña" a:placeholder="Ingrese la contraseña" value="#{listarPerfil.personaSeleccionada.password}"/>
+                                    <h:inputText class="form-control" id="contrasena" a:name="contrasena" a:placeholder="Ingrese la contraseña" value="#{listarPerfil.personaSeleccionada.password}"/>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="repitaContrasena" class="col-sm-2 control-label">Repita la contrasena</label>
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="repitaContrasena" a:name="repitaContrasena" a:placeholder="Ingrese la contraseña" value="#{listarPerfil.personaSeleccionada.password}"/>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="telefono" class="col-sm-2 control-label">Telefono</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="telefono" a:placeholder="Ingrese el telefono" value="#{listarPerfil.personaSeleccionada.telefono}"/>
+                                    <h:inputText class="form-control" id="telefono" a:name="telefono" a:placeholder="Ingrese el telefono" value="#{listarPerfil.personaSeleccionada.telefono}"/>
+
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="direccion" class="col-sm-2 control-label">Direccion</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="direccion" a:placeholder="Ingrese la direccion" value="#{listarPerfil.personaSeleccionada.direccion}"/>
+                                    <h:inputText class="form-control" id="direccion" a:name="direccion" a:placeholder="Ingrese la direccion" value="#{listarPerfil.personaSeleccionada.direccion}"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="email" a:placeholder="Ingrese el email" value="#{listarPerfil.personaSeleccionada.email}"/>
+                                    <h:inputText class="form-control" id="email" a:name="email" a:placeholder="Ingrese el email" value="#{listarPerfil.personaSeleccionada.email}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:form>
-
-                                        <h:commandButton action="#{listarPerfil.actualizarPerfil()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
-                                    </h:form>
+                                    <h:commandButton action="#{listarPerfil.actualizarPerfil()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
                                 </div>
                                 <div class="col-sm-3">
                                     <h:link styleClass="btn btn" outcome="/admin/dashboard/miCuenta.xhtml?faces-redirect=true" value="cancelar"/>
@@ -97,7 +110,61 @@
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script>
-
+            $(document).ready(function () {
+                $('#form-usuario').formValidation({
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        contrasena: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The name is required'
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 30,
+                                    message: 'The name must be more than 6 and less than 30 characters long'
+                                },
+                                regexp: {
+                                    regexp: /^[a-zA-Z0-9_]+$/,
+                                    message: 'The name can only consist of alphabetical, number and underscore'
+                                }
+                            }
+                        },
+                        repitaContrasena: {
+                            validators: {
+                                notEmpty: {
+                                    
+                                },
+                                identical: {
+                                    field: 'contrasena',
+                                    message: 'The password and its confirm are not the same'
+                                }
+                            }
+                        },
+                        telefono: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The name is required'
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 30,
+                                    message: 'The name must be more than 6 and less than 30 characters long'
+                                },
+                                regexp: {
+                                    regexp: /^[a-zA-Z0-9_]+$/,
+                                    message: 'The name can only consist of alphabetical, number and underscore'
+                                }
+                            }
+                        },
+                    }
+                });
+            });
         </script>
     </ui:define>
 
