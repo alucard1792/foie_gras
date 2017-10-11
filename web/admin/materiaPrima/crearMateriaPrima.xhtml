@@ -10,7 +10,13 @@
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:b="http://bootsfaces.net/ui">
-
+    <ui:define name="primerosScripts">
+        <link href="#{request.contextPath}/resources/formValidation/css/formValidation.css" rel="stylesheet" />
+        <script src="#{request.contextPath}/resources/formValidation/js/formValidation.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/framework/bootstrap.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/language/es_ES.js" type="text/javascript" ></script>
+    </ui:define>
+    
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
         Crear materia prima
