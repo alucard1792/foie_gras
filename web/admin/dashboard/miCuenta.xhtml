@@ -46,74 +46,67 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-
-        <div class="row">
-            <div class="col-md-5">
-                <div class="form-group label-floating">
-                    <label class="control-label">Documento</label>
-                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.documento}"></input>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">nombre</label>
-                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.nombre}"></input>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    <label class="control-label">apellido</label>
-                    <input type="email" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.apellido}"></input>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group label-floating">
-                    <label class="control-label">contraseña</label>
-                    <input type="password" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.password}"></input>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group label-floating">
-                    <label class="control-label">telefono</label>
-                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.telefono}"></input>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group label-floating">
-                    <label class="control-label">direccion</label>
-                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.direccion}"></input>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    <label class="control-label">correo electronico</label>
-                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.email}"></input>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    <label class="control-label">area</label>
-                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.areasIdArea.nombreArea}"></input>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    <label class="control-label">estado</label>
-                    <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.estado}"></input>
-                </div>
-            </div>
-        </div>
-
         <h:form>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Documento</label>
+                        <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.documento}"></input>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group label-floating">
+                        <label class="control-label">nombre</label>
+                        <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.nombre}"></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                        <label class="control-label">apellido</label>
+                        <input type="email" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.apellido}"></input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group label-floating">
+                        <label class="control-label">telefono</label>
+                        <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.telefono}"></input>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group label-floating">
+                        <label class="control-label">direccion</label>
+                        <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.direccion}"></input>
+                    </div>
+                </div>
+            </div>
+
+     
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                        <label class="control-label">correo electronico</label>
+                        <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.email}"></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                        <label class="control-label">area</label>
+                        <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.areasIdArea.nombreArea}"></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                        <label class="control-label">estado</label>
+                        <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.estado == 1 ? 'activo':'inactivo'}"></input>
+                    </div>
+                </div>
+            </div>
+
+
             <h:commandButton action="#{listarPerfil.PrepararEditarPerfil(controladorSesion.p)}" class="btn btn-primary btn-primary pull-right" value="Editar perfil"></h:commandButton>
         </h:form>
 
@@ -150,7 +143,7 @@
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
-
+        
         <script>
 
         </script>
