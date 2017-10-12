@@ -12,7 +12,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        Editar rol.
+        #{msg.rolEditarTitulo}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -47,13 +47,13 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/roles/listarRoles.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Listar roles</a>
-        <a href="#" class="btn btn-info ">Editar rol</a>
+        <a href="/foie_gras/admin/roles/listarRoles.xhtml" class="btn btn-default visible-lg-block visible-md-block ">#{msg.rolBreadcrumListarRol}</a>
+        <a href="#" class="btn btn-info ">#{msg.rolBreadcrumEditarRol}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Editar rol</h4>
+        <h4 class="title">#{msg.rolCardboardEditarRol}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -70,37 +70,36 @@
                             </b:row>
 
                             <div class="form-group">
-                                <label for="nombreRol" class="col-sm-2 control-label">Nombre rol</label>
+                                <label for="nombreRol" class="col-sm-2 control-label">#{msg.rolEditarNombre}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nombreRol" a:placeholder="Ingrese el nombre del rol" value="#{listarRoles.rolSeleccionado.nombreRol}"/>
+                                    <h:inputText a:type="text" class="form-control" id="nombreRol" a:placeholder="#{msg.rolEditarNombrePlaceholder}" value="#{listarRoles.rolSeleccionado.nombreRol}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="estado" class="col-sm-2 control-label">Estado</label>
+                                <label for="estado" class="col-sm-2 control-label">#{msg.rolEditarEstado}</label>
                                 <div class="col-sm-10">
                                     <b:selectOneMenu value = "#{listarRoles.rolSeleccionado.estado}"> 
-                                        <f:selectItem itemValue = "0" itemLabel = "Inactivo" /> 
-                                        <f:selectItem itemValue = "1" itemLabel = "Activo" /> 
+                                        <f:selectItem itemValue = "0" itemLabel = "#{msg.rolEditarEstadoInactico}" /> 
+                                        <f:selectItem itemValue = "1" itemLabel = "#{msg.rolEditarEstadoActivo}" /> 
                                     </b:selectOneMenu> 
                                 </div>
                             </div>
                             <!--cargar permisos del rol para editarlos-->
+                            <!-- <div class="form-group">
+                                 <label for="permisosRol" class="col-sm-2 control-label">Permisos rol</label>
+                                 <div class="col-sm-10">
+                                     <b:selectOneMenu>
+                                         <f:selectItems value="#{listarRoles.rolSeleccionado.permisos}" var="p"></f:selectItems>
+                                     </b:selectOneMenu>
+                                 </div>
+                             </div>
+                            -->
                             <div class="form-group">
-                                <label for="permisosRol" class="col-sm-2 control-label">Permisos rol</label>
-                                <div class="col-sm-10">
-                                    <b:selectOneMenu>
-                                        <f:selectItems value="#{listarRoles.rolSeleccionado.permisos}" var="p">
-                                        </f:selectItems>
-                                    </b:selectOneMenu>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="rol" class="col-sm-2 control-label">Rol</label>
+                                <label for="rol" class="col-sm-2 control-label">#{msg.rolEditarPermisos}</label>
                                 <div class="col-sm-10">
                                     <p:selectManyCheckbox id="grid" value="#{listarRoles.rolSeleccionado.permisos}" layout="grid" columns="3">
-                                        <f:selectItems value="#{permisoController.listaPermiso}" var="td" itemLabel="#{td.nombrePermiso}" itemValue="#{td.idPermiso}" />
+                                        <f:selectItems value="#{listarRoles.listaPermisos}" var="td" itemLabel="#{td.nombrePermiso}" itemValue="#{td.idPermiso}" />
                                     </p:selectManyCheckbox>                               
                                 </div>
                             </div>
@@ -110,11 +109,11 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
                                     <h:form>
-                                        <h:commandButton action="#{listarRoles.actualizar()}" class="btn btn-primary" value="Guardar"></h:commandButton>
+                                        <h:commandButton action="#{listarRoles.actualizar()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton>
                                     </h:form>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/roles/listarRoles.xhtml?faces-redirect=true" value="cancelar"/>
+                                    <h:link styleClass="btn btn" outcome="/admin/roles/listarRoles.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                             </div>
 

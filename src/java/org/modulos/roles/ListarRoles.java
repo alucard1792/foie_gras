@@ -15,7 +15,9 @@ import javax.enterprise.context.Conversation;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import org.dao.PermisoFacadeLocal;
 import org.dao.RolFacadeLocal;
+import org.entidades.Permiso;
 import org.entidades.Rol;
 
 /**
@@ -27,11 +29,14 @@ import org.entidades.Rol;
 public class ListarRoles implements Serializable {
 
     @EJB
+    private PermisoFacadeLocal permisoFacadeLocal;
+    @EJB
     private RolFacadeLocal rolFacadeLocal;
     @Inject
     private Conversation conversacion;
     private Rol rolSeleccionado;
-    private List<Rol> listaRoles;
+    private List<Permiso>listaPermisos;
+    private List<Rol>listaRoles;
 
     public ListarRoles() {
         
@@ -39,8 +44,8 @@ public class ListarRoles implements Serializable {
     
     @PostConstruct
     public void init(){
+        listaPermisos = permisoFacadeLocal.findAll();
         listaRoles = rolFacadeLocal.findAll();
-        
     }
 
     public List<Rol> getListaRoles() {
@@ -51,8 +56,16 @@ public class ListarRoles implements Serializable {
         return rolSeleccionado;
     }
 
-    public void setRolSeleccionado(Rol rol) {
-        this.rolSeleccionado = rol;
+    public void setRolSeleccionado(Rol rolSeleccionado) {
+        this.rolSeleccionado = rolSeleccionado;
+    }
+
+    public List<Permiso> getListaPermisos() {
+        return listaPermisos;
+    }
+
+    public void setListaPermisos(List<Permiso> listaPermisos) {
+        this.listaPermisos = listaPermisos;
     }
     
     public void iniciarConversacion(){
@@ -109,7 +122,7 @@ public class ListarRoles implements Serializable {
     
     public String actualizar(){
         rolFacadeLocal.edit(rolSeleccionado);
-        return  "/admin/roles/listarRoles.xhtml?faces-redirect=true";
+        return  cancelar();
     
     }
     
