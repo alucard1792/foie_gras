@@ -6,13 +6,16 @@
 package org.modulos.roles;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.dao.PermisoFacadeLocal;
 import org.dao.RolFacadeLocal;
+import org.entidades.Permiso;
 import org.entidades.Rol;
 
 /**
@@ -25,6 +28,9 @@ public class CrearRol implements Serializable{
 
     @EJB
     private RolFacadeLocal rolFacadeLocal;
+    @EJB
+    private PermisoFacadeLocal permisoFacadeLocal;
+    private List<Permiso>listaPermisos;
     private Rol rol;
     private String nombreRol;
     private int estado;
@@ -35,8 +41,8 @@ public class CrearRol implements Serializable{
     
     @PostConstruct
     public void init(){
-        
-        
+        rol = new Rol();
+        listaPermisos = permisoFacadeLocal.findAll();
     }
 
     public Rol getRol() {
@@ -62,10 +68,17 @@ public class CrearRol implements Serializable{
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    public List<Permiso> getListaPermisos() {
+        return listaPermisos;
+    }
+
+    public void setListaPermisos(List<Permiso> listaPermisos) {
+        this.listaPermisos = listaPermisos;
+    }
     
     public String crear(){
         try {
-            rol = new Rol(null, nombreRol, estado);
             rolFacadeLocal.create(rol);
             return "/admin/roles/listarRoles.xhtml?faces-redirect=true";
         } catch (Exception e) {
