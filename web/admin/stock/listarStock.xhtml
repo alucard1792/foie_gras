@@ -86,7 +86,7 @@
                     <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                         <c:choose>
                             <c:when test="#{p.idPermiso eq 47}">
-                                <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.stockCrearStock}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.stockIngresarStock}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                             </c:when>
                         </c:choose>
                     </c:forEach>                       

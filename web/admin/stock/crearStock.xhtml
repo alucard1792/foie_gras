@@ -54,13 +54,13 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/stock/listarStock.xhtml" class="btn btn-default visible-lg-block visible-md-block">Listar stock</a>
-        <a href="#" class="btn btn-info ">Crear stock</a>
+        <a href="/foie_gras/admin/stock/listarStock.xhtml" class="btn btn-default visible-lg-block visible-md-block">#{msg.stockListarStock}</a>
+        <a href="#" class="btn btn-info ">#{msg.stockCrearStock}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Crear stock</h4>
+        <h4 class="title">#{msg.stockIngresarStock}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -76,55 +76,55 @@
                             </b:row>
 
                             <div class="form-group">
-                                <label for="referencia" class="col-sm-2 control-label">Referencia</label>
+                                <label for="referencia" class="col-sm-2 control-label">#{msg.crearStockReferencia}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="referencia" a:placeholder="ingrese la referencia" value="#{crearStock.materiaPrima.referencia}" />
+                                    <h:inputText a:type="text" class="form-control" id="referencia" a:placeholder="#{msg.crearStockReferenciaPlaceholder}" value="#{crearStock.materiaPrima.referencia}" />
                                 </div>
                             </div>
 
 
                             <div class="form-group">
-                                <label for="calibre" class="col-sm-2 control-label">calibre </label>
+                                <label for="calibre" class="col-sm-2 control-label">#{msg.crearStockCalibre} </label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="calibre" a:placeholder="ingrese el calibre" value="#{crearStock.materiaPrima.calibre}"></h:inputText>
+                                    <h:inputText a:type="text" class="form-control" id="calibre" a:placeholder="#{msg.crearStockCalibrePlaceholder}" value="#{crearStock.materiaPrima.calibre}"></h:inputText>
                                 </div>
                             </div>
 
 
                             <div class="form-group">
-                                <label for="dimensionLargo" class="col-sm-2 control-label">Largo lamina </label>
+                                <label for="dimensionLargo" class="col-sm-2 control-label">#{msg.crearStockLargoLamina} </label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="dimensionLargo" a:placeholder="ingrese el largo de la lamina" value="#{crearStock.materiaPrima.dimensionAlto}"></h:inputText>
+                                    <h:inputText a:type="text" class="form-control" id="dimensionLargo" a:placeholder="#{msg.crearStockLargoLaminaPlaceholder}" value="#{crearStock.materiaPrima.dimensionAlto}"></h:inputText>
                                 </div>
                             </div>
 
 
                             <div class="form-group">
-                                <label for="dimensionAlto" class="col-sm-2 control-label">Alto lamina </label>
+                                <label for="dimensionAlto" class="col-sm-2 control-label">#{msg.crearStockAltoLamina}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="dimensionAlto" a:placeholder="ingrese el alto de la lamina" value="#{crearStock.materiaPrima.dimensionLargo}"></h:inputText>
+                                    <h:inputText a:type="text" class="form-control" id="dimensionAlto" a:placeholder="#{msg.crearStockAltoLaminaPlaceholder}" value="#{crearStock.materiaPrima.dimensionLargo}"></h:inputText>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="stock" class="col-sm-2 control-label">Stock </label>
+                                <label for="stock" class="col-sm-2 control-label">#{msg.crearStockStock} </label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="stock" a:placeholder="Ingrese las existencias" value="#{crearStock.stockEntidad.stock}"></h:inputText>
+                                    <h:inputText a:type="text" class="form-control" id="stock" a:placeholder="#{msg.crearStockStockPlaceholder}" value="#{crearStock.stockEntidad.stock}"></h:inputText>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="tipoMateriaPrima" class="col-sm-2 control-label">Tipo materia prima</label>
+                                <label for="tipoMateriaPrima" class="col-sm-2 control-label">#{msg.crearStockTipoMateria}</label>
                                 <div class="col-sm-10">
                                     <b:selectOneMenu value = "#{crearStock.materiaPrima.tipoMateriaPrima}" > 
-                                        <f:selectItem itemValue="Poliestireno" itemLabel = "Poliestireno" /> 
-                                        <f:selectItem itemValue="Acrilico" itemLabel = "Acrilico"  /> 
+                                        <f:selectItem itemValue="Poliestireno" itemLabel = "#{msg.crearStockTipoMateriaPoliestireno}" /> 
+                                        <f:selectItem itemValue="Acrilico" itemLabel = "#{msg.crearStockTipoMateriaAcrilico}"  /> 
                                     </b:selectOneMenu>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="proveedor" class="col-sm-2 control-label">proveedor</label>
+                                <label for="proveedor" class="col-sm-2 control-label">#{msg.crearStockProveedor}</label>
                                 <div class="col-sm-10">
                                     <b:selectOneMenu value = "#{crearStock.proveedor}"> 
                                         <f:selectItems value="#{crearStock.listaProvedores}" var="lp" itemLabel = "#{lp.nombreEmpresa}" /> 
@@ -135,10 +135,10 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{crearStock.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
+                                    <h:commandButton action="#{crearStock.crear()}" class="btn btn-primary" value="#{msg.crearStockAceptar}"></h:commandButton>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/stock/listarStock.xhtml?faces-redirect=true" value="cancelar"/>
+                                    <h:link styleClass="btn btn" outcome="/admin/stock/listarStock.xhtml?faces-redirect=true" value="#{msg.crearStockCancelar}"/>
                                 </div>
 
                             </div>
