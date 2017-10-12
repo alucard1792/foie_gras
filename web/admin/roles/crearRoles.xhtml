@@ -13,13 +13,13 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        Crear rol
+        #{msg.rolCrearTitulo}
     </ui:define>
 
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/roles/listarRoles.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Listar roles</a>
-        <a href="#" class="btn btn-info ">Crear rol</a>
+        <a href="/foie_gras/admin/roles/listarRoles.xhtml" class="btn btn-default visible-lg-block visible-md-block ">#{msg.rolBreadcrumListarRol}</a>
+        <a href="#" class="btn btn-info ">#{msg.rolBreadcrumCrearRol}</a>
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -53,7 +53,7 @@
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Crear rol</h4>
+        <h4 class="title">#{msg.rolCardboardIngresarRol}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -70,24 +70,24 @@
                             </b:row>
                             
                             <div class="form-group">
-                                <label for="nombreRol" class="col-sm-2 control-label">Nombre del rol</label>
+                                <label for="nombreRol" class="col-sm-2 control-label">#{msg.rolCrearNombre}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nombreRol" a:placeholder="ingrese el nombre del nuevo rol" value="#{crearRol.rol.nombreRol}"/>
+                                    <h:inputText a:type="text" class="form-control" id="nombreRol" a:placeholder="#{msg.rolCrearNombrePlaceholder}" value="#{crearRol.rol.nombreRol}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="estado" class="col-sm-2 control-label">#{msg.rolEditarEstado}</label>
+                                <label for="estado" class="col-sm-2 control-label">#{msg.rolCrearEstado}</label>
                                 <div class="col-sm-10">
                                     <b:selectOneMenu value = "#{crearRol.rol.estado}"> 
-                                        <f:selectItem itemValue = "0" itemLabel = "#{msg.rolEditarEstadoInactico}" /> 
-                                        <f:selectItem itemValue = "1" itemLabel = "#{msg.rolEditarEstadoActivo}" /> 
+                                        <f:selectItem itemValue = "0" itemLabel = "#{msg.rolCrearEstadoActivo}" /> 
+                                        <f:selectItem itemValue = "1" itemLabel = "#{msg.rolCrearEstadoInactico}" /> 
                                     </b:selectOneMenu> 
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="rol" class="col-sm-2 control-label">#{msg.rolEditarPermisos}</label>
+                                <label for="rol" class="col-sm-2 control-label">#{msg.rolCrearPermisos}</label>
                                 <div class="col-sm-10">
                                     <p:selectManyCheckbox id="grid" value="#{crearRol.rol.permisos}" layout="grid" columns="3">
                                         <f:selectItems value="#{crearRol.listaPermisos}" var="td" itemLabel="#{td.nombrePermiso}" itemValue="#{td.idPermiso}" />
@@ -97,10 +97,10 @@
                             
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{crearRol.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
+                                    <h:commandButton action="#{crearRol.crear()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton> 
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/roles/listarRoles.xhtml?faces-redirect=true" value="cancelar"/>
+                                    <h:link styleClass="btn btn" outcome="/admin/roles/listarRoles.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                             </div>
 
