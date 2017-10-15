@@ -11,7 +11,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        #{msg.listarProveedores} 
+        #{msg.proveedorListarTitulo} 
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -46,12 +46,12 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info "> #{msg.listarProveedores}</a>
+        <a href="#" class="btn btn-info ">#{msg.proveedorBreadcrumListarProveedor}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title"> #{msg.listarProveedores}</h4>
+        <h4 class="title">#{msg.proveedorCardboardProveedoresRegistrados}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -66,14 +66,14 @@
                     <ul class="dropdown-menu">
                         <li>
                             <h:commandLink>
-                                a pdf
+                                #{msg.universalAPdf}
                                 <p:dataExporter type="pdf" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
                         <br/>
                         <li>
                             <h:commandLink>
-                                a excel
+                                #{msg.universalAExcel}
                                 <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
@@ -86,7 +86,7 @@
                     <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                         <c:choose>
                             <c:when test="#{p.idPermiso eq 16}">
-                                <span style="float: right"><h:link outcome="/#{p.url}" value="Crear proveedor">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.proveedorListarIngresarNuevo}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                             </c:when>
                         </c:choose>
                     </c:forEach>                       
@@ -95,29 +95,29 @@
 
             <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
 
-                <p:column headerText="id" width="200"> 
+                <p:column headerText="#{msg.proveedorListarId}" width="200"> 
                     <p:outputLabel value="#{lp.idProveedor}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.nitProveedor}" width="200" filterBy="#{lp.nitProveedor}" filterMatchMode="contains">
+                <p:column headerText="#{msg.proveedorListarNitProveedor}" width="200" filterBy="#{lp.nitProveedor}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.nitProveedor}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.nombreEmpresa}" filterBy="#{lp.nombreEmpresa}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.proveedorListarNombreEmpresa}" filterBy="#{lp.nombreEmpresa}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.nombreEmpresa}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.direccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.proveedorListarDireccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.direccion)}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.telefeno}" width="200">
+                <p:column headerText="#{msg.proveedorListarTelefono}" width="200">
                     <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.representanteLegal}" width="200">
+                <p:column headerText="#{msg.proveedorListarRepresentanteLegal}" width="200">
                     <p:outputLabel value="#{lp.representanteLegal}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.ciudad}" filterBy="#{lp.ciudadesIdCiudad.nombreCiudad}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.proveedorListarCiudad}" filterBy="#{lp.ciudadesIdCiudad.nombreCiudad}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.opciones}" exportable="false" style="text-align: center;">
-                    <p:commandButton icon="ui-icon-pencil" title="#{msg.editar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
+                <p:column headerText="#{msg.universalOpciones}" exportable="false" style="text-align: center;">
+                    <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
                 </p:column>
 
             </p:dataTable>
