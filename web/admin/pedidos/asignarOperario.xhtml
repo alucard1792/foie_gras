@@ -13,7 +13,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        Asignar operario
+        #{msg.pedidoAsignarTitulo}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -48,16 +48,18 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info ">Asignar operario</a>
+        <a href="/foie_gras/admin/pedidos/listarPedidos.xhtml" class="btn btn-default visible-lg-block visible-md-block ">#{msg.pedidoBreadcrumListarPedido}</a>
+        <a href="#" class="btn btn-info ">#{msg.pedidoBreadcrumAsignarPedido}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Asignar operario</h4>
+        <h4 class="title">#{msg.pedidoCardboardAsignarPedido}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
-    <ui:define name="contenido">        <div class="row">
+    <ui:define name="contenido">
+        <div class="row">
             <div class="col-md-12">
                 <div class="content-box-large">
                     <div class="panel-body">
@@ -69,7 +71,7 @@
                             </b:row>
 
                             <div class="form-group">
-                                <label for="area" class="col-sm-2 control-label">Operario disponible para el pedido: #{enviarPedidoAProyecto.pedidoSeleccionado.idPedido}</label>
+                                <label for="area" class="col-sm-2 control-label">#{msg.pedidoAsignarOperario} #{enviarPedidoAProyecto.pedidoSeleccionado.idPedido}</label>
                                 <div class="col-sm-10">
                                     <b:selectOneMenu value = "#{enviarPedidoAProyecto.operarioAsignado}" > 
                                         <f:selectItems value="#{enviarPedidoAProyecto.listaOperariosDisponibles}" var="l" itemLabel = "#{l.nombre} #{l.apellido}" /> 
@@ -79,10 +81,10 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <b:commandButton action="#{enviarPedidoAProyecto.asignarOperarioAProyecto()}" class="btn btn-primary" value="Aceptar"></b:commandButton>
+                                    <b:commandButton action="#{enviarPedidoAProyecto.asignarOperarioAProyecto()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></b:commandButton>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/pedidos/listarPedidos.xhtml?faces-redirect=true" value="cancelar"/>
+                                    <h:link styleClass="btn btn" outcome="/admin/pedidos/listarPedidos.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                             </div>
 
