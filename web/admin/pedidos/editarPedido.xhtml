@@ -11,7 +11,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        editar pedido
+        #{msg.pedidoEditarTitulo}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -46,13 +46,13 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/pedidos/listarPedidos.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Listar pedidos</a>
-        <a href="#" class="btn btn-info ">Editar pedido</a>
+        <a href="/foie_gras/admin/pedidos/listarPedidos.xhtml" class="btn btn-default visible-lg-block visible-md-block ">#{msg.pedidoBreadcrumListarPedido}</a>
+        <a href="#" class="btn btn-info ">#{msg.pedidoBreadcrumEditarPedido}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Editar pedido</h4>
+        <h4 class="title">#{msg.pedidoCardboardEditarPedido}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -69,59 +69,59 @@
                             </b:row>
 
                             <div class="form-group">
-                                <label for="nombreProyecto" class="col-sm-2 control-label">Nombre proyecto</label>
+                                <label for="nombreProyecto" class="col-sm-2 control-label">#{msg.pedidoEditarNombre}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nombreProyecto" a:placeholder="Ingrese el nombre del proyecto" value="#{listarPedidos.pedidoSeleccionado.nombreProyecto}"/>
+                                    <h:inputText a:type="text" class="form-control" id="nombreProyecto" a:placeholder="#{msg.pedidoEditarNombreClientePlaceholder}" value="#{listarPedidos.pedidoSeleccionado.nombreProyecto}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="descripcion" class="col-sm-2 control-label">Descripcion</label>
+                                <label for="descripcion" class="col-sm-2 control-label">#{msg.pedidoEditarDescripcion}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="descripcion" a:placeholder="Ingrese la descripcion del proyecto" value="#{listarPedidos.pedidoSeleccionado.descripcion}"/>
+                                    <h:inputText a:type="text" class="form-control" id="descripcion" a:placeholder="#{msg.pedidoEditarDescripcionPlaceholder}" value="#{listarPedidos.pedidoSeleccionado.descripcion}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="cantidad" class="col-sm-2 control-label">Cantidad </label>
+                                <label for="cantidad" class="col-sm-2 control-label">#{msg.pedidoEditarCantidad}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="cantidad" a:placeholder="Ingrese la cantidad de pedidos" value="#{listarPedidos.pedidoSeleccionado.cantidad}"/>
+                                    <h:inputText a:type="number" class="form-control" id="cantidad" a:placeholder="#{msg.pedidoEditarCantidadPlaceholder}" value="#{listarPedidos.pedidoSeleccionado.cantidad}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="nombreCliente" class="col-sm-2 control-label">Nombre cliente </label>
+                                <label for="nombreCliente" class="col-sm-2 control-label">#{msg.pedidoEditarNombreCliente}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nombreCliente" a:placeholder="Ingrese el nombre del cliente" value="#{listarPedidos.pedidoSeleccionado.nombreCliente}"/>
+                                    <h:inputText a:type="text" class="form-control" id="nombreCliente" a:placeholder="#{msg.pedidoEditarNombreClientePlaceholder}" value="#{listarPedidos.pedidoSeleccionado.nombreCliente}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="telefonoCliente" class="col-sm-2 control-label">Telefono cliente </label>
+                                <label for="telefonoCliente" class="col-sm-2 control-label">#{msg.pedidoEditarTelefonoCliente}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="telefonoCliente" a:placeholder="Ingrese el telefono del cliente" value="#{listarPedidos.pedidoSeleccionado.telefonoCliente}"/>
+                                    <h:inputText a:type="text" class="form-control" id="telefonoCliente" a:placeholder="#{msg.pedidoEditarTelefonoPlaceholder}" value="#{listarPedidos.pedidoSeleccionado.telefonoCliente}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="correoCliente" class="col-sm-2 control-label">Correo cliente </label>
+                                <label for="correoCliente" class="col-sm-2 control-label">#{msg.pedidoEditarCorreoCliente}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="correoCliente" a:placeholder="Ingrese el correo del cliente" value="#{listarPedidos.pedidoSeleccionado.correoCliente}"/>
+                                    <h:inputText a:type="text" class="form-control" id="correoCliente" a:placeholder="#{msg.pedidoEditarCorreoPlaceholder}" value="#{listarPedidos.pedidoSeleccionado.correoCliente}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="pago" class="col-sm-2 control-label">Realizo pago</label>
+                                <label for="pago" class="col-sm-2 control-label">#{msg.pedidoEditarRealizoPago}</label>
                                 <div class="col-sm-10">
                                     <b:selectOneMenu value = "#{listarPedidos.pedidoSeleccionado.realizoPago}"> 
-                                        <f:selectItem itemValue = "0" itemLabel = "No" /> 
-                                        <f:selectItem itemValue = "1" itemLabel = "Si" /> 
+                                        <f:selectItem itemValue = "0" itemLabel = "#{msg.pedidoEditarRealizoPagoNo}" /> 
+                                        <f:selectItem itemValue = "1" itemLabel = "#{msg.pedidoEditarRealizoPagoSi}" /> 
                                     </b:selectOneMenu> 
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="materiaPrima" class="col-sm-2 control-label">Materia prima utilizada</label>
+                                <label for="materiaPrima" class="col-sm-2 control-label">#{msg.pedidoEditarMateriaPrima}</label>
                                 <div class="col-sm-10">
                                     <b:selectOneMenu value = "#{listarPedidos.pedidoSeleccionado.materiasPrimaIdMateria}"> 
                                         <f:selectItems value="#{crearPedido.listaMateriaPrima}" var="lmp" itemLabel="#{lmp.referencia}" /> 
@@ -130,20 +130,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="vendedor" class="col-sm-2 control-label">Vendedor </label>
+                                <label for="vendedor" class="col-sm-2 control-label">#{msg.pedidoEditarVendedor}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText disabled="true" a:type="text" class="form-control" id="vendedor" a:placeholder="seleccione el vendedor" value="#{listarPedidos.pedidoSeleccionado.vendedorIdPersona.nombre} #{listarPedidos.pedidoSeleccionado.vendedorIdPersona.apellido}"/>
+                                    <h:inputText disabled="true" a:type="text" class="form-control" id="vendedor" a:placeholder="#{msg.pedidoEditarVendedorPlaceholder}" value="#{listarPedidos.pedidoSeleccionado.vendedorIdPersona.nombre} #{listarPedidos.pedidoSeleccionado.vendedorIdPersona.apellido}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
                                     <h:form>
-                                        <h:commandButton action="#{listarPedidos.actualizarPedido()}" class="btn btn-primary" value="Guardar"></h:commandButton>
+                                        <h:commandButton action="#{listarPedidos.actualizarPedido()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton>
                                     </h:form>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/pedidos/listarPedidos.xhtml?faces-redirect=true" value="cancelar"/>
+                                    <h:link styleClass="btn btn" outcome="/admin/pedidos/listarPedidos.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                             </div>
 
