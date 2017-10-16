@@ -11,7 +11,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        #{msg.listarUsuarios}
+        #{msg.usuarioListarTitulo}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -46,12 +46,12 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info "> #{msg.listarUsuarios}</a>
+        <a href="#" class="btn btn-info "> #{msg.usuarioBreadcrumListarUsuario}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">#{msg.usuariosRegistrados}</h4>
+        <h4 class="title">#{msg.usuarioBreadcrumListarUsuario}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -66,14 +66,14 @@
 
                         <li>
                             <h:commandLink>
-                                a pdf
+                                #{msg.universalAPdf}
                                 <p:dataExporter type="pdf" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
                         <br/>
                         <li>
                             <h:commandLink>
-                                a excel
+                                #{msg.universalAExcel}
                                 <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
                             </h:commandLink>
                         </li>
@@ -90,58 +90,58 @@
                     <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
                         <c:choose>
                             <c:when test="#{p.idPermiso eq 2}">
-                                <span style="float: right"><h:link outcome="/#{p.url}" value="Crear usuario">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                                <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.usuarioListarIngresarNuevo}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
                             </c:when>
                         </c:choose>
                     </c:forEach>                       
                 </div>
             </div>
             <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
-                <p:column headerText="id" width="200"> 
+                <p:column headerText="#{msg.usuarioListarId}" width="200"> 
                     <p:outputLabel value="#{lp.idPersona}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.documento}" width="200">
+                <p:column headerText="#{msg.usuarioListarDocumento}" width="200">
                     <p:outputLabel value="#{lp.documento}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.nombre}" filterBy="#{lp.nombre}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.usuarioListarNombre}" filterBy="#{lp.nombre}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.nombre}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.apellido}" filterBy="#{lp.apellido}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.usuarioListarApellido}" filterBy="#{lp.apellido}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.apellido}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.clave}" width="200">
+                <p:column headerText="#{msg.usuarioListarPassword}" width="200">
                     <p:outputLabel value="#{lp.password}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.telefeno}" width="200">
+                <p:column headerText="#{msg.usuarioListarTelefono}" width="200">
                     <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.direccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.usuarioListarDireccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.direccion}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.correo}" filterBy="#{lp.email}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.usuarioListarCorreo}" filterBy="#{lp.email}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.email}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.fechaNacimiento}" width="200">
+                <p:column headerText="#{msg.usuarioListarFechaNacimiento}" width="200">
                     <p:outputLabel value="#{lp.fechaNacimiento}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.fechaIngreso}" width="200">
+                <p:column headerText="#{msg.usuarioListarFechaRegistro}" width="200">
                     <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="Ultimo inicio sesion" width="200">
+                <p:column headerText="#{msg.usuarioListarUltimaVez}" width="200">
                     <p:outputLabel value="#{(lp.ultimaVez eq null ? 'no se ha validado':lp.ultimaVez)}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.rol}" filterBy="#{lp.roles}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.usuarioListarRol}" filterBy="#{lp.roles}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.roles.get(0) != null ? lp.roles.get(0).nombreRol:'')}" >
                     </p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.area}"  filterBy="#{lp.areasIdArea.nombreArea}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.usuarioListarArea}"  filterBy="#{lp.areasIdArea.nombreArea}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.areasIdArea}" converter="areaConverter"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.estado}" width="200">
+                <p:column headerText="#{msg.usuarioListarEstado}" width="200">
                     <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.opciones}" exportable="false" width="100" style="text-align: center;">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar Usuario" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100" style="text-align: center;">
+                    <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                 </p:column>
 
             </p:dataTable>
