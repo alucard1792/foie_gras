@@ -13,13 +13,13 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        Crear proveedor
+        #{msg.proveedorCrearTitulo}
     </ui:define>
 
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/provedores/listarProveedores.xhtml" class="btn btn-default visible-lg-block visible-md-block ">listar proveedores</a>
-        <a href="#" class="btn btn-info ">Crear proveedor</a>
+        <a href="/foie_gras/admin/provedores/listarProveedores.xhtml" class="btn btn-default visible-lg-block visible-md-block ">#{msg.proveedorBreadcrumListarProveedor}</a>
+        <a href="#" class="btn btn-info ">#{msg.proveedorBreadcrumCrearProveedor}</a>
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -53,7 +53,7 @@
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Crear proveedor</h4>
+        <h4 class="title">#{msg.proveedorCardboardIngresarProveedor}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -70,42 +70,42 @@
                             </b:row>
 
                             <div class="form-group">
-                                <label for="nombreEmpresa" class="col-sm-2 control-label">Nombre empresa</label>
+                                <label for="nombreEmpresa" class="col-sm-2 control-label">#{msg.proveedorCrearNombre}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nombreEmpresa" a:placeholder="ingrese el nombre de la empresa" value="#{crearProveedor.proveedor.nombreEmpresa}" />
+                                    <h:inputText a:type="text" class="form-control" id="nombreEmpresa" a:placeholder="#{msg.proveedorCrearNombrePlaceholder}" value="#{crearProveedor.proveedor.nombreEmpresa}" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="direccion" class="col-sm-2 control-label">Direccion</label>
+                                <label for="direccion" class="col-sm-2 control-label">#{msg.proveedorCrearDireccion}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="direccion" a:placeholder="ingrese la direccion de la empresa" value="#{crearProveedor.proveedor.direccion}" />
+                                    <h:inputText a:type="text" class="form-control" id="direccion" a:placeholder="#{msg.proveedorCrearDireccionPlaceholder}" value="#{crearProveedor.proveedor.direccion}" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="representanteLegal" class="col-sm-2 control-label">Representante legal</label>
+                                <label for="representanteLegal" class="col-sm-2 control-label">#{msg.proveedorCrearRepresentanteLegal}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="representanteLegal" a:placeholder="ingrese el representante legal" value="#{crearProveedor.proveedor.representanteLegal}" />
+                                    <h:inputText a:type="text" class="form-control" id="representanteLegal" a:placeholder="#{msg.proveedorCrearRepresentanteLegalPlaceholder}" value="#{crearProveedor.proveedor.representanteLegal}" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="nitProveedor" class="col-sm-2 control-label">Nit proveedor</label>
+                                <label for="nitProveedor" class="col-sm-2 control-label">#{msg.proveedorCrearNitProveedor}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nitProveedor" a:placeholder="ingrese el nit proveedor" value="#{crearProveedor.proveedor.nitProveedor}" />
+                                    <h:inputText a:type="text" class="form-control" id="nitProveedor" a:placeholder="#{msg.proveedorCrearNitProveedorPlaceholder}" value="#{crearProveedor.proveedor.nitProveedor}" />
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="telefono" class="col-sm-2 control-label">Telefono</label>
+                                <label for="telefono" class="col-sm-2 control-label">#{msg.proveedorCrearTelefono}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="telefono" a:placeholder="ingrese el telefono de la empresa" value="#{crearProveedor.proveedor.telefono}" />
+                                    <h:inputText a:type="number" class="form-control" id="telefono" a:placeholder="#{msg.proveedorCrearTelefonoPlaceholder}" value="#{crearProveedor.proveedor.telefono}" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="ciudad" class="col-sm-2 control-label">Ciudad</label>
+                                <label for="ciudad" class="col-sm-2 control-label">#{msg.proveedorCrearCiudad}</label>
                                 <div class="col-sm-10">
                                     <b:selectOneMenu value = "#{crearProveedor.proveedor.ciudadesIdCiudad}"> 
                                         <f:selectItems value="#{crearProveedor.listaCiudades}" var="lc" itemLabel = "#{lc.nombreCiudad}" /> 
@@ -115,10 +115,10 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{crearProveedor.crear()}" class="btn btn-primary" value="Aceptar"></h:commandButton> 
+                                    <h:commandButton action="#{crearProveedor.crear()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton> 
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/provedores/listarProveedores.xhtml?faces-redirect=true" value="cancelar"/>
+                                    <h:link styleClass="btn btn" outcome="/admin/provedores/listarProveedores.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                             </div>
 
