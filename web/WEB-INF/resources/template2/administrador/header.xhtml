@@ -4,7 +4,8 @@
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              xmlns:p="http://primefaces.org/ui"
-             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+             xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <nav class="navbar navbar-transparent navbar-absolute">
         <div class="container-fluid">
@@ -42,11 +43,11 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="material-icons">notifications</i>
-                           
+
                             <p class="hidden-lg hidden-md">#{msg.notificaciones}</p>
                         </a>
                         <ul class="dropdown-menu">
-                            
+
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -54,14 +55,13 @@
                             <i class="material-icons">person</i>
                             <p class="hidden-lg hidden-md">Mi cuenta</p>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/foie_gras/admin/dashboard/miCuenta.xhtml">My profile</a></li>
-                            <li><a href="/foie_gras/admin/dashboard/Enviarcorreos.xhtml">Enviar correos</a></li>
-                            <li><a href="#">log out</a></li>
-                            <h:form>
-                                <li><h:commandLink style="font-size: 100%;" value="salir" actionListener="#{controladorSesion.cerrarSesion()}"></h:commandLink></li>
-                            </h:form>
-                        </ul>
+                        <h:form>
+                            <ul class="dropdown-menu">
+                                <li><a href="/foie_gras/admin/dashboard/miCuenta.xhtml">My profile</a></li>
+                                <li><a href="/foie_gras/admin/dashboard/Enviarcorreos.xhtml">Enviar correos</a></li>
+                                <li><a jsf:actionListener="#{controladorSesion.cerrarSesion()}">log out</a></li>
+                            </ul>
+                        </h:form>
                     </li>
                 </ul>
             </div>
