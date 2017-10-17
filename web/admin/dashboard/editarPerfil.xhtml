@@ -16,7 +16,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        Editar usuario
+        #{msg.dashboardEditarTitulo}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -39,13 +39,13 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="/foie_gras/admin/dashboard/miCuenta.xhtml" class="btn btn-default visible-lg-block visible-md-block ">Mi perfil</a>
-        <a href="#" class="btn btn-info ">Editar perfil</a>
+        <a href="/foie_gras/admin/dashboard/miCuenta.xhtml" class="btn btn-default visible-lg-block visible-md-block ">#{msg.dashboardBreadcrumMiperfi}</a>
+        <a href="#" class="btn btn-info ">#{msg.dashboardBreadcrumEditarperfil}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Editar perfil</h4>
+        <h4 class="title">#{msg.dashboardCardboardEditarperfil}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -58,45 +58,45 @@
                         <h:form id="form-usuario" prependId="false" class="form-horizontal" role="form">
 
                             <div class="form-group">
-                                <label for="contrasena" class="col-sm-2 control-label">Contraseña</label>
+                                <label for="contrasena" class="col-sm-2 control-label">#{msg.dashboardEditarperfilContraseña}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="contrasena" a:type="password" a:name="contrasena" a:placeholder="Ingrese la contraseña" value="#{listarPerfil.personaSeleccionada.password}"/>
+                                    <h:inputText class="form-control" id="contrasena" a:type="password" a:name="contrasena" a:placeholder="#{msg.dashboardEditarperfilContraseñaPlaceholder}" value="#{listarPerfil.personaSeleccionada.password}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="repitaContrasena" class="col-sm-2 control-label">Repita la contrasena</label>
+                                <label for="repitaContrasena" class="col-sm-2 control-label">#{msg.dashboardEditarperfilContraseñaRepetir}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="repitaContrasena" a:type="password" a:name="repitaContrasena" a:placeholder="Ingrese la contraseña" value="#{listarPerfil.personaSeleccionada.password}"/>
+                                    <h:inputText class="form-control" id="repitaContrasena" a:type="password" a:name="repitaContrasena" a:placeholder="#{msg.dashboardEditarperfilContraseñaRepetirPlaceholder}" value="#{listarPerfil.personaSeleccionada.password}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="telefono" class="col-sm-2 control-label">Telefono</label>
+                                <label for="telefono" class="col-sm-2 control-label">#{msg.dashboardEditarperfilTelefono}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="telefono" a:name="telefono" a:placeholder="Ingrese el telefono" value="#{listarPerfil.personaSeleccionada.telefono}"/>
+                                    <h:inputText class="form-control" id="telefono" a:name="telefono" a:placeholder="#{msg.dashboardEditarperfilTelefonoPlaceholder}" value="#{listarPerfil.personaSeleccionada.telefono}"/>
 
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="direccion" class="col-sm-2 control-label">Direccion</label>
+                                <label for="direccion" class="col-sm-2 control-label">#{msg.dashboardEditarperfilDireccion}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="direccion" a:name="direccion" a:placeholder="Ingrese la direccion" value="#{listarPerfil.personaSeleccionada.direccion}"/>
+                                    <h:inputText class="form-control" id="direccion" a:name="direccion" a:placeholder="#{msg.dashboardEditarperfilDireccionPlaceholder}" value="#{listarPerfil.personaSeleccionada.direccion}"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <label for="email" class="col-sm-2 control-label">#{msg.dashboardEditarperfilCorreo}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="email" a:name="email" a:placeholder="Ingrese el email" value="#{listarPerfil.personaSeleccionada.email}"/>
+                                    <h:inputText class="form-control" id="email" a:name="email" a:placeholder="#{msg.dashboardEditarperfilCorreoPlaceholder}" value="#{listarPerfil.personaSeleccionada.email}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{listarPerfil.actualizarPerfil()}" class="btn btn-primary" value="Aceptar"></h:commandButton>
+                                    <h:commandButton action="#{listarPerfil.actualizarPerfil()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/dashboard/miCuenta.xhtml?faces-redirect=true" value="cancelar"/>
+                                    <h:link styleClass="btn btn" outcome="/admin/dashboard/miCuenta.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                             </div>
                         </h:form>
