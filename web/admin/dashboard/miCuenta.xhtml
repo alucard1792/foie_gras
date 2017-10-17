@@ -12,7 +12,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        Mi cuenta
+        #{msg.dashboardMicuentaTitulo}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -35,12 +35,12 @@
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
         <a href="/foie_gras/admin/index.xhtml" class="btn btn-default visible-lg-block visible-md-block"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-info ">Mi perfil</a>
+        <a href="#" class="btn btn-info ">#{msg.dashboardBreadcrumMiperfi}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Mi perfil</h4>
+        <h4 class="title">#{msg.dashboardCardboardMicuenta}</h4>
 
     </ui:define>
 
@@ -50,20 +50,20 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group label-floating">
-                        <label class="control-label">Documento</label>
+                        <label class="control-label">#{msg.dashboardMiperfilDocumento}</label>
                         <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.documento}"></input>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group label-floating">
-                        <label class="control-label">nombre</label>
+                        <label class="control-label">#{msg.dashboardMiperfilNombre}</label>
                         <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.nombre}"></input>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group label-floating">
-                        <label class="control-label">apellido</label>
-                        <input type="email" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.apellido}"></input>
+                        <label class="control-label">#{msg.dashboardMiperfilApellido}</label>
+                        <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.apellido}"></input>
                     </div>
                 </div>
             </div>
@@ -71,43 +71,41 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group label-floating">
-                        <label class="control-label">telefono</label>
+                        <label class="control-label">#{msg.dashboardMiperfilTelefono}</label>
                         <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.telefono}"></input>
                     </div>
                 </div>
+                
                 <div class="col-md-6">
                     <div class="form-group label-floating">
-                        <label class="control-label">direccion</label>
+                        <label class="control-label">#{msg.dashboardMiperfilDireccion}</label>
                         <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.direccion}"></input>
                     </div>
                 </div>
             </div>
-
-     
-
+            
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group label-floating">
-                        <label class="control-label">correo electronico</label>
+                        <label class="control-label">#{msg.dashboardMiperfilCorreo}</label>
                         <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.email}"></input>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group label-floating">
-                        <label class="control-label">area</label>
+                        <label class="control-label">#{msg.dashboardMiperfilArea}</label>
                         <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.areasIdArea.nombreArea}"></input>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group label-floating">
-                        <label class="control-label">estado</label>
+                        <label class="control-label">#{msg.dashboardMiperfilEstado}</label>
                         <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.estado == 1 ? 'activo':'inactivo'}"></input>
                     </div>
                 </div>
             </div>
 
-
-            <h:commandButton action="#{listarPerfil.PrepararEditarPerfil(controladorSesion.p)}" class="btn btn-primary btn-primary pull-right" value="Editar perfil"></h:commandButton>
+            <h:commandButton action="#{listarPerfil.PrepararEditarPerfil(controladorSesion.p)}" class="btn btn-primary btn-primary pull-right" value="#{msg.universalEditar}"></h:commandButton>
         </h:form>
 
         <div class="clearfix"></div>
@@ -123,7 +121,7 @@
         </div>
 
         <div class="content">
-            <h6 class="category text-gray">Foto de perfil</h6>
+            <h6 class="category text-gray">#{msg.dashboardMiperfilFoto}</h6>
             <h4 class="card-title"></h4>
             <p class="card-content">
             </p>
@@ -143,7 +141,7 @@
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
-        
+
         <script>
 
         </script>
