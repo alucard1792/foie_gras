@@ -30,4 +30,6 @@ public interface ProveedorFacadeLocal {
 
     int count();
     
+    Boolean loadProveedores(String pathFile);
+    
 }

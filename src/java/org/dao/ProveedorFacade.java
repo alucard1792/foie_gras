@@ -8,6 +8,7 @@ package org.dao;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.entidades.Proveedor;
 
 /**
@@ -28,5 +29,22 @@ public class ProveedorFacade extends AbstractFacade<Proveedor> implements Provee
     public ProveedorFacade() {
         super(Proveedor.class);
     }
+
+    @Override
+    public Boolean loadProveedores(String pathFile) {
+         try {
+            String sql = "LOAD DATA LOCAL INFILE '" + pathFile + "' "
+                    + "INTO TABLE proveedores "
+                    + "FIELDS TERMINATED BY ';' "
+                    + "LINES TERMINATED BY '\n' "
+                    + "(nit_proveedor, nombre_empresa, direccion, telefono, representante_legal, ciudades_id_ciudad);";
+            Query nq = getEntityManager().createNativeQuery(sql);
+            nq.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;    }
     
 }
+
