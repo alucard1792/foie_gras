@@ -57,9 +57,9 @@
                         </a>
                         <h:form>
                             <ul class="dropdown-menu">
-                                <li><a href="/foie_gras/admin/dashboard/miCuenta.xhtml">My profile</a></li>
-                                <li><a href="/foie_gras/admin/dashboard/Enviarcorreos.xhtml">Enviar correos</a></li>
-                                <li><a jsf:actionListener="#{controladorSesion.cerrarSesion()}">log out</a></li>
+                                <li><a href="/foie_gras/admin/dashboard/miCuenta.xhtml">#{msg.templateHeaderMiPerfil}</a></li>
+                                <li><a href="/foie_gras/admin/dashboard/Enviarcorreos.xhtml">#{msg.templateHeaderEnvioCorreos}</a></li>
+                                <li><a jsf:actionListener="#{controladorSesion.cerrarSesion()}">#{msg.templateHeaderCerrarSesion}</a></li>
                             </ul>
                         </h:form>
                     </li>
