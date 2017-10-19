@@ -6,6 +6,7 @@
 package org.modulos.roles;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -24,24 +25,26 @@ import org.entidades.Rol;
  */
 @Named(value = "crearRol")
 @ViewScoped
-public class CrearRol implements Serializable{
+public class CrearRol implements Serializable {
 
     @EJB
     private RolFacadeLocal rolFacadeLocal;
     @EJB
     private PermisoFacadeLocal permisoFacadeLocal;
-    private List<Permiso>listaPermisos;
+    private List<Permiso> listaPermisos;
     private Rol rol;
+    private Permiso permiso;
     private String nombreRol;
     private int estado;
 
     public CrearRol() {
-        
+
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         rol = new Rol();
+        permiso = new Permiso();
         listaPermisos = permisoFacadeLocal.findAll();
     }
 
@@ -52,7 +55,7 @@ public class CrearRol implements Serializable{
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-    
+
     public String getNombreRol() {
         return nombreRol;
     }
@@ -76,24 +79,25 @@ public class CrearRol implements Serializable{
     public void setListaPermisos(List<Permiso> listaPermisos) {
         this.listaPermisos = listaPermisos;
     }
-    
-    public String crear(){
+
+    public String crear() {
         try {
             rolFacadeLocal.create(rol);
             return "/admin/roles/listarRoles.xhtml?faces-redirect=true";
+
         } catch (Exception e) {
             e.printStackTrace();
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el rol, por favor contacte al admin", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
             return "";
-            
+
         }
-        
+
     }
-    
-    public String cancelar(){
+
+    public String cancelar() {
         return "/admin/roles/listarRoles.xhtml?faces-redirect=true";
-        
+
     }
-       
+
 }

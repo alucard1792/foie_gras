@@ -120,6 +120,9 @@
                                 <div class="col-sm-3">
                                     <h:link styleClass="btn btn" outcome="/admin/provedores/listarProveedores.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
+                                <div class="col-sm-3">
+                                    <p:commandButton class="btn btn-primary" value="Carga masiva" type="button" onclick="PF('dlg1').show();" />
+                                </div>
                             </div>
 
                         </h:form>
@@ -129,13 +132,13 @@
             </div>
         </div>
         <h:form id="form-load" prependId="false" enctype="multipart/form-data">
-            <h:panelGroup id="load-users" layout="block">
-                <h:inputFile id="file"/>
-            </h:panelGroup>
 
-
-            <h:commandButton value="Cargar" actionListener="#{cargaProveedoresController.cargarUsuarios()}"/>
-
+            <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+                <h:panelGroup id="load-users" layout="block">
+                    <h:inputFile class="" id="file"/>
+                    <p:commandButton class="" value="Cargar" actionListener="#{cargaProveedoresController.cargarUsuarios()}" ajax="false"/>
+                </h:panelGroup>
+            </p:dialog>
 
         </h:form>
     </ui:define>

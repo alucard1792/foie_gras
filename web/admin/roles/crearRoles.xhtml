@@ -89,8 +89,8 @@
                             <div class="form-group">
                                 <label for="rol" class="col-sm-2 control-label">#{msg.rolCrearPermisos}</label>
                                 <div class="col-sm-10">
-                                    <p:selectManyCheckbox id="grid" value="#{crearRol.rol.permisos}" layout="grid" columns="3">
-                                        <f:selectItems value="#{crearRol.listaPermisos}" var="td" itemLabel="#{td.nombrePermiso}" itemValue="#{td.idPermiso}" />
+                                    <p:selectManyCheckbox id="grid" value="#{crearRol.rol.permisos}" layout="grid" columns="3" converter="permisosConverter">
+                                        <f:selectItems value="#{crearRol.listaPermisos}" var="td" itemLabel="#{td.nombrePermiso}" />
                                     </p:selectManyCheckbox>                               
                                 </div>
                             </div>
