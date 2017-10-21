@@ -61,14 +61,14 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="components-documentation.html" >
-                                    <i class="material-icons">description</i> Documentacion
+                                    <i class="material-icons">description</i> #{msg.documentacion}
 
                                 </a>
                             </li>
                             <li>
 
                                 <a href="contactanos.xhtml" >
-                                    <i class="material-icons">mail</i> Contactanos
+                                    <i class="material-icons" >mail</i> #{msg.contact}
                                 </a>
                             </li>
                             <li>
@@ -77,12 +77,12 @@
                                 <b:form id="login" horizontal="true" prependId="false">
                                     <div class="btn-group">
                                         <button id="botonLogin" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
-                                            Iniciar sesion<span class="caret"></span>
+                                            #{msg.login}<span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" id="login-content">
                                             <h:form prependId="false" id="form-login">
-                                                <h:inputText class="form-control"  a:type="text" a:placeholder="#{msg.documento}" value="#{controladorSesion.documento}"/>
-                                                <h:inputSecret class="form-control"  a:placeholder="#{msg.contraseña}" value="#{controladorSesion.password}"/>
+                                                <h:inputText id="user" class="form-control"  a:type="text" a:placeholder="#{msg.documento}" value="#{controladorSesion.documento}"/>
+                                                <h:inputSecret id="pass"  class="form-control"  a:placeholder="#{msg.contraseña}" value="#{controladorSesion.password}"/>
                                                 <div class="action">
                                                     <h:commandButton class="btn btn-primary signup" value="#{msg.boton}" action="#{controladorSesion.iniciarSesion()}"></h:commandButton>
                                                     <a href="RecuperarPassword.xhtml" ></a>
@@ -128,7 +128,7 @@
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="brand">
                                     <h1>INNOVACRYL-LD</h1>
-                                    <h3>Dandole vida a tus ideas.</h3>
+                                    <h3>#{msg.bodyTitle}</h3>
                                 </div>
                             </div>
                         </div>
@@ -186,10 +186,10 @@
 
                                                 <!-- Controls -->
                                                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                                    <i class="material-icons">Izquierda</i>
+                                                    <i class="material-icons">#{msg.izquierda}</i>
                                                 </a>
                                                 <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                                    <i class="material-icons">Derecha</i>
+                                                    <i class="material-icons">D#{msg.derecha}</i>
                                                 </a>
                                             </div>
                                         </div>
@@ -207,22 +207,12 @@
                         <div class="container text-center">
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2 text-center">
-                                    <h2>Misión</h2>
-                                    <h4>
-                                        Trabajamos todos los días para construir un mejor futuro:
-                                        Rentable y sostenible
-                                        Con una operación sana, limpia y segura
-                                        Asegurando la excelencia operacional y la transparencia en cada una de nuestras acciones
-                                        Construyendo relaciones de mutuo beneficio con los grupos de interés  </h4>
+                                    <h2>#{msg.missionTitle}</h2>
+                                    <h4>#{msg.missionDescription}  </h4>
                                 </div>
                                 <div class="col-md-8 col-md-offset-2 text-center">
-                                    <h2>Visiòn</h2>
-                                    <h4>
-                                        Trabajamos todos los días para construir un mejor futuro:
-                                        Rentable y sostenible
-                                        Con una operación sana, limpia y segura
-                                        Asegurando la excelencia operacional y la transparencia en cada una de nuestras acciones
-                                        Construyendo relaciones de mutuo beneficio con los grupos de interés  </h4>
+                                    <h2>#{msg.visionTitle}</h2>
+                                    <h4>#{msg.visionDescription}  </h4>
                                 </div>
                             </div>
                         </div>
