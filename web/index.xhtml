@@ -80,7 +80,7 @@
                                             #{msg.login}<span class="caret"></span>
                                             
                                         </button>
-                                        <ul class="dropdown-menu" id="login-content" style="width: 300px;height: 250px;">
+                                        <ul class="dropdown-menu" id="login-content" style="width: 300px;height: 250px; background: transparent;">
                                             <h:form prependId="false" id="form-login">
                                                 <h:inputText id="user" class="form-control"  a:type="text" a:placeholder="#{msg.documento}" value="#{controladorSesion.documento}" style="margin: auto;  margin-top: 15px;"/>
                                                 <h:inputSecret id="pass"  class="form-control"  a:placeholder="#{msg.contraseña}" value="#{controladorSesion.password}" style="margin: auto; margin-top: 15px;"/>
@@ -101,7 +101,7 @@
                                         <button id="botonLenguajes" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: transparent;" ><i class="material-icons">g_translate</i>
                                             #{msg.idioma} <span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" style="background: transparent;" >
                                             <c:forEach items="#{idioma.supportLanguages}" var="l" >
                                                 <li>
                                                     <h:commandLink  value="#{msg[l.displayLanguage]}" action="#{idioma.cambiarIdioma(l)}">
