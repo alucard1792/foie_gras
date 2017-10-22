@@ -32,14 +32,14 @@ nav.acceder #login-content {
 
 .login-content{
     position: absolute;
-  top: 26px;
+  top: 3434px;
   right: 0;
   z-index: 999;    
   background: #fff;
   padding: 555px;
   border-radius: 10px 0 10px 10px;
-  width: 250px; 
-  display: none;
+  width: 6000px; 
+  
 }
 input#user, input#pass {
   background: #f1f1f1;

@@ -79,14 +79,14 @@
                                         <button id="botonLogin" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
                                             #{msg.login}<span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu" id="login-content">
+                                        <ul class="dropdown-menu" id="login-content" style="width: 300px;height: 250px;">
                                             <h:form prependId="false" id="form-login">
-                                                <h:inputText id="user" class="form-control"  a:type="text" a:placeholder="#{msg.documento}" value="#{controladorSesion.documento}"/>
-                                                <h:inputSecret id="pass"  class="form-control"  a:placeholder="#{msg.contraseña}" value="#{controladorSesion.password}"/>
+                                                <h:inputText id="user" class="form-control"  a:type="text" a:placeholder="#{msg.documento}" value="#{controladorSesion.documento}" style="margin: auto;  margin-top: 15px;"/>
+                                                <h:inputSecret id="pass"  class="form-control"  a:placeholder="#{msg.contraseña}" value="#{controladorSesion.password}" style="margin: auto; margin-top: 15px;"/>
                                                 <div class="action">
-                                                    <h:commandButton class="btn btn-primary signup" value="#{msg.boton}" action="#{controladorSesion.iniciarSesion()}"></h:commandButton>
+                                                    <h:commandButton class="btn btn-primary signup" value="#{msg.boton}" style=" margin: auto; margin-left: 80px; margin-top: 15px;" action="#{controladorSesion.iniciarSesion()}"></h:commandButton>
                                                     <a href="RecuperarPassword.xhtml" ></a>
-                                                    <h:commandButton class="btn btn-secondary signup" value="#{msg.botonOlvidasteContraseña}" action="RecuperarPassword?faces-redirect=true" />
+                                                    <h:commandButton class="btn btn-secondary signup" style="margin: auto; margin-left: 30px;  margin-top: 15px;" value="#{msg.botonOlvidasteContraseña}" action="RecuperarPassword?faces-redirect=true" />
 
                                                 </div> 
                                             </h:form>
