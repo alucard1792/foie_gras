@@ -116,7 +116,7 @@
                 <p:column headerText="#{msg.proveedorListarCiudad}" filterBy="#{lp.ciudadesIdCiudad.nombreCiudad}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.universalOpciones}" exportable="false" style="text-align: center;">
+                <p:column headerText="#{msg.universalOpciones}" exportable="false"  width="100" style="text-align: center;">
                     <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
                 </p:column>
 

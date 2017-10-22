@@ -8,6 +8,12 @@
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="primerosScripts">
+        <link href="#{request.contextPath}/resources/formValidation/css/formValidation.css" rel="stylesheet" />
+        <script src="#{request.contextPath}/resources/formValidation/js/formValidation.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/framework/bootstrap.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/language/es_ES.js" type="text/javascript" ></script>
+    </ui:define>
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -71,21 +77,21 @@
                             <div class="form-group">
                                 <label for="nombreEmpresa" class="col-sm-2 control-label">#{msg.proveedorEditarNombre}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nombreEmpresa" a:placeholder="#{msg.proveedorEditarNombrePlaceholder}" value="#{listarProvedores.proveedorSeleccionado.nombreEmpresa}"/>
+                                    <h:inputText a:name="nombreEmpresa" class="form-control" id="nombreEmpresa" a:placeholder="#{msg.proveedorEditarNombrePlaceholder}" value="#{listarProvedores.proveedorSeleccionado.nombreEmpresa}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="direccion" class="col-sm-2 control-label">#{msg.proveedorEditarDireccion}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="direccion" a:placeholder="#{msg.proveedorEditarDireccionPlaceholder}" value="#{listarProvedores.proveedorSeleccionado.direccion}"/>
+                                    <h:inputText a:name="direccion" class="form-control" id="direccion" a:placeholder="#{msg.proveedorEditarDireccionPlaceholder}" value="#{listarProvedores.proveedorSeleccionado.direccion}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="representanteLegal" class="col-sm-2 control-label">#{msg.proveedorEditarRepresentanteLegal}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="representanteLegal" a:placeholder="#{msg.proveedorEditarRepresentanteLegalPlaceholder}" value="#{listarProvedores.proveedorSeleccionado.representanteLegal}"/>
+                                    <h:inputText a:name="representanteLegal" class="form-control" id="representanteLegal" a:placeholder="#{msg.proveedorEditarRepresentanteLegalPlaceholder}" value="#{listarProvedores.proveedorSeleccionado.representanteLegal}"/>
                                 </div>
                             </div>
 
@@ -93,14 +99,14 @@
                             <div class="form-group">
                                 <label for="nitProveedor" class="col-sm-2 control-label">#{msg.proveedorEditarNitProveedor}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nitProveedor" a:placeholder="#{msg.proveedorEditarNitProveedorPlaceholder}" value="#{listarProvedores.proveedorSeleccionado.nitProveedor}"/>
+                                    <h:inputText a:name="nitProveedor" class="form-control" id="nitProveedor" a:placeholder="#{msg.proveedorEditarNitProveedorPlaceholder}" value="#{listarProvedores.proveedorSeleccionado.nitProveedor}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="telefono" class="col-sm-2 control-label">#{msg.proveedorEditarTelefono}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="telefono" a:placeholder="#{msg.proveedorEditarTelefonoPlaceholder}" value="#{listarProvedores.proveedorSeleccionado.telefono}"/>
+                                    <h:inputText a:name="telefono" class="form-control" id="telefono" a:placeholder="#{msg.proveedorEditarTelefonoPlaceholder}" value="#{listarProvedores.proveedorSeleccionado.telefono}"/>
                                 </div>
                             </div>
 
@@ -135,7 +141,95 @@
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script>
+            $(document).ready(function () {
+                $('#form').formValidation({
+                    locale: "#{(idioma.languageSelect.language.startsWith('es', 0) ? 'es_ES': 'en_US')}",
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        nombreEmpresa: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
+                        direccion: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
 
+                        representanteLegal: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
+
+                        nitProveedor: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
+
+                        telefono: {
+                            validators: {
+                                notEmpty: {},
+                                digits: {},
+                                phone: {
+                                    country: 'CO'
+                                }
+                            }
+                        },
+                    }
+                });
+            });
         </script>
     </ui:define>
 
