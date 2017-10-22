@@ -35,7 +35,7 @@ nav.acceder #login-content {
   top: 3434px;
   right: 0;
   z-index: 999;    
-  background: transparent;
+  background: #fff;
   padding: 555px;
   border-radius: 10px 0 10px 10px;
   width: 6000px; 
