@@ -93,17 +93,17 @@
 
                                 <b:form id="login" horizontal="true" prependId="false">
                                     <div class="btn-group">
-                                        <button id="botonLogin" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
+                                        <button id="botonLogin" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background: transparent;"><i class="material-icons">lock</i> >
                                             #{msg.login}<span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu" id="login-content">
+                                        <ul class="dropdown-menu" id="login-content" style="width: 300px;">
                                             <h:form prependId="false" id="form-login">
-                                                <h:inputText id="user" class="form-control"  a:type="text" a:placeholder="#{msg.documento}" value="#{controladorSesion.documento}"/>
-                                                <h:inputSecret id="pass"  class="form-control"  a:placeholder="#{msg.contraseña}" value="#{controladorSesion.password}"/>
+                                                <h:inputText id="user" class="form-control"  a:type="text" a:placeholder="#{msg.documento}" value="#{controladorSesion.documento}"  style="margin: auto;  margin-top: 15px;"/>
+                                                <h:inputSecret id="pass"  class="form-control"  a:placeholder="#{msg.contraseña}" value="#{controladorSesion.password}"  style="margin: auto;  margin-top: 15px;"/>
                                                 <div class="action">
-                                                    <h:commandButton class="btn btn-primary signup" value="#{msg.boton}" action="#{controladorSesion.iniciarSesion()}"></h:commandButton>
+                                                    <h:commandButton class="btn btn-primary signup" value="#{msg.boton}" style=" margin: auto; margin-left: 80px; margin-top: 15px;" action="#{controladorSesion.iniciarSesion()}"></h:commandButton>
                                                     <a href="RecuperarPassword.xhtml" ></a>
-                                                    <h:commandButton class="btn btn-secondary signup" value="#{msg.botonOlvidasteContraseña}" action="RecuperarPassword?faces-redirect=true" />
+                                                    <h:commandButton class="btn btn-secondary signup" value="#{msg.botonOlvidasteContraseña}" style="margin: auto; margin-left: 30px;  margin-top: 15px;" action="RecuperarPassword?faces-redirect=true" />
 
                                                 </div> 
                                             </h:form>
@@ -114,8 +114,8 @@
                             <li>
                                 <b:form id="form" horizontal="true" prependId="false">
                                     <div class="btn-group">
-                                        <button id="botonLenguajes" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                            #{msg.idioma} <span class="caret"></span>
+                                        <button id="botonLenguajes" type="button" class="btn btn-default dropdown-toggle" style="background: transparent;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            <i class="material-icons">g_translate</i>#{msg.idioma} <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu">
                                             <c:forEach items="#{idioma.supportLanguages}" var="l" >
