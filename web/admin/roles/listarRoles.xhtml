@@ -104,7 +104,7 @@
                 <p:column headerText="#{msg.rolListarEstado}" width="200" filterBy="#{lp.estado}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.estado == 1 ? 'Activo':'inactivo'}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.opciones}" exportable="false" style="text-align: center;" width="200">
+                <p:column headerText="#{msg.universalOpciones}" exportable="false" style="text-align: center;" width="200">
                     <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarRoles.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
                 </p:column>
 
