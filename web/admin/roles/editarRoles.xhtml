@@ -9,6 +9,12 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:p="http://primefaces.org/ui">
+    <ui:define name="primerosScripts">
+        <link href="#{request.contextPath}/resources/formValidation/css/formValidation.css" rel="stylesheet" />
+        <script src="#{request.contextPath}/resources/formValidation/js/formValidation.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/framework/bootstrap.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/language/es_ES.js" type="text/javascript" ></script>
+    </ui:define>
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -72,7 +78,7 @@
                             <div class="form-group">
                                 <label for="nombreRol" class="col-sm-2 control-label">#{msg.rolEditarNombre}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="text" class="form-control" id="nombreRol" a:placeholder="#{msg.rolEditarNombrePlaceholder}" value="#{listarRoles.rolSeleccionado.nombreRol}"/>
+                                    <h:inputText a:name="nombreRol" class="form-control" id="nombreRol" a:placeholder="#{msg.rolEditarNombrePlaceholder}" value="#{listarRoles.rolSeleccionado.nombreRol}"/>
                                 </div>
                             </div>
 
@@ -126,6 +132,32 @@
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script>
+            
+            $(document).ready(function () {
+                $('#form').formValidation({
+                    locale: "#{(idioma.languageSelect.language.startsWith('es', 0) ? 'es_ES': 'en_US')}",
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        nombreRol: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                            }
+                        },
+                    }
+                });
+            });
 
         </script>
     </ui:define>
