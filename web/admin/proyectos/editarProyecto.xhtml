@@ -10,7 +10,13 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:b="http://bootsfaces.net/ui">
-
+    <ui:define name="primerosScripts">
+        <link href="#{request.contextPath}/resources/formValidation/css/formValidation.css" rel="stylesheet" />
+        <script src="#{request.contextPath}/resources/formValidation/js/formValidation.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/framework/bootstrap.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/language/es_ES.js" type="text/javascript" ></script>
+    </ui:define>
+    
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
         #{msg.proyectoEditarTitulo}
@@ -73,7 +79,7 @@
                             <div class="form-group">
                                 <label for="tiempoEstimado" class="col-sm-2 control-label">#{msg.proyectoEditarTiempoEstimado}</label>
                                 <div class="col-sm-10">
-                                    <p:calendar mindate="#{listarProyectos.currentDate}" a:type="date" a:placeholder="#{msg.proyectoEditarNombrePlaceholder}" id="tiempoEstimado" value="#{listarProyectos.proyectoSeleccionado.tiempoEstimado}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                    <p:calendar mindate="#{listarProyectos.currentDate}" a:placeholder="#{msg.proyectoEditarNombrePlaceholder}" id="tiempoEstimado" value="#{listarProyectos.proyectoSeleccionado.tiempoEstimado}" pattern="yyyy-MM-dd HH:mm:ss" />
                                 </div>
                             </div>
 
@@ -106,6 +112,46 @@
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">
         <script>
+
+	 $(document).ready(function () {
+                $('#form').formValidation({
+                    locale: "#{(idioma.languageSelect.language.startsWith('es', 0) ? 'es_ES': 'en_US')}",
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        nombreEmpresa: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
+                        
+                        telefono: {
+                            validators: {
+                                notEmpty: {},
+                                digits: {},
+                                phone: {
+                                    country: 'CO'
+                                }
+                            }
+                        },
+                    }
+                });
+            });
 
         </script>
     </ui:define>
