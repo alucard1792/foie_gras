@@ -93,6 +93,7 @@ public class CrearUsuario implements Serializable {
         try {
             if (persona != null) {
                 Calendar cal = Calendar.getInstance();
+                persona.setIdPersona(null);
                 persona.setFechaIngreso(cal.getTime());
                 rolesAsignados = new ArrayList<>();
                 rolesAsignados.add(rfl.find(rol.getIdRol()));

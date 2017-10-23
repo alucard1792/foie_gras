@@ -10,6 +10,12 @@
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="primerosScripts">
+        <link href="#{request.contextPath}/resources/formValidation/css/formValidation.css" rel="stylesheet" />
+        <script src="#{request.contextPath}/resources/formValidation/js/formValidation.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/framework/bootstrap.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/formValidation/js/language/es_ES.js" type="text/javascript" ></script>
+    </ui:define>
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -72,49 +78,49 @@
                             <div class="form-group">
                                 <label for="documento" class="col-sm-2 control-label">#{msg.usuarioCrearDocumento}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText a:type="number" class="form-control" id="documento" a:placeholder="#{msg.usuarioCrearDocumentoPlaceholder}" value="#{crearUsuario.persona.documento}"></h:inputText>
+                                    <h:inputText a:name="documento" class="form-control" id="documento" a:placeholder="#{msg.usuarioCrearDocumentoPlaceholder}" value="#{crearUsuario.persona.documento}"></h:inputText>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="nombre" class="col-sm-2 control-label">#{msg.usuarioCrearNombre}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText  a:type="text" class="form-control" id="nombre" a:placeholder="#{msg.usuarioCrearNombrePlaceholder}" value="#{crearUsuario.persona.nombre}"></h:inputText>
+                                    <h:inputText  a:name="nombre" class="form-control" id="nombre" a:placeholder="#{msg.usuarioCrearNombrePlaceholder}" value="#{crearUsuario.persona.nombre}"></h:inputText>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="apellido" class="col-sm-2 control-label">#{msg.usuarioCrearApellido}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText  a:type="text" class="form-control" id="apellido" a:placeholder="#{msg.usuarioCrearApellidoPlaceholder}" value="#{crearUsuario.persona.apellido}"></h:inputText>
+                                    <h:inputText  a:name="apellido" class="form-control" id="apellido" a:placeholder="#{msg.usuarioCrearApellidoPlaceholder}" value="#{crearUsuario.persona.apellido}"></h:inputText>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="password" class="col-sm-2 control-label">#{msg.usuarioCrearPassword}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText  a:type="password" class="form-control" id="password" a:placeholder="#{msg.usuarioCrearPasswordPlaceholder}" value="#{crearUsuario.persona.password}"></h:inputText>
+                                    <h:inputText  a:name="password" class="form-control" id="password" a:placeholder="#{msg.usuarioCrearPasswordPlaceholder}" value="#{crearUsuario.persona.password}"></h:inputText>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="telefono" class="col-sm-2 control-label">#{msg.usuarioCrearTelefono}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText  a:type="number" class="form-control" id="telefono" a:placeholder="#{msg.usuarioCrearTelefonoPlaceholder}" value="#{crearUsuario.persona.telefono}"></h:inputText>
+                                    <h:inputText  a:name="telefono" class="form-control" id="telefono" a:placeholder="#{msg.usuarioCrearTelefonoPlaceholder}" value="#{crearUsuario.persona.telefono}"></h:inputText>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="direccion" class="col-sm-2 control-label">#{msg.usuarioCrearDireccion}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText  a:type="text" class="form-control" id="direccion" a:placeholder="#{msg.usuarioCrearDireccionPlaceholder}" value="#{crearUsuario.persona.direccion}"></h:inputText>
+                                    <h:inputText  a:name="direccion" class="form-control" id="direccion" a:placeholder="#{msg.usuarioCrearDireccionPlaceholder}" value="#{crearUsuario.persona.direccion}"></h:inputText>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">#{msg.usuarioCrearCorreo}</label>
                                 <div class="col-sm-10">
-                                    <h:inputText class="form-control" id="email" a:placeholder="#{msg.usuarioCrearCorreoPlaceholder}" a:type="email" value="#{crearUsuario.persona.email}"></h:inputText>
+                                    <h:inputText a:name="email" class="form-control" id="email" a:placeholder="#{msg.usuarioCrearCorreoPlaceholder}" value="#{crearUsuario.persona.email}"></h:inputText>
                                 </div>
                             </div>
 
@@ -172,14 +178,114 @@
 
     <ui:define name="ultimosScripts">
         <script>
-            function isEmpty() {
-                if (document.getElementById("documento").value.length == 0 || document.getElementById("nombre").value.length == 0 || document.getElementById("apellido").value.length == 0 || document.getElementById("password").value.length == 0 ||
-                        document.getElementById("telefono").value.length == 0 || document.getElementById("direccion").value.length == 0 || document.getElementById("email").value.length == 0 || document.getElementById("estado").value.length == 0 ||
-                        document.getElementById("area").value.length == 0 || document.getElementById("rol").value.length == 0 || document.getElementById("fechaNacimiento").value.length == 0 || document.getElementById("fechaRegistro").value.length == 0)
-                {
-                    alert("empty");
-                }
-            }
+
+            $(document).ready(function () {
+                $('#form').formValidation({
+                    locale: "#{(idioma.languageSelect.language.startsWith('es', 0) ? 'es_ES': 'en_US')}",
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        nombre: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
+                        apellido: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
+
+                        password: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
+
+                        direccion: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 30,
+                                    message: ''
+                                },
+                                regexp: {
+                                    regexp: /^[a-zñA-ZÑ0-9_]+$/,
+                                    message: ''
+                                }
+                            }
+                        },
+
+                        email: {
+                            validators: {
+                                notEmpty: {
+
+                                },
+                                emailAddress: {
+                                    
+                                }
+                            }
+                        },
+
+                        documento: {
+                            validators: {
+                                notEmpty: {},
+                                digits: {},
+                            }
+                        },
+
+                        telefono: {
+                            validators: {
+                                notEmpty: {},
+                                digits: {},
+                                phone: {
+                                    country: 'CO'
+                                }
+                            }
+                        },
+                    }
+                });
+            });
         </script>
     </ui:define>
 
