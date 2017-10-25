@@ -96,11 +96,11 @@
                     </c:forEach>                       
                 </div>
             </div>
-            <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+            <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla">
                 <p:column headerText="#{msg.usuarioListarId}" width="200"> 
                     <p:outputLabel value="#{lp.idPersona}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.usuarioListarDocumento}" width="200">
+                <p:column headerText="#{msg.usuarioListarDocumento}" filterBy="#{lp.documento}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.documento}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.usuarioListarNombre}" filterBy="#{lp.nombre}" filterMatchMode="contains" width="200">
@@ -109,10 +109,10 @@
                 <p:column headerText="#{msg.usuarioListarApellido}" filterBy="#{lp.apellido}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.apellido}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.usuarioListarPassword}" width="200">
+                <p:column headerText="#{msg.usuarioListarPassword}" filterBy="#{lp.password}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.password}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.usuarioListarTelefono}" width="200">
+                <p:column headerText="#{msg.usuarioListarTelefono}" filterBy="#{lp.telefono}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.usuarioListarDireccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
@@ -121,23 +121,29 @@
                 <p:column headerText="#{msg.usuarioListarCorreo}" filterBy="#{lp.email}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.email}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.usuarioListarFechaNacimiento}" width="200">
+                <p:column headerText="#{msg.usuarioListarFechaNacimiento}" filterBy="#{lp.fechaNacimiento}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.fechaNacimiento}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.usuarioListarFechaRegistro}" width="200">
+                <p:column headerText="#{msg.usuarioListarFechaRegistro}" filterBy="#{lp.fechaIngreso}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.usuarioListarUltimaVez}" width="200">
+                <p:column headerText="#{msg.usuarioListarUltimaVez}" filterBy="#{lp.ultimaVez}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.ultimaVez eq null ? 'no se ha validado':lp.ultimaVez)}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.usuarioListarRol}" filterBy="#{lp.roles}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.roles.get(0) != null ? lp.roles.get(0).nombreRol:'')}" >
-                    </p:outputLabel>                
+                    </p:outputLabel>
                 </p:column>
                 <p:column headerText="#{msg.usuarioListarArea}"  filterBy="#{lp.areasIdArea.nombreArea}" filterMatchMode="contains" width="200">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla').filter()" style="width:100px;" converter="areaConverter">
+                            <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{listarUsuarios.listaAreas}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
                     <p:outputLabel value="#{lp.areasIdArea}" converter="areaConverter"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.usuarioListarEstado}" width="200">
+                <p:column headerText="#{msg.usuarioListarEstado}" filterBy="#{lp.estado}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100" style="text-align: center;">

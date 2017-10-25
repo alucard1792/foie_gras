@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -56,7 +58,10 @@ public class Rol implements Serializable {
     private int estado;
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private List<Persona> personas;//todos los usuarios que tienen asignado ese permiso 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+@JoinTable(name = "roles_permisos", joinColumns = {
+        @JoinColumn(name = "roles_id_rol", referencedColumnName = "id_rol")}, inverseJoinColumns = {
+        @JoinColumn(name = "permisos_id_permiso", referencedColumnName = "id_permiso")})
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Permiso> permisos;//los permisos que estan asosiados a ese rol
 
     public Rol() {

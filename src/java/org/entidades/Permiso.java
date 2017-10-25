@@ -70,10 +70,8 @@ public class Permiso implements Serializable {
     @Size(max = 45)
     @Column(name = "icon")
     private String icon;
-    @JoinTable(name = "roles_permisos", joinColumns = {
-        @JoinColumn(name = "permisos_id_permiso", referencedColumnName = "id_permiso")}, inverseJoinColumns = {
-        @JoinColumn(name = "roles_id_rol", referencedColumnName = "id_rol")})
-    @ManyToMany(fetch = FetchType.EAGER)
+   //nuevo
+    @ManyToMany(mappedBy = "permisos", fetch = FetchType.EAGER)
     private List<Rol> roles; //indica "ese" permiso, en cuantos roles esta
     @OneToMany(mappedBy = "permisoPadre", fetch = FetchType.EAGER)
     private List<Permiso> subPermisos;//muestra los subpermisos
