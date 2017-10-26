@@ -13,7 +13,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
+import org.dao.CiudadFacadeLocal;
 import org.dao.ProveedorFacadeLocal;
+import org.entidades.Ciudad;
 import org.entidades.Proveedor;
 
 /**
@@ -26,10 +28,13 @@ public class ListarProvedores implements Serializable {
 
     @EJB
     private ProveedorFacadeLocal proveedorFacadeLocal;
+    @EJB
+    private CiudadFacadeLocal ciudadFacadeLocal;
     @Inject
     private Conversation conversacion;
     private Proveedor proveedorSeleccionado;
     private List<Proveedor> listaProveedores;
+    private List<Ciudad> listaCiudad;
 
     public ListarProvedores() {
 
@@ -37,8 +42,9 @@ public class ListarProvedores implements Serializable {
 
     @PostConstruct
     public void init() {
-        System.out.println("sdasdsdasdsa");
         listaProveedores=proveedorFacadeLocal.findAll();
+        listaCiudad = ciudadFacadeLocal.findAll();
+        
     }
 
     public List<Proveedor> getListaProveedores() {
@@ -53,6 +59,10 @@ public class ListarProvedores implements Serializable {
         this.proveedorSeleccionado = proveedorSeleccionado;
     }
 
+    public List<Ciudad> getListaCiudad() {
+        return listaCiudad;
+    }
+    
     public void iniciarConversacion() {
         if (conversacion.isTransient()) {
             conversacion.begin();

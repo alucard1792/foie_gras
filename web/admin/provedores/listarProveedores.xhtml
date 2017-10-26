@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+            <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
 
                 <p:column headerText="#{msg.proveedorListarId}" width="200"> 
                     <p:outputLabel value="#{lp.idProveedor}"></p:outputLabel>                                
@@ -107,13 +107,19 @@
                 <p:column headerText="#{msg.proveedorListarDireccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.direccion)}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.proveedorListarTelefono}" width="200">
+                <p:column headerText="#{msg.proveedorListarTelefono}" filterBy="#{lp.telefono}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.proveedorListarRepresentanteLegal}" width="200">
+                <p:column headerText="#{msg.proveedorListarRepresentanteLegal}" filterBy="#{lp.representanteLegal}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.representanteLegal}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.proveedorListarCiudad}" filterBy="#{lp.ciudadesIdCiudad.nombreCiudad}" filterMatchMode="contains" width="200">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;">
+                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{listarProvedores.listaCiudad}" var="listaCiudad" itemValue="#{listaCiudad.nombreCiudad}" itemLabel="#{listaCiudad.nombreCiudad}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
                     <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.universalOpciones}" exportable="false"  width="100" style="text-align: center;">
