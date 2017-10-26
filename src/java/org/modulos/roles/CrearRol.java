@@ -36,15 +36,15 @@ public class CrearRol implements Serializable {
     private Permiso permiso;
     private String nombreRol;
     private int estado;
-    private  Rol  rol2;
+    private Rol rol2;
+
     public CrearRol() {
 
-    } 
+    }
 
     @PostConstruct
     public void init() {
         rol = new Rol();
-       rol2 = new Rol();
         permiso = new Permiso();
         listaPermisos = permisoFacadeLocal.findAll();
     }
@@ -55,14 +55,6 @@ public class CrearRol implements Serializable {
 
     public void setRol(Rol rol) {
         this.rol = rol;
-    }
-
-    public Rol getRol2() {
-        return rol2;
-    }
-
-    public void setRol2(Rol rol2) {
-        this.rol2 = rol2;
     }
 
     public String getNombreRol() {
@@ -88,19 +80,7 @@ public class CrearRol implements Serializable {
     public void setListaPermisos(List<Permiso> listaPermisos) {
         this.listaPermisos = listaPermisos;
     }
- public void crearRolp() {
-     rol2.setEstado(1);
-     rol2.setNombreRol("prueba");
-    Permiso p1= permisoFacadeLocal.find(1);
-    Permiso p2= permisoFacadeLocal.find(2);
-     List<Permiso> permisos2= new ArrayList<>();
-             permisos2.add(p2);
-             permisos2.add(p1);
-     rol2.setPermisos(permisos2);
- rolFacadeLocal.create(rol2);
- 
- 
- }
+
     public String crear() {
         try {
             rolFacadeLocal.create(rol);
