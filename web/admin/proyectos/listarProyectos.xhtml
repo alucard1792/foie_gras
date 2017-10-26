@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            <p:dataTable value="#{listarProyectos.proyecto}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+            <p:dataTable value="#{listarProyectos.proyecto}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
 
                 <p:column headerText="#{msg.proyectoListarId}" width="200"> 
                     <p:outputLabel value="#{lp.idProyecto}"></p:outputLabel>                                
@@ -98,10 +98,22 @@
                 <p:column headerText="#{msg.proyectoListarFechaFinalizacion}" filterBy="#{lp.fechaFinalizado}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.fechaFinalizado}"><f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.proyectoListarEstado}" filterBy="#{lp.estadosIdEstado.descripcionEstado}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.proyectoListarEstado}" filterBy="#{lp.estadosIdEstado.descripcionEstado}" filterMatchMode="exact" width="200" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;">
+                            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{listarProyectos.listaEstados}" var="listaEstados" itemValue="#{listaEstados.descripcionEstado}" itemLabel="#{listaEstados.descripcionEstado}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
                     <p:outputLabel value="#{(lp.estadosIdEstado.descripcionEstado)}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.proyectoListarDificultad}" width="200">
+                <p:column headerText="#{msg.proyectoListarDificultad}" width="200" filterBy="#{lp.dificultadesIdDificultad.descripcionDificultad}" sortBy="#{lp.dificultadesIdDificultad.descripcionDificultad}" filterMatchMode="exact">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
+                            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{listarProyectos.listaDificultades}" var="listaDificultades" itemValue="#{listaDificultades.descripcionDificultad}" itemLabel="#{listaDificultades.descripcionDificultad}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
                     <p:outputLabel value="#{lp.dificultadesIdDificultad.descripcionDificultad}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.proyectoListarNombreProyecto}"  filterBy="#{lp.pedidosIdPedido.nombreProyecto}" filterMatchMode="contains" width="200">
@@ -113,7 +125,13 @@
                 <p:column headerText="#{msg.proyectoListarCantidad}"  filterBy="#{lp.pedidosIdPedido.cantidad}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.pedidosIdPedido.cantidad}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.proyectoListarOperarioAsignado}" width="200">
+                <p:column headerText="#{msg.proyectoListarOperarioAsignado}" filterBy="#{lp.operarioIdPersona.nombre}" sortBy="#{lp.operarioIdPersona.nombre}" filterMatchMode="contains" width="200">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
+                            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{listarProyectos.listaOperarios}" var="listaOperarios" itemValue="#{listaOperarios.nombre}" itemLabel="#{listaOperarios.nombre} #{lp.operarioIdPersona.apellido}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
                     <p:outputLabel value="#{lp.operarioIdPersona.nombre} #{lp.operarioIdPersona.apellido}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100" style="text-align: center;">
@@ -124,7 +142,7 @@
                         <p:commandButton icon="ui-icon-check" title="#{msg.universalBotonFinalizar}" action="#{listarProyectos.finalizarProyecto(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
                 </p:column>
-                  
+
             </p:dataTable>
 
         </h:form>

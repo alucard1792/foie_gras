@@ -22,9 +22,12 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.dao.DificultadFacadeLocal;
 import org.dao.EstadoFacadeLocal;
+import org.dao.PedidoFacadeLocal;
+import org.dao.PersonaFacadeLocal;
 import org.dao.ProyectoFacadeLocal;
 import org.entidades.Dificultad;
 import org.entidades.Estado;
+import org.entidades.Persona;
 import org.entidades.Proyecto;
 import org.entidades.Rol;
 import org.login.ControladorSesion;
@@ -43,17 +46,20 @@ public class ListarProyectos implements Serializable {
     private DificultadFacadeLocal dificultadFacadeLocal;
     @EJB
     private EstadoFacadeLocal estadoFacadeLocal;
+    @EJB
+    private PedidoFacadeLocal pedidoFacadeLocal;
     @Inject
     private Conversation conversacion;
     @Inject
     private ControladorSesion controladorSesion;
     private Proyecto proyectoSeleccionado;
-    private List<Proyecto> proyecto;
     //datos temporales
     private Estado estado;
     private Dificultad dificultad;
+    private List<Proyecto> proyecto;
     private List<Estado> listaEstados;
     private List<Dificultad> listaDificultades;
+    private List<Persona>listaOperarios;
     private Date currentDate;
     private controller c;
 
@@ -63,6 +69,9 @@ public class ListarProyectos implements Serializable {
 
     @PostConstruct
     public void init() {
+        listaEstados = estadoFacadeLocal.findAll();
+        listaDificultades = dificultadFacadeLocal.findAll();
+        listaOperarios = pedidoFacadeLocal.buscarOperarios();
         currentDate = new Date();
         c = new controller();
 
@@ -139,6 +148,11 @@ public class ListarProyectos implements Serializable {
         this.proyectoSeleccionado = proyectoSeleccionado;
     }
 
+    public List<Persona> getListaOperarios() {
+        return listaOperarios;
+    }
+
+    
     private void iniciarConversacion() {
         if (conversacion.isTransient()) {
             conversacion.begin();
