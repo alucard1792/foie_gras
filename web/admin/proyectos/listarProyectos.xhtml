@@ -101,7 +101,7 @@
                 <p:column headerText="#{msg.proyectoListarEstado}" filterBy="#{lp.estadosIdEstado.descripcionEstado}" filterMatchMode="exact" width="200" >
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;">
-                            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
                             <f:selectItems value="#{listarProyectos.listaEstados}" var="listaEstados" itemValue="#{listaEstados.descripcionEstado}" itemLabel="#{listaEstados.descripcionEstado}"/>
                         </p:selectOneMenu>
                     </f:facet>
@@ -110,7 +110,7 @@
                 <p:column headerText="#{msg.proyectoListarDificultad}" width="200" filterBy="#{lp.dificultadesIdDificultad.descripcionDificultad}" sortBy="#{lp.dificultadesIdDificultad.descripcionDificultad}" filterMatchMode="exact">
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
-                            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
                             <f:selectItems value="#{listarProyectos.listaDificultades}" var="listaDificultades" itemValue="#{listaDificultades.descripcionDificultad}" itemLabel="#{listaDificultades.descripcionDificultad}"/>
                         </p:selectOneMenu>
                     </f:facet>
@@ -128,7 +128,7 @@
                 <p:column headerText="#{msg.proyectoListarOperarioAsignado}" filterBy="#{lp.operarioIdPersona.nombre}" sortBy="#{lp.operarioIdPersona.nombre}" filterMatchMode="contains" width="200">
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
-                            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
                             <f:selectItems value="#{listarProyectos.listaOperarios}" var="listaOperarios" itemValue="#{listaOperarios.nombre}" itemLabel="#{listaOperarios.nombre} #{lp.operarioIdPersona.apellido}"/>
                         </p:selectOneMenu>
                     </f:facet>

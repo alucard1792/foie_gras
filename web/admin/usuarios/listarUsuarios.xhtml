@@ -96,7 +96,7 @@
                     </c:forEach>                       
                 </div>
             </div>
-            <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla">
+            <p:dataTable value="#{listarUsuarios.persona}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
                 <p:column headerText="#{msg.usuarioListarId}" width="200"> 
                     <p:outputLabel value="#{lp.idPersona}"></p:outputLabel>                                
                 </p:column>
@@ -130,15 +130,33 @@
                 <p:column headerText="#{msg.usuarioListarUltimaVez}" filterBy="#{lp.ultimaVez}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.ultimaVez eq null ? 'no se ha validado':lp.ultimaVez)}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.usuarioListarRol}" filterBy="#{lp.roles}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.usuarioListarRol}" filterBy="#{lp.roles}" filterMatchMode="exact" width="200">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
+                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{listarUsuarios.listaRolesListarUsuario}" var="listaRolesListarUsuario" itemValue="#{listaRolesListarUsuario.nombreRol}" itemLabel="#{listaRolesListarUsuario.nombreRol}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
                     <p:outputLabel value="#{(lp.roles.get(0) != null ? lp.roles.get(0).nombreRol:'')}" >
                     </p:outputLabel>
                 </p:column>
                 <p:column headerText="#{msg.usuarioListarArea}"  filterBy="#{lp.areasIdArea.nombreArea}" filterMatchMode="contains" width="200">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
+                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{listarUsuarios.listaAreas}" var="listaAreas" itemValue="#{listaAreas.nombreArea}" itemLabel="#{listaAreas.nombreArea}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
                     <p:outputLabel value="#{lp.areasIdArea}" converter="areaConverter"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.usuarioListarEstado}" filterBy="#{lp.estado}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
+                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="0"/>
+                            <f:selectItem itemLabel="Activo" itemValue="1"/>
+                        </p:selectOneMenu>
+                    </f:facet>                    <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100" style="text-align: center;">
                     <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    

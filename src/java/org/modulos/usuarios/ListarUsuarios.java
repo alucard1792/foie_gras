@@ -49,6 +49,7 @@ public class ListarUsuarios implements Serializable {
     private List<Area> listaAreas;
     private List<Rol> listaRoles;
     private List<Rol> rolesAsignados;
+    private List<Rol> listaRolesListarUsuario;
 
     public ListarUsuarios() {
     }
@@ -57,6 +58,7 @@ public class ListarUsuarios implements Serializable {
     public void init() {
         persona = pfl.findAll();
         listaAreas = afl.findAll();
+        listaRolesListarUsuario = rfl.findAll();
         for(Rol rol:controladorSesion.getP().getRoles()){
             listaRoles = rfl.findRolByUsuarioEnSesion(rol.getIdRol());
             System.out.println(rol.getIdRol());
@@ -110,6 +112,10 @@ public class ListarUsuarios implements Serializable {
 
     public void setRolesAsignados(List<Rol> rolesAsignados) {
         this.rolesAsignados = rolesAsignados;
+    }
+
+    public List<Rol> getListaRolesListarUsuario() {
+        return listaRolesListarUsuario;
     }
 
     private void iniciarConversacion() {
