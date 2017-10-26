@@ -135,12 +135,6 @@
                     </p:outputLabel>
                 </p:column>
                 <p:column headerText="#{msg.usuarioListarArea}"  filterBy="#{lp.areasIdArea.nombreArea}" filterMatchMode="contains" width="200">
-                    <f:facet name="filter">
-                        <p:selectOneMenu onchange="PF('tabla').filter()" style="width:100px;" converter="areaConverter">
-                            <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
-                            <f:selectItems value="#{listarUsuarios.listaAreas}"/>
-                        </p:selectOneMenu>
-                    </f:facet>
                     <p:outputLabel value="#{lp.areasIdArea}" converter="areaConverter"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.usuarioListarEstado}" filterBy="#{lp.estado}" filterMatchMode="contains" width="200">
