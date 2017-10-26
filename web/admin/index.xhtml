@@ -57,24 +57,24 @@
                         </p:commandLink>
                     </div>
                 </div>
-                
-                
-                
-                <!--<p:chart id="proyectosvendidos" type="pie" model="#{graficaProyectosVendidosPorAño.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="proyectosvendidos" />
-                 <div class="row">
-                    <div class="col-md-12 text-center m-t-50">
-                        <p:commandLink onclick="exportarproyectoscendidos()" styleClass="btn btn-primary">
-                            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
-                            Exportar a pdf
-                        </p:commandLink>
-                    </div>
-                </div>-->
-                
-                
-               
 
-                
-                
+
+
+<!--<p:chart id="proyectosvendidos" type="pie" model="#{graficaProyectosVendidosPorAño.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="proyectosvendidos" />
+ <div class="row">
+    <div class="col-md-12 text-center m-t-50">
+        <p:commandLink onclick="exportarproyectoscendidos()" styleClass="btn btn-primary">
+            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
+            Exportar a pdf
+        </p:commandLink>
+    </div>
+</div>-->
+
+
+
+
+
+
                 <p:chart id="pedidos" type="pie" model="#{graficaPagosProyectos.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="pieWV"/>
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
@@ -84,8 +84,8 @@
                         </p:commandLink>
                     </div>
                 </div>
-                
-                
+
+
                 <p:chart type="bar" model="#{graficaDeBarras.barModel}" style="height:300px; width:500px; margin: auto;" widgetVar="barmodel"/>
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
@@ -95,9 +95,11 @@
                         </p:commandLink>
                     </div>
                 </div>
-                
-                
+
+
             </p:row>
+            
+            <h:commandButton value="p" action="#{notificaciones.prueba()}"></h:commandButton>
 
         </h:form>
 
@@ -112,7 +114,7 @@
                         'Pagos de los proyectos',
                         {
                             image: $(PF('pieWV').exportAsImage()).attr('src'),
-                            
+
                         }
                     ]
                 };
@@ -132,8 +134,8 @@
                 pdfMake.createPdf(docDefinition).open();
                 pdfMake.createPdf(docDefinition).download('PedidosSinPagar.pdf');
             }
-            function exportarproyectoscendidos(){
-                 var docDefinition = {
+            function exportarproyectoscendidos() {
+                var docDefinition = {
                     content: [
                         'Proyectos vendidos',
                         {
@@ -144,9 +146,9 @@
                 pdfMake.createPdf(docDefinition).open();
                 pdfMake.createPdf(docDefinition).download('proyectosvendidos.pdf');
             }
-            
-            function exportarbarmodel(){
-                 var docDefinition = {
+
+            function exportarbarmodel() {
+                var docDefinition = {
                     content: [
                         'Proyectos vendidos',
                         {

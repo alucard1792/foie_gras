@@ -67,6 +67,10 @@ public class Proyecto implements Serializable {
     @Column(name = "tiempo_estimado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date tiempoEstimado;
+    @NotNull
+    @Basic(optional = false)
+    @Column(name = "correo_notificacion_enviado")
+    private Integer correoNotificacionEnviado;
     @JoinColumn(name = "dificultades_id_dificultad", referencedColumnName = "id_dificultad")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Dificultad dificultadesIdDificultad;
@@ -123,6 +127,14 @@ public class Proyecto implements Serializable {
 
     public void setTiempoEstimado(Date tiempoEstimado) {
         this.tiempoEstimado = tiempoEstimado;
+    }
+
+    public Integer getCorreoNotificacionEnviado() {
+        return correoNotificacionEnviado;
+    }
+
+    public void setCorreoNotificacionEnviado(Integer correoNotificacionEnviado) {
+        this.correoNotificacionEnviado = correoNotificacionEnviado;
     }
 
     public Dificultad getDificultadesIdDificultad() {
