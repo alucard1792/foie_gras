@@ -93,7 +93,7 @@
                 </div>
             </div>
             
-            <p:dataTable value="#{listarRoles.listaRoles}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+            <p:dataTable value="#{listarRoles.listaRoles}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
 
                 <p:column headerText="#{msg.rolListarId}" width="100"> 
                     <p:outputLabel value="#{lp.idRol}"></p:outputLabel>                                
@@ -102,6 +102,13 @@
                     <p:outputLabel value="#{lp.nombreRol}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.rolListarEstado}" width="200" filterBy="#{lp.estado}" filterMatchMode="contains">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
+                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Activo" itemValue="1" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="0" noSelectionOption="true" />
+                        </p:selectOneMenu>
+                    </f:facet>
                     <p:outputLabel value="#{lp.estado == 1 ? 'Activo':'inactivo'}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.universalOpciones}" exportable="false" style="text-align: center;" width="200">
