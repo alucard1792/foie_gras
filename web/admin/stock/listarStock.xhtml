@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla"  class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10">
+            <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla"  class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
                 <p:column headerText="#{msg.stockTablaIdMateriaPrima}" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.idMateria}"></p:outputLabel>                                
                 </p:column>
@@ -112,21 +112,21 @@
                 <p:column headerText="#{msg.stockTablaAltoLamina}"  filterBy="#{lp.materiasPrimaIdMateria.dimensionAlto}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionAlto}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.stockTablaProveedor}"  filterBy="#{p.nombreEmpresa}" filterMatchMode="contains" width="200">
+                <p:column headerText="#{msg.stockTablaProveedor}"  filterBy="#{lp.materiasPrimaIdMateria.proveedorList}" filterMatchMode="contains" width="200">
                     <ui:repeat value="#{lp.materiasPrimaIdMateria.proveedorList}" var="p">
                         <p:outputLabel value="#{p.nombreEmpresa}"></p:outputLabel>                
                     </ui:repeat>
                 </p:column>
-                <p:column headerText="#{msg.stockTablaIdStock}" width="200">
+                <p:column headerText="#{msg.stockTablaIdStock}" filterBy="#{lp.idStock}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
                 </p:column>
-                <p:column headerText="#{msg.stockTablaExistencias}" width="200">
+                <p:column headerText="#{msg.stockTablaExistencias}" filterBy="#{lp.stock}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.stock}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.stockTablaFechaIngreso}" width="200">
+                <p:column headerText="#{msg.stockTablaFechaIngreso}" filterBy="#{lp.fechaIngreso}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.stockTablaFechaActualizacion}" width="200">
+                <p:column headerText="#{msg.stockTablaFechaActualizacion}" filterBy="#{lp.fechaActualizacion}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100">

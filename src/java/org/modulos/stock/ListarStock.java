@@ -16,8 +16,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.dao.MateriaPrimaFacadeLocal;
+import org.dao.ProveedorFacadeLocal;
 import org.dao.StockFacadeLocal;
 import org.entidades.MateriaPrima;
+import org.entidades.Proveedor;
 import org.entidades.Stock;
 
 /**
@@ -30,9 +32,11 @@ public class ListarStock implements Serializable {
 
     @EJB
     private StockFacadeLocal stockFacadeLocal;
+    @EJB
+    private ProveedorFacadeLocal proveedorFacadeLocal;
     private Stock stockSeleccionado;
     private List<Stock> listaStock;
-
+    private List<Proveedor>listaProveedores;
     @Inject
     private Conversation conversacion;
 
@@ -42,6 +46,7 @@ public class ListarStock implements Serializable {
     @PostConstruct
     public void init() {
         listaStock = stockFacadeLocal.findAll();
+        listaProveedores = proveedorFacadeLocal.findAll();
 
     }
 
@@ -61,6 +66,10 @@ public class ListarStock implements Serializable {
         this.listaStock = listaStock;
     }
 
+    public List<Proveedor> getListaProveedores() {
+        return listaProveedores;
+    }
+    
     public Conversation getConversacion() {
         return conversacion;
     }
