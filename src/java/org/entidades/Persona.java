@@ -131,6 +131,8 @@ public class Persona implements Serializable {
     @JoinColumn(name = "areas_id_area", referencedColumnName = "id_area")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Area areasIdArea;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personasIdPersona", fetch = FetchType.EAGER)
+    private List<Notificacion> notificacionList;
 
     public Persona() {
     }
@@ -315,6 +317,15 @@ public class Persona implements Serializable {
     @Override
     public String toString() {
         return "org.entidades.Persona[ idPersona=" + idPersona + " ]";
+    }
+
+    @XmlTransient
+    public List<Notificacion> getNotificacionList() {
+        return notificacionList;
+    }
+
+    public void setNotificacionList(List<Notificacion> notificacionList) {
+        this.notificacionList = notificacionList;
     }
     
 }
