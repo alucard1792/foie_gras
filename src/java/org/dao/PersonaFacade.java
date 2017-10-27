@@ -17,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.entidades.Persona;
+import org.entidades.Rol;
 
 /**
  *
@@ -112,6 +113,27 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<Persona> listarVendedorAdminRoot() {
+        List<Persona> listaPersonas = new ArrayList<>();
+        Rol rolRoot = new Rol(1);
+        Rol rolAdmin = new Rol(2);
+        Rol rolVendedor = new Rol(3);
+        try {
+            TypedQuery<Persona>query = getEntityManager().createNamedQuery("Persona.findVendedoresAdminRoot", Persona.class);
+            query.setParameter("rol1", rolRoot);
+            query.setParameter("rol2", rolAdmin);
+            query.setParameter("rol3", rolVendedor);
+            listaPersonas = query.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+        return listaPersonas;
     }
 
 }

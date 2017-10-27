@@ -38,5 +38,7 @@ public interface PersonaFacadeLocal {
     Persona recuperacontrasena(String email);
     
     Boolean loadUsuarios(String pathFile);
+    
+    List<Persona> listarVendedorAdminRoot();
 
 }
