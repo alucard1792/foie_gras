@@ -39,3 +39,6 @@ Por favor, mantener actualizado este archivo y anexar los cambios, correcciones 
 	- a nivel de base de datos agregar la tabla notificaciones
 
 	- filter login
+
+	- no permitir la edicion del usuario validado en el modulo usuario
+

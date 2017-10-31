@@ -58,7 +58,7 @@ public class Rol implements Serializable {
     private int estado;
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private List<Persona> personas;//todos los usuarios que tienen asignado ese permiso 
-@JoinTable(name = "roles_permisos", joinColumns = {
+    @JoinTable(name = "roles_permisos", joinColumns = {
         @JoinColumn(name = "roles_id_rol", referencedColumnName = "id_rol")}, inverseJoinColumns = {
         @JoinColumn(name = "permisos_id_permiso", referencedColumnName = "id_permiso")})
     @ManyToMany(fetch = FetchType.EAGER)
@@ -143,5 +143,5 @@ public class Rol implements Serializable {
     public String toString() {
         return "org.entidades.Rol[ idRol=" + idRol + " ]";
     }
-    
+
 }

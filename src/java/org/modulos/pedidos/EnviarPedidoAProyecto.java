@@ -129,7 +129,7 @@ public class EnviarPedidoAProyecto implements Serializable {
                     "nombre cliente = " + pedidoSeleccionado.getNombreCliente() + "<br/>" +
                     "telefono cliente = " + pedidoSeleccionado.getTelefonoCliente() + "<br/>" +
                     "correo cliente = " + pedidoSeleccionado.getCorreoCliente() + "<br/>" +
-                    "materia prima = " + pedidoSeleccionado.getMateriasPrimaIdMateria().getReferencia() + "<br/>";
+                    /*"materia prima = " + pedidoSeleccionado.getMateriasPrimaIdMateria().getReferencia() + */"<br/>";
 
             c.enviarEmailCliente(operarioAsignado.getEmail(), "Notificacion asignacion proyecto: " + pedidoSeleccionado.getNombreProyecto(), mensaje);
             dificultad.setIdDificultad(4);

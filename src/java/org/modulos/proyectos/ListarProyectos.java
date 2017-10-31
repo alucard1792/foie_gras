@@ -196,7 +196,7 @@ public class ListarProyectos implements Serializable {
                     + "nombre cliente = " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/>"
                     + "telefono cliente = " + proyectoSeleccionado.getPedidosIdPedido().getTelefonoCliente() + "<br/>"
                     + "correo cliente = " + proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente() + "<br/>"
-                    + "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia() + "<br/>";
+                   /* + "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia()*/ + "<br/>";
             c.enviarEmailCliente(proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente(), "Notificacion inicio proyecto", mensaje);
             Calendar cal = Calendar.getInstance();
             proyectoSeleccionado.setFechaInicio(cal.getTime());
@@ -222,7 +222,7 @@ public class ListarProyectos implements Serializable {
                     + "nombre cliente = " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/>"
                     + "telefono cliente = " + proyectoSeleccionado.getPedidosIdPedido().getTelefonoCliente() + "<br/>"
                     + "correo cliente = " + proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente() + "<br/>"
-                    + "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia() + "<br/>";
+                    /*+ "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia()*/ + "<br/>";
             c.enviarEmailCliente(proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente(), "Notificacion finalizacion proyecto", mensaje);
             Calendar cal = Calendar.getInstance();
             proyectoSeleccionado = p;

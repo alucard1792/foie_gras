@@ -16,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -83,9 +85,13 @@ public class Pedido implements Serializable {
     @NotNull
     @Column(name = "correo_cliente")
     private String correoCliente;
-    @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private MateriaPrima materiasPrimaIdMateria;
+    
+    @JoinTable(name = "materias_prima_pedidos", joinColumns = {
+        @JoinColumn(name = "pedidos_id_pedido", referencedColumnName = "id_pedido")}, inverseJoinColumns = {
+        @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")})
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<MateriaPrima> materiasPrimaList;
+    
     @JoinColumn(name = "vendedor_id_persona", referencedColumnName = "id_persona")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Persona vendedorIdPersona;
@@ -179,14 +185,14 @@ public class Pedido implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public MateriaPrima getMateriasPrimaIdMateria() {
-        return materiasPrimaIdMateria;
+    public List<MateriaPrima> getMateriasPrimaList() {
+        return materiasPrimaList;
     }
 
-    public void setMateriasPrimaIdMateria(MateriaPrima materiasPrimaIdMateria) {
-        this.materiasPrimaIdMateria = materiasPrimaIdMateria;
+    public void setMateriasPrimaList(List<MateriaPrima> materiasPrimaList) {
+        this.materiasPrimaList = materiasPrimaList;
     }
-
+    
     public Persona getVendedorIdPersona() {
         return vendedorIdPersona;
     }

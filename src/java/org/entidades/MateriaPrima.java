@@ -78,8 +78,10 @@ public class MateriaPrima implements Serializable {
         @JoinColumn(name = "proveedores_id_proveedor", referencedColumnName = "id_proveedor")})
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Proveedor> proveedorList;
-    @OneToMany(mappedBy = "materiasPrimaIdMateria", fetch = FetchType.EAGER)
+    
+    @ManyToMany(mappedBy = "materiasPrimaList", fetch = FetchType.EAGER)
     private List<Pedido> pedidoList;
+    
     @OneToMany(mappedBy = "materiasPrimaIdMateria", fetch = FetchType.EAGER)
     private List<Stock> stockList;
 

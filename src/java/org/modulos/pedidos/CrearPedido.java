@@ -97,7 +97,7 @@ public class CrearPedido implements Serializable {
         this.materiaPrima = materiaPrima;
     }
 
-    public String crear() {
+    /*public String crear() {
         try {
             Date date = new Date();
             String mensaje = "";
@@ -141,7 +141,7 @@ public class CrearPedido implements Serializable {
             return "";
         }
 
-    }
+    }*/
 
     public String cancelar() {
         return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
