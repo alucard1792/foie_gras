@@ -85,6 +85,15 @@ public class Notificacion implements Serializable {
         this.isLeido = isLeido;
     }
 
+    public Notificacion(Integer id, String asunto, String mensaje, Date fechaEnvio, int isLeido, Persona personasIdPersona) {
+        this.id = id;
+        this.asunto = asunto;
+        this.mensaje = mensaje;
+        this.fechaEnvio = fechaEnvio;
+        this.isLeido = isLeido;
+        this.personasIdPersona = personasIdPersona;
+    }
+
     public Integer getId() {
         return id;
     }

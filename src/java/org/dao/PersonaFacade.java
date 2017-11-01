@@ -136,4 +136,22 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
         return listaPersonas;
     }
 
+    @Override
+    public List<Persona> listarRootAdmin() {
+        List<Persona> listaPersonas = new ArrayList<>();
+        Rol rolRoot = new Rol(1);
+        Rol rolAdmin = new Rol(2);
+        try {
+            TypedQuery<Persona>query = getEntityManager().createNamedQuery("Persona.findRootAdmin", Persona.class);
+            query.setParameter("rol1", rolRoot);
+            query.setParameter("rol2", rolAdmin);
+            listaPersonas = query.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+        return listaPersonas;    }
+
 }

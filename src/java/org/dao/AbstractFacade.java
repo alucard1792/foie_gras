@@ -23,14 +23,17 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
+        getEntityManager().getEntityManagerFactory().getCache().evictAll();
         getEntityManager().persist(entity);
     }
 
     public void edit(T entity) {
+        getEntityManager().getEntityManagerFactory().getCache().evictAll();
         getEntityManager().merge(entity);
     }
 
     public void remove(T entity) {
+        getEntityManager().getEntityManagerFactory().getCache().evictAll();
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 

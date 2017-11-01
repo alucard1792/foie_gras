@@ -7,17 +7,25 @@ package org.modulos.pedidos;
 
 import com.controllerEmail.EnviarCorreosMasivos.controller;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.inject.Inject;
+import org.dao.NotificacionFacade;
+import org.dao.NotificacionFacadeLocal;
 import org.dao.PedidoFacadeLocal;
+import org.dao.PersonaFacadeLocal;
 import org.dao.ProyectoFacadeLocal;
 import org.entidades.Dificultad;
 import org.entidades.Estado;
+import org.entidades.Notificacion;
 import org.entidades.Pedido;
 import org.entidades.Persona;
 import org.entidades.Proyecto;
@@ -35,6 +43,10 @@ public class EnviarPedidoAProyecto implements Serializable {
     private PedidoFacadeLocal pedidoFacadeLocal;
     @EJB
     private ProyectoFacadeLocal proyectoFacadeLocal;
+    @EJB
+    private NotificacionFacadeLocal notificacionFacadeLocal;
+    @EJB
+    private PersonaFacadeLocal personaFacadeLocal;
     @Inject
     private Conversation conversacion;
     @Inject
@@ -47,18 +59,24 @@ public class EnviarPedidoAProyecto implements Serializable {
     private Estado estado;
     private Pedido pedidoSeleccionado;
     private controller c;
+    private Notificacion notificacion;
+    private List<Persona> listaRootAdmin;
+    private Persona operarioNotificacion;
 
     public EnviarPedidoAProyecto() {
     }
 
     @PostConstruct
     public void init() {
+        operarioNotificacion = new Persona();
+        listaOperariosDisponibles = new ArrayList<>();
         listaOperariosDisponibles = pedidoFacadeLocal.buscarOperarios();
         operarioAsignado = new Persona();
         proyecto = new Proyecto();
         dificultad = new Dificultad();
         estado = new Estado();
         c = new controller();
+        listaRootAdmin = personaFacadeLocal.listarRootAdmin();
         
     }
 
@@ -121,8 +139,12 @@ public class EnviarPedidoAProyecto implements Serializable {
 
     public String asignarOperarioAProyecto() {
 
-        System.out.println(pedidoSeleccionado.getIdPedido());
         try {
+            String asuntoNotificacionOperario = "Nuevo proyecto";
+            String mensajeNotificacionOperario = "Tiene un nuevo proyecto, por favor revise sus proyectos asignados";
+            String asuntoNotificacionVendedor = "Movimiento pedido";
+            String mensajeNotificacionVendedor = "El pedido " + pedidoSeleccionado.getNombreProyecto() + " se ha asignado al operario " + operarioAsignado.getNombre() + " " + operarioAsignado.getApellido();
+            
             String mensaje = "Estimado colaborador " + operarioAsignado.getNombre() + " " + operarioAsignado.getApellido() + "<br/><br/>Nos permitimos informarle que se ha asignadio un nuevo proyecto a su nombre.  por favor solicitamos inicializarlo lo mas pronto posible. gracias.<br/><br/>";
             mensaje += "resumen del proyecto: <br/><br/>" +
                     "id pedido = " + pedidoSeleccionado.getIdPedido() + "<br/>" +
@@ -146,15 +168,34 @@ public class EnviarPedidoAProyecto implements Serializable {
             proyectoFacadeLocal.create(proyecto);
             pedidoSeleccionado.setEstaAsignado(1);
             pedidoSeleccionado.setMovimientoProyecto(controladorSesion.getP().getNombre() + " " + controladorSesion.getP().getApellido());
-            
             pedidoFacadeLocal.edit(pedidoSeleccionado);
-
+            
+            generarNotificacion(asuntoNotificacionOperario, mensajeNotificacionOperario, operarioAsignado);
+            generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, pedidoSeleccionado.getVendedorIdPersona());
+            for(Persona persona : listaRootAdmin){
+                generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, persona);
+                
+            }
         } catch (Exception e) {
             e.printStackTrace();
-
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al enviar pedido a proyecto, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
         }
         return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
 
+    }
+    
+    public void generarNotificacion(String asunto, String mensaje, Persona persona){
+        Date date = new Date();
+        notificacion = new Notificacion(null, asunto, mensaje, date, 0, persona);
+        try {
+            notificacionFacadeLocal.create(notificacion);
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al generar la notificacion, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+        }
+               
     }
 
 }
