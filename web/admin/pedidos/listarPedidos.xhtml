@@ -134,7 +134,7 @@
                 <p:column headerText="#{msg.pedidoListarCorreoCliente}" width="200" filterBy="#{lp.correoCliente}" filterMatchMode="contains">
                     <p:outputLabel value="#{lp.correoCliente}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.pedidoListarCorreoCliente}" width="200" filterBy="#{lp.correoCliente}" filterMatchMode="contains">
+                <p:column headerText="Movimiento" width="200" filterBy="#{lp.movimientoProyecto}" filterMatchMode="contains">
                     <p:outputLabel value="#{(lp.movimientoProyecto == null ? 'sin movimiento': lp.movimientoProyecto)}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.pedidoListarVendedor}" width="200" filterBy="#{lp.vendedorIdPersona.nombre}" filterMatchMode="contains">

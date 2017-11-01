@@ -21,6 +21,7 @@ import org.entidades.Estado;
 import org.entidades.Pedido;
 import org.entidades.Persona;
 import org.entidades.Proyecto;
+import org.login.ControladorSesion;
 
 /**
  *
@@ -36,6 +37,8 @@ public class EnviarPedidoAProyecto implements Serializable {
     private ProyectoFacadeLocal proyectoFacadeLocal;
     @Inject
     private Conversation conversacion;
+    @Inject
+    ControladorSesion controladorSesion;
     private List<Persona> listaOperariosDisponibles;
     private List<Proyecto> listaProyectos;
     private Proyecto proyecto;
@@ -139,8 +142,11 @@ public class EnviarPedidoAProyecto implements Serializable {
             proyecto.setDificultadesIdDificultad(dificultad);
             proyecto.setPedidosIdPedido(pedidoSeleccionado);
             proyecto.setOperarioIdPersona(operarioAsignado);
+            proyecto.setCorreoNotificacionEnviado(0);
             proyectoFacadeLocal.create(proyecto);
             pedidoSeleccionado.setEstaAsignado(1);
+            pedidoSeleccionado.setMovimientoProyecto(controladorSesion.getP().getNombre() + " " + controladorSesion.getP().getApellido());
+            
             pedidoFacadeLocal.edit(pedidoSeleccionado);
 
         } catch (Exception e) {
