@@ -83,6 +83,9 @@ public class Pedido implements Serializable {
     @NotNull
     @Column(name = "correo_cliente")
     private String correoCliente;
+    @Basic(optional = false)
+    @Column(name = "movimiento_proyecto")
+    private String movimientoProyecto;
     @JoinColumn(name = "materias_prima_id_materia", referencedColumnName = "id_materia")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MateriaPrima materiasPrimaIdMateria;
@@ -177,6 +180,14 @@ public class Pedido implements Serializable {
     
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getMovimientoProyecto() {
+        return movimientoProyecto;
+    }
+
+    public void setMovimientoProyecto(String movimientoProyecto) {
+        this.movimientoProyecto = movimientoProyecto;
     }
 
     public MateriaPrima getMateriasPrimaIdMateria() {
