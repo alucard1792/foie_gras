@@ -8,6 +8,7 @@ package org.dao;
 import java.util.List;
 import javax.ejb.Local;
 import org.entidades.Notificacion;
+import org.entidades.Persona;
 
 /**
  *
@@ -29,5 +30,10 @@ public interface NotificacionFacadeLocal {
     List<Notificacion> findRange(int[] range);
 
     int count();
+    
+    List<Notificacion>notificacionesUsuario(Persona persona);
+    
+    List<Notificacion>notificacionesUsuarioVista(Persona persona);
+    void mensajesLeidos(Persona persona);
     
 }

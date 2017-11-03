@@ -151,7 +151,7 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
             e.printStackTrace();
             
         }
-        
-        return listaPersonas;    }
+        return listaPersonas;
+    }
 
 }

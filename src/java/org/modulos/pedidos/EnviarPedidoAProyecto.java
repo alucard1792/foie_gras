@@ -23,12 +23,14 @@ import org.dao.NotificacionFacadeLocal;
 import org.dao.PedidoFacadeLocal;
 import org.dao.PersonaFacadeLocal;
 import org.dao.ProyectoFacadeLocal;
+import org.dao.RolFacadeLocal;
 import org.entidades.Dificultad;
 import org.entidades.Estado;
 import org.entidades.Notificacion;
 import org.entidades.Pedido;
 import org.entidades.Persona;
 import org.entidades.Proyecto;
+import org.entidades.Rol;
 import org.login.ControladorSesion;
 
 /**
@@ -47,6 +49,8 @@ public class EnviarPedidoAProyecto implements Serializable {
     private NotificacionFacadeLocal notificacionFacadeLocal;
     @EJB
     private PersonaFacadeLocal personaFacadeLocal;
+    @EJB
+    private RolFacadeLocal rolfacadeLocal;
     @Inject
     private Conversation conversacion;
     @Inject
@@ -169,9 +173,17 @@ public class EnviarPedidoAProyecto implements Serializable {
             pedidoSeleccionado.setEstaAsignado(1);
             pedidoSeleccionado.setMovimientoProyecto(controladorSesion.getP().getNombre() + " " + controladorSesion.getP().getApellido());
             pedidoFacadeLocal.edit(pedidoSeleccionado);
-            
             generarNotificacion(asuntoNotificacionOperario, mensajeNotificacionOperario, operarioAsignado);
-            generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, pedidoSeleccionado.getVendedorIdPersona());
+            int bandera = 0;
+            for(Rol rol:pedidoSeleccionado.getVendedorIdPersona().getRoles()){
+                if(rol.getIdRol() == 1 || rol.getIdRol() == 2){
+                    bandera = 1;
+                }
+            }
+            if(bandera != 1){
+                generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, pedidoSeleccionado.getVendedorIdPersona());    
+                
+            }
             for(Persona persona : listaRootAdmin){
                 generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, persona);
                 

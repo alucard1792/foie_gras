@@ -20,7 +20,9 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import org.dao.NotificacionFacadeLocal;
 import org.dao.PersonaFacadeLocal;
+import org.entidades.Notificacion;
 import org.entidades.Permiso;
 import org.entidades.Persona;
 import org.entidades.Rol;
@@ -35,12 +37,17 @@ public class ControladorSesion implements Serializable {
 
     @EJB
     private PersonaFacadeLocal pfl;
+    @EJB
+    private NotificacionFacadeLocal notificacionFacadeLocal;
+    private Rol rolSeleccionado;
     private Persona p;
-
     private String password;
     private int documento;
     private int rol;
-    private Rol rolSeleccionado;
+    private List<Notificacion> listaNotificaciones;
+    private List<Notificacion> listaNotificacionesVista;
+    boolean bandera = false;
+    private Notificacion notificacionSeleccionado;
 
     public ControladorSesion() {
 
@@ -91,22 +98,55 @@ public class ControladorSesion implements Serializable {
         this.p = p;
     }
 
+    public List<Notificacion> getListaNotificaciones() {
+        return listaNotificaciones;
+    }
+
+    public void setListaNotificaciones(List<Notificacion> listaNotificaciones) {
+        this.listaNotificaciones = listaNotificaciones;
+    }
+
+    public boolean isBandera() {
+        return bandera;
+    }
+
+    public void setBandera(boolean bandera) {
+        this.bandera = bandera;
+    }
+
+    public Notificacion getNotificacionSeleccionado() {
+        return notificacionSeleccionado;
+    }
+
+    public void setNotificacionSeleccionado(Notificacion notificacionSeleccionado) {
+        this.notificacionSeleccionado = notificacionSeleccionado;
+    }
+
+    public List<Notificacion> getListaNotificacionesVista() {
+        return listaNotificacionesVista;
+    }
+
+    public void setListaNotificacionesVista(List<Notificacion> listaNotificacionesVista) {
+        this.listaNotificacionesVista = listaNotificacionesVista;
+    }
+
     public String iniciarSesion() {
         FacesContext fc = FacesContext.getCurrentInstance();
         if ((documento != 0) && password != null && !password.equals("")) {
             p = pfl.iniciarSesion(documento, password);
             if (p != null && p.getEstado() == 1) {
+                cargarNotificaciones();
                 Date date = new Date();
                 p.setUltimaVez(date);
                 pfl.edit(p);
                 System.out.println(p.getNombre() + p.getApellido() + p.getEmail());
                 List<Rol> rolesUsuario = p.getRoles();//esto lo hacemos para aprovechar el mapeo bidireccional y traer todos los roles
-               
-                for(Rol rolUsuario:rolesUsuario){
+
+                for (Rol rolUsuario : rolesUsuario) {
                     rol = rolUsuario.getIdRol();
-                
+
                 }
-                
+
                 if (rolesUsuario.size() > 0) { // se hace esta validacion para saber si el usuario tiene al menos un rol seleccionado para que no me retorne null
                     rolSeleccionado = rolesUsuario.get(0);
                     List<Permiso> permisosRol = rolSeleccionado.getPermisos();
@@ -194,4 +234,17 @@ public class ControladorSesion implements Serializable {
 
     }
 
+    public void cargarNotificaciones() {
+        System.out.println("Cargando notificaciones:");
+        listaNotificaciones = notificacionFacadeLocal.notificacionesUsuario(p);
+        System.out.println(listaNotificaciones.size());
+
+    }
+
+    public String leerNotificacion() {
+        notificacionFacadeLocal.mensajesLeidos(p);
+        listaNotificacionesVista = notificacionFacadeLocal.notificacionesUsuarioVista(p);
+        cargarNotificaciones();
+        return "/admin/notificaciones/notificaciones.xhtml?faces-redirect=true";
+    }
 }

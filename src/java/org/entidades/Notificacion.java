@@ -38,6 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Notificacion.findByAsunto", query = "SELECT n FROM Notificacion n WHERE n.asunto = :asunto")
     , @NamedQuery(name = "Notificacion.findByMensaje", query = "SELECT n FROM Notificacion n WHERE n.mensaje = :mensaje")
     , @NamedQuery(name = "Notificacion.findByFechaEnvio", query = "SELECT n FROM Notificacion n WHERE n.fechaEnvio = :fechaEnvio")
+    , @NamedQuery(name = "Notificacion.findNotificacionesUsuarioValidado", query = "SELECT n FROM Notificacion n WHERE n.personasIdPersona = :personasIdPersona AND n.isLeido = 0")
+    , @NamedQuery(name = "Notificacion.findNotificacionesUsuarioValidadoVista", query = "SELECT n FROM Notificacion n WHERE n.personasIdPersona = :personasIdPersona ORDER BY n.fechaEnvio DESC")
+    , @NamedQuery(name = "Notificacion.updateMensajesLeidosPorPersona", query = "UPDATE Notificacion n SET n.isLeido = 1 WHERE n.personasIdPersona = :personasIdPersona")
     , @NamedQuery(name = "Notificacion.findByIsLeido", query = "SELECT n FROM Notificacion n WHERE n.isLeido = :isLeido")})
 public class Notificacion implements Serializable {
 

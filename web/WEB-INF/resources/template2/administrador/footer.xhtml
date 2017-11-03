@@ -26,7 +26,7 @@
     <!-- Material Dashboard javascript methods -->
     <script src="#{request.contextPath}/resources/assets/js/material-dashboard.js"></script>
     <h:form>
-        <p:poll interval="3" listener="#{notificaciones.enviarNotificacion()}" />
+        <p:poll interval="3" listener="#{controladorSesion.cargarNotificaciones()}" />
     </h:form>
     <ui:insert name="ultimosScripts">
 
