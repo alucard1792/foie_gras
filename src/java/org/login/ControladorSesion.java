@@ -9,10 +9,12 @@ import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -48,6 +50,9 @@ public class ControladorSesion implements Serializable {
     private List<Notificacion> listaNotificacionesVista;
     boolean bandera = false;
     private Notificacion notificacionSeleccionado;
+    private ArrayList<String>listaColores = new ArrayList<>();
+    private Random random = new Random();
+    private String color;
 
     public ControladorSesion() {
 
@@ -130,7 +135,33 @@ public class ControladorSesion implements Serializable {
         this.listaNotificacionesVista = listaNotificacionesVista;
     }
 
+    public ArrayList<String> getListaColores() {
+        return listaColores;
+    }
+    
+    public void addColors(){
+        listaColores.add("purple");
+        listaColores.add("blue");
+        listaColores.add("green");
+        listaColores.add("orange");
+        listaColores.add("red");
+    
+    }
+    
+    public void setColorTemplate(){
+        color = listaColores.get((random.nextInt(listaColores.size() - 1)));
+        
+    }
+
+    public String getColor() {
+        return color;
+    }
+    
     public String iniciarSesion() {
+        addColors();
+        setColorTemplate();
+        System.out.println(color);
+        
         FacesContext fc = FacesContext.getCurrentInstance();
         if ((documento != 0) && password != null && !password.equals("")) {
             p = pfl.iniciarSesion(documento, password);
