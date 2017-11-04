@@ -75,7 +75,7 @@
                         <input type="text" class="form-control" disabled="true" jsf:value="#{controladorSesion.p.telefono}"></input>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
                     <div class="form-group label-floating">
                         <label class="control-label">#{msg.dashboardMiperfilDireccion}</label>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group label-floating">
@@ -116,7 +116,7 @@
 
         <div class="card-avatar">
             <a href="#pablo">
-                <img class="img" src="../assets/img/faces/marc.jpg" />
+                <img class="img" src="#{controladorSesion.p.imagen == null ? '/foie_gras/files/photosUploads/inicial.jpg': controladorSesion.p.imagen}"/>
             </a>
         </div>
 
@@ -126,13 +126,18 @@
             <p class="card-content">
             </p>
 
-            <h:form enctype="multipart/form-data">
-                <p:growl id="messages" showDetail="true" />
-
-                <p:fileUpload value="#{subirArchivoQuemado.file}" mode="simple" skinSimple="true"/>
-
-                <p:commandButton value="Submit" ajax="false" actionListener="#{subirArchivoQuemado.upload()}" disabled="true" />
+            <h:form enctype="multipart/form-data" id="form" prependId="false">
+                <div id="form-group" align="center" style="margin-bottom: 50px">
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <p:commandButton value="Cargar foto" class="btn btn-primary btn-primary" type="button" onclick="PF('dlg1').show();" />
+                    </h:panelGrid>
+                </div>
+                <p:dialog header="Carga de foto" widgetVar="dlg1" minWidth="666">
+                    <p:fileUpload style="width:100%;" fileUploadListener="#{fileUploadPhoto.upload()}" mode="advanced" dragDropSupport="false"
+                                  fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                </p:dialog>
             </h:form>
+
             <!--<a href="#pablo" class="btn btn-primary btn-round">Cambiar foto de perfil</a>-->
         </div>
 

@@ -247,4 +247,5 @@ public class ControladorSesion implements Serializable {
         cargarNotificaciones();
         return "/admin/notificaciones/notificaciones.xhtml?faces-redirect=true";
     }
+    
 }
