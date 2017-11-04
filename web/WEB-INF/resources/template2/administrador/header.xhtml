@@ -42,7 +42,7 @@
                         <c:choose>
                             <c:when test="#{controladorSesion.listaNotificaciones.size() > 0}">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
                                         <i class="material-icons">notifications</i>
                                         <span class="notification">#{controladorSesion.listaNotificaciones.size()}</span>
                                         <p class="hidden-lg hidden-md">#{msg.templateHeaderNotificaciones}</p>
@@ -59,7 +59,7 @@
                                         <p class="hidden-lg hidden-md">#{msg.templateHeaderNotificaciones}</p>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><h:commandLink value="No tiene notidicaciones" action="#{controladorSesion.leerNotificacion()}"></h:commandLink></li>
+                                        <li><h:commandLink value="No tiene notidicaciones" action="#{controladorSesion.leerNotificacion()}" ></h:commandLink></li>
                                     </ul>
                                 </li>
                             </c:otherwise>
