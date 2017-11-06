@@ -81,7 +81,7 @@ public class EnviarPedidoAProyecto implements Serializable {
         estado = new Estado();
         c = new controller();
         listaRootAdmin = personaFacadeLocal.listarRootAdmin();
-        
+
     }
 
     public List<Persona> getListaOperariosDisponibles() {
@@ -145,22 +145,25 @@ public class EnviarPedidoAProyecto implements Serializable {
 
         try {
             String asuntoNotificacionOperario = "Nuevo proyecto";
-            String mensajeNotificacionOperario = "Tiene un nuevo proyecto, por favor revise sus proyectos asignados";
+            String mensajeNotificacionOperario = "Se ha asignado el proyecto: " + pedidoSeleccionado.getNombreProyecto() + ". por favor iniciarlo lo mas pronto posible";
             String asuntoNotificacionVendedor = "Movimiento pedido";
             String mensajeNotificacionVendedor = "El pedido " + pedidoSeleccionado.getNombreProyecto() + " se ha asignado al operario " + operarioAsignado.getNombre() + " " + operarioAsignado.getApellido();
-            
-            String mensaje = "Estimado colaborador " + operarioAsignado.getNombre() + " " + operarioAsignado.getApellido() + "<br/><br/>Nos permitimos informarle que se ha asignadio un nuevo proyecto a su nombre.  por favor solicitamos inicializarlo lo mas pronto posible. gracias.<br/><br/>";
-            mensaje += "resumen del proyecto: <br/><br/>" +
-                    "id pedido = " + pedidoSeleccionado.getIdPedido() + "<br/>" +
-                    "nombre pedido = " + pedidoSeleccionado.getNombreProyecto() + "<br/>" +
-                    "descripcion pedido = " + pedidoSeleccionado.getNombreProyecto() + "<br/>" +
-                    "cantidad pedido = " + pedidoSeleccionado.getCantidad() + "<br/>" +
-                    "nombre cliente = " + pedidoSeleccionado.getNombreCliente() + "<br/>" +
-                    "telefono cliente = " + pedidoSeleccionado.getTelefonoCliente() + "<br/>" +
-                    "correo cliente = " + pedidoSeleccionado.getCorreoCliente() + "<br/>" +
-                    "materia prima = " + pedidoSeleccionado.getMateriasPrimaIdMateria().getReferencia() + "<br/>";
 
-            c.enviarEmailCliente(operarioAsignado.getEmail(), "Notificacion asignacion proyecto: " + pedidoSeleccionado.getNombreProyecto(), mensaje);
+            String mensaje = "<h2>Estimado colaborador " + operarioAsignado.getNombre() + " " + operarioAsignado.getApellido() + "<h2/>";
+            mensaje += "<h3><br/><br/>Nos permitimos informarle que se ha asignadio un nuevo proyecto a su nombre. por favor solicitamos inicializarlo lo mas pronto posible. gracias.<br/><br/><h3/>"
+                    + "<h4>resumen del proyecto: <br/><br/>"
+                    + "id pedido = " + pedidoSeleccionado.getIdPedido() + "<br/>"
+                    + "nombre pedido = " + pedidoSeleccionado.getNombreProyecto() + "<br/>"
+                    + "descripcion pedido = " + pedidoSeleccionado.getNombreProyecto() + "<br/>"
+                    + "cantidad pedido = " + pedidoSeleccionado.getCantidad() + "<br/>"
+                    + "nombre cliente = " + pedidoSeleccionado.getNombreCliente() + "<br/>"
+                    + "telefono cliente = " + pedidoSeleccionado.getTelefonoCliente() + "<br/>"
+                    + "correo cliente = " + pedidoSeleccionado.getCorreoCliente() + "<br/>"
+                    + "materia prima = " + pedidoSeleccionado.getMateriasPrimaIdMateria().getReferencia() + "<br/><h4/>" 
+                    + "<h5>Este correo es de carácter informativo, por favor no responder<h5/>"
+                    + "<h6>Fixedup 2017<h6/>";
+
+            c.enviarEmailCliente(operarioAsignado.getEmail(), "Notificación asignacion proyecto: " + pedidoSeleccionado.getNombreProyecto(), mensaje);
             dificultad.setIdDificultad(4);
             estado.setIdEstado(5);
             proyecto.setOperarioIdPersona(operarioAsignado);
@@ -175,18 +178,18 @@ public class EnviarPedidoAProyecto implements Serializable {
             pedidoFacadeLocal.edit(pedidoSeleccionado);
             generarNotificacion(asuntoNotificacionOperario, mensajeNotificacionOperario, operarioAsignado);
             int bandera = 0;
-            for(Rol rol:pedidoSeleccionado.getVendedorIdPersona().getRoles()){
-                if(rol.getIdRol() == 1 || rol.getIdRol() == 2){
+            for (Rol rol : pedidoSeleccionado.getVendedorIdPersona().getRoles()) {
+                if (rol.getIdRol() == 1 || rol.getIdRol() == 2) {
                     bandera = 1;
                 }
             }
-            if(bandera != 1){
-                generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, pedidoSeleccionado.getVendedorIdPersona());    
-                
+            if (bandera != 1) {
+                generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, pedidoSeleccionado.getVendedorIdPersona());
+
             }
-            for(Persona persona : listaRootAdmin){
+            for (Persona persona : listaRootAdmin) {
                 generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, persona);
-                
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -196,8 +199,8 @@ public class EnviarPedidoAProyecto implements Serializable {
         return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
 
     }
-    
-    public void generarNotificacion(String asunto, String mensaje, Persona persona){
+
+    public void generarNotificacion(String asunto, String mensaje, Persona persona) {
         Date date = new Date();
         notificacion = new Notificacion(null, asunto, mensaje, date, 0, persona);
         try {
@@ -207,7 +210,7 @@ public class EnviarPedidoAProyecto implements Serializable {
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al generar la notificacion, por favor contacte al admin", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
         }
-               
+
     }
 
 }
