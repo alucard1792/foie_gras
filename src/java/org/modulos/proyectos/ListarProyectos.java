@@ -185,19 +185,27 @@ public class ListarProyectos implements Serializable {
     }
 
     public String iniciarProyecto() {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
         try {
             DateFormat readFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss aa");
             
-            String mensaje = "Estimado cliente " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/><br/>Nos permitimos informarle que su proyecto acaba de iniciar. aproximadamente su proyecto sale de la linea de produccion el dia " + readFormat.format(proyectoSeleccionado.getTiempoEstimado()) + ".<br/><br/>Cuando el operario acabe su labor le notificara via email. gracias.<br/><br/>";
-            mensaje += "resumen del proyecto: <br/><br/>"
+            String mensaje = "<h2>Estimado cliente " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<h2/>"
+                    + "<h3><br/>Nos permitimos informar que su proyecto acaba de iniciar, "
+                    + "el cual sale de la linea de produccion el dia " + readFormat.format(proyectoSeleccionado.getTiempoEstimado()) + ""
+                    + ". Una vez el operario finalice su labor le notificara via email. gracias.<br/><h3/>"
+                    + "<h4>resumen del proyecto: <br/>"
                     + "nombre pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
                     + "descripcion pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
                     + "cantidad pedido = " + proyectoSeleccionado.getPedidosIdPedido().getCantidad() + "<br/>"
                     + "nombre cliente = " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/>"
                     + "telefono cliente = " + proyectoSeleccionado.getPedidosIdPedido().getTelefonoCliente() + "<br/>"
                     + "correo cliente = " + proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente() + "<br/>"
-                    + "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia() + "<br/>";
+                    + "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia() + "<br/><h4/>"
+                    + "<h5>Este correo es de carácter informativo, por favor no responder<br/>"
+                    + "Fixedup " + year + "<h5/>";
+            
             c.enviarEmailCliente(proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente(), "Notificacion inicio proyecto", mensaje);
+            
             Calendar cal = Calendar.getInstance();
             proyectoSeleccionado.setFechaInicio(cal.getTime());
             estado = new Estado(1);

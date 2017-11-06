@@ -7,6 +7,7 @@ package org.modulos.pedidos;
 
 import com.controllerEmail.EnviarCorreosMasivos.controller;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -98,15 +99,23 @@ public class CrearPedido implements Serializable {
     }
 
     public String crear() {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
         try {
             Date date = new Date();
             String mensaje = "";
             if (pedido.getRealizoPago() == 1) {
-                mensaje += "Señor(a) " + pedido.getNombreCliente() + "<br/><br/>Nos permitimos informarle que su pedido se ha ingresado exitosamente al sistema, dentro de poco se le enviara un email notificando el inicio de su pedido.<br/><br/>gracias";
+                mensaje += "<h2>Señor(a) " + pedido.getNombreCliente() + "<h2/>"
+                        + "<h3><br/>Nos permitimos informar que su pedido se ha ingresado exitosamente al sistema, "
+                        + "dentro de poco se le enviara un email notificando el inicio de su pedido. gracias por confiar en Innovacril.<br/><h3/>"
+                        + "<h5>Este correo es de carácter informativo, por favor no responder<br/>"
+                        + "Fixedup " + year + "<h5/>";
 
             } else {
-                mensaje = "Señor(a) " + pedido.getNombreCliente() + "<br/><br/>Nos permitimos informarle que su pedido se ha ingresado exitosamente al sistema. Le recordamos realizar el pago de su pedido para que pueda iniciar la produccion de su pedido.<br/><br/>gracias.";
-
+                mensaje = "<h2>Señor(a) " + pedido.getNombreCliente() + "<h2/>"
+                        + "<h3><br/>Nos permitimos informar que su pedido se ha ingresado exitosamente al sistema, "
+                        + " le recordamos realizar el pago de su pedido para que pueda iniciar la produccion de su pedido. gracias por confiar en Innovacril.<br/><h3>"
+                        + "<h5>Este correo es de carácter informativo, por favor no responder<br/>"
+                        + "Fixedup " + year + "<h5/>";
             }
             for (Stock stock : pedido.getMateriasPrimaIdMateria().getStockList()) {
                 stockMateriaPrima = stockFacadeLocal.find(stock.getIdStock());
@@ -115,7 +124,7 @@ public class CrearPedido implements Serializable {
             }
 
             materiaPrima = materiaPrimaFacadeLocal.find(pedido.getMateriasPrimaIdMateria().getIdMateria());
-            
+
             if (stockMateriaPrima.getStock() >= pedido.getCantidad()) {
                 pedido.setMateriasPrimaIdMateria(materiaPrima);
                 pedido.setVendedorIdPersona(controladorSesion.getP());
@@ -127,7 +136,7 @@ public class CrearPedido implements Serializable {
 
                 c.enviarEmailCliente(pedido.getCorreoCliente(), "Notificacion ingreso pedido: " + pedido.getNombreProyecto(), mensaje);
                 return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
-                
+
             } else {
                 FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "no tiene suficientes existencias de esa materia prima", "por favor ingrese mas existencias o ingrese menos cantidades de ese pedido. \nnumero de existencias = " + stockMateriaPrima.getStock());
                 FacesContext.getCurrentInstance().addMessage(null, msj);

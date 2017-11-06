@@ -8,6 +8,7 @@ package org.modulos.pedidos;
 import com.controllerEmail.EnviarCorreosMasivos.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -142,7 +143,7 @@ public class EnviarPedidoAProyecto implements Serializable {
     }
 
     public String asignarOperarioAProyecto() {
-
+        int year = Calendar.getInstance().get(Calendar.YEAR);
         try {
             String asuntoNotificacionOperario = "Nuevo proyecto";
             String mensajeNotificacionOperario = "Se ha asignado el proyecto: " + pedidoSeleccionado.getNombreProyecto() + ". por favor iniciarlo lo mas pronto posible";
@@ -150,8 +151,8 @@ public class EnviarPedidoAProyecto implements Serializable {
             String mensajeNotificacionVendedor = "El pedido " + pedidoSeleccionado.getNombreProyecto() + " se ha asignado al operario " + operarioAsignado.getNombre() + " " + operarioAsignado.getApellido();
 
             String mensaje = "<h2>Estimado colaborador " + operarioAsignado.getNombre() + " " + operarioAsignado.getApellido() + "<h2/>";
-            mensaje += "<h3><br/><br/>Nos permitimos informarle que se ha asignadio un nuevo proyecto a su nombre. por favor solicitamos inicializarlo lo mas pronto posible. gracias.<br/><br/><h3/>"
-                    + "<h4>resumen del proyecto: <br/><br/>"
+            mensaje += "<h3><br/>Nos permitimos informarle que se ha asignadio un nuevo proyecto a su nombre. por favor solicitamos inicializarlo lo mas pronto posible. gracias.<br/><h3/>"
+                    + "<h4>resumen del proyecto: <br/>"
                     + "id pedido = " + pedidoSeleccionado.getIdPedido() + "<br/>"
                     + "nombre pedido = " + pedidoSeleccionado.getNombreProyecto() + "<br/>"
                     + "descripcion pedido = " + pedidoSeleccionado.getNombreProyecto() + "<br/>"
@@ -159,9 +160,9 @@ public class EnviarPedidoAProyecto implements Serializable {
                     + "nombre cliente = " + pedidoSeleccionado.getNombreCliente() + "<br/>"
                     + "telefono cliente = " + pedidoSeleccionado.getTelefonoCliente() + "<br/>"
                     + "correo cliente = " + pedidoSeleccionado.getCorreoCliente() + "<br/>"
-                    + "materia prima = " + pedidoSeleccionado.getMateriasPrimaIdMateria().getReferencia() + "<br/><h4/>" 
-                    + "<h5>Este correo es de carácter informativo, por favor no responder<h5/>"
-                    + "<h6>Fixedup 2017<h6/>";
+                    + "materia prima = " + pedidoSeleccionado.getMateriasPrimaIdMateria().getReferencia() + "<br/><h4/>"
+                    + "<h5>Este correo es de carácter informativo, por favor no responder<br/>"
+                    + "Fixedup " + year + "<h5/>";
 
             c.enviarEmailCliente(operarioAsignado.getEmail(), "Notificación asignacion proyecto: " + pedidoSeleccionado.getNombreProyecto(), mensaje);
             dificultad.setIdDificultad(4);
