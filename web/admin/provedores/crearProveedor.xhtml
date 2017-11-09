@@ -127,7 +127,7 @@
                                     <h:link styleClass="btn btn" outcome="/admin/provedores/listarProveedores.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p:commandButton class="btn btn-primary" value="Carga masiva" type="button" onclick="PF('dlg1').show();" />
+                                    <b:commandButton class="btn btn-primary" value="#{msg.proveedorCrearBtnCargaMasiva}" type="button" onclick="PF('dlg1').show();" />
                                 </div>
                             </div>
 
@@ -139,11 +139,9 @@
         </div>
         <h:form id="form-load" prependId="false" enctype="multipart/form-data">
 
-            <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-                <h:panelGroup id="load-users" layout="block">
-                    <h:inputFile class="" id="file"/>
-                    <p:commandButton class="" value="Cargar" actionListener="#{cargaProveedoresController.cargarUsuarios()}" ajax="false"/>
-                </h:panelGroup>
+            <p:dialog header="#{msg.proveedorCrearModalTitulo}" widgetVar="dlg1" minHeight="40">
+                <p:fileUpload style="width:100%;" fileUploadListener="#{cargaProveedoresController.cargarUsuarios()}" mode="advanced" dragDropSupport="false"
+                              fileLimit="1" allowTypes="/(\.|\/)(csv)$/"/>
             </p:dialog>
 
         </h:form>

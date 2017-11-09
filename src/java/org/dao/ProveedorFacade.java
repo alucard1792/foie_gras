@@ -34,10 +34,10 @@ public class ProveedorFacade extends AbstractFacade<Proveedor> implements Provee
     public Boolean loadProveedores(String pathFile) {
          try {
             String sql = "LOAD DATA LOCAL INFILE '" + pathFile + "' "
-                    + "INTO TABLE proveedores "
+                    + "INTO TABLE ciudades "
                     + "FIELDS TERMINATED BY ';' "
                     + "LINES TERMINATED BY '\n' "
-                    + "(nit_proveedor, nombre_empresa, direccion, telefono, representante_legal, ciudades_id_ciudad);";
+                    + "(id_ciudad, nombre_ciudad);";
             Query nq = getEntityManager().createNativeQuery(sql);
             nq.executeUpdate();
         } catch (Exception e) {
