@@ -7,12 +7,15 @@ package com.controller.grafico.proyectos;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import org.dao.ProyectoFacadeLocal;
 import org.entidades.Proyecto;
+import org.lang.Idioma;
 import org.primefaces.model.chart.PieChartModel;
 
 /**
@@ -23,6 +26,8 @@ import org.primefaces.model.chart.PieChartModel;
 @ViewScoped
 public class GraficaProyectos implements Serializable{
 
+    @Inject
+    private Idioma idioma;
     
     public GraficaProyectos() {
     }
@@ -52,8 +57,6 @@ public class GraficaProyectos implements Serializable{
     public void setProyectosTerminados(List<Proyecto> ProyectosTerminados) {
         this.ProyectosTerminados = ProyectosTerminados;
     }
-
-   
 
     public PieChartModel getPiemodel() {
         return piemodel;
@@ -91,17 +94,39 @@ public class GraficaProyectos implements Serializable{
     public void reporte(List<Proyecto> ProyectosTerminados, List<Proyecto> ProyectosIniciados, List<Proyecto> ProyectosPausados, List<Proyecto> ProyectosSinComenzar, List<Proyecto> ProyectosConNovedad){
         
         piemodel = new PieChartModel();
+        String proyectoTerminado, 
+               proyectoIniciado, 
+               proyectoPausado, 
+               protectoSinComenzar, 
+               proyectoNovedad,
+               proyectoEstado;
+        System.out.println(idioma.getLanguageSelect());
+        if(idioma.getLanguageSelect().getLanguage().startsWith("es")){
+            proyectoTerminado = "Proyectos terminados";
+            proyectoIniciado = "Proyectos Iniciados";
+            proyectoPausado = "Proyectos Pausados";
+            protectoSinComenzar = "Proyectos sin comenzar";
+            proyectoNovedad = "Proyectos con novedad";
+            proyectoEstado = "Estados de proyectos";
+        }else{
+            proyectoTerminado = "Projects finished";
+            proyectoIniciado = "Projects started";
+            proyectoPausado = "Projects paused";
+            protectoSinComenzar = "Projects not begin";
+            proyectoNovedad = "Projects with news";
+            proyectoEstado = "States of proyects";
+        }
         
-       
-            piemodel.set("Proyectos terminados", ProyectosTerminados.size());
-            piemodel.set("Proyectos Iniciados", ProyectosIniciados.size());
-            piemodel.set("Proyectos Pausados", ProyectosPausados.size());
-            piemodel.set("Proyectos sin comenzar", ProyectosSinComenzar.size());
-            piemodel.set("Proyectos con novedad",ProyectosConNovedad.size());
+            System.out.println(idioma.getLanguageSelect());
+            piemodel.set(proyectoTerminado, ProyectosTerminados.size());
+            piemodel.set(proyectoIniciado, ProyectosIniciados.size());
+            piemodel.set(proyectoPausado, ProyectosPausados.size());
+            piemodel.set(protectoSinComenzar, ProyectosSinComenzar.size());
+            piemodel.set(proyectoNovedad, ProyectosConNovedad.size());
         
         
         
-        piemodel.setTitle("Estados de proyectos");
+        piemodel.setTitle(proyectoEstado);
         piemodel.setLegendPosition("e");
         piemodel.setFill(false);
         piemodel.setShowDataLabels(true);

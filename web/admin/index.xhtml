@@ -10,7 +10,7 @@
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
-        Inicio administrador
+        #{msg.indexTitulo}
     </ui:define>
 
     <!--renderizacion del menu principal-->
@@ -36,7 +36,7 @@
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Enhorabuena! Bienvenido al sistema Fixed up.</h4>
+        <h4 class="title">#{msg.indexCardboardIndex}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
@@ -47,40 +47,32 @@
 
             <p:row rendered="#{controladorSesion.rol == 1 || controladorSesion.rol == 2}">
 
-
                 <p:chart id="proyectos" type="pie" model="#{graficaProyectos.piemodel}" style="height:300px; width:500px; margin: auto;"  widgetVar="pie"/>
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
                         <p:commandLink onclick="exportChartInPDFGRAFICA()" styleClass="btn btn-primary">
                             <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
-                            Exportar a pdf
+                            #{msg.universalAPdf}
                         </p:commandLink>
                     </div>
                 </div>
 
-
-
-<!--<p:chart id="proyectosvendidos" type="pie" model="#{graficaProyectosVendidosPorAño.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="proyectosvendidos" />
- <div class="row">
-    <div class="col-md-12 text-center m-t-50">
-        <p:commandLink onclick="exportarproyectoscendidos()" styleClass="btn btn-primary">
-            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
-            Exportar a pdf
-        </p:commandLink>
-    </div>
-</div>-->
-
-
-
-
-
+                <!--<p:chart id="proyectosvendidos" type="pie" model="#{graficaProyectosVendidosPorAño.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="proyectosvendidos" />
+                 <div class="row">
+                    <div class="col-md-12 text-center m-t-50">
+                        <p:commandLink onclick="exportarproyectoscendidos()" styleClass="btn btn-primary">
+                            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
+                            Exportar a pdf
+                        </p:commandLink>
+                    </div>
+                </div>-->
 
                 <p:chart id="pedidos" type="pie" model="#{graficaPagosProyectos.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="pieWV"/>
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
                         <p:commandLink onclick="exportChartInPDF()" styleClass="btn btn-primary">
                             <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
-                            Exportar a pdf
+                            #{msg.universalAPdf}
                         </p:commandLink>
                     </div>
                 </div>
@@ -91,15 +83,12 @@
                     <div class="col-md-12 text-center m-t-50">
                         <p:commandLink onclick="exportarbarmodel()" styleClass="btn btn-primary">
                             <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
-                            Exportar a pdf
+                            #{msg.universalAPdf}
                         </p:commandLink>
                     </div>
                 </div>
 
-
             </p:row>
-            
-            <h:commandButton value="p" action="#{notificaciones.prueba()}"></h:commandButton>
 
         </h:form>
 
@@ -163,8 +152,6 @@
 
         </script>
     </ui:define>
-
-
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
     <ui:define name="ultimosScripts">

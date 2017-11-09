@@ -73,4 +73,10 @@ public class Idioma implements Serializable {
         return "";
     }
 
+    public Locale getLanguageSelected() {
+        return languageSelected;
+    }
+    
+    
+
 }
