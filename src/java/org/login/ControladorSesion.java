@@ -24,9 +24,11 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.dao.NotificacionFacadeLocal;
 import org.dao.PersonaFacadeLocal;
+import org.dao.ProyectoFacadeLocal;
 import org.entidades.Notificacion;
 import org.entidades.Permiso;
 import org.entidades.Persona;
+import org.entidades.Proyecto;
 import org.entidades.Rol;
 
 /**
@@ -41,6 +43,8 @@ public class ControladorSesion implements Serializable {
     private PersonaFacadeLocal pfl;
     @EJB
     private NotificacionFacadeLocal notificacionFacadeLocal;
+    @EJB
+    private ProyectoFacadeLocal proyectoFacadeLocal;
     private Rol rolSeleccionado;
     private Persona p;
     private String password;
@@ -48,9 +52,10 @@ public class ControladorSesion implements Serializable {
     private int rol;
     private List<Notificacion> listaNotificaciones;
     private List<Notificacion> listaNotificacionesVista;
+    private List<Proyecto> listaProyectosVencidos;
     boolean bandera = false;
     private Notificacion notificacionSeleccionado;
-    private ArrayList<String>listaColores = new ArrayList<>();
+    private ArrayList<String> listaColores = new ArrayList<>();
     private Random random = new Random();
     private String color;
 
@@ -138,39 +143,40 @@ public class ControladorSesion implements Serializable {
     public ArrayList<String> getListaColores() {
         return listaColores;
     }
-    
-    public void addColors(){
+
+    public void addColors() {
         listaColores.add("purple");
         listaColores.add("blue");
         listaColores.add("green");
         listaColores.add("orange");
         listaColores.add("red");
-    
+
     }
-    
-    public void setColorTemplate(){
+
+    public void setColorTemplate() {
         color = listaColores.get((random.nextInt(listaColores.size() - 1)));
-        
+
     }
 
     public String getColor() {
         return color;
     }
-    
+
+    public List<Proyecto> getListaProyectosVencidos() {
+        return listaProyectosVencidos;
+    }
+
     public String iniciarSesion() {
         addColors();
         setColorTemplate();
-        System.out.println(color);
-        
+
         FacesContext fc = FacesContext.getCurrentInstance();
         if ((documento != 0) && password != null && !password.equals("")) {
             p = pfl.iniciarSesion(documento, password);
             if (p != null && p.getEstado() == 1) {
-                cargarNotificaciones();
                 Date date = new Date();
                 p.setUltimaVez(date);
                 pfl.edit(p);
-                System.out.println(p.getNombre() + p.getApellido() + p.getEmail());
                 List<Rol> rolesUsuario = p.getRoles();//esto lo hacemos para aprovechar el mapeo bidireccional y traer todos los roles
 
                 for (Rol rolUsuario : rolesUsuario) {
@@ -211,6 +217,8 @@ public class ControladorSesion implements Serializable {
 
                     System.out.println("area: " + p.getAreasIdArea().getIdArea() + " " + p.getAreasIdArea().getNombreArea());
 
+                    cargarProyectosVencidos();
+                    cargarNotificaciones();
                     return "admin/index.xhtml?faces-redirect=true";
 
                 }
@@ -266,10 +274,8 @@ public class ControladorSesion implements Serializable {
     }
 
     public void cargarNotificaciones() {
-        System.out.println("Cargando notificaciones:");
         listaNotificaciones = notificacionFacadeLocal.notificacionesUsuario(p);
-        System.out.println(listaNotificaciones.size());
-
+        System.out.println("size notificacion: " + listaNotificaciones.size());
     }
 
     public String leerNotificacion() {
@@ -278,5 +284,35 @@ public class ControladorSesion implements Serializable {
         cargarNotificaciones();
         return "/admin/notificaciones/notificaciones.xhtml?faces-redirect=true";
     }
-    
+
+    public void cargarProyectosVencidos() {
+        Date date = new Date();
+        int bandera = 0;
+        try {
+            listaProyectosVencidos = proyectoFacadeLocal.findByfechaFinalizado();
+                System.out.println("size vencidos: " + listaProyectosVencidos.size());
+            
+            if (listaProyectosVencidos.size() > 0) {
+                for (Proyecto proyecto : listaProyectosVencidos) {
+                    proyecto.setCorreoNotificacionEnviado(1);
+                    proyectoFacadeLocal.edit(proyecto);
+                    System.out.println(listaProyectosVencidos.size());
+                    String asunto = "Vencimiento proyecto " + proyecto.getPedidosIdPedido().getNombreProyecto() + ".";
+                    String mensajeOperario = "El proyecto acaba de finalizar, por favor tomar medidas y/o informar al cliente.";
+                    Notificacion notificacion = new Notificacion(null, asunto, mensajeOperario, date, 0, proyecto.getOperarioIdPersona());
+                    notificacionFacadeLocal.create(notificacion);
+                    System.out.println(proyecto.getOperarioIdPersona().getNombre());
+                    notificacion = new Notificacion(null, asunto, mensajeOperario, date, 0, proyecto.getPedidosIdPedido().getVendedorIdPersona());
+                    notificacionFacadeLocal.create(notificacion);
+                    System.out.println(proyecto.getPedidosIdPedido().getVendedorIdPersona().getNombre());
+
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
 }

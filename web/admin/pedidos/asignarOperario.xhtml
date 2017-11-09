@@ -65,7 +65,7 @@
                     <div class="panel-body">
 
                         <h:form id="form" prependId="false" class="form-horizontal" role="form">
-
+                            <p:growl id="growl" />
                             <b:row>
                                 <b:messages large-screen="full-width" />
                             </b:row>
@@ -81,12 +81,17 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <b:commandButton action="#{enviarPedidoAProyecto.asignarOperarioAProyecto()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></b:commandButton>
+                                    <b:commandButton id="enviar" action="#{enviarPedidoAProyecto.asignarOperarioAProyecto()}" class="btn btn-primary" onclick='PrimeFaces.ab({s:"enviar"});return false;' value="#{msg.universalBotonAceptar}"></b:commandButton>
                                 </div>
                                 <div class="col-sm-3">
                                     <h:link styleClass="btn btn" outcome="/admin/pedidos/listarPedidos.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                             </div>
+
+                            <p:blockUI block="abc" trigger="enviar" >
+                                LOADING<br />
+                                <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />
+                            </p:blockUI>
 
                         </h:form>
 

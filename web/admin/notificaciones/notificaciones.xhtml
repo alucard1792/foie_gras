@@ -45,13 +45,13 @@
             <p:column headerText="Id" width="10"> 
                 <p:outputLabel value="#{ln.id}"></p:outputLabel>                                
             </p:column>
-            <p:column headerText="Asunto" width="200" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+            <p:column headerText="Asunto" width="100" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
                 <p:outputLabel value="#{ln.asunto}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Mensaje" width="200" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+            <p:column headerText="Mensaje" width="400" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
                 <p:outputLabel value="#{ln.mensaje}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Fecha" width="200" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+            <p:column headerText="Fecha" width="100" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
                 <p:outputLabel value="#{ln.fechaEnvio}"><f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" /></p:outputLabel>                
             </p:column>
         </p:dataTable>

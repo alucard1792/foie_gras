@@ -6,6 +6,7 @@
 package org.jasper.reportes;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -38,8 +40,8 @@ import org.login.ControladorSesion;
  * @author David
  */
 @Named(value = "reporteUsuarios")
-@RequestScoped
-public class ReporteUsuarios {
+@ViewScoped
+public class ReporteUsuarios implements Serializable{
 
     @Inject
     private ControladorSesion controladorSesion;
@@ -84,7 +86,9 @@ public class ReporteUsuarios {
     private void prepararExportar() throws JRException{
         
         Map<String, Object>params = new HashMap<>();
-        params.put("Nombre: ", controladorSesion.getP().getNombre());
+        Persona persona = controladorSesion.getP();
+        String nombre = persona.getNombre();
+        params.put("Nombre:", nombre);
         JRBeanCollectionDataSource bcds = new JRBeanCollectionDataSource(listaReportePersona);
         String reportPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/")+"/WEB-INF/reportes/usuarios/report1.jasper";
         jasperPrint = JasperFillManager.fillReport(reportPath, params, bcds);

@@ -55,6 +55,9 @@ public class ListarPedidos implements Serializable {
         for(Rol rol:controladorSesion.getP().getRoles()){
             if (rol.getIdRol() == 1 || rol.getIdRol() == 2) {
                 listaPedidos = pfl.findAll();
+                for(Pedido pedido:listaPedidos){
+                    System.out.println(pedido.getIdPedido());
+                }
                 
             }else if(rol.getIdRol() == 3 || rol.getIdRol() == 6){
                 listaPedidos = pfl.listarPedidosVendedorAsignados(controladorSesion.getP());
