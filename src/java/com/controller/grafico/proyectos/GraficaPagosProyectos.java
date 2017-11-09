@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import org.dao.PedidoFacadeLocal;
 import org.dao.ProyectoFacadeLocal;
 import org.entidades.Pedido;
 import org.entidades.Proyecto;
+import org.lang.Idioma;
 import org.primefaces.model.chart.PieChartModel;
 
 /**
@@ -22,15 +25,15 @@ import org.primefaces.model.chart.PieChartModel;
  * @author Orlando.R.R
  */
 @Named(value = "graficaPagosProyectos")
-@ViewScoped
-public class GraficaPagosProyectos implements Serializable{
+@RequestScoped
+public class GraficaPagosProyectos implements Serializable {
 
-    /**
-     * Creates a new instance of GraficaPagosProyectos
-     */
+    @Inject
+    private Idioma idioma;
+
     public GraficaPagosProyectos() {
     }
-    @EJB 
+    @EJB
     private PedidoFacadeLocal pfl;
     @EJB
     private ProyectoFacadeLocal proyectofacadelocal;
@@ -63,10 +66,6 @@ public class GraficaPagosProyectos implements Serializable{
     public void setListapedidopago(List<Pedido> listapedidopago) {
         this.listapedidopago = listapedidopago;
     }
-    
-    
-
-    
 
     public PieChartModel getPiemodel() {
         return piemodel;
@@ -84,32 +83,41 @@ public class GraficaPagosProyectos implements Serializable{
         this.pedido = pedido;
     }
 
-    
     @PostConstruct
-    public void init(){
+    public void init() {
         listapedido = pfl.pedidosSinPagar(0);
         listapedidopago = pfl.pedidosSinPagar(1);
-        
-        
-       
+
         Reporte(listapedido, listapedidopago);
     }
-    
-    
-    public void Reporte(List<Pedido> listapedido, List<Pedido> listapedidopago){
-        
+
+    public void Reporte(List<Pedido> listapedido, List<Pedido> listapedidopago) {
+
         piemodel = new PieChartModel();
+        String sinPagar,
+                pagos,
+                pedidosPagosSinPagar;
         
-        piemodel.set("Sin pagar", listapedido.size());
-        piemodel.set("Pagos", listapedidopago.size());
+        if (idioma.getLanguageSelect().getLanguage().startsWith("es")) {
+            sinPagar = "Sin pagar";
+            pagos = "Pagos";
+            pedidosPagosSinPagar = "Pedidos pagos y sin pagar";
+
+        } else {
+            sinPagar = "Not paid";
+            pagos = "Paid";
+            pedidosPagosSinPagar = "Paid and not paid orders";
+            
+        }
         
-        piemodel.setTitle("Pedidos pagos y sin pagar");
+        piemodel.set(sinPagar, listapedido.size());
+        piemodel.set(pagos, listapedidopago.size());
+
+        piemodel.setTitle(pedidosPagosSinPagar);
         piemodel.setLegendPosition("e");
         piemodel.setFill(false);
         piemodel.setShowDataLabels(true);
         piemodel.setDiameter(150);
     }
-   
-    
-    
+
 }
