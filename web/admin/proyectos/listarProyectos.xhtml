@@ -139,11 +139,16 @@
                         <p:commandButton icon="ui-icon-play" title="#{msg.universalBotonIniciar}" action="#{listarProyectos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
                     <p:row rendered="#{lp.estadosIdEstado.idEstado == 1}">
-                        <p:commandButton icon="ui-icon-check" title="#{msg.universalBotonFinalizar}" action="#{listarProyectos.finalizarProyecto(lp)}" ajax="false"></p:commandButton>                    
+                        <p:commandButton styleClass="mybutton-class" onclick="PF('bui').show()" oncomplete="PF('bui').show()" class="mybutton-class" icon="ui-icon-check" title="#{msg.universalBotonFinalizar}" action="#{listarProyectos.finalizarProyecto(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
                 </p:column>
 
             </p:dataTable>
+
+            <p:blockUI block="abc" widgetVar="bui" >
+                #{msg.universalCargandoUiBlock}<br />
+                <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />
+            </p:blockUI>
 
         </h:form>
 
