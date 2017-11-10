@@ -63,7 +63,7 @@ public class ControladorSesion implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        
     }
 
     public Rol getRolSeleccionado() {

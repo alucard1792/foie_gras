@@ -5,6 +5,7 @@
  */
 package org.modulos.usuarios;
 
+import com.controllerEmail.EnviarCorreosMasivos.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,6 +46,8 @@ public class CrearUsuario implements Serializable {
     private Rol rol;
     private List<Rol> rolesAsignados;
     private List<Area> listaAreas;
+    private controller c;
+
 
     @PostConstruct
     public void init() {
@@ -54,6 +57,7 @@ public class CrearUsuario implements Serializable {
             System.out.println(rol.getIdRol());
         }
         persona = new Persona();
+        c = new controller();
 
     }
 
@@ -90,8 +94,16 @@ public class CrearUsuario implements Serializable {
     }
 
     public String crearUsuario() {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
         try {
             if (persona != null) {
+                String mensaje = "<h2>Estimado " + persona.getNombre() + " " + persona.getApellido() + ".<h2/><br/>"
+                        + "<h3>Nos permitimos informarle que su usuario ha sido creado exitosamente.<br/>"
+                        + "Datos de inicio de sesion de su cuenta:<h3/><br/>"
+                        + "<h4>Usuario: " + persona.getDocumento() + "<br/>"
+                        + "Contraseña = " + persona.getPassword() + "<h4/><br/>"
+                        + "<h5>Este correo es de carácter informativo, por favor no responder<br/>"
+                        + "Fixedup " + year + "<h5/>";
                 Calendar cal = Calendar.getInstance();
                 persona.setIdPersona(null);
                 persona.setFechaIngreso(cal.getTime());
@@ -99,9 +111,12 @@ public class CrearUsuario implements Serializable {
                 rolesAsignados.add(rfl.find(rol.getIdRol()));
                 persona.setRoles(rolesAsignados);
                 pfl.create(persona);
+                c.enviarEmailCliente(persona.getEmail(), "Notificacion creacion usuario", mensaje);
                 return "/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true";
 
             } else {
+                FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Por favor, Termine de llenar el formulario", "");
+                FacesContext.getCurrentInstance().addMessage(null, msj);
                 return "";
 
             }
