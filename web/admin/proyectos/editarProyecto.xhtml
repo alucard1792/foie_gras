@@ -94,12 +94,17 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{listarProyectos.iniciarProyecto()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton>
+                                    <h:commandButton id="enviar" onclick='PrimeFaces.ab({s:"enviar"});return false;' action="#{listarProyectos.iniciarProyecto()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton>
                                 </div>
                                 <div class="col-sm-3">
                                     <h:link styleClass="btn btn" outcome="/admin/proyectos/listarProyectos.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
                                 </div>
                             </div>
+                            
+                            <p:blockUI block="abc" trigger="enviar" >
+                                #{msg.universalCargandoUiBlock}<br />
+                                <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />
+                            </p:blockUI>
 
                         </h:form>
 
