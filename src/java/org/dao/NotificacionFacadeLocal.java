@@ -34,6 +34,7 @@ public interface NotificacionFacadeLocal {
     List<Notificacion>notificacionesUsuario(Persona persona);
     
     List<Notificacion>notificacionesUsuarioVista(Persona persona);
+    
     void mensajesLeidos(Persona persona);
     
 }

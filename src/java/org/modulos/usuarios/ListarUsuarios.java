@@ -61,7 +61,7 @@ public class ListarUsuarios implements Serializable {
         listaRolesListarUsuario = rfl.findAll();
         for(Rol rol:controladorSesion.getP().getRoles()){
             listaRoles = rfl.findRolByUsuarioEnSesion(rol.getIdRol());
-            System.out.println(rol.getIdRol());
+
         }
         
     }

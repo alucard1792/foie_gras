@@ -130,6 +130,7 @@ public class EnviarPedidoAProyecto implements Serializable {
     public String preparacionAsignarOperario(Pedido p) {
         iniciarConversacion();
         pedidoSeleccionado = p;
+        
         return "/admin/pedidos/asignarOperario.xhtml?faces-redirect=true";
 
     }

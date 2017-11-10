@@ -13,7 +13,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.dao.ProyectoFacadeLocal;
-import org.entidades.Pedido;
 import org.entidades.Proyecto;
 
 /**

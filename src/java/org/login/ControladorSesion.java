@@ -10,8 +10,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -279,10 +277,16 @@ public class ControladorSesion implements Serializable {
     }
 
     public String leerNotificacion() {
-        notificacionFacadeLocal.mensajesLeidos(p);
-        listaNotificacionesVista = notificacionFacadeLocal.notificacionesUsuarioVista(p);
-        cargarNotificaciones();
-        return "/admin/notificaciones/notificaciones.xhtml?faces-redirect=true";
+        try {
+            notificacionFacadeLocal.mensajesLeidos(p);
+            listaNotificacionesVista = notificacionFacadeLocal.notificacionesUsuarioVista(p);
+            cargarNotificaciones();
+            return "/admin/notificaciones/notificaciones.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+            
+        }
     }
 
     public void cargarProyectosVencidos() {
@@ -313,6 +317,11 @@ public class ControladorSesion implements Serializable {
             e.printStackTrace();
         }
         
+    }
+    
+    public void pollNotificaciones(){
+        cargarNotificaciones();
+        cargarProyectosVencidos();
     }
 
 }
