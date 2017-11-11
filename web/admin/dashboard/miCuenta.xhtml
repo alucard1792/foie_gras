@@ -8,7 +8,8 @@
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
 
     <!--Nombre de la pagina-->
     <ui:define name="titulo">
@@ -113,33 +114,33 @@
     </ui:define>
 
     <ui:define name="perfil">
+        <h:form enctype="multipart/form-data" id="form" prependId="false">
+            <p:panel id="foto_perfil" style="border-color: #fff">
+                <div class="card-avatar">
+                    <a href="#">
+                        <img  class="img" src="#{controladorSesion.p.imagen == null ? '/foie_gras/files/photosUploads/inicial.jpg': controladorSesion.p.imagen}"/>
+                    </a>
+                </div>
+            </p:panel>
+            <div class="content">
+                <h6 class="category text-gray">#{msg.dashboardMiperfilFoto}</h6>
+                <h4 class="card-title"></h4>
+                <p class="card-content">
+                </p>
 
-        <div class="card-avatar">
-            <a href="#pablo">
-                <img class="img" src="#{controladorSesion.p.imagen == null ? '/foie_gras/files/photosUploads/inicial.jpg': controladorSesion.p.imagen}"/>
-            </a>
-        </div>
-
-        <div class="content">
-            <h6 class="category text-gray">#{msg.dashboardMiperfilFoto}</h6>
-            <h4 class="card-title"></h4>
-            <p class="card-content">
-            </p>
-
-            <h:form enctype="multipart/form-data" id="form" prependId="false">
-                <div id="form-group" align="center" style="margin-bottom: 50px">
+                <div id="form-group" align="center" style="margin-bottom: 25px">
                     <h:panelGrid columns="1" cellpadding="5">
-                        <p:commandButton value="Cargar foto" class="btn btn-primary btn-primary" type="button" onclick="PF('dlg1').show();" />
+                        <b:commandButton value="#{msg.dashboardMiperfilCargarFoto}" class="btn btn-primary btn-primary" type="button" onclick="PF('dlg1').show();" />
                     </h:panelGrid>
                 </div>
                 <p:dialog header="Carga de foto" widgetVar="dlg1" minWidth="666">
                     <p:fileUpload style="width:100%;" fileUploadListener="#{fileUploadPhoto.upload()}" mode="advanced" dragDropSupport="false"
-                                  fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                  fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update="foto_perfil"/>
                 </p:dialog>
-            </h:form>
 
-            <!--<a href="#pablo" class="btn btn-primary btn-round">Cambiar foto de perfil</a>-->
-        </div>
+                <!--<a href="#pablo" class="btn btn-primary btn-round">Cambiar foto de perfil</a>-->
+            </div>
+        </h:form>
 
     </ui:define>
 
