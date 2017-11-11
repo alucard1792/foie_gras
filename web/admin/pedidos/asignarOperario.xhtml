@@ -81,7 +81,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-3">
-                                    <b:commandButton id="enviar" action="#{enviarPedidoAProyecto.asignarOperarioAProyecto()}" class="btn btn-primary" onclick='PrimeFaces.ab({s:"enviar"});return false;' value="#{msg.universalBotonAceptar}"></b:commandButton>
+                                    <b:commandButton id="enviar" action="#{enviarPedidoAProyecto.asignarOperarioAProyecto()}" class="btn btn-primary" onclick='PrimeFaces.ab({s:"enviar"});return false;'  update="growl" value="#{msg.universalBotonAceptar}"></b:commandButton>
                                 </div>
                                 <div class="col-sm-3">
                                     <h:link styleClass="btn btn" outcome="/admin/pedidos/listarPedidos.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>

@@ -80,10 +80,11 @@ public class controller implements Serializable {
 
     public String EmailEnviar() {
         try {
-            EnviarEmail mailSender=new EnviarEmail();
-            mailSender.sendMail("correofixedup@gmail.com", "correofixedup@gmail.com", "fixedupsena", toMail, subject, message);
-           
+            MailSender mailSender=new MailSender();
+            mailSender.enviarEmailCliente(this.toMail, this.subject, this.message);
+            
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return "";
     }
