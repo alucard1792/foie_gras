@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Proyecto.findByFechaInicio", query = "SELECT p FROM Proyecto p WHERE p.fechaInicio = :fechaInicio")
     , @NamedQuery(name = "Proyecto.findByfechaFinalizado", query = "SELECT p FROM Proyecto p WHERE p.fechaFinalizado = :fechaFinalizado")
     , @NamedQuery(name = "Proyecto.findByOperarioAsignado", query = "SELECT p FROM Proyecto p WHERE p.operarioIdPersona = :operarioIdPersona")
-    , @NamedQuery(name = "Proyecto.findVencidos", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado.idEstado != 5 AND p.tiempoEstimado < CURRENT_DATE AND p.correoNotificacionEnviado = 0")
+    , @NamedQuery(name = "Proyecto.findVencidos", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado.idEstado != 5 AND p.tiempoEstimado <= CURRENT_DATE AND p.correoNotificacionEnviado = 0")
     , @NamedQuery(name = "proyectosTerminados", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
     , @NamedQuery(name = "ProyectosIniciados", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
     , @NamedQuery(name = "ProyectosPausados", query = "SELECT p FROM Proyecto p WHERE p.estadosIdEstado = :estado")
