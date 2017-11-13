@@ -1053,8 +1053,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.poi-3.7.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.primefaces-6.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.spring.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.javax.validation-1.0.0.GA.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.javax.validation-1.0.0.GA.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.groovy-all-2.2.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.groovy-all-2.2.1.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>

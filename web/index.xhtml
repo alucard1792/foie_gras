@@ -65,12 +65,7 @@
 
                                 </a>
                             </li>
-                            <li>
-
-                                <a href="contactanos.xhtml" >
-                                    <i class="material-icons" >mail</i> #{msg.contact}
-                                </a>
-                            </li>
+                           
                             <li>
 
 
@@ -202,7 +197,7 @@
                         </div>
                     </div>
 
-                    <div class="space-50"></div>
+                
 
                     <div class="section">
                         <div class="container text-center">
@@ -218,17 +213,55 @@
                             </div>
                         </div>
                     </div>
-                    <div class="section">
-                        <div class="container text-center">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2 text-center">
-                                    <h2></h2>
-                                    <h4>
-                                    </h4>
+                   
+                    <div class="container">
+                        <div class="section text-center section-landing">
+
+                            <div class="section landing-section">
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <h2 class="text-center title">Contactanos</h2>
+                                        <h4 class="text-center description">Envianos tu correo electronico y te contactaremos inmediatamente para tomar tu pedido o para resolver tu inquietud</h4>
+                                        <h:form class="contact-form">
+                                            <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Tu correo</label>
+                                                        <h:inputText id="email" class="form-control" value="#{MainController.message}" size="30" required="true"></h:inputText>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tu mensaje</label>
+                                                <h:inputText id="asunto" class="form-control" value="#{MainController.subject}" size="30" required="true"></h:inputText>
+                                            </div>
+
+                                            <div class="field submit">
+                                                <label for="submit_button"></label>
+                                                <h:commandButton class="btn btn-primary btn-raised" id="submit_button" value="Enviar" action="#{MainController.send()}"/>
+                                            </div>
+
+                                           
+                                        </h:form>
+
+                                        <div class="space-50"></div>
+
+                                        <div class="features">
+                                            <h4 class="text-center title">Esta es nuestra ubicacion por si desea visitar nuestra empresa</h4>
+                                            <div id="map-outer" style="text-align:center;">
+                                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d63624.97393841797!2d-74.099755!3d4.672092!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8d5a835aae232cc3!2sAcr%C3%ADlicos+Innovacryl-LD!5e0!3m2!1ses!2sus!4v1508624480448" width="600" height="450" frameborder="0" style="border:0" allowfullscreen="true"></iframe>                            <div id="map">&nbsp;</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
+                    
+                    
 
                 </div>
                 <footer class="footer">
