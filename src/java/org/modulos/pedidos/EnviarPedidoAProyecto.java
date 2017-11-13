@@ -81,7 +81,6 @@ public class EnviarPedidoAProyecto implements Serializable {
         dificultad = new Dificultad();
         estado = new Estado();
         c = new controller();
-        listaRootAdmin = personaFacadeLocal.listarRootAdmin();
 
     }
 
@@ -146,6 +145,7 @@ public class EnviarPedidoAProyecto implements Serializable {
     public String asignarOperarioAProyecto() {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         try {
+            listaRootAdmin = personaFacadeLocal.listarRootAdmin();
             String asuntoNotificacionOperario = "Nuevo proyecto";
             String mensajeNotificacionOperario = "Se ha asignado el proyecto: " + pedidoSeleccionado.getNombreProyecto() + ". por favor iniciarlo lo mas pronto posible";
             String asuntoNotificacionVendedor = "Movimiento pedido";

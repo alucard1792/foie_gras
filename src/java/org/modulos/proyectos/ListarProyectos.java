@@ -22,11 +22,13 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.dao.DificultadFacadeLocal;
 import org.dao.EstadoFacadeLocal;
+import org.dao.NotificacionFacadeLocal;
 import org.dao.PedidoFacadeLocal;
 import org.dao.PersonaFacadeLocal;
 import org.dao.ProyectoFacadeLocal;
 import org.entidades.Dificultad;
 import org.entidades.Estado;
+import org.entidades.Notificacion;
 import org.entidades.Persona;
 import org.entidades.Proyecto;
 import org.entidades.Rol;
@@ -48,6 +50,8 @@ public class ListarProyectos implements Serializable {
     private EstadoFacadeLocal estadoFacadeLocal;
     @EJB
     private PedidoFacadeLocal pedidoFacadeLocal;
+    @EJB
+    private NotificacionFacadeLocal notificacionFacadeLocal;
     @Inject
     private Conversation conversacion;
     @Inject
@@ -59,9 +63,10 @@ public class ListarProyectos implements Serializable {
     private List<Proyecto> proyecto;
     private List<Estado> listaEstados;
     private List<Dificultad> listaDificultades;
-    private List<Persona>listaOperarios;
+    private List<Persona> listaOperarios;
     private Date currentDate;
     private controller c;
+    private Notificacion notificacion;
 
     public ListarProyectos() {
 
@@ -152,7 +157,6 @@ public class ListarProyectos implements Serializable {
         return listaOperarios;
     }
 
-    
     private void iniciarConversacion() {
         if (conversacion.isTransient()) {
             conversacion.begin();
@@ -186,9 +190,12 @@ public class ListarProyectos implements Serializable {
 
     public String iniciarProyecto() {
         int year = Calendar.getInstance().get(Calendar.YEAR);
+        String asuntoNotificacionVendedor = "Movimiento proyecto";
+        String mensajeNotificacionVendedor = "El proyecto " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + " ha iniciado";
+
         try {
             DateFormat readFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss aa");
-            
+
             String mensaje = "<h2>Estimado cliente " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<h2/>"
                     + "<h3><br/>Nos permitimos informar que su proyecto acaba de iniciar, "
                     + "el cual sale de la linea de produccion el dia " + readFormat.format(proyectoSeleccionado.getTiempoEstimado()) + ""
@@ -203,14 +210,15 @@ public class ListarProyectos implements Serializable {
                     + "materia prima = " + proyectoSeleccionado.getPedidosIdPedido().getMateriasPrimaIdMateria().getReferencia() + "<br/><h4/>"
                     + "<h5>Este correo es de carácter informativo, por favor no responder<br/>"
                     + "Fixedup " + year + "<h5/>";
-            
+
             c.enviarEmailCliente(proyectoSeleccionado.getPedidosIdPedido().getCorreoCliente(), "Notificacion inicio proyecto", mensaje);
-            
+
             Calendar cal = Calendar.getInstance();
             proyectoSeleccionado.setFechaInicio(cal.getTime());
             estado = new Estado(1);
             proyectoSeleccionado.setEstadosIdEstado(estado);
             pfl.edit(proyectoSeleccionado);
+            generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, proyectoSeleccionado.getPedidosIdPedido().getVendedorIdPersona());
             return cancelar();
         } catch (Exception e) {
             e.printStackTrace();
@@ -220,8 +228,11 @@ public class ListarProyectos implements Serializable {
     }
 
     public String finalizarProyecto(Proyecto p) {
+        proyectoSeleccionado = p;
+        String asuntoNotificacionVendedor = "Finalizacion proyecto";
+        String mensajeNotificacionVendedor = "El proyecto " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + " ha finalizado";
+
         try {
-            proyectoSeleccionado = p;
             String mensaje = "Estimado cliente " + proyectoSeleccionado.getPedidosIdPedido().getNombreCliente() + "<br/><br/>Nos permitimos informarle que su proyecto acaba de finalizar. Puede acercarce a nuestra bodega para hacer la entrega del proyecto. gracias.<br/><br/>";
             mensaje += "resumen del proyecto: <br/><br/>"
                     + "nombre pedido = " + proyectoSeleccionado.getPedidosIdPedido().getNombreProyecto() + "<br/>"
@@ -238,6 +249,7 @@ public class ListarProyectos implements Serializable {
             estado = new Estado(3);
             proyectoSeleccionado.setEstadosIdEstado(estado);
             pfl.edit(proyectoSeleccionado);
+            generarNotificacion(asuntoNotificacionVendedor, mensajeNotificacionVendedor, proyectoSeleccionado.getPedidosIdPedido().getVendedorIdPersona());
             return cancelar();
         } catch (Exception e) {
             e.printStackTrace();
@@ -266,6 +278,19 @@ public class ListarProyectos implements Serializable {
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al eliminar el usuario", "intentelo de nuevo");
             FacesContext.getCurrentInstance().addMessage(null, msj);
 
+        }
+
+    }
+
+    public void generarNotificacion(String asunto, String mensaje, Persona persona) {
+        Date date = new Date();
+        notificacion = new Notificacion(null, asunto, mensaje, date, 0, persona);
+        try {
+            notificacionFacadeLocal.create(notificacion);
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al generar la notificacion, por favor contacte al admin", "");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
         }
 
     }
