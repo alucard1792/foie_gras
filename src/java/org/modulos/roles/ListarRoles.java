@@ -19,6 +19,7 @@ import org.dao.PermisoFacadeLocal;
 import org.dao.RolFacadeLocal;
 import org.entidades.Permiso;
 import org.entidades.Rol;
+import org.login.ControladorSesion;
 
 /**
  *
@@ -34,6 +35,8 @@ public class ListarRoles implements Serializable {
     private RolFacadeLocal rolFacadeLocal;
     @Inject
     private Conversation conversacion;
+    @Inject
+    private ControladorSesion controladorSesion;
     private Rol rolSeleccionado;
     private List<Permiso>listaPermisos;
     private List<Rol>listaRoles;
@@ -45,7 +48,9 @@ public class ListarRoles implements Serializable {
     @PostConstruct
     public void init(){
         listaPermisos = permisoFacadeLocal.findAll();
-        listaRoles = rolFacadeLocal.findAll();
+        for(Rol rol: controladorSesion.getP().getRoles()){
+            listaRoles = rolFacadeLocal.findRolByUsuarioEnSesion(rol.getIdRol());
+        }
     }
 
     public List<Rol> getListaRoles() {
