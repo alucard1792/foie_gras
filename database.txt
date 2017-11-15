@@ -1,4 +1,4 @@
-﻿********************Actualizado: 10-10-2017*********************
+﻿********************Actualizado: 14-11-2017*********************
 
 Este es el dump de la base de datos para que pueda funcionar el proyecto. ejecutar en workbench y listo
 ~~*Nota *: para que el proyecto funcionen les toca crear un usuario que se llame fixed_up y la contraseña 123, si no lo hacen les toca configurar el archivo glassfish resources.xml con el usuario root. Si crean el usuario le deben dar todos los permisos, desde phpMyAdmin es facil.~~
@@ -7,9 +7,9 @@ Este es el dump de la base de datos para que pueda funcionar el proyecto. ejecut
 *Nota 3: Solo hacer respaldos desde workbench
 	1. nuevo
 		nueva columna en la tabla proyectos
-		nueva tabla: notificaciones
+		
 
-CREATE DATABASE `proyecto_v3` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE  IF NOT EXISTS `proyecto_v3` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `proyecto_v3`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
@@ -145,7 +145,7 @@ CREATE TABLE `ciudades` (
   `id_ciudad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'muestra el codigo de la ciudad',
   `nombre_ciudad` varchar(30) NOT NULL COMMENT 'muestra el nombre de la ciudad',
   PRIMARY KEY (`id_ciudad`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `ciudades` (
 
 LOCK TABLES `ciudades` WRITE;
 /*!40000 ALTER TABLE `ciudades` DISABLE KEYS */;
-INSERT INTO `ciudades` VALUES (1,'bogota'),(2,'medellin'),(3,'cali'),(4,'facatativa'),(5,'madrid');
+INSERT INTO `ciudades` VALUES (1,'bogota'),(2,'medellin'),(3,'cali'),(4,'facatativa'),(5,'madrid'),(6,'AMAZONAS\r'),(7,'CALDAS\r'),(8,'CAQUETÃ\r'),(9,'CASANARE\r'),(10,'CAUCA\r'),(11,'CESAR\r'),(12,'CHOCÃ“\r'),(13,'CÃ“RDOBA\r'),(14,'CUNDINAMARCA\r'),(15,'GUAINÃA\r'),(16,'GUAVIARE\r'),(17,'HUILA\r'),(18,'LAGUAJIRA\r'),(19,'MAGDALENA\r'),(20,'META\r'),(21,'NARIÃ‘O\r'),(22,'NORTEDESANTANDER\r'),(23,'PUTUMAYO\r'),(24,'QUINDÃO\r'),(25,'RISARALDA\r'),(26,'SANANDRÃ‰SYROVIDENCIA\r'),(27,'SANTANDER\r'),(28,'SUCRE\r'),(29,'TOLIMA\r'),(30,'VALLEDELCAUCA\r'),(31,'VAUPÃ‰S\r'),(32,'VICHADA');
 /*!40000 ALTER TABLE `ciudades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +251,7 @@ CREATE TABLE `notificaciones` (
   PRIMARY KEY (`id`),
   KEY `personas_id_persona` (`personas_id_persona`),
   CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`personas_id_persona`) REFERENCES `personas` (`id_persona`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,6 +260,7 @@ CREATE TABLE `notificaciones` (
 
 LOCK TABLES `notificaciones` WRITE;
 /*!40000 ALTER TABLE `notificaciones` DISABLE KEYS */;
+INSERT INTO `notificaciones` VALUES (1,'Nuevo proyecto','Se ha asignado el proyecto: prueba pedido. por favor iniciarlo lo mas pronto posible','2017-11-13 14:14:42',0,6),(2,'Movimiento pedido','El pedido prueba pedido se ha asignado al operario kevin galeano','2017-11-13 14:14:42',1,1),(3,'Movimiento pedido','El pedido prueba pedido se ha asignado al operario kevin galeano','2017-11-13 14:14:42',0,2),(4,'Movimiento pedido','El pedido prueba pedido se ha asignado al operario kevin galeano','2017-11-13 14:14:42',0,3),(5,'Movimiento proyecto','El proyecto prueba pedido ha iniciado','2017-11-13 14:43:35',1,1),(6,'Finalizacion proyecto','El proyecto prueba pedido ha finalizado','2017-11-13 14:44:35',1,1),(7,'Nuevo proyecto','Se ha asignado el proyecto: prueba pedido 2. por favor iniciarlo lo mas pronto posible','2017-11-13 14:58:06',0,7),(8,'Movimiento pedido','El pedido prueba pedido 2 se ha asignado al operario sofia  henao','2017-11-13 14:58:06',1,1),(9,'Movimiento pedido','El pedido prueba pedido 2 se ha asignado al operario sofia  henao','2017-11-13 14:58:06',0,2),(10,'Movimiento pedido','El pedido prueba pedido 2 se ha asignado al operario sofia  henao','2017-11-13 14:58:06',0,3),(11,'Movimiento proyecto','El proyecto prueba pedido 2 ha iniciado','2017-11-13 14:59:05',1,1),(12,'Vencimiento proyecto prueba pedido 2.','El proyecto acaba de finalizar, por favor tomar medidas y/o informar al cliente.','2017-11-13 15:00:56',0,7),(13,'Vencimiento proyecto prueba pedido 2.','El proyecto acaba de finalizar, por favor tomar medidas y/o informar al cliente.','2017-11-13 15:00:56',1,1),(14,'Nuevo proyecto','Se ha asignado el proyecto: prueba pedido 3. por favor iniciarlo lo mas pronto posible','2017-11-13 15:07:02',0,6),(15,'Movimiento pedido','El pedido prueba pedido 3 se ha asignado al operario kevin galeano','2017-11-13 15:07:03',1,1),(16,'Movimiento pedido','El pedido prueba pedido 3 se ha asignado al operario kevin galeano','2017-11-13 15:07:03',0,2),(17,'Movimiento pedido','El pedido prueba pedido 3 se ha asignado al operario kevin galeano','2017-11-13 15:07:03',0,3),(18,'Finalizacion proyecto','El proyecto prueba pedido 2 ha finalizado','2017-11-13 15:08:01',1,1),(19,'Movimiento proyecto','El proyecto prueba pedido 3 ha iniciado','2017-11-13 15:08:30',1,1),(20,'Vencimiento proyecto prueba pedido 3.','El proyecto acaba de finalizar, por favor tomar medidas y/o informar al cliente.','2017-11-13 15:08:30',0,6),(21,'Vencimiento proyecto prueba pedido 3.','El proyecto acaba de finalizar, por favor tomar medidas y/o informar al cliente.','2017-11-13 15:08:30',1,1);
 /*!40000 ALTER TABLE `notificaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,6 +281,7 @@ CREATE TABLE `pedidos` (
   `nombre_cliente` varchar(50) NOT NULL,
   `telefono_cliente` varchar(50) NOT NULL,
   `correo_cliente` varchar(50) NOT NULL,
+  `movimiento_proyecto` varchar(75) DEFAULT NULL,
   `materias_prima_id_materia` int(11) NOT NULL,
   `vendedor_id_persona` int(11) NOT NULL,
   PRIMARY KEY (`id_pedido`),
@@ -287,7 +289,7 @@ CREATE TABLE `pedidos` (
   KEY `fk_pedidos_personas1_idx` (`vendedor_id_persona`),
   CONSTRAINT `fk_pedidos_materias_prima1` FOREIGN KEY (`materias_prima_id_materia`) REFERENCES `materias_prima` (`id_materia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_pedidos_personas1` FOREIGN KEY (`vendedor_id_persona`) REFERENCES `personas` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +298,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,'prueba pedido','prueba pedido',1,1,1,'prueba pedido n','prueba pedido 1','prueba pedido @',1,1),(2,'prueba pedido 2','prueba pedido 2',1,1,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(3,'prueba pedido 2','prueba pedido 2',1,1,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(4,'prueba pedido 2','prueba pedido 2',1,1,0,'edgar zamora','123','edzamora1@misena.edu.co',2,1),(5,'prueba pedido 2','prueba pedido 2',0,0,1,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(6,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(7,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(8,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(9,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(10,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(11,'prueba pedido 3','prueba pedido 3',1,1,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(12,'prueba stock 1','prueba stock 1',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(13,'prueba stock 1','prueba stock 1',0,0,0,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(14,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(15,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(16,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(17,'prueba pedido 2','prueba pedido 2',0,0,0,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(18,'prueba pedido 2','prueba pedido 2',0,0,5,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(19,'prueba alex','prueba alex',0,0,10,'edgar zamora','123','edzamora1@misena.edu.co',2,1),(20,'prueba alex','prueba alex',0,0,1,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1),(21,'prueba alex','prueba alex',0,0,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(22,'prueba alex','prueba alex',0,0,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(23,'prueba pedido 2','motor electrico superior',0,0,1,'edgar zamora','123','edzamora1@misena.edu.co',1,1),(24,'prueba alex','pri',0,0,0,'','','',1,1),(25,'prueba alex','prueba alex',1,1,1,'edgar zamora','prueba pedido 1','edzamora1@misena.edu.co',1,1);
+INSERT INTO `pedidos` VALUES (1,'prueba pedido','prueba pedido',1,1,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(2,'prueba pedido 2','prueba pedido 2',1,1,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(3,'prueba pedido 3','prueba pedido 3',1,1,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(4,'prueba pedido 4','prueba pedido 4',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(5,'prueba pedido 5','prueba pedido 5',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(6,'prueba pedido 6','prueba pedido 6',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(7,'prueba pedido 7','prueba pedido 7',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(8,'prueba pedido 8','prueba pedido 8',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(9,'prueba pedido 9','prueba pedido 9',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(10,'prueba pedido 10','prueba pedido 10',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(11,'prueba pedido 11','prueba pedido 11',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(12,'prueba pedido 12','prueba pedido 12',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(13,'prueba pedido 13','prueba pedido 13',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(14,'prueba pedido 14','prueba pedido 14',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(15,'prueba pedido 15','prueba pedido 15',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1),(16,'prueba pedido 16','prueba pedido 16',1,0,1,'edgar zamora','6694034','edzamora1@misena.edu.co','david zamora',1,1);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,7 +368,7 @@ CREATE TABLE `personas` (
 
 LOCK TABLES `personas` WRITE;
 /*!40000 ALTER TABLE `personas` DISABLE KEYS */;
-INSERT INTO `personas` VALUES (1,10,'david','zamora','123',1,' occidente','edzamora1@misena.edu.co',1,1,'1992-10-04','2016-06-22','2017-10-27',''),(2,11,'alex','ramos benavides','123',2,'calle occidente','edzamora1@misena.edu.co',1,1,'1992-10-05','2016-06-22',NULL,NULL),(3,12,'orlando','rubio','123',3,'calle occidente','edzamora1@misena.edu.co',1,1,'1992-10-05','2016-06-22',NULL,NULL),(4,13,'harrison','copasachoa','123',4,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22',NULL,NULL),(5,14,'manolo ','cardenas','123',5,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22',NULL,NULL),(6,15,'kevin','galeano','123',6,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-10-05','2016-06-22',NULL,NULL),(7,16,'sofia ','henao','123',7,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-10-05','2016-06-22',NULL,NULL),(8,17,'vendedor','ayudante','123',8,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22','2017-10-08',NULL),(9,18,'operarioa','ayudante','123123',9,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-09-30','2016-06-17',NULL,'');
+INSERT INTO `personas` VALUES (1,10,'david','zamora','123',1,' occidente','edzamora1@misena.edu.co',1,1,'1992-10-04','2016-06-22','2017-11-13',NULL),(2,11,'alex','ramos benavides','123',2,'calle occidente','edzamora1@misena.edu.co',1,1,'1992-10-05','2016-06-22','2017-11-13',NULL),(3,12,'orlando','rubio','123',3,'calle occidente','edzamora1@misena.edu.co',1,1,'1992-10-05','2016-06-22','2017-11-03',NULL),(4,13,'harrison','copasachoa','123',4,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22','2017-11-03',NULL),(5,14,'manolo ','cardenas','123',5,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22','2017-11-01',NULL),(6,15,'kevin','galeano','123',6,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-10-05','2016-06-22','2017-11-12',NULL),(7,16,'sofia ','henao','123',7,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-10-05','2016-06-22','2017-11-13',NULL),(8,17,'vendedor','ayudante','123456',8,'calle occidente','edzamora1@misena.edu.co',2,1,'1992-10-05','2016-06-22','2017-10-08',NULL),(9,18,'operario','ayudante','123456',9,'calle occidente','edzamora1@misena.edu.co',3,1,'1992-09-30','2016-06-17','2017-11-13',NULL);
 /*!40000 ALTER TABLE `personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -388,7 +390,7 @@ CREATE TABLE `proveedores` (
   PRIMARY KEY (`id_proveedor`),
   KEY `fk_proveedores_ciudades1_idx` (`ciudades_id_ciudad`),
   CONSTRAINT `fk_proveedores_ciudades1` FOREIGN KEY (`ciudades_id_ciudad`) REFERENCES `ciudades` (`id_ciudad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -397,7 +399,7 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
-INSERT INTO `proveedores` VALUES (1,'2021','acricol','calle 5',2233,'daniel ortega',5),(2,'2022','acribest','calle 6',3344,'rubio moreno',2),(3,'2023','acrilicos de bogota','calle 7',4455,'fernando ojeda',3),(4,'2024','acrilicos de cundinamarca','calle 8',5566,'luis fernando',4),(5,'2025','acrilicos internacional','calle 9',6677,'ismael alveiro rondon',5);
+INSERT INTO `proveedores` VALUES (1,'2021','acricol','calle 5',2233,'daniel ortega',5),(2,'2022','acribest','calle 6',3344,'rubio moreno',2),(3,'2023','acrilicos de bogota','calle 7',4455,'fernando ojeda',3),(4,'2024','acrilicos de cundinamarca','calle 8',5566,'luis fernando',4),(5,'2025','acrilicos internacional','calle 9',6677,'ismael alveiro rondon',5),(7,'102030','empresa prueba carga','calle 90 carrera 15',123456,'Mauricio Cardenas',6);
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,7 +456,7 @@ CREATE TABLE `proyectos` (
   CONSTRAINT `fk_proyectos_estados1` FOREIGN KEY (`estados_id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_pedidos1` FOREIGN KEY (`pedidos_id_pedido`) REFERENCES `pedidos` (`id_pedido`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_personas1` FOREIGN KEY (`operario_id_persona`) REFERENCES `personas` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +465,7 @@ CREATE TABLE `proyectos` (
 
 LOCK TABLES `proyectos` WRITE;
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` VALUES (1,'2017-10-04 13:31:09','2017-10-16 14:20:04','2017-10-05 14:30:00',0,3,2,11,6),(2,'2017-10-27 14:24:41','2017-10-12 14:25:05','2017-10-11 14:24:33',0,3,2,2,6),(3,'2017-10-04 14:28:37','2017-10-04 14:28:58','2017-10-11 11:28:29',0,3,2,3,7),(4,'2017-10-05 13:12:34','2017-10-05 13:12:58','2017-10-07 11:34:00',0,3,3,25,6),(5,'2017-10-05 14:59:54',NULL,'2017-10-27 11:00:00',0,1,3,4,6),(6,'2017-10-06 18:19:29',NULL,'2017-10-27 11:37:00',0,1,2,1,6);
+INSERT INTO `proyectos` VALUES (1,'2017-11-13 14:43:35','2017-11-13 14:44:35','2017-11-13 14:43:09',0,3,3,1,6),(2,'2017-11-13 14:59:04','2017-11-13 15:08:01','2017-11-13 00:00:00',1,3,4,2,7),(3,'2017-11-13 15:08:30',NULL,'2017-11-13 00:00:00',1,1,1,3,6);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -479,7 +481,7 @@ CREATE TABLE `roles` (
   `nombre_rol` varchar(20) NOT NULL COMMENT 'descripcion del rol',
   `estado` int(11) NOT NULL,
   PRIMARY KEY (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -488,7 +490,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'root',1),(2,'administrador',1),(3,'vendedor',1),(4,'operario',1),(5,'operario ayudante',1),(6,'vendedor ayudante',1),(7,'aa',1),(8,'bb',0);
+INSERT INTO `roles` VALUES (1,'root',1),(2,'administrador',1),(3,'vendedor',1),(4,'operario',1),(5,'operario ayudante',1),(6,'vendedor ayudante',1);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -515,7 +517,7 @@ CREATE TABLE `roles_permisos` (
 
 LOCK TABLES `roles_permisos` WRITE;
 /*!40000 ALTER TABLE `roles_permisos` DISABLE KEYS */;
-INSERT INTO `roles_permisos` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(1,33),(1,34),(1,35),(1,36),(1,37),(1,38),(1,39),(1,40),(1,41),(1,42),(2,1),(2,2),(2,3),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,40),(2,41),(2,42),(3,22),(3,23),(3,24),(3,26),(3,27),(3,28),(4,29),(4,30),(4,31),(4,33),(4,34),(4,35),(6,29),(6,31),(6,34),(1,43),(1,44),(1,45),(1,46),(1,47),(1,48),(1,49),(1,50),(1,51),(1,52),(1,53),(2,53),(3,53);
+INSERT INTO `roles_permisos` VALUES (1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(1,33),(1,34),(1,35),(1,36),(1,37),(1,38),(1,39),(1,40),(1,41),(1,42),(2,1),(2,2),(2,3),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,40),(2,41),(2,42),(3,22),(3,23),(3,24),(3,26),(3,27),(3,28),(4,29),(4,30),(4,31),(4,33),(4,34),(4,35),(6,29),(6,31),(6,34),(1,43),(1,44),(1,45),(1,46),(1,47),(1,48),(1,49),(1,50),(1,51),(1,52),(1,53),(2,53),(3,53),(1,2),(1,4),(1,6),(1,5),(1,1),(1,3);
 /*!40000 ALTER TABLE `roles_permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -542,7 +544,7 @@ CREATE TABLE `roles_personas` (
 
 LOCK TABLES `roles_personas` WRITE;
 /*!40000 ALTER TABLE `roles_personas` DISABLE KEYS */;
-INSERT INTO `roles_personas` VALUES (1,1),(2,2),(2,3),(3,4),(3,5),(4,6),(4,7),(5,8),(2,9);
+INSERT INTO `roles_personas` VALUES (1,1),(2,2),(2,3),(3,4),(3,5),(4,6),(4,7),(6,8),(5,9);
 /*!40000 ALTER TABLE `roles_personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -571,7 +573,7 @@ CREATE TABLE `stocks` (
 
 LOCK TABLES `stocks` WRITE;
 /*!40000 ALTER TABLE `stocks` DISABLE KEYS */;
-INSERT INTO `stocks` VALUES (1,97,'2017-09-29','2017-10-05',1),(2,0,'2017-10-04','2017-10-04',2);
+INSERT INTO `stocks` VALUES (1,72,'2017-09-29','2017-11-12',1),(2,0,'2017-10-04','2017-10-04',2);
 /*!40000 ALTER TABLE `stocks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -617,7 +619,7 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-27 14:54:14
+-- Dump completed on 2017-11-14 19:16:54
 
 
 
