@@ -7,8 +7,10 @@ package com.controller;
 
 import com.mailsender.MailSender;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -75,9 +77,14 @@ public class MainController implements Serializable {
 
     public void send() {
         try {
-            MailSender mailSender=new MailSender();
+            MailSender mailSender = new MailSender();
             mailSender.sendMail("correofixedup@gmail.com", "correofixedup@gmail.com", "fixedupsena", "correofixedup@gmail.com", subject, message);
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            context.addMessage(null, new FacesMessage("Successful", "Your message: " + "aaaaaaa"));
+            context.addMessage(null, new FacesMessage("Second Message", "Additional Message Detail"));
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
