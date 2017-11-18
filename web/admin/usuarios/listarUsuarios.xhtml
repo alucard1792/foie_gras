@@ -159,7 +159,7 @@
                     </f:facet>                    <p:outputLabel value="#{(lp.estado == 1 ? 'activo':'inactivo')}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100" style="text-align: center;">
-                    <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                    <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarUsuarios.preparacionEditar(lp)}" ajax="false" rendered="#{(controladorSesion.p.roles.get(0).getIdRol() eq 1) or (lp.roles.get(0).getIdRol() > controladorSesion.p.roles.get(0).getIdRol())}"></p:commandButton>                    
                 </p:column>
 
             </p:dataTable>
