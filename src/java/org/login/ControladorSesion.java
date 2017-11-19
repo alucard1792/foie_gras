@@ -63,7 +63,7 @@ public class ControladorSesion implements Serializable {
 
     @PostConstruct
     public void init() {
-        
+
     }
 
     public Rol getRolSeleccionado() {
@@ -167,8 +167,8 @@ public class ControladorSesion implements Serializable {
     public String iniciarSesion() {
         addColors();
         setColorTemplate();
-
         FacesContext fc = FacesContext.getCurrentInstance();
+
         if ((documento != 0) && password != null && !password.equals("")) {
             p = pfl.iniciarSesion(documento, password);
             if (p != null && p.getEstado() == 1) {
@@ -223,13 +223,12 @@ public class ControladorSesion implements Serializable {
 
             } else {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "contraseña, documento incorrecto o usuario desactivado. ", "Contacte con el administrador");
-                fc.addMessage(null, fm);
+                fc.addMessage("idMessageLogin", fm);
             }
 
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "Todos los campos son obligatorios", "Diligencie todos los campos");
-            fc.addMessage(null, fm);
-
+            fc.addMessage("idMessageLogin", fm);
         }
 
         return "";
@@ -285,7 +284,7 @@ public class ControladorSesion implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
             return "";
-            
+
         }
     }
 
@@ -294,8 +293,8 @@ public class ControladorSesion implements Serializable {
         int bandera = 0;
         try {
             listaProyectosVencidos = proyectoFacadeLocal.findByfechaFinalizado();
-                System.out.println("size vencidos: " + listaProyectosVencidos.size());
-            
+            System.out.println("size vencidos: " + listaProyectosVencidos.size());
+
             if (listaProyectosVencidos.size() > 0) {
                 for (Proyecto proyecto : listaProyectosVencidos) {
                     proyecto.setCorreoNotificacionEnviado(1);
@@ -316,10 +315,10 @@ public class ControladorSesion implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
-    public void pollNotificaciones(){
+
+    public void pollNotificaciones() {
         cargarNotificaciones();
         cargarProyectosVencidos();
     }

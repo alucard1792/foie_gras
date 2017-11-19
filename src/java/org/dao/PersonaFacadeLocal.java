@@ -40,6 +40,7 @@ public interface PersonaFacadeLocal {
     Boolean loadUsuarios(String pathFile);
     
     List<Persona> listarVendedorAdminRoot();
+    
     List<Persona> listarRootAdmin();
 
 }
