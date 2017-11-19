@@ -215,7 +215,7 @@
                                                         <label for="submit_button"></label>
                                                         <p:commandButton update="growl" class="btn btn-primary btn-raised" id="submit_button" value="#{msg.btnEnviar}" actionListener="#{MainController.send()}" />
                                                     </div>
-                                                    
+
                                                     <p:blockUI block="abc" trigger="submit_button">
                                                         #{msg.universalCargandoUiBlock}<br />
                                                         <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />
@@ -280,7 +280,7 @@
                                                 <span class="input-group-addon">
                                                     <i class="material-icons">face</i>
                                                 </span>
-                                                <input type="text" class="form-control" placeholder="#{msg.documento}" jsf:value="#{controladorSesion.documento}"></input>
+                                                <input type="text" class="form-control" jsf:id="idMessageLogin" placeholder="#{msg.documento}" jsf:value="#{controladorSesion.documento}"></input>
                                             </div>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
@@ -292,23 +292,28 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <h:commandButton value="#{msg.login}" action="#{controladorSesion.iniciarSesion()}" class="btn btn-success btn-simple"></h:commandButton>
-                                        <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Close</button>
+                                        <b:commandButton  update="messageLogin" id="btIniciarSesion" value="#{msg.universalBotonAceptar}" action="#{controladorSesion.iniciarSesion()}" class="btn btn-success btn-simple">
+                                        </b:commandButton>
+                                        <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">#{msg.universalBotonCancelar}</button>
                                         <a href="#" data-toggle="modal" type="button" class="btn btn-warning btn-simple"  data-target="#myModalPasswordLost" style="margin-bottom: 10px">#{msg.botonOlvidasteContraseña}</a>
+
+                                        <b:message id="messageLogin" for="idMessageLogin" style="text-align: center" show-detail="true" show-summary="true" ></b:message>
+                                        <!--
+                                        <h:messages id="idMessageLogin" showDetail="true" showSummary="true"></h:messages>
+                                        -->
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-                    </h:form>
 
-                    <h:form prependId="false" id="form_password_lost">
+                        <!--Modal Recover pass-->
                         <div class="modal fade" id="myModalPasswordLost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h4 class="modal-title text-center">#{msg.login}</h4>
+                                        <h4 class="modal-title text-center">#{msg.tituloRestablecer}</h4>
                                     </div>
 
                                     <div class="modal-body">
@@ -317,20 +322,15 @@
                                                 <span class="input-group-addon">
                                                     <i class="material-icons">face</i>
                                                 </span>
-                                                <input type="text" class="form-control" placeholder="#{msg.documento}" jsf:value="#{controladorSesion.documento}"></input>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">lock_outline</i>
-                                                </span>
-                                                <input type="password" placeholder="#{msg.contraseña}" class="form-control" jsf:value="#{controladorSesion.password}"/>
+                                                <input type="text" class="form-control" placeholder="#{msg.ingresaCorreo}" jsf:value="#{emailrecuperarcontraseña.emailDestinatario}" require="true"></input>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer">
-                                        <h:commandButton value="#{msg.login}" action="#{controladorSesion.iniciarSesion()}" class="btn btn-default btn-simple"></h:commandButton>
-                                        <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Close</button>
+                                        <b:commandButton  id="btRecuperarPassword" value="#{msg.universalBotonAceptar}" action="#{emailrecuperarcontraseña.asignacionCorreos()}" class="btn btn-success btn-simple"  ajax="true" ></b:commandButton>
+                                        <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">#{msg.universalBotonCancelar}</button>
+                                        <b:message id="idMessageRecoverPass" style="text-align: center" show-detail="true" show-summary="true" ></b:message>
                                     </div>
 
                                 </div>

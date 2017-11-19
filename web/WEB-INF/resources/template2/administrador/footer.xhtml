@@ -3,7 +3,8 @@
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             xmlns:p="http://primefaces.org/ui">
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:b="http://bootsfaces.net/ui">
 
     <div class="container-fluid">
         <p class="copyright pull-right">
@@ -26,8 +27,7 @@
     <!-- Material Dashboard javascript methods -->
     <script src="#{request.contextPath}/resources/assets/js/material-dashboard.js"></script>
     <h:form>
-        <p:poll interval="8" listener="#{controladorSesion.pollNotificaciones()}" />
-        
+        <p:poll update="txt_count" interval="8" listener="#{controladorSesion.pollNotificaciones()}" />
     </h:form>
     <ui:insert name="ultimosScripts">
 

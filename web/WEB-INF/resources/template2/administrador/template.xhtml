@@ -15,9 +15,6 @@
             <f:event type="preRenderView" listener="#{controladorSesion.validarSesion()}"></f:event>
             <ui:include src="/WEB-INF/resources/template2/administrador/head.xhtml"></ui:include>
             <p:outputPanel/>  
-            <h:form prependId="false" id="form_remote">
-                <p:remoteCommand name="onload" action="#{controladorSesion.cargarNotificaciones()}"></p:remoteCommand>
-            </h:form>
         </h:head>
 
         <h:body id="abc">
