@@ -299,15 +299,14 @@ public class ControladorSesion implements Serializable {
                 for (Proyecto proyecto : listaProyectosVencidos) {
                     proyecto.setCorreoNotificacionEnviado(1);
                     proyectoFacadeLocal.edit(proyecto);
-                    System.out.println(listaProyectosVencidos.size());
                     String asunto = "Vencimiento proyecto " + proyecto.getPedidosIdPedido().getNombreProyecto() + ".";
                     String mensajeOperario = "El proyecto acaba de finalizar, por favor tomar medidas y/o informar al cliente.";
                     Notificacion notificacion = new Notificacion(null, asunto, mensajeOperario, date, 0, proyecto.getOperarioIdPersona());
                     notificacionFacadeLocal.create(notificacion);
-                    System.out.println(proyecto.getOperarioIdPersona().getNombre());
+                    System.out.println("se envio correo a: " + proyecto.getOperarioIdPersona());
                     notificacion = new Notificacion(null, asunto, mensajeOperario, date, 0, proyecto.getPedidosIdPedido().getVendedorIdPersona());
+                    System.out.println("se envio correo a: " + proyecto.getPedidosIdPedido().getVendedorIdPersona());
                     notificacionFacadeLocal.create(notificacion);
-                    System.out.println(proyecto.getPedidosIdPedido().getVendedorIdPersona().getNombre());
 
                 }
 
@@ -321,6 +320,7 @@ public class ControladorSesion implements Serializable {
     public void pollNotificaciones() {
         cargarNotificaciones();
         cargarProyectosVencidos();
+        
     }
 
 }
