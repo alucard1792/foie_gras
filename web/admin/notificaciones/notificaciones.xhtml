@@ -31,27 +31,28 @@
 
     <!--renderizacion del breadcrumb-->
     <ui:define name="breadcrumb">
-        <a href="#" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="/foie_gras/admin/index.xhtml" class="btn"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="#" class="btn btn-info ">#{msg.notificacionesBreadCrum}</a>
     </ui:define>
 
     <!--renderizacion del cardboard-->
     <ui:define name="tituloCarta">
-        <h4 class="title">Notificaciones</h4>
+        <h4 class="title">#{msg.notificacionesCardboard}</h4>
     </ui:define>
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
         <p:dataTable value="#{controladorSesion.listaNotificacionesVista}" var="ln" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
-            <p:column headerText="Id" width="10"> 
+            <p:column headerText="#{msg.notificacionesId}" width="10"> 
                 <p:outputLabel value="#{ln.id}"></p:outputLabel>                                
             </p:column>
-            <p:column headerText="Asunto" width="100" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+            <p:column headerText="#{msg.notificacionesAsunto}" width="100" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
                 <p:outputLabel value="#{ln.asunto}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Mensaje" width="400" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+            <p:column headerText="#{msg.notificacionesMensaje}" width="400" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
                 <p:outputLabel value="#{ln.mensaje}"></p:outputLabel>                
             </p:column>
-            <p:column headerText="Fecha" width="100" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
+            <p:column headerText="#{msg.notificacionesFecha}" width="100" filterBy="#{lp.nombreProyecto}" filterMatchMode="contains">
                 <p:outputLabel value="#{ln.fechaEnvio}"><f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" /></p:outputLabel>                
             </p:column>
         </p:dataTable>
