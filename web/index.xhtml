@@ -62,7 +62,7 @@
                                     <ul class="nav navbar-nav">
                                         <li><a href="#" data-toggle="modal" data-target="#myModal">#{msg.login}</a></li>
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msg.idioma}
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msg.documentacion}
                                                 <b class="caret"></b>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right" >
@@ -211,11 +211,11 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
-                                                            <input type="text" value="" placeholder="Ingrese su correo" jsf:value="#{MainController.message}" class="form-control" />
+                                                            <input type="text" value="" placeholder="#{msg.correo}" jsf:value="#{MainController.message}" class="form-control" />
                                                         </div>
                                                     </div>
                                                     <div class=" col-sm-12" id="textarea-row">
-                                                        <textarea class="form-control" placeholder="Ingrese su mensaje" jsf:value="#{MainController.subject}" rows="2"></textarea>
+                                                        <textarea class="form-control" placeholder="#{msg.mensaje}" jsf:value="#{MainController.subject}" rows="2"></textarea>
                                                     </div>
                                                     <div class="field submit">
                                                         <label for="submit_button"></label>
