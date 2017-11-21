@@ -13,8 +13,10 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -116,6 +118,7 @@ public class emailrecuperarcontraseña implements Serializable {
 
     public void asignacionCorreos() {
         System.out.println("Ingresamos a enviar correo" + emailDestinatario);
+        FacesContext fc = FacesContext.getCurrentInstance();
 
         try {
             if (emailDestinatario != null && !emailDestinatario.equals("")) {
@@ -127,10 +130,14 @@ public class emailrecuperarcontraseña implements Serializable {
 
                 } else {
                     System.out.println("Email no esta en base de datos");
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "Todos los campos son obligatorios", "Diligencie todos los campos");
+                    fc.addMessage("messageRecoverPass", fm);
 
                 }
             } else {
                 System.out.println("Email es nulo o vacio");
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "Todos los campos son obligatorios", "Diligencie todos los campos");
+                fc.addMessage("messageRecoverPass", fm);
 
             }
         } catch (Exception e) {
