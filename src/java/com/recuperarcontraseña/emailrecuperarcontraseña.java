@@ -131,13 +131,13 @@ public class emailrecuperarcontraseña implements Serializable {
                 } else {
                     System.out.println("Email no esta en base de datos");
                     FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "Todos los campos son obligatorios", "Diligencie todos los campos");
-                    fc.addMessage("messageRecoverPass", fm);
+                    fc.addMessage("correoLost", fm);
 
                 }
             } else {
                 System.out.println("Email es nulo o vacio");
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "Todos los campos son obligatorios", "Diligencie todos los campos");
-                fc.addMessage("messageRecoverPass", fm);
+                fc.addMessage("correoLost", fm);
 
             }
         } catch (Exception e) {

@@ -326,13 +326,13 @@
                                                 <span class="input-group-addon">
                                                     <i class="material-icons">face</i>
                                                 </span>
-                                                <input name="correo" type="text" class="form-control" jsf:id="correoLost" placeholder="#{msg.ingresaCorreo}" jsf:value="#{emailrecuperarcontraseña.emailDestinatario}" require="true"></input>
+                                                <input name="correoLost" type="text" class="form-control" jsf:id="correoLost" placeholder="#{msg.ingresaCorreo}" jsf:value="#{emailrecuperarcontraseña.emailDestinatario}" require="true"></input>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer">
-                                        <b:commandButton update="messageRecoverPass" id="btRecuperarPassword" value="#{msg.universalBotonAceptar}" action="#{emailrecuperarcontraseña.asignacionCorreos()}" class="btn btn-success btn-simple"  ajax="true" onclick='PrimeFaces.ab({s: "btRecuperarPassword"});return false;'></b:commandButton>
+                                        <b:commandButton update="messageRecoverPass" id="btRecuperarPassword" value="#{msg.universalBotonAceptar}" action="#{emailrecuperarcontraseña.asignacionCorreos()}" class="btn btn-success btn-simple"  ajax="true" ></b:commandButton>
                                         <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">#{msg.universalBotonCancelar}</button>
                                         <b:message id="messageRecoverPass" for="correoLost" style="text-align: center" show-detail="true" show-summary="true" ></b:message>
                                     </div>
