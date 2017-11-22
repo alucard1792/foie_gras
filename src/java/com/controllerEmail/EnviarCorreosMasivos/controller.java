@@ -81,7 +81,7 @@ public class controller implements Serializable {
     public String EmailEnviar() {
         try {
             MailSender mailSender=new MailSender();
-            mailSender.enviarEmailCliente(this.toMail, this.subject, this.message);
+            mailSender.sendMail("correofixedup@gmail.com", "correofixedup@gmail.com", "fixedupsena", toMail, subject, message);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,4 +99,6 @@ public class controller implements Serializable {
         }
 
     }
+    
+   
 }

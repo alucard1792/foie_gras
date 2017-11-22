@@ -14,6 +14,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.NewsAddress;
 
 /**
  *
@@ -42,7 +43,7 @@ public class MailSender implements Serializable {
         Message mailMessage = new MimeMessage(mailSession);
 
         mailMessage.setFrom(new InternetAddress("correofixedup@gmail.com"));
-        mailMessage.setRecipient(Message.RecipientType.TO, new InternetAddress("correofixedup@gmail.com"));
+        mailMessage.setRecipient(Message.RecipientType.CC, new NewsAddress(toMail));
         mailMessage.setContent(message, "text/html");
         mailMessage.setSubject(subject);
 
