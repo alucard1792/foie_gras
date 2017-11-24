@@ -88,7 +88,8 @@ public class ReporteUsuarios implements Serializable{
         Map<String, Object>params = new HashMap<>();
         Persona persona = controladorSesion.getP();
         String nombre = persona.getNombre();
-        params.put("Nombre:", nombre);
+        System.out.println(controladorSesion.getP().getNombre());
+        params.put("nombre", controladorSesion.getP().getNombre() + " " + controladorSesion.getP().getApellido());
         JRBeanCollectionDataSource bcds = new JRBeanCollectionDataSource(listaReportePersona);
         String reportPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/")+"/WEB-INF/reportes/usuarios/report1.jasper";
         jasperPrint = JasperFillManager.fillReport(reportPath, params, bcds);
