@@ -58,8 +58,8 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="/foie_gras/admin/dashboard/miCuenta.xhtml">#{msg.templateHeaderMiPerfil}</a></li>
-                                <li><a href="/foie_gras/admin/dashboard/Enviarcorreos.xhtml">#{msg.templateHeaderEnvioCorreos}</a></li>
+                                <li><a href="#{request.contextPath}/admin/dashboard/miCuenta.xhtml">#{msg.templateHeaderMiPerfil}</a></li>
+                                <li><a href="#{request.contextPath}/admin/dashboard/Enviarcorreos.xhtml">#{msg.templateHeaderEnvioCorreos}</a></li>
                                 <li><a jsf:actionListener="#{controladorSesion.cerrarSesion()}">#{msg.templateHeaderCerrarSesion}</a></li>
                             </ul>
 
