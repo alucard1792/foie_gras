@@ -80,7 +80,7 @@ public class ReporteMateriaPrima {
     private void prepararExportar() throws JRException{
         
         Map<String, Object>params = new HashMap<>();
-        params.put("Nombre: ", controladorSesion.getP().getNombre().toString());
+        params.put("nombre", controladorSesion.getP().getNombre().toString());
         JRBeanCollectionDataSource bcds = new JRBeanCollectionDataSource(listaReporteMateriaPrima);
         String reportPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/")+"/WEB-INF/reportes/materia_prima/report2.jasper";
         jasperPrint = JasperFillManager.fillReport(reportPath, params, bcds);
