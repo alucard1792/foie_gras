@@ -77,6 +77,7 @@ public class emailrecuperarcontraseña implements Serializable {
             propiedades.setProperty("mail.smtp.auth", "true");
             propiedades.setProperty("mail.smtp.ssl.trust", HOST_EMAIL_GMAIL);
             session = Session.getDefaultInstance(propiedades);
+            session.setDebug(true);
             mimeMessage = new MimeMessage(session);
             mimeMessage.setFrom(new InternetAddress(emailRemitente));
             mimeMessage.setRecipients(Message.RecipientType.TO, emailDestinatario);
@@ -124,13 +125,15 @@ public class emailrecuperarcontraseña implements Serializable {
             if (emailDestinatario != null && !emailDestinatario.equals("")) {
                 persona = pfl.recuperacontrasena(emailDestinatario);
                 if (persona != null) {
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Enviando email, ", "Espere un momento...");
+                    fc.addMessage("correoLost", fm);
                     Contrasena = persona.getPassword();
                     emailrecuperarcontraseña email = new emailrecuperarcontraseña("correofixedup@gmail.com", "fixedupsena", emailDestinatario);
                     email.enviarSimple(" contraseña Fixed up", "Tu contraseña es: " + Contrasena);
 
                 } else {
                     System.out.println("Email no esta en base de datos");
-                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "Todos los campos son obligatorios", "Diligencie todos los campos");
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "Email no esta en base de datos", "Por favor contacte con el administrador");
                     fc.addMessage("correoLost", fm);
 
                 }

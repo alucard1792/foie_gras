@@ -286,7 +286,7 @@
                                                 <span class="input-group-addon">
                                                     <i class="material-icons">face</i>
                                                 </span>
-                                                <input name="documento" type="text" class="form-control" jsf:id="idMessageLogin" placeholder="#{msg.documento}" jsf:value="#{controladorSesion.documento}"></input>
+                                                <input name="documento" type="text" class="form-control" jsf:id="idMessageLogin" placeholder="#{msg.documento}" jsf:value="#{controladorSesion.documento}" jsf:converterMessage="Please enter digits only."></input>
                                             </div>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
@@ -298,7 +298,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <b:commandButton  update="messageLogin" id="btIniciarSesion" value="#{msg.universalBotonAceptar}" action="#{controladorSesion.iniciarSesion()}" class="btn btn-success btn-simple"></b:commandButton>
+                                        <p:commandButton  update="messageLogin" id="btIniciarSesion" value="#{msg.universalBotonAceptar}" action="#{controladorSesion.iniciarSesion()}" class="btn btn-success btn-simple"></p:commandButton>
                                         <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">#{msg.universalBotonCancelar}</button>
                                         <a href="#" data-toggle="modal" type="button" class="btn btn-warning btn-simple"  data-target="#myModalPasswordLost" style="margin-bottom: 10px">#{msg.botonOlvidasteContraseña}</a>
                                         <b:message id="messageLogin" for="idMessageLogin" style="text-align: center" show-detail="true" show-summary="true" ></b:message>
