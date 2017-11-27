@@ -56,87 +56,89 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <h:form>
+        <ui:fragment rendered="#{controladorSesion.p.roles.get(0).idRol eq 1 or controladorSesion.p.roles.get(0).idRol eq 2}">
 
-            <ul class="nav navbar-nav navbar-link">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="material-icons">file_download</i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <h:commandLink>
-                                #{msg.universalAPdf}
-                                <p:dataExporter type="pdf" target="tabla" fileName="reporte" pageOnly="true"/>
-                            </h:commandLink>
-                        </li>
-                        <br/>
-                        <li>
-                            <h:commandLink>
-                                #{msg.universalAExcel}
-                                <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
-                            </h:commandLink>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <br/>
-            <div class="panel-heading">
-                <div class="panel-options">
-                    <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                        <c:choose>
-                            <c:when test="#{p.idPermiso eq 47}">
-                                <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.stockIngresarStock}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                            </c:when>
-                        </c:choose>
-                    </c:forEach>                       
+            <h:form>
+
+                <ul class="nav navbar-nav navbar-link">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">file_download</i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <h:commandLink>
+                                    #{msg.universalAPdf}
+                                    <p:dataExporter type="pdf" target="tabla" fileName="reporte" pageOnly="true"/>
+                                </h:commandLink>
+                            </li>
+                            <br/>
+                            <li>
+                                <h:commandLink>
+                                    #{msg.universalAExcel}
+                                    <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
+                                </h:commandLink>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <br/>
+                <div class="panel-heading">
+                    <div class="panel-options">
+                        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                            <c:choose>
+                                <c:when test="#{p.idPermiso eq 47}">
+                                    <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.stockIngresarStock}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>                       
+                    </div>
                 </div>
-            </div>
 
-            <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla"  class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
-                <p:column headerText="#{msg.stockTablaIdMateriaPrima}" width="200">
-                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.idMateria}"></p:outputLabel>                                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaReferencia}" filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains"  width="200">
-                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaTipo}"  filterBy="#{lp.materiasPrimaIdMateria.tipoMateriaPrima}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.tipoMateriaPrima}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaCalibre}" filterBy="#{lp.materiasPrimaIdMateria.calibre}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.calibre}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaLargoLamina}" filterBy="#{lp.materiasPrimaIdMateria.dimensionLargo}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionLargo}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaAltoLamina}"  filterBy="#{lp.materiasPrimaIdMateria.dimensionAlto}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionAlto}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaProveedor}"  filterBy="#{lp.materiasPrimaIdMateria.proveedorList}" filterMatchMode="contains" width="200">
-                    <ui:repeat value="#{lp.materiasPrimaIdMateria.proveedorList}" var="p">
-                        <p:outputLabel value="#{p.nombreEmpresa}"></p:outputLabel>                
-                    </ui:repeat>
-                </p:column>
-                <p:column headerText="#{msg.stockTablaIdStock}" filterBy="#{lp.idStock}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaExistencias}" filterBy="#{lp.stock}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.stock}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaFechaIngreso}" filterBy="#{lp.fechaIngreso}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.stockTablaFechaActualizacion}" filterBy="#{lp.fechaActualizacion}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100">
-                    <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}"  action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
-                </p:column>
+                <p:dataTable value="#{listarStock.listaStock}" var="lp" id="tabla"  class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
+                    <p:column headerText="#{msg.stockTablaIdMateriaPrima}" width="200">
+                        <p:outputLabel value="#{lp.materiasPrimaIdMateria.idMateria}"></p:outputLabel>                                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaReferencia}" filterBy="#{lp.materiasPrimaIdMateria.referencia}" filterMatchMode="contains"  width="200">
+                        <p:outputLabel value="#{lp.materiasPrimaIdMateria.referencia}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaTipo}"  filterBy="#{lp.materiasPrimaIdMateria.tipoMateriaPrima}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.materiasPrimaIdMateria.tipoMateriaPrima}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaCalibre}" filterBy="#{lp.materiasPrimaIdMateria.calibre}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.materiasPrimaIdMateria.calibre}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaLargoLamina}" filterBy="#{lp.materiasPrimaIdMateria.dimensionLargo}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionLargo}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaAltoLamina}"  filterBy="#{lp.materiasPrimaIdMateria.dimensionAlto}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.materiasPrimaIdMateria.dimensionAlto}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaProveedor}"  filterBy="#{lp.materiasPrimaIdMateria.proveedorList}" filterMatchMode="contains" width="200">
+                        <ui:repeat value="#{lp.materiasPrimaIdMateria.proveedorList}" var="p">
+                            <p:outputLabel value="#{p.nombreEmpresa}"></p:outputLabel>                
+                        </ui:repeat>
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaIdStock}" filterBy="#{lp.idStock}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.idStock}"></p:outputLabel>                                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaExistencias}" filterBy="#{lp.stock}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.stock}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaFechaIngreso}" filterBy="#{lp.fechaIngreso}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.fechaIngreso}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.stockTablaFechaActualizacion}" filterBy="#{lp.fechaActualizacion}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{(lp.fechaActualizacion != null ? lp.fechaActualizacion: 'no ha tenido movimientos')}"><f:convertDateTime pattern="yyyy/MM/dd" /></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100">
+                        <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}"  action="#{listarStock.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
+                    </p:column>
 
-            </p:dataTable>
+                </p:dataTable>
 
-        </h:form>
-
+            </h:form>
+        </ui:fragment>
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
