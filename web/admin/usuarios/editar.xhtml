@@ -65,115 +65,119 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="content-box-large">
-                    <div class="panel-body">
+        <ui:fragment rendered="#{controladorSesion.p.roles.get(0).idRol eq 1 or controladorSesion.p.roles.get(0).idRol eq 2}">
 
-                        <h:form id="form" prependId="false" class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content-box-large">
+                        <div class="panel-body">
 
-                            <b:row>
-                                <b:messages large-screen="full-width" />
-                            </b:row>
+                            <h:form id="form" prependId="false" class="form-horizontal" role="form">
 
-                            <div class="form-group">
-                                <label for="documento" class="col-sm-2 control-label">#{msg.usuarioEditarDocumento}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="documento" class="form-control" id="documento" a:placeholder="#{msg.usuarioEditarDocumentoPlaceholder}" value="#{listarUsuarios.personaSeleccionado.documento}" />
+                                <b:row>
+                                    <b:messages large-screen="full-width" />
+                                </b:row>
+
+                                <div class="form-group">
+                                    <label for="documento" class="col-sm-2 control-label">#{msg.usuarioEditarDocumento}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="documento" class="form-control" id="documento" a:placeholder="#{msg.usuarioEditarDocumentoPlaceholder}" value="#{listarUsuarios.personaSeleccionado.documento}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="nombre" class="col-sm-2 control-label">#{msg.usuarioEditarNombre}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="nombre" class="form-control" id="nombre" a:placeholder="#{msg.usuarioEditarNombrePlaceholder}" value="#{listarUsuarios.personaSeleccionado.nombre}" />
+                                <div class="form-group">
+                                    <label for="nombre" class="col-sm-2 control-label">#{msg.usuarioEditarNombre}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="nombre" class="form-control" id="nombre" a:placeholder="#{msg.usuarioEditarNombrePlaceholder}" value="#{listarUsuarios.personaSeleccionado.nombre}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="apellido" class="col-sm-2 control-label">#{msg.usuarioEditarApellido}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="apellido" class="form-control" id="apellido" a:placeholder="#{msg.usuarioEditarApellidoPlaceholder}" value="#{listarUsuarios.personaSeleccionado.apellido}" />
+                                <div class="form-group">
+                                    <label for="apellido" class="col-sm-2 control-label">#{msg.usuarioEditarApellido}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="apellido" class="form-control" id="apellido" a:placeholder="#{msg.usuarioEditarApellidoPlaceholder}" value="#{listarUsuarios.personaSeleccionado.apellido}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="contraseña" class="col-sm-2 control-label">#{msg.usuarioEditarPassword}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="contraseña" class="form-control" id="contraseña" a:placeholder="#{msg.usuarioEditarPassword}" value="#{listarUsuarios.personaSeleccionado.password}" />
+                                <div class="form-group">
+                                    <label for="contraseña" class="col-sm-2 control-label">#{msg.usuarioEditarPassword}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="contraseña" class="form-control" id="contraseña" a:placeholder="#{msg.usuarioEditarPassword}" value="#{listarUsuarios.personaSeleccionado.password}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="telefono" class="col-sm-2 control-label">#{msg.usuarioEditarTelefono}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="telefono" class="form-control" id="telefono" a:placeholder="#{msg.usuarioEditarTelefonoPlaceholder}" value="#{listarUsuarios.personaSeleccionado.telefono}" />
+                                <div class="form-group">
+                                    <label for="telefono" class="col-sm-2 control-label">#{msg.usuarioEditarTelefono}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="telefono" class="form-control" id="telefono" a:placeholder="#{msg.usuarioEditarTelefonoPlaceholder}" value="#{listarUsuarios.personaSeleccionado.telefono}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="direccion" class="col-sm-2 control-label">#{msg.usuarioEditarDireccion}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="direccion" class="form-control" id="direccion" a:placeholder="#{msg.usuarioEditarDireccionPlaceholder}" value="#{listarUsuarios.personaSeleccionado.direccion}" />
+                                <div class="form-group">
+                                    <label for="direccion" class="col-sm-2 control-label">#{msg.usuarioEditarDireccion}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="direccion" class="form-control" id="direccion" a:placeholder="#{msg.usuarioEditarDireccionPlaceholder}" value="#{listarUsuarios.personaSeleccionado.direccion}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">#{msg.usuarioEditarCorreo}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="email" class="form-control" id="email" a:placeholder="#{msg.usuarioEditarCorreoPlaceholder}" value="#{listarUsuarios.personaSeleccionado.email}" />
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">#{msg.usuarioEditarCorreo}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="email" class="form-control" id="email" a:placeholder="#{msg.usuarioEditarCorreoPlaceholder}" value="#{listarUsuarios.personaSeleccionado.email}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="estado" class="col-sm-2 control-label">#{msg.usuarioEditarEstado}</label>
-                                <div class="col-sm-10">
-                                    <b:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.estado}" > 
-                                        <f:selectItem itemValue="1" itemLabel = "#{msg.usuarioEditarEstadoActivo}" /> 
-                                        <f:selectItem itemValue="0" itemLabel = "#{msg.usuarioEditarEstadoInactivo}"  /> 
-                                    </b:selectOneMenu> 	
+                                <div class="form-group">
+                                    <label for="estado" class="col-sm-2 control-label">#{msg.usuarioEditarEstado}</label>
+                                    <div class="col-sm-10">
+                                        <b:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.estado}" > 
+                                            <f:selectItem itemValue="1" itemLabel = "#{msg.usuarioEditarEstadoActivo}" /> 
+                                            <f:selectItem itemValue="0" itemLabel = "#{msg.usuarioEditarEstadoInactivo}"  /> 
+                                        </b:selectOneMenu> 	
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="area" class="col-sm-2 control-label">#{msg.usuarioEditarArea}</label>
-                                <div class="col-sm-10">
-                                    <b:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.areasIdArea}" > 
-                                        <f:selectItems value="#{listarUsuarios.listaAreas}" var="la" itemLabel = "#{la.nombreArea}" /> 
-                                    </b:selectOneMenu> 	
+                                <div class="form-group">
+                                    <label for="area" class="col-sm-2 control-label">#{msg.usuarioEditarArea}</label>
+                                    <div class="col-sm-10">
+                                        <b:selectOneMenu value = "#{listarUsuarios.personaSeleccionado.areasIdArea}" > 
+                                            <f:selectItems value="#{listarUsuarios.listaAreas}" var="la" itemLabel = "#{la.nombreArea}" /> 
+                                        </b:selectOneMenu> 	
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="rol" class="col-sm-2 control-label">#{msg.usuarioEditarRol}</label>
-                                <div class="col-sm-10">
-                                    <b:selectOneMenu value = "#{listarUsuarios.rol}" > 
-                                        <f:selectItems value="#{listarUsuarios.listaRoles}" var="rl" itemLabel = "#{rl.nombreRol}" /> 
-                                    </b:selectOneMenu> 	
+                                <div class="form-group">
+                                    <label for="rol" class="col-sm-2 control-label">#{msg.usuarioEditarRol}</label>
+                                    <div class="col-sm-10">
+                                        <b:selectOneMenu value = "#{listarUsuarios.rol}" > 
+                                            <f:selectItems value="#{listarUsuarios.listaRoles}" var="rl" itemLabel = "#{rl.nombreRol}" /> 
+                                        </b:selectOneMenu> 	
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="fechaNacimiento" class="col-sm-2 control-label">#{msg.usuarioEditarFechaNacimiento}</label>
-                                <div class="col-sm-10">
-                                    <p:calendar id="fechaNacimiento" value="#{listarUsuarios.personaSeleccionado.fechaNacimiento}" locale="de" navigator="true" pattern="yyyy-MM-dd" />                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-3">
-                                    <b:commandButton action="#{listarUsuarios.actualizarUsuario()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></b:commandButton>
+                                <div class="form-group">
+                                    <label for="fechaNacimiento" class="col-sm-2 control-label">#{msg.usuarioEditarFechaNacimiento}</label>
+                                    <div class="col-sm-10">
+                                        <p:calendar id="fechaNacimiento" value="#{listarUsuarios.personaSeleccionado.fechaNacimiento}" locale="de" navigator="true" pattern="yyyy-MM-dd" />                                </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-3">
+                                        <b:commandButton action="#{listarUsuarios.actualizarUsuario()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></b:commandButton>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h:link styleClass="btn btn" outcome="/admin/usuarios/listarUsuarios.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </h:form>
+                            </h:form>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        </ui:fragment>
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->
@@ -247,7 +251,7 @@
 
                                 },
                                 emailAddress: {
-                                    
+
                                 }
                             }
                         },
