@@ -56,79 +56,82 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <h:form>
+        <ui:fragment rendered="#{controladorSesion.p.roles.get(0).idRol eq 1 or controladorSesion.p.roles.get(0).idRol eq 2}">
 
-            <ul class="nav navbar-nav navbar-link">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="material-icons">file_download</i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <h:commandLink>
-                                #{msg.universalAPdf}
-                                <p:dataExporter type="pdf" target="tabla" fileName="reporte" pageOnly="true"/>
-                            </h:commandLink>
-                        </li>
-                        <br/>
-                        <li>
-                            <h:commandLink>
-                                #{msg.universalAExcel}
-                                <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
-                            </h:commandLink>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <br/>
-            <div class="panel-heading">
-                <div class="panel-options">
-                    <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
-                        <c:choose>
-                            <c:when test="#{p.idPermiso eq 16}">
-                                <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.proveedorListarIngresarNuevo}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
-                            </c:when>
-                        </c:choose>
-                    </c:forEach>                       
+            <h:form>
+
+                <ul class="nav navbar-nav navbar-link">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">file_download</i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <h:commandLink>
+                                    #{msg.universalAPdf}
+                                    <p:dataExporter type="pdf" target="tabla" fileName="reporte" pageOnly="true"/>
+                                </h:commandLink>
+                            </li>
+                            <br/>
+                            <li>
+                                <h:commandLink>
+                                    #{msg.universalAExcel}
+                                    <p:dataExporter type="xls" target="tabla" fileName="reporte" pageOnly="true"/>
+                                </h:commandLink>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <br/>
+                <div class="panel-heading">
+                    <div class="panel-options">
+                        <c:forEach items="#{controladorSesion.rolSeleccionado.permisos}" var="p">
+                            <c:choose>
+                                <c:when test="#{p.idPermiso eq 16}">
+                                    <span style="float: right"><h:link outcome="/#{p.url}" value="#{msg.proveedorListarIngresarNuevo}">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span><br></br>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>                       
+                    </div>
                 </div>
-            </div>
 
-            <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
+                <p:dataTable value="#{listarProvedores.listaProveedores}" var="lp" id="tabla" class="table" scrollable="true" scrollWidth="100%" paginator="true" rows="10" widgetVar="tabla1">
 
-                <p:column headerText="#{msg.proveedorListarId}" width="200"> 
-                    <p:outputLabel value="#{lp.idProveedor}"></p:outputLabel>                                
-                </p:column>
-                <p:column headerText="#{msg.proveedorListarNitProveedor}" width="200" filterBy="#{lp.nitProveedor}" filterMatchMode="contains">
-                    <p:outputLabel value="#{lp.nitProveedor}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.proveedorListarNombreEmpresa}" filterBy="#{lp.nombreEmpresa}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.nombreEmpresa}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.proveedorListarDireccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{(lp.direccion)}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.proveedorListarTelefono}" filterBy="#{lp.telefono}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.proveedorListarRepresentanteLegal}" filterBy="#{lp.representanteLegal}" filterMatchMode="contains" width="200">
-                    <p:outputLabel value="#{lp.representanteLegal}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.proveedorListarCiudad}" filterBy="#{lp.ciudadesIdCiudad.nombreCiudad}" filterMatchMode="contains" width="200">
-                    <f:facet name="filter">
-                        <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;">
-                            <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
-                            <f:selectItems value="#{listarProvedores.listaCiudad}" var="listaCiudad" itemValue="#{listaCiudad.nombreCiudad}" itemLabel="#{listaCiudad.nombreCiudad}"/>
-                        </p:selectOneMenu>
-                    </f:facet>
-                    <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
-                </p:column>
-                <p:column headerText="#{msg.universalOpciones}" exportable="false"  width="100" style="text-align: center;">
-                    <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
-                </p:column>
+                    <p:column headerText="#{msg.proveedorListarId}" width="200"> 
+                        <p:outputLabel value="#{lp.idProveedor}"></p:outputLabel>                                
+                    </p:column>
+                    <p:column headerText="#{msg.proveedorListarNitProveedor}" width="200" filterBy="#{lp.nitProveedor}" filterMatchMode="contains">
+                        <p:outputLabel value="#{lp.nitProveedor}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.proveedorListarNombreEmpresa}" filterBy="#{lp.nombreEmpresa}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.nombreEmpresa}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.proveedorListarDireccion}" filterBy="#{lp.direccion}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{(lp.direccion)}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.proveedorListarTelefono}" filterBy="#{lp.telefono}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.telefono}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.proveedorListarRepresentanteLegal}" filterBy="#{lp.representanteLegal}" filterMatchMode="contains" width="200">
+                        <p:outputLabel value="#{lp.representanteLegal}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.proveedorListarCiudad}" filterBy="#{lp.ciudadesIdCiudad.nombreCiudad}" filterMatchMode="contains" width="200">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;">
+                                <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{listarProvedores.listaCiudad}" var="listaCiudad" itemValue="#{listaCiudad.nombreCiudad}" itemLabel="#{listaCiudad.nombreCiudad}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <p:outputLabel value="#{lp.ciudadesIdCiudad.nombreCiudad}"></p:outputLabel>                
+                    </p:column>
+                    <p:column headerText="#{msg.universalOpciones}" exportable="false"  width="100" style="text-align: center;">
+                        <p:commandButton icon="ui-icon-pencil" title="#{msg.universalEditar}" action="#{listarProvedores.prepararEditar(lp)}" ajax="false"></p:commandButton>                    
+                    </p:column>
 
-            </p:dataTable>
+                </p:dataTable>
 
-        </h:form>
+            </h:form>
+        </ui:fragment>
     </ui:define>
 
     <!--renderizacion de los ultimos scripts(solo en caso de que fallen los scripts en la pagina)-->

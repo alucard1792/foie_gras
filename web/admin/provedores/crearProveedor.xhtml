@@ -64,87 +64,90 @@
 
     <!--renderizacion del body 'contenido principal'-->
     <ui:define name="contenido">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="content-box-large">
-                    <div class="panel-body">
+        <ui:fragment rendered="#{controladorSesion.p.roles.get(0).idRol eq 1 or controladorSesion.p.roles.get(0).idRol eq 2}">
 
-                        <h:form id="form" prependId="false" class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content-box-large">
+                        <div class="panel-body">
 
-                            <b:row>
-                                <b:messages only-most-severe="true" large-screen="full-width" />
-                            </b:row>
+                            <h:form id="form" prependId="false" class="form-horizontal" role="form">
 
-                            <div class="form-group">
-                                <label for="nombreEmpresa" class="col-sm-2 control-label">#{msg.proveedorCrearNombre}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText  a:name="nombreEmpresa" class="form-control" id="nombreEmpresa" a:placeholder="#{msg.proveedorCrearNombrePlaceholder}" value="#{crearProveedor.proveedor.nombreEmpresa}" />
+                                <b:row>
+                                    <b:messages only-most-severe="true" large-screen="full-width" />
+                                </b:row>
+
+                                <div class="form-group">
+                                    <label for="nombreEmpresa" class="col-sm-2 control-label">#{msg.proveedorCrearNombre}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText  a:name="nombreEmpresa" class="form-control" id="nombreEmpresa" a:placeholder="#{msg.proveedorCrearNombrePlaceholder}" value="#{crearProveedor.proveedor.nombreEmpresa}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="direccion" class="col-sm-2 control-label">#{msg.proveedorCrearDireccion}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="direccion" class="form-control" id="direccion" a:placeholder="#{msg.proveedorCrearDireccionPlaceholder}" value="#{crearProveedor.proveedor.direccion}" />
+                                <div class="form-group">
+                                    <label for="direccion" class="col-sm-2 control-label">#{msg.proveedorCrearDireccion}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="direccion" class="form-control" id="direccion" a:placeholder="#{msg.proveedorCrearDireccionPlaceholder}" value="#{crearProveedor.proveedor.direccion}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="representanteLegal" class="col-sm-2 control-label">#{msg.proveedorCrearRepresentanteLegal}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="representanteLegal" class="form-control" id="representanteLegal" a:placeholder="#{msg.proveedorCrearRepresentanteLegalPlaceholder}" value="#{crearProveedor.proveedor.representanteLegal}" />
+                                <div class="form-group">
+                                    <label for="representanteLegal" class="col-sm-2 control-label">#{msg.proveedorCrearRepresentanteLegal}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="representanteLegal" class="form-control" id="representanteLegal" a:placeholder="#{msg.proveedorCrearRepresentanteLegalPlaceholder}" value="#{crearProveedor.proveedor.representanteLegal}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="nitProveedor" class="col-sm-2 control-label">#{msg.proveedorCrearNitProveedor}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="nitProveedor" class="form-control" id="nitProveedor" a:placeholder="#{msg.proveedorCrearNitProveedorPlaceholder}" value="#{crearProveedor.proveedor.nitProveedor}" />
+                                <div class="form-group">
+                                    <label for="nitProveedor" class="col-sm-2 control-label">#{msg.proveedorCrearNitProveedor}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="nitProveedor" class="form-control" id="nitProveedor" a:placeholder="#{msg.proveedorCrearNitProveedorPlaceholder}" value="#{crearProveedor.proveedor.nitProveedor}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="telefono" class="col-sm-2 control-label">#{msg.proveedorCrearTelefono}</label>
-                                <div class="col-sm-10">
-                                    <h:inputText a:name="telefono" class="form-control" id="telefono" a:placeholder="#{msg.proveedorCrearTelefonoPlaceholder}" value="#{crearProveedor.proveedor.telefono}" />
+                                <div class="form-group">
+                                    <label for="telefono" class="col-sm-2 control-label">#{msg.proveedorCrearTelefono}</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText a:name="telefono" class="form-control" id="telefono" a:placeholder="#{msg.proveedorCrearTelefonoPlaceholder}" value="#{crearProveedor.proveedor.telefono}" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="ciudad" class="col-sm-2 control-label">#{msg.proveedorCrearCiudad}</label>
-                                <div class="col-sm-10">
-                                    <b:selectOneMenu value = "#{crearProveedor.proveedor.ciudadesIdCiudad}"> 
-                                        <f:selectItems value="#{crearProveedor.listaCiudades}" var="lc" itemLabel = "#{lc.nombreCiudad}" /> 
-                                    </b:selectOneMenu> 	
+                                <div class="form-group">
+                                    <label for="ciudad" class="col-sm-2 control-label">#{msg.proveedorCrearCiudad}</label>
+                                    <div class="col-sm-10">
+                                        <b:selectOneMenu value = "#{crearProveedor.proveedor.ciudadesIdCiudad}"> 
+                                            <f:selectItems value="#{crearProveedor.listaCiudades}" var="lc" itemLabel = "#{lc.nombreCiudad}" /> 
+                                        </b:selectOneMenu> 	
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-3">
-                                    <h:commandButton action="#{crearProveedor.crear()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton> 
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-3">
+                                        <h:commandButton action="#{crearProveedor.crear()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></h:commandButton> 
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h:link styleClass="btn btn" outcome="/admin/provedores/listarProveedores.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <b:commandButton class="btn btn-primary" value="#{msg.proveedorCrearBtnCargaMasiva}" type="button" onclick="PF('dlg1').show();" />
+                                    </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <h:link styleClass="btn btn" outcome="/admin/provedores/listarProveedores.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
-                                </div>
-                                <div class="col-sm-3">
-                                    <b:commandButton class="btn btn-primary" value="#{msg.proveedorCrearBtnCargaMasiva}" type="button" onclick="PF('dlg1').show();" />
-                                </div>
-                            </div>
 
-                        </h:form>
+                            </h:form>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <h:form id="form-load" prependId="false" enctype="multipart/form-data">
+            <h:form id="form-load" prependId="false" enctype="multipart/form-data">
 
-            <p:dialog header="#{msg.proveedorCrearModalTitulo}" widgetVar="dlg1" minHeight="40">
-                <p:fileUpload style="width:100%;" fileUploadListener="#{cargaProveedoresController.cargarUsuarios()}" mode="advanced" dragDropSupport="false"
-                              fileLimit="1" allowTypes="/(\.|\/)(csv)$/"/>
-            </p:dialog>
+                <p:dialog header="#{msg.proveedorCrearModalTitulo}" widgetVar="dlg1" minHeight="40">
+                    <p:fileUpload style="width:100%;" fileUploadListener="#{cargaProveedoresController.cargarUsuarios()}" mode="advanced" dragDropSupport="false"
+                                  fileLimit="1" allowTypes="/(\.|\/)(csv)$/"/>
+                </p:dialog>
 
-        </h:form>
+            </h:form>
+        </ui:fragment>
     </ui:define>
 
     <ui:define name="ultimosScripts">
