@@ -135,10 +135,10 @@
                     <p:outputLabel value="#{lp.operarioIdPersona.nombre} #{lp.operarioIdPersona.apellido}"></p:outputLabel>                
                 </p:column>
                 <p:column headerText="#{msg.universalOpciones}" exportable="false" width="100" style="text-align: center;">
-                    <p:row rendered="#{lp.estadosIdEstado.idEstado == 5}">
+                    <p:row rendered="#{lp.estadosIdEstado.idEstado == 5 and controladorSesion.p.idPersona == lp.operarioIdPersona.idPersona}">
                         <p:commandButton icon="ui-icon-play" title="#{msg.universalBotonIniciar}" action="#{listarProyectos.preparacionEditar(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
-                    <p:row rendered="#{lp.estadosIdEstado.idEstado == 1}">
+                    <p:row rendered="#{lp.estadosIdEstado.idEstado == 1 and controladorSesion.p.idPersona == lp.operarioIdPersona.idPersona}">
                         <p:commandButton styleClass="mybutton-class" onclick="PF('bui').show()" oncomplete="PF('bui').show()" class="mybutton-class" icon="ui-icon-check" title="#{msg.universalBotonFinalizar}" action="#{listarProyectos.finalizarProyecto(lp)}" ajax="false"></p:commandButton>                    
                     </p:row>
                 </p:column>
