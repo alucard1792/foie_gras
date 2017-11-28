@@ -139,7 +139,7 @@
                     <p:column headerText="Movimiento" width="200" filterBy="#{lp.movimientoProyecto}" filterMatchMode="contains">
                         <p:outputLabel value="#{(lp.movimientoProyecto == null ? 'sin movimiento': lp.movimientoProyecto)}"></p:outputLabel>                
                     </p:column>
-                    <p:column headerText="#{msg.pedidoListarVendedor}" width="200" filterBy="#{lp.vendedorIdPersona.nombre}" filterMatchMode="contains">
+                    <p:column rendered="#{controladorSesion.p.roles.get(0).idRol eq 1 or controladorSesion.p.roles.get(0).idRol eq 2}" headerText="#{msg.pedidoListarVendedor}" width="200" filterBy="#{lp.vendedorIdPersona.nombre}" filterMatchMode="contains">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;">
                                 <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
