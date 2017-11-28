@@ -1057,10 +1057,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.javax.validation-1.0.0.GA.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.javax.validation-1.0.0.GA.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.groovy-all-2.2.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-<<<<<<< Updated upstream
-        <copyfiles files="${file.reference.groovy-all-2.2.1.jar-2}" todir="${build.web.dir}/WEB-INF/lib"/>
-=======
->>>>>>> Stashed changes
         <copyfiles files="${file.reference.groovy-all-2.2.1.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">

@@ -5,10 +5,12 @@ package com.recuperarcontraseña;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.mailsender.MailSender;
 import static com.mailsender.MailSender.HOST_EMAIL_GMAIL;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,7 +103,7 @@ public class emailrecuperarcontraseña implements Serializable {
                 contenidoMensaje.addBodyPart(text);
 
                 mimeMessage.setSubject(asunto);
-                mimeMessage.setContent(contenidoMensaje);
+                mimeMessage.setContent(contenidoMensaje, "text/html");
 
                 Transport transport = session.getTransport("smtp");
                 transport.connect(emailRemitente, passRemitente);
@@ -117,9 +119,12 @@ public class emailrecuperarcontraseña implements Serializable {
         }
     }
 
+    
+     
     public void asignacionCorreos() {
         System.out.println("Ingresamos a enviar correo" + emailDestinatario);
         FacesContext fc = FacesContext.getCurrentInstance();
+        int year = Calendar.getInstance().get(Calendar.YEAR);
 
         try {
             if (emailDestinatario != null && !emailDestinatario.equals("")) {
@@ -129,7 +134,10 @@ public class emailrecuperarcontraseña implements Serializable {
                     fc.addMessage("correoLost", fm);
                     Contrasena = persona.getPassword();
                     emailrecuperarcontraseña email = new emailrecuperarcontraseña("correofixedup@gmail.com", "fixedupsena", emailDestinatario);
-                    email.enviarSimple(" contraseña Fixed up", "Tu contraseña es: " + Contrasena);
+                    email.enviarSimple("Restablecimiento contraseña fixedUp "
+                            + "contraseña Fixed up", "Tu contraseña es: " + Contrasena + ""
+                    + "Este correo es de carácter informativo, por favor no responder"
+                        + "Fixedup " + year + " ");
 
                 } else {
                     System.out.println("Email no esta en base de datos");
