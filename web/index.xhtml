@@ -199,7 +199,7 @@
                             </div>
                         </div>
 
-                        <h:form prependId="false" id="form_contacto">
+                        <h:form prependId="false" id="signupForm" a:method="post">
                             <p:growl id="growl" showDetail="true" sticky="true" />  
                             <div class="container">
                                 <div class="section text-center section-landing">
@@ -211,15 +211,23 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
-                                                            <input type="text" value="" placeholder="#{msg.correo}" jsf:value="#{MainController.message}" class="form-control" />
+                                                            <input type="text" class="form-control" placeholder="#{msg.correo}" id="email"  jsf:value="#{MainController.message}" name="email" required="true" />
                                                         </div>
                                                     </div>
                                                     <div class=" col-sm-12" id="textarea-row">
-                                                        <textarea class="form-control" placeholder="#{msg.mensaje}" jsf:value="#{MainController.subject}" rows="2"></textarea>
+                                                        <input type="text" class="form-control" jsf:id="username" name="username" placeholder="#{msg.mensaje}" jsf:value="#{MainController.subject}" required="true"/>
+
                                                     </div>
+                                                    
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                        </div>
+                                                    </div>
+                                                    
                                                     <div class="field submit">
                                                         <label for="submit_button"></label>
-                                                        <p:commandButton update="growl" class="btn btn-primary btn-raised" id="submit_button" value="#{msg.btnEnviar}" actionListener="#{MainController.send()}" />
+                                                        <p:commandButton update="mensajecontactenos" type="submit" onclick="return formTwo.valid()" a:name="signup" class="btn btn-primary btn-raised" id="submit_button" value="#{msg.btnEnviar}" action="#{MainController.send()}" />
+                                                        <b:message id="mensajecontactenos" for="username" show-detail="true" show-summary="true"></b:message>
                                                     </div>
 
                                                     <p:blockUI block="abc" trigger="submit_button">
@@ -351,11 +359,15 @@
                 </footer>
 
             </div>
-            
+
             <!--   Core JS Files   -->
+
+
+            <script src="assets/js/jquery-1.11.1.js" type="text/javascript"></script>
+            <script src="assets/js/jquery.validate.js" type="text/javascript"></script>
+
             <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
             <script src="assets/js/material.min.js"></script>
-
             <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
             <script src="assets/js/nouislider.min.js" type="text/javascript"></script>
 
@@ -366,18 +378,18 @@
             <script src="assets/js/material-kit.js" type="text/javascript"></script>
 
             <script type="text/javascript">
-                $().ready(function () {
-                    // the body of this function is in assets/material-kit.js
-                    materialKit.initSliders();
-                    window_width = $(window).width();
+                                                            $().ready(function () {
+                                                                // the body of this function is in assets/material-kit.js
+                                                                materialKit.initSliders();
+                                                                window_width = $(window).width();
 
-                    if (window_width >= 992) {
-                        big_image = $('.wrapper > .header');
+                                                                if (window_width >= 992) {
+                                                                    big_image = $('.wrapper > .header');
 
-                        $(window).on('scroll', materialKitDemo.checkScrollForParallax);
-                    }
+                                                                    $(window).on('scroll', materialKitDemo.checkScrollForParallax);
+                                                                }
 
-                });
+                                                            });
             </script> 
 
             <script>
@@ -387,6 +399,58 @@
                         $(this).toggleClass('active');
                     });
                 });
+            </script>
+
+            <script type="text/javascript">
+
+                var formTwo = $("#signupForm");
+
+
+                formTwo.validate({
+                    rules: {
+
+                        username: {
+                            required: true,
+                            minlength: 2
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+
+                    },
+                    messages: {
+
+                        username: {
+                            required: "#{msg.escribeMensaje}",
+                            minlength: "#{msg.tamañoMensaje}"
+                        },
+
+                        email: "#{msg.ingresaCorreo}",
+                    },
+                    errorElement: "em",
+
+                    errorPlacement: function (error, element) {
+                        // Add the `help-block` class to the error element
+                        error.addClass("help-block");
+
+                        if (element.prop("type") === "checkbox") {
+                            error.insertAfter(element.parent("label"));
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
+                    }
+
+                });
+
+
+
             </script>
 
 

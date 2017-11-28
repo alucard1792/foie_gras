@@ -81,8 +81,8 @@ public class MainController implements Serializable {
             mailSender.sendMail("correofixedup@gmail.com", "correofixedup@gmail.com", "fixedupsena", "correofixedup@gmail.com", subject, message);
             FacesContext context = FacesContext.getCurrentInstance();
 
-            context.addMessage(null, new FacesMessage("Successful", "Your message: " + "aaaaaaa"));
-            context.addMessage(null, new FacesMessage("Second Message", "Additional Message Detail"));
+            
+            context.addMessage("username", new FacesMessage("Tu mensaje se ha enviado", "Nos contactaremos contigo"));
         } catch (Exception e) {
             e.printStackTrace();
         }
