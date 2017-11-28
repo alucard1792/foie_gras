@@ -135,9 +135,9 @@ public class emailrecuperarcontraseña implements Serializable {
                     Contrasena = persona.getPassword();
                     emailrecuperarcontraseña email = new emailrecuperarcontraseña("correofixedup@gmail.com", "fixedupsena", emailDestinatario);
                     email.enviarSimple("Restablecimiento contraseña fixedUp "
-                            + "contraseña Fixed up", "Tu contraseña es: " + Contrasena + ""
-                    + "Este correo es de carácter informativo, por favor no responder"
-                        + "Fixedup " + year + " ");
+                            + "contraseña Fixed up", "Tu contraseña es: " + Contrasena + " "
+                    + "Este correo es de carácter informativo, por favor no responder "
+                        + " Fixedup " + year + " ");
 
                 } else {
                     System.out.println("Email no esta en base de datos");
