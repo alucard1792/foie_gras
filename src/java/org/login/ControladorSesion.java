@@ -23,6 +23,7 @@ import javax.faces.context.FacesContext;
 import org.dao.NotificacionFacadeLocal;
 import org.dao.PersonaFacadeLocal;
 import org.dao.ProyectoFacadeLocal;
+import org.entidades.Estado;
 import org.entidades.Notificacion;
 import org.entidades.Permiso;
 import org.entidades.Persona;
@@ -296,7 +297,10 @@ public class ControladorSesion implements Serializable {
             System.out.println("size vencidos: " + listaProyectosVencidos.size());
 
             if (listaProyectosVencidos.size() > 0) {
+                
                 for (Proyecto proyecto : listaProyectosVencidos) {
+                    Estado estado = new Estado(4);
+                    proyecto.setEstadosIdEstado(estado);
                     proyecto.setCorreoNotificacionEnviado(1);
                     proyectoFacadeLocal.edit(proyecto);
                     String asunto = "Vencimiento proyecto " + proyecto.getPedidosIdPedido().getNombreProyecto() + ".";
