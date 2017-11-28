@@ -125,7 +125,7 @@
                 <p:column headerText="#{msg.proyectoListarCantidad}"  filterBy="#{lp.pedidosIdPedido.cantidad}" filterMatchMode="contains" width="200">
                     <p:outputLabel value="#{lp.pedidosIdPedido.cantidad}"></p:outputLabel>                
                 </p:column>
-                <p:column headerText="#{msg.proyectoListarOperarioAsignado}" filterBy="#{lp.operarioIdPersona.nombre}" sortBy="#{lp.operarioIdPersona.nombre}" filterMatchMode="contains" width="200">
+                <p:column rendered="#{controladorSesion.p.roles.get(0).idRol eq 1 or controladorSesion.p.roles.get(0).idRol eq 2}" headerText="#{msg.proyectoListarOperarioAsignado}" filterBy="#{lp.operarioIdPersona.nombre}" sortBy="#{lp.operarioIdPersona.nombre}" filterMatchMode="contains" width="200">
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('tabla1').filter()" style="width:150px;" >
                             <f:selectItem itemLabel="#{msg.universalPrimefacesSeleccione}" itemValue="#{null}" noSelectionOption="true" />
