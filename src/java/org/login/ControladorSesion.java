@@ -297,9 +297,9 @@ public class ControladorSesion implements Serializable {
             System.out.println("size vencidos: " + listaProyectosVencidos.size());
 
             if (listaProyectosVencidos.size() > 0) {
+                Estado estado = new Estado(4);
                 
                 for (Proyecto proyecto : listaProyectosVencidos) {
-                    Estado estado = new Estado(4);
                     proyecto.setEstadosIdEstado(estado);
                     proyecto.setCorreoNotificacionEnviado(1);
                     proyectoFacadeLocal.edit(proyecto);
@@ -311,10 +311,11 @@ public class ControladorSesion implements Serializable {
                     notificacion = new Notificacion(null, asunto, mensajeOperario, date, 0, proyecto.getPedidosIdPedido().getVendedorIdPersona());
                     System.out.println("se envio correo a: " + proyecto.getPedidosIdPedido().getVendedorIdPersona());
                     notificacionFacadeLocal.create(notificacion);
-
+                    
                 }
-
+                
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
