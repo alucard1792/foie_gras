@@ -99,6 +99,7 @@ public class CrearPedido implements Serializable {
     }
 
     public String crear() {
+        FacesContext fc = FacesContext.getCurrentInstance();
         int year = Calendar.getInstance().get(Calendar.YEAR);
         try {
             Date date = new Date();
@@ -138,15 +139,15 @@ public class CrearPedido implements Serializable {
                 return "/admin/pedidos/listarPedidos.xhtml?faces-redirect=true";
 
             } else {
-                FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "no tiene suficientes existencias de esa materia prima", "por favor ingrese mas existencias o ingrese menos cantidades de ese pedido. \nnumero de existencias = " + stockMateriaPrima.getStock());
-                FacesContext.getCurrentInstance().addMessage(null, msj);
+                FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_WARN, "no tiene suficientes existencias de esa materia prima", "por favor ingrese mas existencias o ingrese menos cantidades de ese pedido. \nnumero de existencias = " + stockMateriaPrima.getStock());
+                fc.addMessage("cantidad", msj);
                 return "";
 
             }
         } catch (Exception e) {
             e.printStackTrace();
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "error al crear el pedido, por favor contacte al admin", "");
-            FacesContext.getCurrentInstance().addMessage(null, msj);
+            fc.addMessage("cantidad", msj);
             return "";
         }
 
