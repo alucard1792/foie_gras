@@ -130,7 +130,7 @@ public class emailrecuperarcontraseña implements Serializable {
             if (emailDestinatario != null && !emailDestinatario.equals("")) {
                 persona = pfl.recuperacontrasena(emailDestinatario);
                 if (persona != null) {
-                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Enviando email, ", "Espere un momento...");
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha enviado la contraseña a su correo, ", "Por favor revise su bandeja de entrada");
                     fc.addMessage("correoLost", fm);
                     Contrasena = persona.getPassword();
                     emailrecuperarcontraseña email = new emailrecuperarcontraseña("correofixedup@gmail.com", "fixedupsena", emailDestinatario);
