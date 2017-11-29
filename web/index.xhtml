@@ -41,75 +41,72 @@
         <h:body class="index-page"  id="abc">
 
             <!-- Navbar -->
-            <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
-
-                <div class="container">
-
-                    <div class="navbar-header">
-                        <a>
-                            <div class="logo-container">
-                                <div class="brand">
-                                    <img src="assets/img/logosinfondo2.png" alt="Fixed up"  title="Fixed up" style="height: 40px; white: 40px;"></img>
+            <h:form prependId="false" id="form_menu_principal">
+                <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a>
+                                <div class="logo-container">
+                                    <div class="brand">
+                                        <img src="assets/img/logosinfondo2.png" alt="Fixed up"  title="Fixed up" style="height: 40px; white: 40px;"></img>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
 
-                    <h:form prependId="false" id="form_menu_principal">
                         <div class="collapse navbar-collapse" id="navigation-index">
                             <ul class="nav navbar-nav navbar-right">
-                                <div class="collapse navbar-collapse" id="example-navbar">
-                                    <ul class="nav navbar-nav">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msg.documentacion}
-                                                <b class="caret"></b>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-right" >
-                                                <li class="dropdown-header">#{msg.indexFase1}</li>
-                                                <li><a href="resources/documentacion/fase1/diagramasdeprocesos.zip">Diagrama de procesos</a></li>
-                                                <li><a href="resources/documentacion/fase1/IEEE830 Fixed Up.doc">IEEE 830</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdown-header">#{msg.indexFase2}</li>
-                                                <li><a href="resources/documentacion/fase2/casos_uso_extendidos.zip">Casos de uso extendidos</a></li>
-                                                <li><a href="resources/documentacion/fase2/casos_uso_img.zip">Casos de uso</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdown-header">#{msg.indexFase3}</li>
-                                                <li><a href="resources/documentacion/fase3/DEA fixed up.docx">DEA</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdown-header">#{msg.indexFase4}</li>
-                                                <li><a href="resources/documentacion/fase4/MANUAL TECNICO.pdf">Manual tecnico</a></li>
-                                                <li><a href="resources/documentacion/fase4/Manual Corporativo.pdf">Manual corporativo</a></li>
-                                                <li><a href="resources/documentacion/fase4/Manual de usuario.pdf">Manual de usuario</a></li>
-                                                <li><a href="resources/documentacion/fase4/Matriz de Resultados.xlsx">Matriz de resultado</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdown-header">#{msg.indexFase5}</li>
-                                                <li><a href="resources/documentacion/fase5/PLAN DE IMPLANTACIÓN.pdf">Plan de implantacion</a></li>
-                                                <li><a href="resources/documentacion/fase5/Plan de capacitacion.pdf">Plan de aceptacion</a></li>
-                                                <li class="divider"></li>
-                                            </ul>
-                                        </li>  
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msg.idioma}
-                                                <b class="caret"></b>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <c:forEach items="#{idioma.supportLanguages}" var="l" >
-                                                    <li>
-                                                        <h:commandLink  value="#{msg[l.displayLanguage]}" action="#{idioma.cambiarIdioma(l)}"></h:commandLink>
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#" data-toggle="modal" data-target="#myModal">#{msg.login}</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msg.documentacion}
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right" >
+                                        <li class="dropdown-header">#{msg.indexFase1}</li>
+                                        <li><a href="resources/documentacion/fase1/diagramasdeprocesos.zip">Diagrama de procesos</a></li>
+                                        <li><a href="resources/documentacion/fase1/IEEE830 Fixed Up.doc">IEEE 830</a></li>
+                                        <li class="divider"></li>
+                                        <li class="dropdown-header">#{msg.indexFase2}</li>
+                                        <li><a href="resources/documentacion/fase2/casos_uso_extendidos.zip">Casos de uso extendidos</a></li>
+                                        <li><a href="resources/documentacion/fase2/casos_uso_img.zip">Casos de uso</a></li>
+                                        <li class="divider"></li>
+                                        <li class="dropdown-header">#{msg.indexFase3}</li>
+                                        <li><a href="resources/documentacion/fase3/DEA fixed up.docx">DEA</a></li>
+                                        <li class="divider"></li>
+                                        <li class="dropdown-header">#{msg.indexFase4}</li>
+                                        <li><a href="resources/documentacion/fase4/MANUAL TECNICO.pdf">Manual tecnico</a></li>
+                                        <li><a href="resources/documentacion/fase4/Manual Corporativo.pdf">Manual corporativo</a></li>
+                                        <li><a href="resources/documentacion/fase4/Manual de usuario.pdf">Manual de usuario</a></li>
+                                        <li><a href="resources/documentacion/fase4/Matriz de Resultados.xlsx">Matriz de resultado</a></li>
+                                        <li class="divider"></li>
+                                        <li class="dropdown-header">#{msg.indexFase5}</li>
+                                        <li><a href="resources/documentacion/fase5/PLAN DE IMPLANTACIÓN.pdf">Plan de implantacion</a></li>
+                                        <li><a href="resources/documentacion/fase5/Plan de capacitacion.pdf">Plan de aceptacion</a></li>
                                     </ul>
-                                </div>
+                                </li>  
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msg.idioma}
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <c:forEach items="#{idioma.supportLanguages}" var="l" >
+                                            <li>
+                                                <h:commandLink  value="#{msg[l.displayLanguage]}" action="#{idioma.cambiarIdioma(l)}"></h:commandLink>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
+                                <li><a href="#" data-toggle="modal" data-target="#myModal">#{msg.login}</a></li>
                             </ul>
                         </div>
-                    </h:form>
-
-                </div>
-
-            </nav>
+                    </div>
+                </nav>
+            </h:form>
             <!-- End Navbar -->
 
             <div class="wrapper">
@@ -313,7 +310,7 @@
                                                 <span class="input-group-addon">
                                                     <i class="material-icons">face</i>
                                                 </span>
-                                                <input name="documento" type="text" class="form-control" jsf:id="idMessageLogin" placeholder="#{msg.documento}" jsf:value="#{controladorSesion.documento}" jsf:converterMessage="Please enter digits only."></input>
+                                                <input name="documento" type="text" class="form-control" jsf:id="idMessageLogin" placeholder="#{msg.documento}" jsf:value="#{controladorSesion.documento}" jsf:converterMessage="#{msg.indexConverterMessage}"></input>
                                             </div>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
