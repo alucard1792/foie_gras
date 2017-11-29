@@ -264,9 +264,7 @@
                                                     <div class="field submit">
                                                         <label for="submit_button"></label>
                                                         <p:commandButton update="mensajecontactenos" type="submit" onclick="return formTwo.valid()" a:name="signup" class="btn btn-primary btn-raised" id="submit_button" value="#{msg.btnEnviar}" action="#{MainController.send()}" />
-                                                        <b:message id="mensajecontactenos" for="username" show-detail="true" show-summary="true"></b:message>
-                                                        
-                                                        
+                                                        <b:message id="mensajecontactenos" for="username" show-detail="true" show-summary="true"></b:message>                                                       
                                                     </div>
                                                     
                                                     <p:blockUI block="abc" trigger="submit_button">

@@ -45,17 +45,26 @@
         <error-code>404</error-code>
         <location>/PagesErrors</location>
     </error-page>
-  <error-page>
-   <exception-type>404</exception-type>
-   <location>/Error-404.xhtml</location>
-</error-page>
+    <error-page>
+        <exception-type>404</exception-type>
+        <location>/Error-404.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>404</exception-type>
+        <location>/PagesErrors</location>
+    </error-page>
     <error-page>
         <error-code>500</error-code>
         <location>/PagesErrors500</location>
     </error-page>
     <error-page>
-   <exception-type>500</exception-type>
-   <location>/Error-500.xhtml</location>
-</error-page>
+        <exception-type>500</exception-type>
+        <location>/Error-500.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>500</exception-type>
+        <location>/PagesErrors500</location>
+    </error-page>
+
     
 </web-app>

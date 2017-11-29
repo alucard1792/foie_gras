@@ -34,11 +34,45 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         super(Proyecto.class);
     }
 
-    @Override
+    public List<Proyecto> listarProyectosOperariosAsignadosIdSeis(){
+        List<Proyecto> listarProyectosSeis = new ArrayList<>();
+        
+        Persona persona = new Persona(6);
+        
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("Proyecto.findByOperarioAsignado", Proyecto.class);
+            q.setParameter("operarioIdPersona", persona);
+            listarProyectosSeis = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        return listarProyectosSeis;
+    }
+    
     public List<Proyecto> listarProyectosOperariosAsignados(Persona p) {
         List<Proyecto> listaProyectos = new ArrayList<>();
         Persona persona = new Persona();
         persona.setIdPersona(p.getIdPersona());
+
+        try {
+            TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("Proyecto.findByOperarioAsignado", Proyecto.class);
+            q.setParameter("operarioIdPersona", persona);
+            listaProyectos = q.getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return listaProyectos;
+
+    }
+
+    public List<Proyecto> listarProyectosOperariosAsignadosIdCinco() {
+        List<Proyecto> listaProyectos = new ArrayList<>();
+        Persona persona = new Persona(7);
+        
 
         try {
             TypedQuery<Proyecto> q = getEntityManager().createNamedQuery("Proyecto.findByOperarioAsignado", Proyecto.class);

@@ -31,7 +31,11 @@ public interface ProyectoFacadeLocal {
 
     int count();
     
+    List<Proyecto>listarProyectosOperariosAsignadosIdCinco();
+    
     List<Proyecto>listarProyectosOperariosAsignados(Persona p);
+    
+    List<Proyecto>listarProyectosOperariosAsignadosIdSeis();
     
     List<Proyecto> buscarProyectosTerminados();
     
@@ -50,6 +54,8 @@ public interface ProyectoFacadeLocal {
     List<Proyecto> cantidadDeproyectosVendidosEnDosMilDiesiseis();
     
     List<Proyecto> cantidadDeproyectosVendidosEnDosMilDiesisiete();
+    
+   
 
 
     public List<Proyecto> findByfechaFinalizado();
