@@ -61,52 +61,33 @@
                                 <div class="collapse navbar-collapse" id="example-navbar">
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">fase 1
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msg.documentacion}
                                                 <b class="caret"></b>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right" >
+                                                <li class="dropdown-header">Dropdown header</li>
                                                 <li><a href="resources/documentacion/fase1/diagramasdeprocesos.zip">Diagrama de procesos</a></li>
                                                 <li><a href="resources/documentacion/fase1/IEEE830 Fixed Up.doc">IEEE 830</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">fase 2
-                                                <b class="caret"></b>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-right" >
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Dropdown header</li>
                                                 <li><a href="resources/documentacion/fase2/casos_uso_extendidos.zip">Casos de uso extendidos</a></li>
                                                 <li><a href="resources/documentacion/fase2/casos_uso_img.zip">Casos de uso</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">fase 3
-                                                <b class="caret"></b>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-right" >
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Dropdown header</li>
                                                 <li><a href="resources/documentacion/fase3/DEA fixed up.docx">DEA</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">fase 4
-                                                <b class="caret"></b>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-right" >
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Dropdown header</li>
                                                 <li><a href="resources/documentacion/fase4/MANUAL TECNICO.pdf">Manual tecnico</a></li>
                                                 <li><a href="resources/documentacion/fase4/Manual Corporativo.pdf">Manual corporativo</a></li>
                                                 <li><a href="resources/documentacion/fase4/Manual de usuario.pdf">Manual de usuario</a></li>
                                                 <li><a href="resources/documentacion/fase4/Matriz de Resultados.xlsx">Matriz de resultado</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">fase 5
-                                                <b class="caret"></b>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-right" >
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Dropdown header</li>
                                                 <li><a href="resources/documentacion/fase5/PLAN DE IMPLANTACIÓN.pdf">Plan de implantacion</a></li>
                                                 <li><a href="resources/documentacion/fase5/Plan de capacitacion.pdf">Plan de aceptacion</a></li>
+                                                <li class="divider"></li>
                                             </ul>
-                                        </li>
-                                        <li><a href="#" data-toggle="modal" data-target="#myModal">#{msg.login}</a></li>
+                                        </li>  
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msg.idioma}
                                                 <b class="caret"></b>
@@ -119,6 +100,7 @@
                                                 </c:forEach>
                                             </ul>
                                         </li>
+                                        <li><a href="#" data-toggle="modal" data-target="#myModal">#{msg.login}</a></li>
                                     </ul>
                                 </div>
                             </ul>
@@ -265,10 +247,10 @@
                                                         <label for="submit_button"></label>
                                                         <p:commandButton update="mensajecontactenos" type="submit" onclick="return formTwo.valid()" a:name="signup" class="btn btn-primary btn-raised" id="submit_button" value="#{msg.btnEnviar}" action="#{MainController.send()}" />
                                                         <b:message id="mensajecontactenos" for="username" show-detail="true" show-summary="true"></b:message>
-                                                        
-                                                        
+
+
                                                     </div>
-                                                    
+
                                                     <p:blockUI block="abc" trigger="submit_button">
                                                         #{msg.universalCargandoUiBlock}<br />
                                                         <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />
