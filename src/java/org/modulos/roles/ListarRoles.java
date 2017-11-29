@@ -49,7 +49,7 @@ public class ListarRoles implements Serializable {
     public void init(){
         listaPermisos = permisoFacadeLocal.findAll();
         for(Rol rol: controladorSesion.getP().getRoles()){
-            listaRoles = rolFacadeLocal.findRolByUsuarioEnSesion(rol.getIdRol());
+            listaRoles = rolFacadeLocal.findRolByUsuarioEnSesionListarRoles(rol.getIdRol());
         }
     }
 

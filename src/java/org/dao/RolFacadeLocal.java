@@ -32,4 +32,6 @@ public interface RolFacadeLocal {
     
     List<Rol>findRolByUsuarioEnSesion(int idRol);
     
+    List<Rol>findRolByUsuarioEnSesionListarRoles(int idRol);
+    
 }

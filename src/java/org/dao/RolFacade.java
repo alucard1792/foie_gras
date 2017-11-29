@@ -36,7 +36,23 @@ public class RolFacade extends AbstractFacade<Rol> implements RolFacadeLocal {
     public List<Rol> findRolByUsuarioEnSesion(int idRol) {
         List<Rol>listaRoles = new ArrayList<>();
         try {
-            TypedQuery<Rol> q = getEntityManager().createNamedQuery("Rol.findRolByUsuarioEnSesion", Rol.class);
+            TypedQuery<Rol> q = getEntityManager().createNamedQuery("Rol.findRolByUsuarioEnSesionCrearUsuario", Rol.class);
+            q.setParameter("idRol", idRol);
+            listaRoles = q.getResultList();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        return listaRoles;
+        
+    }
+
+    @Override
+    public List<Rol> findRolByUsuarioEnSesionListarRoles(int idRol) {
+        List<Rol>listaRoles = new ArrayList<>();
+        try {
+            TypedQuery<Rol> q = getEntityManager().createNamedQuery("Rol.findRolByUsuarioEnSesionListarRoles", Rol.class);
             q.setParameter("idRol", idRol);
             listaRoles = q.getResultList();
             
