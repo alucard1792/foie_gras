@@ -35,7 +35,7 @@ public class PagesErrors extends HttpServlet {
         PrintWriter out = response.getWriter();
         
             try {
-                response.sendRedirect("Error-404.xhtml");
+                response.sendRedirect("../../Page-Error/Error-404.xhtml");
             } finally {
                 out.close();
             }

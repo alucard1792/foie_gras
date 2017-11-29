@@ -34,7 +34,7 @@ public class PagesErrors500 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            response.sendRedirect("Error-500.xhtml");
+            response.sendRedirect("../../Page-Error/Error-500.xhtml");
         } catch (Exception e) {
             out.close();
         }
