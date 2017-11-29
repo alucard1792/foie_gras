@@ -66,7 +66,8 @@
                         </p:commandLink>
                     </div>
                 </div>-->
-
+            </p:row>
+            <p:row rendered="#{controladorSesion.rol == 1 || controladorSesion.rol == 2 || controladorSesion.rol == 3}">
                 <p:chart id="pedidos" type="pie" model="#{graficaPagosProyectos.piemodel}" style="height:300px; width:500px; margin: auto;" widgetVar="pieWV"/>
                 <div class="row">
                     <div class="col-md-12 text-center m-t-50">
@@ -87,10 +88,31 @@
                         </p:commandLink>
                     </div>
                 </div>
-                
-                <p:chart id="proyectosOperario" type="bar" model="#{graficoProyectoOperario.barModel}" style="height: 300px; width: 500px; margin: auto;" />
-
             </p:row>
+
+            <p:row rendered="#{controladorSesion.rol == 4}">
+                <p:chart id="proyectosOperario" type="bar" model="#{graficoProyectoOperario.barModel}" style="height: 300px; width: 500px; margin: auto;" widgetVar="proyectosOperario" />
+                <div class="row">
+                    <div class="col-md-12 text-center m-t-50">
+                        <p:commandLink onclick="exportChartInPDFbarModel()" styleClass="btn btn-primary">
+                            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
+                            #{msg.universalAPdf}
+                        </p:commandLink>
+                    </div>
+                </div>
+            </p:row>
+            <p:row rendered="#{controladorSesion.rol == 4}">
+                <p:chart id="proyectosSegundoOperario" type="bar" model="#{graficoProyectoSegundoOperario.barModel}" style="height: 300px; width: 500px; margin: auto;" widgetVar="proyectosSegundoOperario" />
+                <div class="row">
+                    <div class="col-md-12 text-center m-t-50">
+                        <p:commandLink onclick="exportChartInPDFGRAFICAbarmodeldos()" styleClass="btn btn-primary">
+                            <i class="fa fa-file-pdf-o m-r-5" aria-hidden="true"></i>
+                            #{msg.universalAPdf}
+                        </p:commandLink>
+                    </div>
+                </div>
+            </p:row>
+
 
         </h:form>
 
@@ -112,13 +134,39 @@
                 pdfMake.createPdf(docDefinition).open();
                 pdfMake.createPdf(docDefinition).download('primefaces-charts.pdf');
             }
+            function exportChartInPDFbarModel() {
+                var docDefinition = {
+                    content: [
+                        'Pagos de los proyectos',
+                        {
+                            image: $(PF('proyectosOperario').exportAsImage()).attr('src'),
 
-            function exportChartInPDFGRAFICA() {
+                        }
+                    ]
+                };
+                pdfMake.createPdf(docDefinition).open();
+                pdfMake.createPdf(docDefinition).download('primefaces-charts.pdf');
+            }
+            function exportChartInPDFbarModel() {
+                var docDefinition = {
+                    content: [
+                        'Pagos de los proyectos',
+                        {
+                            image: $(PF('proyectosOperario').exportAsImage()).attr('src'),
+
+                        }
+                    ]
+                };
+                pdfMake.createPdf(docDefinition).open();
+                pdfMake.createPdf(docDefinition).download('primefaces-charts.pdf');
+            }
+
+            function exportChartInPDFGRAFICAbarmodeldos() {
                 var docDefinition = {
                     content: [
                         'Estado de los proyectos',
                         {
-                            image: $(PF('pie').exportAsImage()).attr('src'),
+                            image: $(PF('proyectosSegundoOperario').exportAsImage()).attr('src'),
                         }
                     ]
                 };
