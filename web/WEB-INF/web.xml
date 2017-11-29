@@ -66,5 +66,14 @@
         <location>/PagesErrors500</location>
     </error-page>
 
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/Page-Error/Error-404.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/Page-Error/Error-500.xhtml</location>
+    </error-page>
     
 </web-app>
