@@ -85,6 +85,7 @@ public class FileUploadPhoto implements Serializable{
     }
 
     private void savePart(ExternalContext ec, FileBean fileBean) throws IOException {
+        
         File dir = new File(ec.getRealPath("") + UPLOAD_DIR);
         dir.mkdirs();
         File file = new File(dir, fileBean.getFileNameFull());
@@ -105,7 +106,7 @@ public class FileUploadPhoto implements Serializable{
         persona = controladorSesion.getP();
         System.out.println(controladorSesion.getP().getDocumento());
         if(persona != null){
-            persona.setImagen("/foie_gras" + UPLOAD_DIR + fileBean.getFileNameFull());
+            persona.setImagen(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + UPLOAD_DIR + fileBean.getFileNameFull());
             personaFacadeLocal.edit(persona);
         }
     }
