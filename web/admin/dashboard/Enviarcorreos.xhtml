@@ -141,11 +141,13 @@
                         destinatario: {
                             validators: {
                                 notEmpty: {
-
+                                    message: ''
                                 },
-                                emailAddress: {
-
-                                }
+                                stringLength: {
+                                    min: 5,
+                                    max: 80,
+                                    message: ''
+                                },
                             }
                         },
 

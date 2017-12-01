@@ -77,46 +77,46 @@
                                 <div class="form-group">
                                     <label for="nombreProyecto" class="col-sm-2 control-label">#{msg.pedidoCrearNombre}</label>
                                     <div class="col-sm-10">
-                                        <h:inputText a:name="nombreProyecto" class="form-control" id="nombreProyecto" a:placeholder="#{msg.pedidoCrearNombrePlaceholder}" value="#{crearPedido.pedido.nombreProyecto}"/>
+                                        <h:inputText a:name="nombreProyecto"  class="form-control" id="nombreProyecto" a:placeholder="#{msg.pedidoCrearNombrePlaceholder}" value="#{crearPedido.pedido.nombreProyecto}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="descripcion" class="col-sm-2 control-label">#{msg.pedidoCrearDescripcion}</label>
                                     <div class="col-sm-10">
-                                        <h:inputText a:name="descripcion" class="form-control" id="descripcion" a:placeholder="#{msg.pedidoCrearDescripcionPlaceholder}" value="#{crearPedido.pedido.descripcion}"/>
+                                        <h:inputText a:name="descripcion"  class="form-control" id="descripcion" a:placeholder="#{msg.pedidoCrearDescripcionPlaceholder}" value="#{crearPedido.pedido.descripcion}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="cantidad" class="col-sm-2 control-label">#{msg.pedidoCrearCantidad}</label>
                                     <div class="col-sm-10">
-                                        <h:inputText a:name="cantidad" class="form-control" id="cantidad" a:placeholder="#{msg.pedidoCrearCantidadPlaceholder}" value="#{crearPedido.pedido.cantidad}"/>
+                                        <h:inputText a:name="cantidad"  class="form-control" id="cantidad" a:placeholder="#{msg.pedidoCrearCantidadPlaceholder}" value="#{crearPedido.pedido.cantidad}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="nombreCliente" class="col-sm-2 control-label">#{msg.pedidoCrearNombreCliente}</label>
                                     <div class="col-sm-10">
-                                        <h:inputText a:name="nombreCliente" class="form-control" id="nombreCliente" a:placeholder="#{msg.pedidoCrearNombreClientePlaceholder}" value="#{crearPedido.pedido.nombreCliente}"/>
+                                        <h:inputText a:name="nombreCliente"  class="form-control" id="nombreCliente" a:placeholder="#{msg.pedidoCrearNombreClientePlaceholder}" value="#{crearPedido.pedido.nombreCliente}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="telefonoCliente" class="col-sm-2 control-label">#{msg.pedidoCrearTelefonoCliente}</label>
+                                    <label for="telefonoCliente"  class="col-sm-2 control-label">#{msg.pedidoCrearTelefonoCliente}</label>
                                     <div class="col-sm-10">
-                                        <h:inputText a:name="telefonoCliente" class="form-control" id="telefonoCliente" a:placeholder="#{msg.pedidoCrearTelefonoPlaceholder}" value="#{crearPedido.pedido.telefonoCliente}"/>
+                                        <h:inputText a:name="telefonoCliente"  class="form-control" id="telefonoCliente" a:placeholder="#{msg.pedidoCrearTelefonoPlaceholder}" value="#{crearPedido.pedido.telefonoCliente}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="correoCliente" class="col-sm-2 control-label">#{msg.pedidoCrearCorreoCliente}</label>
                                     <div class="col-sm-10">
-                                        <h:inputText a:name="correoCliente" class="form-control" id="correoCliente" a:placeholder="#{msg.pedidoCrearCorreoPlaceholder}" value="#{crearPedido.pedido.correoCliente}"/>
+                                        <h:inputText a:name="correoCliente"  class="form-control" id="correoCliente" a:placeholder="#{msg.pedidoCrearCorreoPlaceholder}" value="#{crearPedido.pedido.correoCliente}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="pago" class="col-sm-2 control-label">#{msg.pedidoCrearRealizoPago}</label>
+                                    <label for="pago"  class="col-sm-2 control-label">#{msg.pedidoCrearRealizoPago}</label>
                                     <div class="col-sm-10">
                                         <b:selectOneMenu value = "#{crearPedido.pedido.realizoPago}"> 
                                             <f:selectItem itemValue = "0" itemLabel = "#{msg.pedidoCrearRealizoPagoNo}" /> 
@@ -126,7 +126,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="materiaPrima" class="col-sm-2 control-label">#{msg.pedidoCrearMateriaPrima}</label>
+                                    <label for="materiaPrima"  class="col-sm-2 control-label">#{msg.pedidoCrearMateriaPrima}</label>
                                     <div class="col-sm-10">
                                         <b:selectOneMenu value = "#{crearPedido.pedido.materiasPrimaIdMateria}"> 
                                             <f:selectItems value="#{crearPedido.listaMateriaPrima}" var="lmp" itemLabel="#{lmp.referencia}" /> 
@@ -136,7 +136,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-3">
-                                        <p:commandButton id="enviar" update="error-message" action="#{crearPedido.crear()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></p:commandButton> 
+                                        <p:commandButton  id="enviar" update="error-message" action="#{crearPedido.crear()}" class="btn btn-primary" value="#{msg.universalBotonAceptar}"></p:commandButton> 
                                     </div>
                                     <div class="col-sm-3">
                                         <h:link styleClass="btn btn" outcome="/admin/pedidos/listarPedidos.xhtml?faces-redirect=true" value="#{msg.universalBotonCancelar}"/>
@@ -160,88 +160,7 @@
     </ui:define>
 
     <ui:define name="ultimosScripts">
-        <script>
-
-            $(document).ready(function () {
-                $('#form').formValidation({
-                    locale: "#{(idioma.languageSelect.language.startsWith('es', 0) ? 'es_ES': 'en_US')}",
-                    framework: 'bootstrap',
-                    icon: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    fields: {
-                        nombreProyecto: {
-                            validators: {
-                                notEmpty: {
-                                    message: ''
-                                },
-                                stringLength: {
-                                    min: 5,
-                                    max: 30,
-                                    message: ''
-                                },
-                            }
-                        },
-                        descripcion: {
-                            validators: {
-                                notEmpty: {
-                                    message: ''
-                                },
-                                stringLength: {
-                                    min: 5,
-                                    max: 30,
-                                    message: ''
-                                },
-                            }
-                        },
-                        nombreCliente: {
-                            validators: {
-                                notEmpty: {
-                                    message: ''
-                                },
-                                stringLength: {
-                                    min: 5,
-                                    max: 30,
-                                    message: ''
-                                },
-                            }
-                        },
-                        correoCliente: {
-                            validators: {
-                                notEmpty: {
-
-                                },
-                                emailAddress: {
-
-                                }
-                            }
-                        },
-
-                        cantidad: {
-                            validators: {
-                                notEmpty: {},
-                                digits: {},
-                                phone: {
-                                    country: 'CO'
-                                }
-                            }
-                        },
-                        telefonoCliente: {
-                            validators: {
-                                notEmpty: {},
-                                digits: {},
-                                phone: {
-                                    country: 'CO'
-                                }
-                            }
-                        },
-
-                    }
-                });
-            });
-        </script>
+        
     </ui:define>
 
 </ui:composition>
