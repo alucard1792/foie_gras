@@ -160,7 +160,87 @@
     </ui:define>
 
     <ui:define name="ultimosScripts">
-        
+        <script>
+              $(document).ready(function () {
+                $('#form').formValidation({
+                    locale: "#{(idioma.languageSelect.language.startsWith('es', 0) ? 'es_ES': 'en_US')}",
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        nombreProyecto: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 5,
+                                    max: 30,
+                                    message: ''
+                                },
+                            }
+                        },
+                        descripcion: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 5,
+                                    max: 30,
+                                    message: ''
+                                },
+                            }
+                        },
+                        nombreCliente: {
+                            validators: {
+                                notEmpty: {
+                                    message: ''
+                                },
+                                stringLength: {
+                                    min: 5,
+                                    max: 30,
+                                    message: ''
+                                },
+                            }
+                        },
+                        correoCliente: {
+                            validators: {
+                                notEmpty: {
+
+                                },
+                                emailAddress: {
+
+                                }
+                            }
+                        },
+
+                        cantidad: {
+                            validators: {
+                                notEmpty: {},
+                                digits: {},
+                                phone: {
+                                    country: 'CO'
+                                }
+                            }
+                        },
+                        telefonoCliente: {
+                            validators: {
+                                notEmpty: {},
+                                digits: {},
+                                phone: {
+                                    country: 'CO'
+                                }
+                            }
+                        },
+
+                    }
+                });
+            });
+        </script>
     </ui:define>
 
 </ui:composition>
