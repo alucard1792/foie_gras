@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Error 500</title>
+        <link href="#{request.contextPath}/assets/css/bootstrap.min_1.css" rel="stylesheet" />
+        <link href="#{request.contextPath}/assets/css/estilosPageError.css" rel="stylesheet"/>
+        <script src="#{request.contextPath}/resources/formValidation/js/framework/bootstrap.js" type="text/javascript"></script>
+        <link href="../assets/css/bootstrap.min_1.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body id="error-page">
+        
+        <section>
+           
+            <div class="container-fluid main">
+
+                <div class="container pagError " style="top: 70px;">
+
+                    <div class="col-lg-5 pagError__img">
+                        <img id="estirada" src="../assets/img/error-500-funcional copia.jpg" />
+                    </div>
+                   
+
+                    <div class="col-lg-7 pagError__content">
+
+                        <div class="content">
+                            <h1>Ups! hubo un error 500</h1>
+                            <br></br>
+                                <p>
+                                    Tenemos un problema, error interno del servidor.                    		
+                                    Parece que el servidor encontro  un error inesperado.
+                                </p>
+                        </div>
+                        <div class="pagError__info">
+                            <h5 class="title">
+                                Error interno del servidor.                    		
+                            </h5>
+                                <a class="btn btn-primary" href="../admin/index.xhtml" >VOLVER</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </h:body>
+</html>
+
