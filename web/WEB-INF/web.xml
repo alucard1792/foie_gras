@@ -41,17 +41,4 @@
         <extension>eot</extension>
         <mime-type>application/x-font-eot</mime-type>
     </mime-mapping>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/Error-404.xhtml</location>
-    </error-page>
-    
-   
-    <error-page>
-        <error-code>500</error-code>
-        <location>/Page-Error/Error-500.xhtml</location>
-    </error-page>
-   
-    
-    
 </web-app>
